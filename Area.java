@@ -1,20 +1,20 @@
-package domini;
-
 import java.util.ArrayList;
+
 import java.lang.Math;
+
 public class Area{
 
 	//Atributs
-	
+
 	private int pos;//identificador area, va de 0 a nombreAreas-1
 	private char op;//tipus operacio, sense op es casella sola
 	private ArrayList<Casilla > caselles;//conte la llista de caselles
 	private int res;//resultat real de l'area
 	private int resact;
-	
-	
-	//Metodes	
-	
+
+
+	//Metodes
+
 	public Area(int pos, char op){//tenir en compte la operacio per despres afegir caselles
 		this.pos = pos;
 		this.op = op;
@@ -22,6 +22,7 @@ public class Area{
 		resact = 0;
 		caselles = new ArrayList<Casilla>();
 	}
+
 
 	public char get_operacio(){
 		return op;
@@ -35,32 +36,32 @@ public class Area{
 		this.calcular_resultatactual();
 		return resact;
 	}
-	
+
 	public int get_posicio(){
 		return pos;
 	}
-	
+
 	public Boolean correcte(){
 		this.calcular_resultatactual();
 		return res == resact || res == -resact;
 	}
-	
+
 	public void afegir_casella(Casilla cas){//es fara 1 cop si =;2 per - i /; 2 o mes * i +
 		caselles.add(cas);
 	}
-	
+
 	public Casilla get_casella(int i){
 		return caselles.get(i);
 	}
-	
+
 	public void set_casella(Casilla cas, int i){
 		caselles.set(i,cas);
 	}
-	
+
 	public void set_res(int res){
 		this.res = res;
 	}
-	
+
 	public Boolean check(int n){
 		Boolean b1;
 		switch(op){
@@ -163,7 +164,6 @@ public class Area{
 						}
 					}
 				}
-				
 				break;
 			default:
 				b1 = true;
@@ -172,12 +172,12 @@ public class Area{
 		return b1;
 
 	}
-	
+
 	public Boolean recursiva_mult(int mult, int cont, int n){
-		if(cont == 1)	
+		if(cont == 1)
 		for(int i=n; i > 0; ++i){
 			if(mult%i == 0){
-				
+
 			}
 		}
 		return true;
@@ -212,7 +212,7 @@ public class Area{
 				break;
 		}
 	}*/
-	
+
 	public void calcular_resultatactual(){
 		switch(op){
 			case '+':
@@ -242,5 +242,5 @@ public class Area{
 				break;
 		}
 	}
-	
+
 }

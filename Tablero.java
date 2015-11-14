@@ -1,13 +1,10 @@
 //Made by Ferran Noguera Vall 4-11-15
-package domini;
-import domini.*;
-
 public class Tablero{
   //Dades
   protected int files;
-  
+
   protected int columnes;
-  
+
   /*protected Array<Array<integer>> Tablero;*/
   protected Casilla tauler[][];
 
@@ -18,7 +15,7 @@ public class Tablero{
     columnes = 0;
     tauler = new Casilla[0][0];
   }
-  
+
   public Tablero(int files, int columnes){
     this.files = files;
     this.columnes = columnes;
@@ -40,15 +37,15 @@ public class Tablero{
   public Casilla getCasilla(int x, int y){
     return tauler[x][y];
   }
-  
+
   public void setCasilla(Casilla c, int x, int y){
     tauler[x][y] = c;
   }
-  
+
   public int getFiles(){
     return files;
   }
-  
+
   public int getColumnes(){
     return columnes;
   }

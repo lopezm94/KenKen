@@ -78,7 +78,7 @@ public class ConstraintEngine {
   *@param y Posicion de la casilla en el eje Y.
   */
   public void removeValue(int x, int y) {
-    this.board.setCasillaVal(x,y,0);
+    this.board.setCasillaVal(x,y,-1);
   }
 
 

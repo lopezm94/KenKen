@@ -1,5 +1,3 @@
-package domini;
-
 public class Perfil{
 	private String usuari;
 	private String contrasenya;

@@ -1,5 +1,3 @@
-package domini;
-
 public class Partida{
 	private String nomPartida;
 	private int time;
