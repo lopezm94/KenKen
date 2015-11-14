@@ -1,19 +1,20 @@
+package domini;
+
 import java.util.ArrayList;
 import java.lang.Math;
-
 public class Area{
 
 	//Atributs
-
+	
 	private int pos;//identificador area, va de 0 a nombreAreas-1
 	private char op;//tipus operacio, sense op es casella sola
 	private ArrayList<Casilla > caselles;//conte la llista de caselles
 	private int res;//resultat real de l'area
 	private int resact;
-
-
-	//Metodes
-
+	
+	
+	//Metodes	
+	
 	public Area(int pos, char op){//tenir en compte la operacio per despres afegir caselles
 		this.pos = pos;
 		this.op = op;
@@ -21,7 +22,6 @@ public class Area{
 		resact = 0;
 		caselles = new ArrayList<Casilla>();
 	}
-
 
 	public char get_operacio(){
 		return op;
@@ -32,35 +32,40 @@ public class Area{
 	}
 
 	public int get_resultatactual(){
-		this.calcular_resultatactual();
+		//this.calcular_resultatactual();
 		return resact;
 	}
-
+	
 	public int get_posicio(){
 		return pos;
 	}
-
+	
 	public Boolean correcte(){
 		this.calcular_resultatactual();
-		return res == resact || res == -resact;
+		if(res == 0) this.calcular_resultat();
+		return res == resact;
 	}
-
+	
 	public void afegir_casella(Casilla cas){//es fara 1 cop si =;2 per - i /; 2 o mes * i +
 		caselles.add(cas);
 	}
-
+	
+	public int get_tamany(){
+		return caselles.size();
+	}
+	
 	public Casilla get_casella(int i){
 		return caselles.get(i);
 	}
-
+	
 	public void set_casella(Casilla cas, int i){
 		caselles.set(i,cas);
 	}
-
+	
 	public void set_res(int res){
 		this.res = res;
 	}
-
+	
 	public Boolean check(int n){
 		Boolean b1;
 		switch(op){
@@ -104,7 +109,7 @@ public class Area{
 								b1 = false;
 							}
 						/*	for(int i=1; i <= n && i != y && b1 != true; ++i){
-								b1 = (res == (i-y)) || (res == (y-i));
+								b1 = (res == (i-y)) || (res == (y-i));a
 							}*/
 						}else{
 							int maxi = Math.max(x-1, n-x);
@@ -154,15 +159,16 @@ public class Area{
 						b1 = false;
 						if(x1 == -1){
 							for(int j=1; j <= n && j != y1 && b1 != true; ++j){
-								b1 = (y1/j == res && y1%j == 0) || (j/y1 == res && j/y1 == 0);
+								b1 = (y1/j == res && y1%j == 0) || (j/y1 == res && j%y1 == 0);
 							}
 						}else{
 							for(int j=1; j <= n && j != x1 && b1 != true; ++j){
-								b1 = (x1/j == res && x1%j == 0) || (j/x1 == res && j/x1 == 0);
+								b1 = (x1/j == res && x1%j == 0) || (j/x1 == res && j%x1 == 0);
 							}
 						}
 					}
 				}
+				
 				break;
 			default:
 				b1 = true;
@@ -171,17 +177,17 @@ public class Area{
 		return b1;
 
 	}
-
+	
 	public Boolean recursiva_mult(int mult, int cont, int n){
-		if(cont == 1)
+		if(cont == 1)	
 		for(int i=n; i > 0; ++i){
 			if(mult%i == 0){
-
+				
 			}
 		}
 		return true;
 	}
-	/*54
+	
 	public void calcular_resultat(){
 		switch(op){
 			case '+':
@@ -191,7 +197,7 @@ public class Area{
 				}
 				break;
 			case '-':
-				res = caselles.get(0).getSolucion() - caselles.get(1).getSolucion();
+				res = Math.abs(caselles.get(0).getSolucion() - caselles.get(1).getSolucion());
 				break;
 			case '*':
 				res = 1;
@@ -210,8 +216,8 @@ public class Area{
 				res = caselles.get(0).getSolucion();
 				break;
 		}
-	}*/
-
+	}
+	
 	public void calcular_resultatactual(){
 		switch(op){
 			case '+':
@@ -221,7 +227,7 @@ public class Area{
 				}
 				break;
 			case '-':
-				res = caselles.get(0).getValor() - caselles.get(1).getValor();
+				resact = Math.abs(caselles.get(0).getValor() - caselles.get(1).getValor());
 				break;
 			case '*':
 				resact = 1;
@@ -241,5 +247,5 @@ public class Area{
 				break;
 		}
 	}
-
+	
 }
