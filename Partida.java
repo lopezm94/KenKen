@@ -2,7 +2,7 @@ public class Partida{
 	private String nomPartida;
 	private int time;
 	private String dificultat;
-	Tablero taulerPartida;
+	TableroH taulerPartida;
 	public Partida(String nomPartida, String username){
 		this.nomPartida = nomPartida;
 		this.time = 0;
@@ -24,10 +24,10 @@ public class Partida{
 	public void setDificultat(String dificultat){
 		this.dificultat = dificultat; //enumtype
 	}
-	public void setTauler(Tablero t){
+	public void setTauler(TableroH t){
 		taulerPartida = t;
 	}
-	public Tablero getTauler(){
+	public TableroH getTauler(){
 		return taulerPartida;
 	}
 }
