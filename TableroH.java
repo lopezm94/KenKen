@@ -1,5 +1,3 @@
-package domini;
-
 import java.util.LinkedList;
 import java.lang.RuntimeException;
 import java.util.ArrayList;
@@ -45,15 +43,21 @@ public class TableroH extends Tablero {
 		return areas.get(n);
 	}
 
-	public Area getArea(int x, int y) {
+	public Boolean areaContains(Area area, int x, int y) {
+		int id = area.get_posicio();
+		return id == idAreas[x][y];
+	}
+
+	public Area getAreaByPos(int x, int y) {
 		return areas.get(this.idAreas[x][y]);
 	}
 
-	public LinkedList<Integer> getCellDomain(int x, int y) {
+	public LinkedList<Integer> getCasillaDomain(int x, int y) {
+		Casilla casilla = this.getCasilla(x,y);
 		LinkedList<Integer> list = new LinkedList<Integer>();
-		int tmp = this.getCan(0);
+		int tmp = casilla.getCan(0);
 		for (int i=1; tmp != -1; i++) {
-			tmp = this.getCan(i);
+			tmp = casilla.getCan(i);
 			list.add(tmp);
 		}
 		return list;
@@ -66,8 +70,12 @@ public class TableroH extends Tablero {
 		//else return null;
 	}
 
-	public void setCasilla(int x, int y, int num){
+	public void setCasillaVal(int x, int y, int num){
 		if  (! this.tauler[x][y].getFija()) this.tauler[x][y].valor = num;
+	}
+
+	public int getCasillaVal(int x, int y) {
+		return this.tauler[x][y].valor;
 	}
 
 	public void setCasillaSol(int x, int y, int valor){
@@ -109,21 +117,6 @@ public class TableroH extends Tablero {
 
 	public int getAreaID(int x, int y){
 		return this.idAreas[x][y];
-	}
-	/*
-	public String toString(){ //devuelve los contenidos de un tablero en una string
-		/*String contenido = new String;
-		int var = 0;
-		for (int i = 0; i < m; ++i){
-			for (int j = 0; j < m;++j){
-				contenido[var] = tablero[x][y].num;
-				++var;
-			}
-		}*/
-/*	}
-*/
-	public void setCell(int x, int y, int value){ //Cambiar el valor a value en la posicion (x,y)
-		this.tauler[x][y].valor = value;
 	}
 
 	public Area getArea(int x, int y){ // Devuelve el area asociada a la posicion x,y.
