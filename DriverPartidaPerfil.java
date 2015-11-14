@@ -18,7 +18,7 @@ public class DriverPartidaPerfil {
 	public static void main(String[] args) throws IOException, FicheroNoExiste {
 				Perfil marc = new Perfil("marc","holakease");
 			    Partida kenken = new Partida("kenkenfacil",marc.get_usuari());
-			    kenken.setDificultat(482);
+			    kenken.setDificultat(42);
 			    kenken.setTime(1000);
 			    kenken.setTauler(new TableroH(3));
 			    marc.assignar_nova_partida(kenken);
