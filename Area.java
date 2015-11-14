@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.lang.Math;
 public class Area{
 
-	//Atributs//ejemplo
+	//Atributs
 	
 	private int pos;//identificador area, va de 0 a nombreAreas-1
 	private char op;//tipus operacio, sense op es casella sola
@@ -40,11 +40,16 @@ public class Area{
 	}
 	
 	public Boolean correcte(){
+		this.calcular_resultatactual();
 		return res == resact || res == -resact;
 	}
 	
 	public void afegir_casella(Casilla cas){//es fara 1 cop si =;2 per - i /; 2 o mes * i +
 		caselles.add(cas);
+	}
+	
+	public void set_res(int res){
+		this.res = res;
 	}
 	
 	public Boolean check(int n){
@@ -124,7 +129,7 @@ public class Area{
 						if(res % mult != 0){
 							b1 = false;
 						}else{
-							b1 = recursiva_mult(res/mult, contador2);
+							b1 = recursiva_mult(res/mult, contador2,n);
 						}
 					}
 				}
@@ -159,10 +164,16 @@ public class Area{
 
 	}
 	
-	public Boolean recursiva_mult(int mult, int cont){
+	public Boolean recursiva_mult(int mult, int cont, int n){
+		if(cont == 1)	
+		for(int i=n; i > 0; ++i){
+			if(mult%i == 0){
+				
+			}
+		}
 		return true;
 	}
-	
+	/*
 	public void calcular_resultat(){
 		switch(op){
 			case '+':
@@ -191,7 +202,7 @@ public class Area{
 				res = caselles.get(0).getSolucion();
 				break;
 		}
-	}
+	}*/
 	
 	public void calcular_resultatactual(){
 		switch(op){
