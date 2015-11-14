@@ -42,34 +42,34 @@ public class Casilla{
 	public int getValor(){
 		return valor;
 	}
-	
-	
+
+
 	public int getCan(int x){
 		if (can.size()>x) return can.get(x).intValue();
 		else return -1;
 	}
-	
+
 	public void addCan(int x){
 	Integer aux = new Integer(x);
 		if(!can.contains(aux))can.add(aux);
 	}
-	
+
 	public boolean candidato(int x){
 		return can.contains(new Integer(x));
 	}
-	
+
 	public void borrarcandidatos(){
 		can.clear();
 	}
-	
+
 	public int numerocandidatos(){
 		return can.size();
 	}
-	
+
 	public void quitarcandidato(int x){
 		can.remove(new Integer(x));
 	}
-	
+
 	public boolean getFija(){
 		return fija;
 	}

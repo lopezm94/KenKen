@@ -1,5 +1,3 @@
-package domini;
-
 public class Puntuacio{
 	public int facil;
 	public int mig;

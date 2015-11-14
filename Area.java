@@ -1,6 +1,5 @@
-package domini;
-
 import java.util.ArrayList;
+import java.lang.Math;
 
 public class Area{
 
@@ -22,6 +21,7 @@ public class Area{
 		resact = 0;
 		caselles = new ArrayList<Casilla>();
 	}
+  
 
 	public char get_operacio(){
 		return op;
@@ -48,8 +48,8 @@ public class Area{
 	}
 
 	public Boolean check(int n){
+		Boolean b1;
 		switch(op){
-			Boolean b1;
 			case '+':
 				int suma = 0, contador = 0;
 				for(int i=0; i < caselles.size(); ++i){
@@ -74,26 +74,45 @@ public class Area{
 				}
 				break;
 			case '-':
-				int x = caselles.get(i).getValor() , y = caselles.get(i).getValor();
-				if( x != -1 and y != -1){
+				int x = caselles.get(0).getValor() , y = caselles.get(1).getValor();
+				if( x != -1 && y != -1){
 					b1 = res == (x-y) || res == (y-x);
 				}else{
-					if(x == -1 and y == -1){
+					if(x == -1 && y == -1){
 						b1 = true;
 					}else{
+						b1 = false;
 						if(x == -1){
-							if(res-y
+							int maxi = Math.max(y-1,n-y);
+							if(maxi >= res){
+								b1 = true;
+							}else{
+								b1 = false;
+							}
+						/*	for(int i=1; i <= n && i != y && b1 != true; ++i){
+								b1 = (res == (i-y)) || (res == (y-i));
+							}*/
+						}else{
+							int maxi = Math.max(x-1, n-x);
+							if(maxi >= res){
+								b1 = true;
+							}else{
+								b1 = false;
+							}
+							/*for(int i=1; i <= n && i != x && b1 != true; ++i){
+								b1 = (res == (i-x)) || (res == (x-i));
+							}*/
 						}
 					}
 				}
 				break;
 			case '*':
-				int mult = 1, contador = 0;
+				int mult = 1, contador2 = 0;
 				for(int i=0; i < caselles.size(); ++i){
 					if(caselles.get(i).getValor() != -1){
 						mult *= caselles.get(i).getValor();
 					}else{
-						++contador;
+						++contador2;
 					}
 				}
 				if(mult == res){
@@ -105,24 +124,44 @@ public class Area{
 						if(res % mult != 0){
 							b1 = false;
 						}else{
-							b1 = recursiva_mult(contador,res/mult);
+							b1 = recursiva_mult(res/mult, contador2);
 						}
 					}
 				}
 				break;
 			case '/':
+				int x1 = caselles.get(0).getValor() , y1 = caselles.get(1).getValor();
+				if(x1 == -1 && y1 == -1){
+					b1 = true;
+				}else{
+					if(x1 != -1 && y1 != -1){
+						b1 = (x1/y1 == res && x1%y1 == 0) || (y1/x1 == res && y1%x1 == 0);
+					}else{
+						b1 = false;
+						if(x1 == -1){
+							for(int j=1; j <= n && j != y1 && b1 != true; ++j){
+								b1 = (y1/j == res && y1%j == 0) || (j/y1 == res && j/y1 == 0);
+							}
+						}else{
+							for(int j=1; j <= n && j != x1 && b1 != true; ++j){
+								b1 = (x1/j == res && x1%j == 0) || (j/x1 == res && j/x1 == 0);
+							}
+						}
+					}
+				}
+
 				break;
 			default:
 				b1 = true;
 				break;
-			return b1;
 		}
-	}
-
-	public Boolean recursiva_mult(int pos, int x){
+		return b1;
 
 	}
 
+	public Boolean recursiva_mult(int mult, int cont){
+		return true;
+	}
 
 	public void calcular_resultat(){
 		switch(op){
