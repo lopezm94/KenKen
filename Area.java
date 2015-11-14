@@ -32,6 +32,7 @@ public class Area{
 	}
 
 	public int get_resultatactual(){
+		this.calcular_resultatactual();
 		return resact;
 	}
 	
@@ -46,6 +47,14 @@ public class Area{
 	
 	public void afegir_casella(Casilla cas){//es fara 1 cop si =;2 per - i /; 2 o mes * i +
 		caselles.add(cas);
+	}
+	
+	public Casilla get_casella(int i){
+		return caselles.get(i);
+	}
+	
+	public void set_casella(Casilla cas, int i){
+		caselles.set(i,cas);
 	}
 	
 	public void set_res(int res){
