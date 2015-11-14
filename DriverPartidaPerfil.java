@@ -1,7 +1,4 @@
-package domini;
 import java.io.IOException;
-
-import domini.*;
 
 public class DriverPartidaPerfil {
 	private static void imprimeix_resultats(Perfil marc, Partida p){
@@ -12,7 +9,7 @@ public class DriverPartidaPerfil {
 		//Partida:
 		System.out.println("Nom partida: " + p.getNomPartida());
 		System.out.println("Dificultat partida: " + p.getDificultat());
-		System.out.print("Partida conté un tauler de mida: ");
+		System.out.print("Partida contï¿½ un tauler de mida: ");
 		System.out.print(p.getTauler().getFiles());
 	}
 	public static void main(String[] args) throws IOException, FicheroNoExiste {
@@ -28,4 +25,3 @@ public class DriverPartidaPerfil {
 			    imprimeix_resultats(marc,kenken);
 		}
 	}
-

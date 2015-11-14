@@ -1,8 +1,5 @@
-package domini;
-
 import java.io.IOException;
 import java.util.Scanner;
-import domini.*;
 
 public class DriverArea{
 	public static void main (String args[]) throws IOException{
@@ -137,16 +134,16 @@ public class DriverArea{
                 System.out.println("Accion introducida no es correcta. Intentelo de nuevo.");
                 break;
 			}
-			
+
 		}
 	}
-	
+
 	private static int action() throws IOException{
 		System.out.println(	"1 - Crear Area amb parametres\n"+
 							"2 - Obtenir operacio de l'area\n"+
 							"3 - Obtenir resultat de l'area\n"+
 							"4 - Obtenir resultat actual de l'area\n"+
-							"5 - Obtenir ID de l'àrea\n"+
+							"5 - Obtenir ID de l'ï¿½rea\n"+
 							"6 - Saber si el resultat es correcte\n"+
 							"7 - Afegeix les caselles a l'area\n"+
 							"8 - Saber si es possible arribar a la solucio amb les caselles entrades\n"+
