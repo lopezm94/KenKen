@@ -1,6 +1,3 @@
-package domini;
-
-import java.lang;
 import java.lang.CloneNotSupportedException;
 import java.util.Comparator;
 import java.util.LinkedList;
