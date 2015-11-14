@@ -173,7 +173,7 @@ public class Area{
 		}
 		return true;
 	}
-	/*
+	/*54
 	public void calcular_resultat(){
 		switch(op){
 			case '+':
