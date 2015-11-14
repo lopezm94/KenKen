@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.lang.Math;
 public class Area{
 
-	//Atributs
+	//Atributs//ejemplo
 	
 	private int pos;//identificador area, va de 0 a nombreAreas-1
 	private char op;//tipus operacio, sense op es casella sola
