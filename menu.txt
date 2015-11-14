@@ -1,0 +1,5 @@
+0- Crear Partida
+1- Carregar Partida
+2- Generar KenKen
+3- Elimina l'usuari
+4- Tutorial sobre com jugar al KenKen
