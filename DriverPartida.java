@@ -9,9 +9,8 @@ public class DriverPartida {
 		String nom;
 		Partida p;
 		System.out.println(	"1 - Crear una nova partida\n"+
-				"2 - Assignar una dificultat a una partida\n"+
-				"3 - Assignar un tauler a una partida\n"+
-				"4 - Afegir temps transcorregut a la partida\n"+
+				"2 - Assignar un tauler a una partida\n"+
+				"3 - Afegir temps transcorregut a la partida\n"+
 				"Per sortir : 0\n");
 		while(!end){
 			switch(action(in)){
@@ -24,18 +23,7 @@ public class DriverPartida {
 				p = new Partida(nom,test.get_usuari());
 				System.out.println("S'ha creat una partida amb nom: " + p.getNomPartida());
 				break;
-			case 2: //Assignar una dificultat a una partida
-				System.out.println("Nom de la partida: ");
-				nom = in.next();
-				p = new Partida(nom,test.get_usuari());
-				System.out.println("Dificultat de la partida (nombre enter) : ");
-				int dif = in.nextInt();
-				p.setDificultat(dif);
-				System.out.println("S'ha creat una partida amb nom: " + p.getNomPartida()
-						+ " i dificultat : " + p.getDificultat()
-					);
-				break;
-			case 3: //Assignar un tauler a una partida
+			case 2: //Assignar un tauler a una partida
 				System.out.println("Nom de la partida: ");
 				nom = in.next();
 				p = new Partida(nom,test.get_usuari());
@@ -43,7 +31,7 @@ public class DriverPartida {
 				p.setTauler(test2);
 				System.out.println("S'ha afegit un tauler de : " + p.getTauler().size());
 				break;
-			case 4: //Afegir temps transcorregut a la partida
+			case 3: //Afegir temps transcorregut a la partida
 				System.out.println("Nom de la partida: ");
 				nom = in.next();
 				p = new Partida(nom,test.get_usuari());

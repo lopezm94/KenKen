@@ -82,9 +82,14 @@ public class MainController{
 		dataEngine = new GestioDadesH(p);
 
 	}
-	public void new_game(){
-		//Partida nova = new Partida();
-
+	public void new_game(String nompartida){
+		//pre: current user ja està inicialitzat
+		Partida nova = new Partida(nompartida,currentUser.get_usuari());
+		currentUser.assignar_nova_partida(nova);
+		/*Ara hem d'inicialitzar un tauler i assignar-lo a la partida, 
+		  L'usuari ha de seleccionar un tauler ja existent per començar la partida:
+		*/
+		TableroH tablero = new TableroH();
 	}
 	public void load_game(){
 		//Load an existing game

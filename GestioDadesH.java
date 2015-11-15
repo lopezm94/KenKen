@@ -211,6 +211,14 @@ public class GestioDadesH  extends Gestio_Dades{
 		}
 		return mida;
 	}
+	public int getMidaKenken(String nomkenken, String dir){
+		int dificultat = 0;
+		String[] op = getInfoLine("operacions", "./KenKens", nomkenken).split("\\s"); 
+		opnew = new String[op.length-1];
+		for(int i = 0; i< opnew.length;++i){
+			opnew[i] = op[i+1];
+		}		
+	}
 	public String[] getOperacions(String nomkenken, String dir){
 		String[] opnew;
 		String[] op = getInfoLine("operacions", "./KenKens", nomkenken).split("\\s"); 
