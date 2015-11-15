@@ -162,12 +162,15 @@ public class GestioDadesH  extends Gestio_Dades{
 		}
 		return caselles;
 	}
-
+	/*
+		Exemple Partida.txt:
+		3
+		operacions;+;-;*;/;*;.
+		casella0 
+	*/
 	public void escriure_kenken(TableroH tauler){
-
+		//Funcio escriptura del KenKen
 	}
-
-	//RETRN 
 	public int getMidaKenken(String nomkenken, String dir){
 		int mida = -1;
 		try{
@@ -179,4 +182,21 @@ public class GestioDadesH  extends Gestio_Dades{
 		}
 		return mida;
 	}
+	public String[] getOperacions(String nomkenken, String dir){
+		String[] opnew;
+		try{
+			String[] op = getInfoLine("operacions", "./KenKens", nomkenken).split(";"); 
+			opnew = new String[op.lengh-1];
+			for(int i = 0; i< opnew.length;++i){
+				opnew[i] = op[i+1];
+			}
+		}catch(IOException e){
+			System.out.println(e.toString());
+		} catch (FicheroNoExiste e) {
+			e.printStackTrace();
+		}
+		return opnew;
+	}
+
+}
 }
