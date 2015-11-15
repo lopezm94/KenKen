@@ -27,7 +27,8 @@ public class Main{
 					exit = 1;
 					break;
 				case 1:
-					mc.new_game();
+					System.out.println("Entra el nom de la partida que vols crear:");
+					mc.new_game(in.next());
 					break;
 				case 2:
 					if(user.get_usuari().equals("invitado")){
@@ -54,5 +55,6 @@ public class Main{
 					break;
 			}
 		}
+	in.close();
 	}
 }

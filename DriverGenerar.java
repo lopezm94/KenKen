@@ -18,9 +18,17 @@ public class DriverGenerar {
 		try {
 			test = new File("testGen");
 			System.out.println("Quieres poner tamaño al KenKen?(Si/No)");
+<<<<<<< HEAD
 			input = new Scanner(System.in);
 			//input = new Scanner(test);
 
+=======
+			input = new Scanner(test);
+		//try {
+			//test = new File("testGen");
+			System.out.println("Quieres poner tamaï¿½o al KenKen?(Si/No)");
+			input = new Scanner(System.in);
+>>>>>>> 5bd503a30e6c0dbe52058502aec09ee756f2ed30
 			boolean ok =false;
 			TableroH tablero = null;
 			while (! ok){
@@ -60,9 +68,15 @@ public class DriverGenerar {
 					if (var >  0){
 						edita = true;
 						tam = var;
+<<<<<<< HEAD
 						int at = 0;
 						while (at < var){
 							System.out.println("Quieres tener un area de tipo? (+,-,*,/)");
+=======
+						while (var != 0){
+							System.out.println("Quieres tener un area de tipo? (+,-,*,/)");
+							System.out.println("Quieres tener un ï¿½rea de tipo? (+,-,*,/)");
+>>>>>>> 5bd503a30e6c0dbe52058502aec09ee756f2ed30
 							String varS = input.next();
 							char var2[] = varS.toCharArray();
 							if (var2[0] == '+' || var2[0] == '-' || var2[0] == '*' || var2[0] == '/'){
@@ -151,6 +165,7 @@ public class DriverGenerar {
 						}
 						else System.out.println("Como?");
 					}
+<<<<<<< HEAD
 	
 					int tamaño = tam;
 					if (edita){
@@ -176,6 +191,46 @@ public class DriverGenerar {
 									if (tablero.getAreaID(var2,var3) == -1){
 										if (var2 >= 0 && var2 < (tablero.size()-1)){
 											if (var3 >= 0 && var3 < (tablero.size()-1)){
+=======
+					else System.out.println("Como?");
+				}
+
+				int tamaño = tam;
+				if (edita){
+					System.out.println("Que area le quieres poner a cada casilla?");
+					System.out.println("Area: " + "1 - "+ tamaï¿½o);
+					int var = input.nextInt();
+					int numC = tablero.size()*tablero.size();
+					while (numC > 0){
+						--var;
+						System.out.println("Posicion x: (Min: 0, Max: " + (tablero.size()-1) + ")");
+						int var2 = input.nextInt();
+						System.out.println("Posicion y: (Min: 0, Max: "+ (tablero.size()-1) + ")");
+						int var3 = input.nextInt();
+
+			/*---->*/			if (var2 >= 0 && var2 < tablero.size() && var3 >= 0 && var3 < tablero.size()){
+						if (var2 >= 0 && var2 < tablero.size() && var3 >= 0 && var3 < tablero.size()){
+							if (! vect[var] && var2>= 0 && var2 < tablero.size() && var3 >= 0 && var3 < tablero.size()){
+								tablero.setid(var,var2,var3);
+								vect[var] = true;
+								--numC;
+							}
+							else if (vect[var]){
+								Boolean toca= false;
+							//	if (tablero.getAreaID(var2,var3) == -1){
+									/*if (var2 >= 0 && var2 < tablero.size()){
+										if (var3 >= 0 && var3 < tablero.size()-1){
+=======
+									if (var2 >= 0 && var2 < tablero.size()){
+										if (var3 >= 0 && var3 < tablero.size()){
+>>>>>>> c7467b778e02c0e80413c97674a1b80c6e3da45b
+											if (var == tablero.getAreaID(var2+1,var3)) toca = true;
+											else if (var == tablero.getAreaID(var2+1,var3+1)) toca = true;
+											else if (var == tablero.getAreaID(var2,var3+1)) toca = true;
+										}
+										else{
+											if (var3 == tablero.size()){
+>>>>>>> 5bd503a30e6c0dbe52058502aec09ee756f2ed30
 												if (var == tablero.getAreaID(var2+1,var3)) toca = true;
 												else if (var == tablero.getAreaID(var2,var3+1)) toca = true;
 											}
@@ -221,6 +276,7 @@ public class DriverGenerar {
 							}
 						}
 					}
+<<<<<<< HEAD
 					if (! rand){
 						System.out.println("Quieres poner casillas fijas?(Si/No)");
 						Boolean Fijas = false;
@@ -250,22 +306,65 @@ public class DriverGenerar {
 								var = input.nextInt();
 							}
 						}
+=======
+				}
+
+				System.out.println("Quieres poner casillas fijas?(Si/No)");
+				Boolean Fijas = false;
+				edita = false;
+				while (! Fijas){
+					String varS = input.next();
+					char var2[] = varS.toCharArray();
+					if (var2[0] == 'S' && var2[1] == 'i'){
+						Fijas = true;
+						edita = true;
+					}
+					else if (var2[0] == 'N' && var2[1] == 'o') Fijas = true;
+					else System.out.println("Como?");
+				}
+				if (edita){
+					System.out.println("Recuerda que tu Kenken es de tamaï¿½o "+ tablero.size()+ " (Para salir teclea -1)");
+					System.out.println("Valor casilla fija: (las casillas fijas no se modifican, tienes que poner un valor correcto");
+					int var = input.nextInt();
+					while (var != -1){
+						System.out.println("Donde la quieres poner?");
+						System.out.println("Posicion x:");
+						int i = input.nextInt();
+						System.out.println("Posicion y:");
+						System.out.println("Posiciï¿½n x:");
+						int i = input.nextInt();
+						System.out.println("Posiciï¿½n y:");
+						int j = input.nextInt();
+						tablero.setCasillaFija(var,i,j);
+						System.out.println("Valor casilla fija:");
+						var = input.nextInt();
+>>>>>>> 5bd503a30e6c0dbe52058502aec09ee756f2ed30
 					}
 				}
 				
 				//tablero.checkarea();
 				
+<<<<<<< HEAD
 				System.out.println("Vamos a comprobar que tu Kenken es correcto");
+=======
+				System.out.println("Vamos a comprobar que tu Kenken es correcto")
+>>>>>>> 5bd503a30e6c0dbe52058502aec09ee756f2ed30
 				
 				//System.out.println(tablero);
 				
 				KenkenSolver solucion = new KenkenSolver(tablero);
+<<<<<<< HEAD
 				Boolean solu = false;
+=======
+				/*KenkenSolver solucion = new KenkenSolver(tablero);
+>>>>>>> c7467b778e02c0e80413c97674a1b80c6e3da45b
+>>>>>>> 5bd503a30e6c0dbe52058502aec09ee756f2ed30
 				if (solucion.solveKenken()){
 					System.out.println("Tu Kenken es correcto :)");
 					solu = true;
 				}
 				else System.out.println("Vuelve a intentarlo, tu Kenken no tiene solucion :(");
+<<<<<<< HEAD
 				if (solu){
 					System.out.println("Quieres ver la solucion de tu Kenken?");
 					Boolean resol = false;
@@ -289,6 +388,21 @@ public class DriverGenerar {
 							res = res + "\n";
 						}
 						System.out.println(res);
+=======
+<<<<<<< HEAD
+				
+=======
+				*/
+				System.out.println("Quieres resolver tu Kenken?");
+				Boolean resol = false;
+				edita = false;
+				while (! resol){
+					String varS = input.next();
+					char var2[] = varS.toCharArray();
+					if (var2[0] == 'S' && var2[1] == 'i'){
+						resol = true;
+						edita = true;
+>>>>>>> 5bd503a30e6c0dbe52058502aec09ee756f2ed30
 					}
 				}
 		}/* catch (FileNotFoundException e) {

@@ -1,10 +1,8 @@
-
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 public class MainController{
-	//Definici� variables globals i controladors que necessitarem:
+	//Definició variables globals i controladors que necessitarem:
 	private Perfil currentUser;
 	private GestioDadesH dataEngine;
 	Scanner in;
@@ -20,11 +18,8 @@ public class MainController{
 				String nomUser = in.next();
 				System.out.println("Entra la contasenya");
 				String pass = in.next();
-				StringTokenizer st = dataEngine.getProfileInfo(nomUser, ".", "Profiles");
+				String[] st = dataEngine.getProfileInfo(nomUser, ".", "Profiles");
 				//Control String tokenizer
-				while (st.hasMoreElements()) {
-					System.out.println(st.nextElement());
-				}
 				if(dataEngine.existsUser(st,nomUser)){
 					//Buscar les dades al controlador gestio, si no el troba, 
 					//preguntar si vol crear un nou usuari
@@ -47,12 +42,12 @@ public class MainController{
 					System.out.println("Entra la contasenya");
 					String passr = in.next();
 					if(pass.equals(passr)){
-						StringTokenizer st = dataEngine.getProfileInfo(nomUser, ".", "Profiles.txt"); 
-						if(dataEngine.existsUser(st)){
+						String[] st = dataEngine.getProfileInfo(nomUser, ".", "Profiles"); 
+						if(dataEngine.existsUser(st,nomUser)){
 							System.out.println("Ja existeix un usuari amb aquest nom.");
 						}else{
 							try{
-								dataEngine.Escribir_string(nomUser+" "+pass+" 0 0 0", "\n", "Profiles", ".");
+								GestioDadesH.Escribir_string(nomUser+" "+pass+" 0 0 0", "\n", "Profiles", ".");
 							}catch(IOException e){
 								System.out.println(e.toString());
 							} catch (FicheroNoExiste f) {
@@ -60,7 +55,7 @@ public class MainController{
 								System.out.println("fichero no existe");
 							}
 							try{
-								dataEngine.Crear_directorio(nomUser,"./Games");
+								GestioDadesH.Crear_directorio(nomUser,"./Games");
 							}catch(IOException e){
 								System.out.println(e.toString());
 							} catch (FicheroYaExistente e) {
@@ -87,8 +82,14 @@ public class MainController{
 		dataEngine = new GestioDadesH(p);
 
 	}
-	public void new_game(){
-
+	public void new_game(String nompartida){
+		//pre: current user ja està inicialitzat
+		Partida nova = new Partida(nompartida,currentUser.get_usuari());
+		currentUser.assignar_nova_partida(nova);
+		/*Ara hem d'inicialitzar un tauler i assignar-lo a la partida, 
+		  L'usuari ha de seleccionar un tauler ja existent per començar la partida:
+		*/
+		TableroH tablero = new TableroH();
 	}
 	public void load_game(){
 		//Load an existing game
@@ -99,9 +100,19 @@ public class MainController{
 	}
 	public void delete_user(){
 		//delete my current username
-
+		int linea = dataEngine.getLine(currentUser.get_usuari(),".","Profiles.txt");
+		try{
+			Gestio_Dades.modificarString("Profiles", ".", linea, "\n", "\n");
+		}catch(IOException e){
+			System.out.println(e.toString());
+		}catch(FicheroNoExiste f){
+			System.out.println("El fichero no existe\n");
+		}catch(FicheroYaExistente f1){
+			System.out.println("El fichero ya existe\n");
+		}
 	}
 	public void show_tutorial(){
 		//show a simple text
+		System.out.println("Tutorial per jugar:\n http://www.kenkenpuzzle.com/howto/solve");
 	}
 }

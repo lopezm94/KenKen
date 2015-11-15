@@ -11,13 +11,21 @@ public class KenkenSolver {
 	private TableroH tablero;
 
 	public KenkenSolver(TableroH tablero){
+<<<<<<< HEAD
+=======
+	public void KenKenSolver(TableroH tablero){
+>>>>>>> 5bd503a30e6c0dbe52058502aec09ee756f2ed30
 		this.tablero = tablero;
 		this.initDomain();
 	}
 
 	private Boolean FuncionRecursiva(int x, int y, ConstraintEngine ce) {
 		if (y == this.tablero.size()) {
+<<<<<<< HEAD
 			//System.out.println("termino");
+=======
+			System.out.println("termino");
+>>>>>>> 5bd503a30e6c0dbe52058502aec09ee756f2ed30
 			ce.storeSolution();
 			//System.out.println(tablero);
 
@@ -31,10 +39,20 @@ public class KenkenSolver {
 			
 		}
 		Boolean check = false;
+<<<<<<< HEAD
 		Boolean done = false;
 		int newx = (x+1)%this.tablero.size();
 		int newy = y;
 		if (newx == 0) newy++;
+=======
+			ce.storeSolution();
+			return true;
+		}
+		Boolean done = false;
+		int newx = (x+1)%this.tablero.size();
+		int newy = y;
+		if (newx == 0) y++;
+>>>>>>> 5bd503a30e6c0dbe52058502aec09ee756f2ed30
 
 		for (Integer value : new LinkedList<Integer>(ce.getDomain(x,y))) {
 			//System.out.println("hola");
@@ -62,7 +80,15 @@ public class KenkenSolver {
 			}                          
 			catch(IOException e){      
 				                       
+<<<<<<< HEAD
             } */                         
+=======
+            }                          
+		for (Integer value : ce.getDomain(x,y)) {
+			if (ce.propagate(x, y, value))
+				done = this.FuncionRecursiva(newx,newy,ce);
+			ce.depropagate(x,y);
+>>>>>>> 5bd503a30e6c0dbe52058502aec09ee756f2ed30
 			if (done) break;
 		}
 		return done;

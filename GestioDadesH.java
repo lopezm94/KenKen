@@ -1,10 +1,10 @@
-import java.lang.RuntimeException;
+//import java.lang.RuntimeException;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileWriter;
+//import java.io.File;
+//import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.StringTokenizer;
+//import java.util.StringTokenizer;
 
 public class GestioDadesH  extends Gestio_Dades{
 	/*
@@ -25,10 +25,32 @@ public class GestioDadesH  extends Gestio_Dades{
 		       		profiledata = line;
 		       }
 		    }
+		    br.close();
 		}catch(IOException e){
 			System.out.println(e.toString());
 		}
 		return profiledata;
+	}
+
+	//Obté la línia a que es troba en el fitxer donada una keyword
+	public int getLine(String keyword, String dir, String file){
+		int contador = 0;
+		Boolean control = false;
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("./"+file));
+		    String line;
+		    while ((line = br.readLine()) != null && !control) {
+		       if(line.contains(keyword)){
+		       		control = true;
+		       }else{
+		    	   contador++;
+		       }
+		    }
+		    br.close();
+		}catch(IOException e){
+			System.out.println(e.toString());
+		}
+		return contador;
 	}
 
 	public GestioDadesH(Perfil p){
@@ -49,7 +71,7 @@ public class GestioDadesH  extends Gestio_Dades{
 						Game3.txt
 					Pepe
 						Game1.txt
-					Al�_el_Magreb�
+					Alí_el_Magrebí
 						Game1.txt
 				->Ranking.txt
 
@@ -80,38 +102,30 @@ public class GestioDadesH  extends Gestio_Dades{
 		}
 	}
 
-	public StringTokenizer getProfileInfo(String keyword, String dir, String file){
+	public String[] getProfileInfo(String keyword, String dir, String file){
 		//retorna una array de strings [marc,1234,20,20,100]  [0]-> usr; [1]->pass; [2:5] -> points
-		StringTokenizer st = new StringTokenizer(getInfoLine(keyword,dir,file+".txt"),"\\s");
-		return st;
+		return getInfoLine(keyword,dir,file+".txt").split("\\s");
 	}
-	public Boolean existsUser(StringTokenizer st, String username){
+	public Boolean existsUser(String[] st, String username){
 		/*Comprova dins del tokenizer que no sigui null*/
-		return st.nextElemt().equals(username);
+		return st[0].equals(username);
 	}
-	public String getUserByToken(StringTokenizer st){
-		if(st.countTokens() > 0) return st.nextToken();
+	public String getUserByToken(String[] st){
+		if(st.length > 0) return st[0];
 		else return "";
 	}
-	public String getPassByToken(StringTokenizer st){
-		int i = 0;
-		if(st.countTokens() > 0){
-			while(st.hasMoreTokens()){
-				if(i == 1) return st.nextToken();
-				st.nextToken();
-				++i;
-			}
+	public String getPassByToken(String[] st){
+		if(st.length > 0){
+			return st[1];
 		}
 		return "";
 	}
-	public int[] getPuntuacio(StringTokenizer st){
+	public int[] getPuntuacio(String[] st){
 		int i = 0;
 		int[] punts = new int[3];
-		if(st.countTokens() > 0){
-			while(st.hasMoreTokens()){
-				if(i>1) punts[i] = Integer.parseInt(st.nextToken());
-				else st.nextToken();
-				++i;
+		if(st.length > 0){
+			for (i = 2; i<5; ++i) {
+				punts[i] = Integer.parseInt(st[i]);
 			}
 		}
 		return punts;
@@ -130,7 +144,7 @@ public class GestioDadesH  extends Gestio_Dades{
 			3 1 2
 			2 3 1
 	*/
-	public StringTokenizer getPartidaHeaderInfo(String file, String username){
+	public String[] getPartidaHeaderInfo(String file, String username){
 		/*
 			getPartidaHeaderInfo retorna els valors:
 			->nom de partida
@@ -139,10 +153,9 @@ public class GestioDadesH  extends Gestio_Dades{
 			->fitxer on es troba el kenken a rsoldre
 			->mida del kenken
 		*/
-		StringTokenizer st;
+		String[] headerinfo = null;
 		try{
-			st = new StringTokenizer(Leer_string(file,"./"+username,"\n",4),"\n"); 
-			return st;
+			headerinfo = Leer_string(file,"./"+username,"\n",4).split("\n"); 
 		}catch(IOException e){
 			System.out.println(e.toString());
 			return null;
@@ -150,21 +163,20 @@ public class GestioDadesH  extends Gestio_Dades{
 			e.printStackTrace();
 			return null;
 		}
+		return headerinfo;
 
 	}
 	public int[][] getPartidaValues(String file, String username, int mida){
 		int[][] caselles = new int[mida][mida];
-		int i,j;
-		i = j = 0;
+		int i;
+		i = 0;
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 		    String line;
 		    while ((line = br.readLine()) != null) {
-		       StringTokenizer fila = new StringTokenizer(line,"\\s");
-		       while(fila.hasMoreTokens()){
-		       		caselles[i][j] = Integer.parseInt(fila.nextToken());
-		       		++j;
-		       }
-		       j = 0;
+		       String[] fila = line.split("\\s");
+		         for (int j=0; j<fila.length; j++){
+			       	caselles[i][j] = Integer.parseInt(fila[j]);
+			      }
 		       ++i;
 		    }
 		}catch(IOException e){
@@ -172,4 +184,73 @@ public class GestioDadesH  extends Gestio_Dades{
 		}
 		return caselles;
 	}
+	/*
+	Exemple Partida.txt:
+	3
+	operacions + - * / * . +
+	casella0 0 2 6
+	casella1 0 3 1
+	casella2 1 2 2
+	casella3 1 1 4
+	...
+	casellax fija sol idarea --> fija (1 fija,0 no fija), sol(value), idarea(0...total areas)
+*/
+	public void escriure_kenken(TableroH tauler){
+
+	}
+
+	//RETRN 
+	public int getMidaKenken(String nomkenken, String dir){
+		int mida = -1;
+		try{
+			mida = Integer.parseInt(Leer_string(nomkenken,"./KenKens","\n",1)); 
+		}catch(IOException e){
+			System.out.println(e.toString());
+		} catch (FicheroNoExiste e) {
+			e.printStackTrace();
+		}
+		return mida;
+	}
+	public int getMidaKenken(String nomkenken, String dir){
+		int dificultat = 0;
+		String[] op = getInfoLine("operacions", "./KenKens", nomkenken).split("\\s"); 
+		opnew = new String[op.length-1];
+		for(int i = 0; i< opnew.length;++i){
+			opnew[i] = op[i+1];
+		}		
+	}
+	public String[] getOperacions(String nomkenken, String dir){
+		String[] opnew;
+		String[] op = getInfoLine("operacions", "./KenKens", nomkenken).split("\\s"); 
+		opnew = new String[op.length-1];
+		for(int i = 0; i< opnew.length;++i){
+			opnew[i] = op[i+1];
+		}		
+		return opnew;
+	}
+
+	/*
+	Exemple de contingut de variable de retorn:
+	1 2 3 --> casella 0 --> retorn[0]
+	1 3 2
+	2 2 2
+	3 4 6
+	1 2 6
+	Per cada fila de l'element de la matriu equival a una casella, i cada columna a les seves propietats:
+	- fija o no fija (1,0)
+	- solucio usuari temporal
+	- area a la que correspon
+	*/
+	public int[][] getCasellaValors(String nomkenken, String dir){
+		int mida = getMidaKenken(nomkenken,dir);
+		int casella_values[][] = new int[mida*mida][3];
+		for(int i = 0; i<mida*mida; ++i){
+			String[] casellainfo = getInfoLine("casella"+i,"./KenKens",nomkenken).split("\\s");
+			for(int k = 0; k < 3; ++k){
+				casella_values[i][k] = Integer.parseInt(casellainfo[k+1]);
+			}
+		}
+		return casella_values;
+	}
 }
+
