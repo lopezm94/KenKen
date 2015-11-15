@@ -111,7 +111,7 @@ public class DriverGenerar {
 							++tam;
 						}
 						--tam;
-						int num = (tablero.size())^2;
+						int num = (tablero.size() * tablero.size());
 						for (int i = 0; i < tablero.size();++i){
 							for (int j = 0; j < tablero.size(); ++j){
 								tablero.setid(tam,i,j);
@@ -119,7 +119,10 @@ public class DriverGenerar {
 								if (tam != 0){
 									int var5 = rnd.nextInt();
 									var5 = Math.abs(var5);
-									if (var5 < 10 && var5 > 0) --tam;
+									var5 = var5%tablero.size();
+								//	System.out.println(var5+ " " + num);
+
+									if (var5 == 0) --tam;
 									else if (num <= tam) --tam;
 								}
 							}
@@ -127,7 +130,7 @@ public class DriverGenerar {
 						
 						tablero.colocaRes();
 						
-						System.out.println(tablero);
+						//System.out.println(tablero);
 						ok = true;
 						System.out.println("Areas generadas: "+ are);
 

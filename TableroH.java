@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class TableroH extends Tablero {
 	private int[][] idAreas;
 	private ArrayList<Area> areas;
-
+	
 
 
 	public TableroH(int medida){
@@ -144,6 +144,19 @@ public class TableroH extends Tablero {
 		int a = this.idAreas[x][y];
 		return areas.get(a);
 	}
+	
+	public int calcuDif(){
+		int var = 0;
+		for (int i = 0; i < files; ++i){
+			for (int j = 0; j < files; ++j){
+				if (tauler[i][j].fija) ++var;
+			}
+		}
+		if (var >= 1 && var <= 16) var = 0;
+		else if (var > 16 && var <= 49) var = 1;
+		else var = 2;
+		return var;
+	}
 
 	public String toString(){ //devuelve los contenidos de un tablero en una string
 		String res = "";
@@ -153,7 +166,7 @@ public class TableroH extends Tablero {
 			}
 			res = res + "\n";
 		}
-		res = res + "\n";
+		/*res = res + "\n";
 		res = res + "\n";
 
 		for (int i = 0; i < files;++i){
@@ -175,7 +188,7 @@ public class TableroH extends Tablero {
 		
 		res = res + "\n";
 		res = res + "\n";
-		
+		*/
 		//System.out.println(areas);
 		
 		return res;
