@@ -1,7 +1,5 @@
-package domini;
-
 import java.util.LinkedList;
-import java.lang.RuntimeException;
+//import java.lang.RuntimeException;
 import java.util.ArrayList;
 
 /*@version 1.0
@@ -24,12 +22,16 @@ public class TableroH extends Tablero {
 		areas = new ArrayList<Area>();
 	}
 
-	public void afegirArea(Area a){
+	public void afegirArea(Area a, int ress){
+			a.set_res(ress);
+			System.out.println(ress);
 	      areas.add(a);
+	      
 	}
 
 	public void setid(int c, int x, int y){
 	  idAreas[x][y] = c;
+	  areas.get(c).afegir_casella(tauler[x][y]);
 	}
 
 
@@ -53,7 +55,7 @@ public class TableroH extends Tablero {
 	public Area getAreaByPos(int x, int y) {
 		return areas.get(this.idAreas[x][y]);
 	}
-	
+
 	public Boolean casillaIsFija(int x, int y) {
 		return this.tauler[x][y].getFija();
 	}
@@ -63,8 +65,8 @@ public class TableroH extends Tablero {
 		LinkedList<Integer> list = new LinkedList<Integer>();
 		int tmp = casilla.getCan(0);
 		for (int i=1; tmp != -1; i++) {
-			tmp = casilla.getCan(i);
 			list.add(tmp);
+			tmp = casilla.getCan(i);
 		}
 		return list;
 	}
@@ -76,10 +78,20 @@ public class TableroH extends Tablero {
 	public void setCasillaVal(int x, int y, int num){
 		if  (! this.tauler[x][y].getFija()) this.tauler[x][y].valor = num;
 	}
+	
+	public void setCasillaFija(int val, int x, int y){
+		this.tauler[x][y].fija = true;
+		this.tauler[x][y].solucion = val;
+		this.tauler[x][y].valor = val;
+	}
 
 	public int getCasillaVal(int x, int y) {
 		return this.tauler[x][y].valor;
 	}
+	
+/*	public void checkarea(){
+		for (int i = 0; i < this.areas.size(); ++i) areas.get(i).calcular_resultatactual();
+	}*/
 
 	public void setCasillaSol(int x, int y, int valor){
 		this.tauler[x][y].solucion = valor;
@@ -123,12 +135,13 @@ public class TableroH extends Tablero {
 	public int getAreaID(int x, int y){
 		return this.idAreas[x][y];
 	}
+	
 
 	public Area getArea(int x, int y){ // Devuelve el area asociada a la posicion x,y.
 		int a = this.idAreas[x][y];
 		return areas.get(a);
 	}
-	
+
 	public String toString(){ //devuelve los contenidos de un tablero en una string
 		String res = "";
 		for (int i = 0; i < files;++i){
@@ -137,6 +150,31 @@ public class TableroH extends Tablero {
 			}
 			res = res + "\n";
 		}
+		res = res + "\n";
+		res = res + "\n";
+
+		for (int i = 0; i < files;++i){
+			for (int j = 0; j < files; ++j){
+				res = res + getCasillaSol(i,j) + " ";
+			}
+			res = res + "\n";
+		}
+		
+		res = res + "\n";
+		res = res + "\n";
+		
+		for (int i = 0; i < files;++i){
+			for (int j = 0; j < files; ++j){
+				res = res + idAreas[i][j] + " ";
+			}
+			res = res + "\n";
+		}
+		
+		res = res + "\n";
+		res = res + "\n";
+		
+		System.out.println(areas);
+		
 		return res;
 	}
 }
