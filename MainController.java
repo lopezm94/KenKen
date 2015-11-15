@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 public class MainController{
 	//Definició variables globals i controladors que necessitarem:
@@ -44,11 +43,11 @@ public class MainController{
 					String passr = in.next();
 					if(pass.equals(passr)){
 						String[] st = dataEngine.getProfileInfo(nomUser, ".", "Profiles"); 
-						if(dataEngine.existsUser(st)){
+						if(dataEngine.existsUser(st,nomUser)){
 							System.out.println("Ja existeix un usuari amb aquest nom.");
 						}else{
 							try{
-								dataEngine.Escribir_string(nomUser+" "+pass+" 0 0 0", "\n", "Profiles", ".");
+								GestioDadesH.Escribir_string(nomUser+" "+pass+" 0 0 0", "\n", "Profiles", ".");
 							}catch(IOException e){
 								System.out.println(e.toString());
 							} catch (FicheroNoExiste f) {
@@ -56,7 +55,7 @@ public class MainController{
 								System.out.println("fichero no existe");
 							}
 							try{
-								dataEngine.Crear_directorio(nomUser,"./Games");
+								GestioDadesH.Crear_directorio(nomUser,"./Games");
 							}catch(IOException e){
 								System.out.println(e.toString());
 							} catch (FicheroYaExistente e) {
@@ -84,7 +83,7 @@ public class MainController{
 
 	}
 	public void new_game(){
-		Partida nova = new Partida();
+		//Partida nova = new Partida();
 
 	}
 	public void load_game(){
@@ -96,9 +95,19 @@ public class MainController{
 	}
 	public void delete_user(){
 		//delete my current username
-
+		int linea = dataEngine.getLine(currentUser.get_usuari(),".","Profiles.txt");
+		try{
+			Gestio_Dades.modificarString("Profiles", ".", linea, "\n", "\n");
+		}catch(IOException e){
+			System.out.println(e.toString());
+		}catch(FicheroNoExiste f){
+			System.out.println("El fichero no existe\n");
+		}catch(FicheroYaExistente f1){
+			System.out.println("El fichero ya existe\n");
+		}
 	}
 	public void show_tutorial(){
 		//show a simple text
+		System.out.println("Tutorial per jugar:\n http://www.kenkenpuzzle.com/howto/solve");
 	}
 }
