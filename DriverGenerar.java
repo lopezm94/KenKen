@@ -15,17 +15,14 @@ public class DriverGenerar {
 		Scanner input = null;
 		File test = null;
 
-<<<<<<< HEAD
 		try {
 			test = new File("testGen");
 			System.out.println("Quieres poner tamaño al KenKen?(Si/No)");
 			input = new Scanner(test);
-=======
 		//try {
 			//test = new File("testGen");
 			System.out.println("Quieres poner tamaï¿½o al KenKen?(Si/No)");
 			input = new Scanner(System.in);
->>>>>>> c7467b778e02c0e80413c97674a1b80c6e3da45b
 			boolean ok =false;
 			TableroH tablero = null;
 			while (! ok){
@@ -65,11 +62,8 @@ public class DriverGenerar {
 						edita = true;
 						tam = var;
 						while (var != 0){
-<<<<<<< HEAD
 							System.out.println("Quieres tener un area de tipo? (+,-,*,/)");
-=======
 							System.out.println("Quieres tener un ï¿½rea de tipo? (+,-,*,/)");
->>>>>>> c7467b778e02c0e80413c97674a1b80c6e3da45b
 							String varS = input.next();
 							char var2[] = varS.toCharArray();
 							if (var2[0] == '+' || var2[0] == '-' || var2[0] == '*' || var2[0] == '/'){
@@ -128,11 +122,7 @@ public class DriverGenerar {
 					else System.out.println("Como?");
 				}
 
-<<<<<<< HEAD
 				int tamaño = tam;
-=======
-				int tamaï¿½o = tam;
->>>>>>> c7467b778e02c0e80413c97674a1b80c6e3da45b
 				if (edita){
 					System.out.println("Que area le quieres poner a cada casilla?");
 					System.out.println("Area: " + "1 - "+ tamaï¿½o);
@@ -145,11 +135,8 @@ public class DriverGenerar {
 						System.out.println("Posicion y: (Min: 0, Max: "+ (tablero.size()-1) + ")");
 						int var3 = input.nextInt();
 
-<<<<<<< HEAD
 			/*---->*/			if (var2 >= 0 && var2 < tablero.size() && var3 >= 0 && var3 < tablero.size()){
-=======
 						if (var2 >= 0 && var2 < tablero.size() && var3 >= 0 && var3 < tablero.size()){
->>>>>>> c7467b778e02c0e80413c97674a1b80c6e3da45b
 							if (! vect[var] && var2>= 0 && var2 < tablero.size() && var3 >= 0 && var3 < tablero.size()){
 								tablero.setid(var,var2,var3);
 								vect[var] = true;
@@ -158,7 +145,6 @@ public class DriverGenerar {
 							else if (vect[var]){
 								Boolean toca= false;
 							//	if (tablero.getAreaID(var2,var3) == -1){
-<<<<<<< HEAD
 									/*if (var2 >= 0 && var2 < tablero.size()){
 										if (var3 >= 0 && var3 < tablero.size()-1){
 =======
@@ -244,15 +230,12 @@ public class DriverGenerar {
 					int var = input.nextInt();
 					while (var != -1){
 						System.out.println("Donde la quieres poner?");
-<<<<<<< HEAD
 						System.out.println("Posicion x:");
 						int i = input.nextInt();
 						System.out.println("Posicion y:");
-=======
 						System.out.println("Posiciï¿½n x:");
 						int i = input.nextInt();
 						System.out.println("Posiciï¿½n y:");
->>>>>>> c7467b778e02c0e80413c97674a1b80c6e3da45b
 						int j = input.nextInt();
 						tablero.setCasillaFija(var,i,j);
 						System.out.println("Valor casilla fija:");
@@ -262,13 +245,11 @@ public class DriverGenerar {
 				
 				//tablero.checkarea();
 				
-				System.out.println("Vamos a comprobar que tu Kenken es correcto");
-<<<<<<< HEAD
+				System.out.println("Vamos a comprobar que tu Kenken es correcto")
 				
 				//System.out.println(tablero);
 				
 				KenkenSolver solucion = new KenkenSolver(tablero);
-=======
 				/*KenkenSolver solucion = new KenkenSolver(tablero);
 >>>>>>> c7467b778e02c0e80413c97674a1b80c6e3da45b
 				if (solucion.solveKenken()){
@@ -279,7 +260,6 @@ public class DriverGenerar {
 				
 =======
 				*/
->>>>>>> c7467b778e02c0e80413c97674a1b80c6e3da45b
 				System.out.println("Quieres resolver tu Kenken?");
 				Boolean resol = false;
 				edita = false;
