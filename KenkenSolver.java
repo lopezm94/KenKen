@@ -5,7 +5,6 @@
 
 public class KenkenSolver {
 
-	private Boolean Ok = false;
 	private TableroH tablero;
 
 	public void KenKenSolver(TableroH tablero){
@@ -14,24 +13,26 @@ public class KenkenSolver {
 	}
 
 	private Boolean FuncionRecursiva(int x, int y, ConstraintEngine ce) {
-		if (y == this.tablero.size())
+		if (y == this.tablero.size()) {
+			ce.storeSolution();
 			return true;
+		}
 		Boolean done = false;
 		int newx = (x+1)%this.tablero.size();
 		int newy = y;
 		if (newx == 0) y++;
-		for (Integer value : ce.getCellDomain(x,y)) {
-			ConstraintEngine newce = ce.clone();
-			if (newce.propagate(x, y, value))
-				done = this.FuncionRecursiva(newx,newy,newce);
+		for (Integer value : ce.getDomain(x,y)) {
+			if (ce.propagate(x, y, value))
+				done = this.FuncionRecursiva(newx,newy,ce);
+			ce.depropagate(x,y);
 			if (done) break;
 		}
+		return done;
 	}
 
 	public Boolean solveKenken(){
 		ConstraintEngine ce = new ConstraintEngine(tablero);
-		Ok = this.FuncionRecursiva(0,0,ce);
-		return Ok;
+		return this.FuncionRecursiva(0,0,ce);
 	}
 
 	public void initDomain(){

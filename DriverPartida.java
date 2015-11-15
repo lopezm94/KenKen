@@ -3,9 +3,16 @@ import java.util.Scanner;
 
 public class DriverPartida {
 	public static void main(String[] args) throws IOException {
-		Boolean end = false;
+		boolean end = false;
 		Scanner in = new Scanner(System.in);
 		Perfil test = new Perfil();
+		String nom;
+		Partida p;
+		System.out.println(	"1 - Crear una nova partida\n"+
+				"2 - Assignar una dificultat a una partida\n"+
+				"3 - Assignar un tauler a una partida\n"+
+				"4 - Afegir temps transcorregut a la partida\n"+
+				"Per sortir : 0\n");
 		while(!end){
 			switch(action(in)){
 			case 0:
@@ -13,14 +20,14 @@ public class DriverPartida {
 				break;
 			case 1: //Crear una nova partida
 				System.out.println("Nom de la partida: ");
-				String nom = in.next();
-				Partida p = new Partida(nom,test);
+				nom = in.next();
+				p = new Partida(nom,test.get_usuari());
 				System.out.println("S'ha creat una partida amb nom: " + p.getNomPartida());
 				break;
 			case 2: //Assignar una dificultat a una partida
 				System.out.println("Nom de la partida: ");
-				String nom = in.next();
-				Partida p = new Partida(nom,test);
+				nom = in.next();
+				p = new Partida(nom,test.get_usuari());
 				System.out.println("Dificultat de la partida (nombre enter) : ");
 				int dif = in.nextInt();
 				p.setDificultat(dif);
@@ -30,16 +37,16 @@ public class DriverPartida {
 				break;
 			case 3: //Assignar un tauler a una partida
 				System.out.println("Nom de la partida: ");
-				String nom = in.next();
-				Partida p = new Partida(nom,test);
+				nom = in.next();
+				p = new Partida(nom,test.get_usuari());
 				TableroH test2 = new TableroH(9);
 				p.setTauler(test2);
-				System.out.println("S'ha afegit un tauler de : " p.getTauler().size());
+				System.out.println("S'ha afegit un tauler de : " + p.getTauler().size());
 				break;
 			case 4: //Afegir temps transcorregut a la partida
 				System.out.println("Nom de la partida: ");
-				String nom = in.next();
-				Partida p = new Partida(nom,test);
+				nom = in.next();
+				p = new Partida(nom,test.get_usuari());
 				System.out.println("Temps transcorregut de la partida: ");
 				int time = in.nextInt();
 				p.setTime(time);
@@ -54,11 +61,6 @@ public class DriverPartida {
 		in.close();
 	}
 	private static int action(Scanner in1) throws IOException{
-		System.out.println(	"1 - Crear una nova partida\n"+
-							"2 - Assignar una dificultat a una partida\n"+
-							"3 - Assignar un tauler a una partida\n"+
-							"4 - Afegir temps transcorregut a la partida\n"+
-							"Per sortir : 0\n");
 		int res = in1.nextInt();
 		return res;
 	}
