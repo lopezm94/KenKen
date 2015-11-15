@@ -1,3 +1,4 @@
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -109,6 +110,7 @@ public class DriverArea{
 	                	Casilla c = new Casilla(valor,fija,sol);
 	                	a.afegir_casella(c);
 					}
+					a.calcular_resultat();
 				}
 				break;
 			case 10://set valor casella
@@ -123,6 +125,7 @@ public class DriverArea{
 					c.setValor(valor);
 					a.set_casella(c,num);
 					System.out.println("El valor de la casella ha sigut canviat\n");
+					a.calcular_resultatactual();
 				}
 				break;
 			case 11://print valors caselles
@@ -140,11 +143,11 @@ public class DriverArea{
                 System.out.println("Accion introducida no es correcta. Intentelo de nuevo.");
                 break;
 			}
-
+			
 		}
 		in.close();
 	}
-
+	
 	private static int action(Scanner in1) throws IOException{
 		System.out.println(	"1 - Crear Area amb parametres\n"+
 							"2 - Obtenir operacio de l'area\n"+

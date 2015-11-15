@@ -68,7 +68,7 @@ public class ConstraintEngine {
   *
   *@param x Posicion de la casilla en el eje X.
   *@param y Posicion de la casilla en el eje Y.
-  *@return HashSet<Integer> Coleccion con el dominio de la casilla.
+  *@return HashSet Coleccion con el dominio de la casilla.
   */
   public HashSet<Integer> getDomain(int x, int y) {
     return this.cellDomain.get(x).get(y);
@@ -78,8 +78,8 @@ public class ConstraintEngine {
   /**
   *Devuelve una coleccion con el dominio de una casilla.
   *
-  *@param Pair<Integer,Integer> Posicion de la casilla.
-  *@return HashSet<Integer> Coleccion con el dominio de la casilla.
+  *@param pos Posicion de la casilla.
+  *@return HashSet Coleccion con el dominio de la casilla.
   */
   public HashSet<Integer> getDomain(Pair<Integer,Integer> pos) {
     return this.getDomain(pos.getFirst(),pos.getSecond());
@@ -97,11 +97,6 @@ public class ConstraintEngine {
   *KenKen, true en caso contrario.
   */
   public Boolean propagate(int x, int y, int value) {
-    if (this.board.casillaIsFija(x,y))
-      return true;
-
-    if (this.board.getCasillaVal(x,y) != -1) //Porsia temporal
-      throw new RuntimeException("No se puede cambiar una casilla ya inicializada");
 
     Area area = this.board.getAreaByPos(x,y);
     MutableBoolean valid = new MutableBoolean();
@@ -144,13 +139,12 @@ public class ConstraintEngine {
   *@param y Posicion en el eje Y de el tablero.
   */
   public void depropagate(int x, int y) {
-    if (this.board.casillaIsFija(x,y))
-      return;
+    if (!this.board.casillaIsFija(x,y))
+      this.board.setCasillaVal(x,y,-1);
 
     Pair<Integer,Integer> pos;
     HashSet<Integer> aux;
 
-    this.board.setCasillaVal(x,y,-1);
     while (log.peek() != null) {
       pos = this.getMatrixPos(log.peek().getFirst());
       aux = this.getDomain(pos);

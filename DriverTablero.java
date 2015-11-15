@@ -5,6 +5,11 @@ import java.util.Scanner;
 import java.io.*;
 
 
+/*@version 1.0
+*@author Reyes Vera
+*/
+
+
 public class DriverTablero {
 
 
@@ -55,7 +60,7 @@ public class DriverTablero {
 					var = input.nextInt();
 					int var2 = input.nextInt();
 					int var3 = input.nextInt();
-					tablero.setCasella(var,var2,var3);
+					tablero.setCasillaVal(var,var2,var3);
 					--varC;
 				}
 

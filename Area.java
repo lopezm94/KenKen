@@ -107,7 +107,7 @@ public class Area{
 								b1 = false;
 							}
 						/*	for(int i=1; i <= n && i != y && b1 != true; ++i){
-								b1 = (res == (i-y)) || (res == (y-i));a
+								b1 = (res == (i-y)) || (res == (y-i));
 							}*/
 						}else{
 							int maxi = Math.max(x-1, n-x);
@@ -141,7 +141,19 @@ public class Area{
 						if(res % mult != 0){
 							b1 = false;
 						}else{
-							b1 = recursiva_mult(res/mult, contador2,n);
+							int quocient = res/mult;
+							Boolean control = false;
+							while(contador2 > 0){
+								for(int i=n; i > 0 && !control; --i){
+									if(quocient%i == 0){
+										quocient = quocient / i;
+										control = true;
+									}
+								}
+								contador2--;
+								control = false;
+							}
+							b1 = quocient == 1;
 						}
 					}
 				}
@@ -156,11 +168,11 @@ public class Area{
 					}else{
 						b1 = false;
 						if(x1 == -1){
-							for(int j=1; j <= n && j != y1 && b1 != true; ++j){
+							for(int j=1; j <= n  && b1 != true; ++j){
 								b1 = (y1/j == res && y1%j == 0) || (j/y1 == res && j%y1 == 0);
 							}
 						}else{
-							for(int j=1; j <= n && j != x1 && b1 != true; ++j){
+							for(int j=1; j <= n  && b1 != true; ++j){
 								b1 = (x1/j == res && x1%j == 0) || (j/x1 == res && j%x1 == 0);
 							}
 						}
@@ -174,16 +186,6 @@ public class Area{
 		}
 		return b1;
 
-	}
-	
-	public Boolean recursiva_mult(int mult, int cont, int n){
-		if(cont == 1)	
-		for(int i=n; i > 0; ++i){
-			if(mult%i == 0){
-				
-			}
-		}
-		return true;
 	}
 	
 	public void calcular_resultat(){
