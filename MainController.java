@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class MainController{
-	//DefiniciÃ³ variables globals i controladors que necessitarem:
+	//Definició variables globals i controladors que necessitarem:
 	private Perfil currentUser;
 	private GestioDadesH dataEngine;
 	Scanner in;
@@ -17,9 +17,9 @@ public class MainController{
 			int te_usuari = in.nextInt();
 			if(te_usuari == 1){
 				System.out.println("Entra el nom d'usuari");
-				String nomUser = in.nextLine();
+				String nomUser = in.next();
 				System.out.println("Entra la contasenya");
-				String pass = in.nextLine();
+				String pass = in.next();
 				StringTokenizer st = dataEngine.getProfileInfo(nomUser, ".", "Profiles.txt"); 
 				if(dataEngine.existsUser(st)){
 					//Buscar les dades al controlador gestio, si no el troba, 
@@ -35,22 +35,30 @@ public class MainController{
 					control = 1;
 				}else if(usuari_nou == 1){
 					System.out.println("Entra el nom d'usuari");
-					String nomUser = in.nextLine();
+					String nomUser = in.next();
 					System.out.println("Entra la contasenya");
-					String pass = in.nextLine();
+					String pass = in.next();
 					System.out.println("Entra la contasenya");
-					String passr = in.nextLine();
-					if(pass == passr){
+					String passr = in.next();
+					if(pass.equals(passr)){
 						StringTokenizer st = dataEngine.getProfileInfo(nomUser, ".", "Profiles.txt"); 
 						if(dataEngine.existsUser(st)){
 							System.out.println("Ja existeix un usuari amb aquest nom.");
 						}else{
 							try{
-								dataEngine.Escribir_string(nomUser+" "+pass+" 0 0 0", "\n", "Profiles.txt", ".");
+								dataEngine.Escribir_string(nomUser+" "+pass+" 0 0 0", "\n", "Profiles", ".");
 							}catch(IOException e){
 								System.out.println(e.toString());
 							} catch (FicheroNoExiste f) {
 								f.printStackTrace();
+								System.out.println("fichero no existe");
+							}
+							try{
+								dataEngine.Crear_directorio(nomUser,"./Games");
+							}catch(IOException e){
+								System.out.println(e.toString());
+							} catch (FicheroYaExistente e) {
+								e.printStackTrace();
 							}
 							currentUser = new Perfil(nomUser,pass);
 							control = 1;
