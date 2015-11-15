@@ -30,9 +30,41 @@ public class GestioDadesH  extends Gestio_Dades{
 		return profiledata;
 	}
 
-	public StringTokenizer getProfileInfo(String keyword, String dir, String file){
+	public GestioDadesH(Perfil p){
+		//Creem els fitxers necessaris, si existeixen llavors no es crearan, si no existeixen es crearan.
+		/*
+			Create if not exist --> all txt database files and dir's needed.
+			Directory structure:
+			./
+				./KenKens
+					Kenken1.txt
+					KenKen2.txt
+					KenKen3.txt
+				->Profiles.txt
+				./Games
+					MarcOrtiz
+						Game1.txt
+						Game2.txt
+						Game3.txt
+					Pepe
+						Game1.txt
+					Alí_el_Magrebí
+						Game1.txt
+				->Ranking.txt
+
+		*/ 
+		Crear_directorio(".","KenKens");
+		Crear_directorio(".","Games");
+		if(p.get_usuari() != "invitado"){
+			Crear_directorio("./Games",p.get_usuari());
+		}
+		Crear_archivo('.',"Ranking.txt");
+		Crear_archivo('.',"Profiles.txt");
+	}
+
+	public static StringTokenizer getProfileInfo(String keyword, String dir, String file){
 		//retorna una array de strings [marc,1234,20,20,100]  [0]-> usr; [1]->pass; [2:5] -> points
-		StringTokenizer st = new StringTokenizer(getInfoLine(keyword,dir,file)," ");
+		StringTokenizer st = new StringTokenizer(getInfoLine(keyword,dir,file),"\\s");
 		return st
 	}
 	public Boolean existsUser(StringTokenizer st){
@@ -64,5 +96,50 @@ public class GestioDadesH  extends Gestio_Dades{
 			}
 		}
 		return punts;
+	}
+
+	/*
+		Exemple partida.txt:
+		HEADER PARTIDA:
+			Partida_dificil_marc
+			1234
+			32
+			Kenken2.txt
+			3
+		VALUES PARTIDA:
+			1 2 3
+			3 1 2
+			2 3 1
+	*/
+	public StringTokenizer getPartidaHeaderInfo(String file, String username){
+		/*
+			getPartidaHeaderInfo retorna els valors:
+			->nom de partida
+			->temps de partida
+			->dificultat de partida(int)
+			->fitxer on es troba el kenken a rsoldre
+			->mida del kenken
+		*/
+		return new StringTokenizer(Leer_string(file,"./"+username,"\n",4),'\n');
+	}
+	public int[][] getPartidaValues(String file, String username, int mida){
+		int[][] caselles = new int[mida][mida];
+		int i,j;
+		i = j = 0;
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+		    String line;
+		    while ((line = br.readLine()) != null) {
+		       StringTokenizer fila = new StringTokenizer(line,"\\s");
+		       while(fila.hasMoreTokens()){
+		       		caselles[i][j] = Integer.parseInt(fila.nextToken());
+		       		++j;
+		       }
+		       j = 0;
+		       ++i;
+		    }
+		}catch{
+			throw new IOException("No existeix el fitxer");
+		}
+		return caselles;
 	}
 }
