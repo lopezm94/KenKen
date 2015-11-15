@@ -1,6 +1,13 @@
+package domini;
+
 import java.util.LinkedList;
 import java.lang.RuntimeException;
 import java.util.ArrayList;
+
+/*@version 1.0
+*@author Reyes Vera
+*/
+
 
 public class TableroH extends Tablero {
 	private int[][] idAreas;
@@ -34,10 +41,6 @@ public class TableroH extends Tablero {
 		return areas.size();
 	}
 
-	public Boolean casillaIsFija(int x, int y) {
-		return this.tauler[x][y].getFija();
-	}
-
 	public Area getArea(int n){ //n = area, retorna una llista
 		return areas.get(n);
 	}
@@ -49,6 +52,10 @@ public class TableroH extends Tablero {
 
 	public Area getAreaByPos(int x, int y) {
 		return areas.get(this.idAreas[x][y]);
+	}
+	
+	public Boolean casillaIsFija(int x, int y) {
+		return this.tauler[x][y].getFija();
 	}
 
 	public LinkedList<Integer> getCasillaDomain(int x, int y) {
@@ -121,7 +128,7 @@ public class TableroH extends Tablero {
 		int a = this.idAreas[x][y];
 		return areas.get(a);
 	}
-
+	
 	public String toString(){ //devuelve los contenidos de un tablero en una string
 		String res = "";
 		for (int i = 0; i < files;++i){

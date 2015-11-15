@@ -1,33 +1,41 @@
-public class KenkenSolver {
+package domini;
 
+/*@version 1.0
+*@author Reyes Vera
+*/
+
+
+public class KenkenSolver {
+	
 	private Boolean Ok = false;
 	private TableroH tablero;
-
+	
 	public void KenKenSolver(TableroH tablero){
 		this.tablero = tablero;
 		this.initDomain();
 	}
-
-	/*private Boolean FuncionRecursiva(int x, int y, ConstraintEngine ce) {
+	
+	private Boolean FuncionRecursiva(int x, int y, ConstraintEngine ce) {
 		if (y == this.tablero.size())
 			return true;
 		Boolean done = false;
 		int newx = (x+1)%this.tablero.size();
 		int newy = y;
 		if (newx == 0) y++;
-		for (Integer value : ce.getDomain(x,y)) {
+		for (Integer value : ce.getCellDomain(x,y)) {
+			ConstraintEngine newce = ce.clone();
 			if (newce.propagate(x, y, value))
 				done = this.FuncionRecursiva(newx,newy,newce);
 			if (done) break;
 		}
-	}*/
-
+	}
+	
 	public Boolean solveKenken(){
 		ConstraintEngine ce = new ConstraintEngine(tablero);
-		//Ok = this.FuncionRecursiva(0,0,ce);
+		Ok = this.FuncionRecursiva(0,0,ce);
 		return Ok;
 	}
-
+	
 	public void initDomain(){
 		for (int i = 0; i < tablero.size(); ++i){
 			for (int j = 0; j < tablero.size();++j){
@@ -36,9 +44,7 @@ public class KenkenSolver {
 				}
 			}
 		}
-
-		//Propagar las fijas
 	}
-
-
+	
+	
 }
