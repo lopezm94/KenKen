@@ -55,7 +55,9 @@ public class GestioDadesH  extends Gestio_Dades{
 		*/ 
 		Crear_directorio(".","KenKens");
 		Crear_directorio(".","Games");
-		Crear_directorio("./Games",p.get_usuari());
+		if(p.get_usuari() != "invitado"){
+			Crear_directorio("./Games",p.get_usuari());
+		}
 		Crear_archivo('.',"Ranking.txt");
 		Crear_archivo('.',"Profiles.txt");
 	}
@@ -95,7 +97,7 @@ public class GestioDadesH  extends Gestio_Dades{
 		}
 		return punts;
 	}
-	
+
 	/*
 		Exemple partida.txt:
 		HEADER PARTIDA:
@@ -141,6 +143,3 @@ public class GestioDadesH  extends Gestio_Dades{
 		return caselles;
 	}
 }
-=======
-}
->>>>>>> b1e3df111b73fbcfaf79402c800bbedd96d4e712
