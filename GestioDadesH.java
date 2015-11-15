@@ -50,7 +50,7 @@ public class GestioDadesH  extends Gestio_Dades{
 						Game3.txt
 					Pepe
 						Game1.txt
-					Alí_el_Magrebí
+					AlÃ­_el_MagrebÃ­
 						Game1.txt
 				->Ranking.txt
 

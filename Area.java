@@ -30,7 +30,7 @@ public class Area{
 	}
 
 	public int get_resultatactual(){
-		//this.calcular_resultatactual();
+		this.calcular_resultatactual();
 		return resact;
 	}
 	
@@ -180,8 +180,11 @@ public class Area{
 				}
 				
 				break;
-			default:
+			case '.':
 				b1 = true;
+				break;
+			default:
+				b1 = false;
 				break;
 		}
 		return b1;
@@ -212,8 +215,11 @@ public class Area{
 					res = caselles.get(1).getSolucion() / caselles.get(0).getSolucion();
 				}
 				break;
-			default:
+			case '.':
 				res = caselles.get(0).getSolucion();
+				break;
+			default:
+				res = 0;
 				break;
 		}
 	}
@@ -242,8 +248,11 @@ public class Area{
 					resact = caselles.get(1).getValor() / caselles.get(0).getValor();
 				}
 				break;
-			default:
+			case '.':
 				resact = caselles.get(0).getValor();
+				break;
+			default:
+				resact = 0;
 				break;
 		}
 	}

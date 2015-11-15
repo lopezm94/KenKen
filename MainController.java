@@ -1,10 +1,9 @@
-
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class MainController{
-	//Definició variables globals i controladors que necessitarem:
+	//DefiniciÃ³ variables globals i controladors que necessitarem:
 	private Perfil currentUser;
 	private GestioDadesH dataEngine;
 	Scanner in;

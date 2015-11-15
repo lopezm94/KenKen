@@ -6,14 +6,14 @@ import java.util.Stack;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.lang.RuntimeException;
-import java.lang.CloneNotSupportedException;
+//import java.lang.CloneNotSupportedException;
 
 /**
 *<h1>ConstraintEngine</h1>
 *Implementa un motor de restricciones para resolver el juego KenKen.
 *
 *@version 1.0
-*@author Juan LÃ³pez
+*@author Juan López
 */
 public class ConstraintEngine {
 
@@ -112,9 +112,11 @@ public class ConstraintEngine {
 
     valid.setValue(area.check(this.board.size()));
     this.propValue(x,y,value,valid,dirtyArea);
+    
 
     while (!dirtyArea.isEmpty() && valid.getValue())
       this.propLines(valid,dirtyArea);
+    //System.out.println(this.toString()); /*<-------------------------------------------------------------------------------*/
 
     //Vacia logTrack y pasarlo a log
     int pos;
@@ -320,9 +322,9 @@ public class ConstraintEngine {
     Arrays.fill(taken,false);
     for (int i=0; i<this.board.size(); i++) {
       for (int j=0; j<this.board.size(); j++) {
-        if (!this.board.areaContains(area,i,j))
-          continue;
         aux = this.board.getCasillaVal(i,j);
+        if (!this.board.areaContains(area,i,j) || aux == -1)
+          continue;
         //Si ha sido tomado y ha sido removido o es una linea distinta.
         if (taken[aux] && (lines.get(aux) == null || lines.get(aux) != i)) {
           lines.remove(aux);
@@ -343,9 +345,9 @@ public class ConstraintEngine {
     Arrays.fill(taken,false);
     for (int j=0; j<this.board.size(); j++) {
       for (int i=0; i<this.board.size(); i++) {
-        if (!this.board.areaContains(area,i,j))
-          continue;
-        aux = this.board.getCasillaVal(i,j);
+		 aux = this.board.getCasillaVal(i,j);
+	     if (!this.board.areaContains(area,i,j) || aux == -1)
+	        continue;
         //Si ha sido tomado y ha sido removido o es una linea distinta.
         if (taken[aux] && (lines.get(aux) == null || lines.get(aux) != j)) {
           lines.remove(aux);
@@ -375,6 +377,8 @@ public class ConstraintEngine {
     return
       "tablero:\n" + this.board.toString() + "\n"
       + "dominio de casillas del motor:\n" + this.cellDomain.toString() + "\n"
-      + "log del motor:\n" + this.log.toString() + "\n";
+      + "logtrack: \n" + this.logTrack.toString() + "\n"
+      + "log del motor:\n" + this.log.toString() 
+      + "\n";
   }
 }

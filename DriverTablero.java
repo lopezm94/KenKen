@@ -1,8 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
+//import java.io.IOException;
 import java.util.Scanner;
-import java.io.*;
+//import java.io.*;
 
 
 /*@version 1.0
@@ -37,11 +37,15 @@ public class DriverTablero {
 			}
 			var = input.nextInt();
 			while (var != -1){
+<<<<<<< HEAD
+				System.out.println("Quieres tener un area de tipo? (+,-,*,/)");
+=======
 				System.out.println("Quieres tener un �rea de tipo? (+,-,*,/)");
+>>>>>>> c7467b778e02c0e80413c97674a1b80c6e3da45b
 				String varS = input.next();
 				char var2[] = varS.toCharArray();
 				Area a = new Area(var,var2[0]);
-				tablero.afegirArea(a);
+	/*---->*/			tablero.afegirArea(a,0);
 				var = input.nextInt();
 			}
 			int a = tablero.files * tablero.files;
