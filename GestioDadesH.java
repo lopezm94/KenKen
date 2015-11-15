@@ -18,7 +18,7 @@ public class GestioDadesH  extends Gestio_Dades{
 	private String getInfoLine(String keyword, String dir, String file){
 		String profiledata = "";
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(file));
+			BufferedReader br = new BufferedReader(new FileReader("./"+file));
 		    String line;
 		    while ((line = br.readLine()) != null) {
 		       if(line.contains(keyword)){
@@ -49,7 +49,7 @@ public class GestioDadesH  extends Gestio_Dades{
 						Game3.txt
 					Pepe
 						Game1.txt
-					AlÃ­_el_MagrebÃ­
+					Alí_el_Magrebí
 						Game1.txt
 				->Ranking.txt
 
@@ -59,28 +59,31 @@ public class GestioDadesH  extends Gestio_Dades{
 		}catch(IOException e){
 			System.out.println(e.toString());
 		} catch (FicheroYaExistente f) {
-			f.printStackTrace();
 		}
 		try{
 			Crear_directorio(".","Games");
 		}catch(IOException e){
 			System.out.println(e.toString());
 		} catch (FicheroYaExistente e) {
+<<<<<<< HEAD
 			e.printStackTrace();
 		}
 		try{
 			Crear_archivo(".","Ranking.txt");
-		}catch(IOException e){
-			System.out.println(e.toString());
-		} catch (FicheroYaExistente e) {
-			e.printStackTrace();
+=======
 		}
 		try{
-			Crear_archivo(".","Profiles.txt");
+			Crear_archivo("Ranking",".");
+>>>>>>> 53a1278a47bd16c49b7570c99748a93d61d63759
 		}catch(IOException e){
-			System.out.println(e.toString());
+			System.out.println(e.toString()+"hola");
 		} catch (FicheroYaExistente e) {
-			e.printStackTrace();
+		}
+		try{
+			Crear_archivo("Profiles",".");
+		}catch(IOException e){
+			System.out.println(e.toString()+"2hola");
+		} catch (FicheroYaExistente e) {
 		}
 	}
 
