@@ -47,7 +47,7 @@ public class MainController{
 					System.out.println("Entra la contasenya");
 					String passr = in.next();
 					if(pass.equals(passr)){
-						StringTokenizer st = dataEngine.getProfileInfo(nomUser, ".", "Profiles.txt"); 
+						StringTokenizer st = dataEngine.getProfileInfo(nomUser, ".", "Profiles"); 
 						if(dataEngine.existsUser(st)){
 							System.out.println("Ja existeix un usuari amb aquest nom.");
 						}else{
@@ -89,7 +89,7 @@ public class MainController{
 	}
 	public void new_game(){
 		Partida nova = new Partida();
-		
+
 	}
 	public void load_game(){
 		//Load an existing game
