@@ -67,15 +67,8 @@ public class GestioDadesH  extends Gestio_Dades{
 			System.out.println(e.toString());
 		} catch (FicheroYaExistente e) {
 			e.printStackTrace();
-		}try{
-			if(p.get_usuari() != "invitado"){
-				Crear_directorio("./Games",p.get_usuari());
-			}
-		}catch(IOException e){
-			System.out.println(e.toString());
-		} catch (FicheroYaExistente e) {
-			e.printStackTrace();
-		}try{
+		}
+		try{
 			Crear_archivo(".","Ranking.txt");
 		}catch(IOException e){
 			System.out.println(e.toString());
@@ -184,3 +177,4 @@ public class GestioDadesH  extends Gestio_Dades{
 		return caselles;
 	}
 }
+
