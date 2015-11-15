@@ -31,6 +31,8 @@ public class GestioDadesH  extends Gestio_Dades{
 		}
 		return profiledata;
 	}
+
+	//Obté la línia a que es troba en el fitxer donada una keyword
 	public int getLine(String keyword, String dir, String file){
 		int contador = 0;
 		Boolean control = false;
