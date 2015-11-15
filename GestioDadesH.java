@@ -49,7 +49,7 @@ public class GestioDadesH  extends Gestio_Dades{
 						Game3.txt
 					Pepe
 						Game1.txt
-					Alí_el_Magrebí
+					AlÃ­_el_MagrebÃ­
 						Game1.txt
 				->Ranking.txt
 
@@ -80,38 +80,30 @@ public class GestioDadesH  extends Gestio_Dades{
 		}
 	}
 
-	public StringTokenizer getProfileInfo(String keyword, String dir, String file){
+	public String[] getProfileInfo(String keyword, String dir, String file){
 		//retorna una array de strings [marc,1234,20,20,100]  [0]-> usr; [1]->pass; [2:5] -> points
-		StringTokenizer st = new StringTokenizer(getInfoLine(keyword,dir,file+".txt"),"\\s");
-		return st;
+		return getInfoLine(keyword,dir,file+".txt").split("\\s");
 	}
-	public Boolean existsUser(StringTokenizer st, String username){
+	public Boolean existsUser(String[] st, String username){
 		/*Comprova dins del tokenizer que no sigui null*/
-		return st.nextElemt().equals(username);
+		return st.length > 0;
 	}
-	public String getUserByToken(StringTokenizer st){
-		if(st.countTokens() > 0) return st.nextToken();
+	public String getUserByToken(String[] st){
+		if(st.length > 0) return st[0];
 		else return "";
 	}
-	public String getPassByToken(StringTokenizer st){
-		int i = 0;
-		if(st.countTokens() > 0){
-			while(st.hasMoreTokens()){
-				if(i == 1) return st.nextToken();
-				st.nextToken();
-				++i;
-			}
+	public String getPassByToken(String[] st){
+		if(st.length > 0){
+			st[1];
 		}
 		return "";
 	}
-	public int[] getPuntuacio(StringTokenizer st){
+	public int[] getPuntuacio(String[] st){
 		int i = 0;
 		int[] punts = new int[3];
-		if(st.countTokens() > 0){
-			while(st.hasMoreTokens()){
-				if(i>1) punts[i] = Integer.parseInt(st.nextToken());
-				else st.nextToken();
-				++i;
+		if(length > 0){
+			for (int i = 2; i<5; ++i) {
+				punts[i] = Integer.parseInt(st[i]);
 			}
 		}
 		return punts;
@@ -130,7 +122,7 @@ public class GestioDadesH  extends Gestio_Dades{
 			3 1 2
 			2 3 1
 	*/
-	public StringTokenizer getPartidaHeaderInfo(String file, String username){
+	public String[] getPartidaHeaderInfo(String file, String username){
 		/*
 			getPartidaHeaderInfo retorna els valors:
 			->nom de partida
@@ -139,10 +131,9 @@ public class GestioDadesH  extends Gestio_Dades{
 			->fitxer on es troba el kenken a rsoldre
 			->mida del kenken
 		*/
-		StringTokenizer st;
+		String[] headerinfo = null;
 		try{
-			st = new StringTokenizer(Leer_string(file,"./"+username,"\n",4),"\n"); 
-			return st;
+			headerinfo = Leer_string(file,"./"+username,"\n",4).split("\n"); 
 		}catch(IOException e){
 			System.out.println(e.toString());
 			return null;
@@ -150,26 +141,42 @@ public class GestioDadesH  extends Gestio_Dades{
 			e.printStackTrace();
 			return null;
 		}
+		return headerinfo;
 
 	}
 	public int[][] getPartidaValues(String file, String username, int mida){
 		int[][] caselles = new int[mida][mida];
-		int i,j;
-		i = j = 0;
+		int i;
+		i = 0;
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 		    String line;
 		    while ((line = br.readLine()) != null) {
-		       StringTokenizer fila = new StringTokenizer(line,"\\s");
-		       while(fila.hasMoreTokens()){
-		       		caselles[i][j] = Integer.parseInt(fila.nextToken());
-		       		++j;
-		       }
-		       j = 0;
+		       String[] fila = line.split("\\s");
+		         for (int j=0; j<fila.length; j++)
+			       	caselles[i][j] = Integer.parseInt(fila[i][j]);
+			       }
 		       ++i;
 		    }
 		}catch(IOException e){
 			System.out.println(e.toString());
 		}
 		return caselles;
+	}
+
+	public void escriure_kenken(TableroH tauler){
+
+	}
+
+	//RETRN 
+	public int getMidaKenken(String nomkenken, String dir){
+		int mida = -1;
+		try{
+			mida = Integer.parseInt(Leer_string(file,"./KenKens","\n",1)); 
+		}catch(IOException e){
+			System.out.println(e.toString());
+		} catch (FicheroNoExiste e) {
+			e.printStackTrace();
+		}
+		return mida;
 	}
 }
