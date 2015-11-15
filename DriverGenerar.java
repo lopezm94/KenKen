@@ -88,7 +88,7 @@ public class DriverGenerar {
 						int pos = rnd.nextInt();
 						pos = pos%tablero.size();
 						pos = Math.abs(pos);
-						if(pos == 0) pos =1;
+						++pos;
 						for (int i = 0; i < tablero.size(); ++i){
 							for (int j = 0; j < tablero.size();++j){
 								tablero.setCasillaSol(i, j, pos);
