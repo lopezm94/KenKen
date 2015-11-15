@@ -88,7 +88,8 @@ public class MainController{
 
 	}
 	public void new_game(){
-
+		Partida nova = new Partida();
+		
 	}
 	public void load_game(){
 		//Load an existing game
