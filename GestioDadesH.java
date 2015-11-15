@@ -17,15 +17,16 @@ public class GestioDadesH  extends Gestio_Dades{
 	*/
 	private String getInfoLine(String keyword, String dir, String file){
 		String profiledata = "";
-		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(file));
 		    String line;
 		    while ((line = br.readLine()) != null) {
 		       if(line.contains(keyword)){
 		       		profiledata = line;
 		       }
 		    }
-		}catch{
-			throw new IOException("No existeix el fitxer");
+		}catch(IOException e){
+			System.out.println(e.toString());
 		}
 		return profiledata;
 	}
@@ -53,42 +54,71 @@ public class GestioDadesH  extends Gestio_Dades{
 				->Ranking.txt
 
 		*/ 
-		Crear_directorio(".","KenKens");
-		Crear_directorio(".","Games");
-		if(p.get_usuari() != "invitado"){
-			Crear_directorio("./Games",p.get_usuari());
+		try{
+			Crear_directorio(".","KenKens");
+		}catch(IOException e){
+			System.out.println(e.toString());
+		} catch (FicheroYaExistente f) {
+			f.printStackTrace();
 		}
-		Crear_archivo('.',"Ranking.txt");
-		Crear_archivo('.',"Profiles.txt");
+		try{
+			Crear_directorio(".","Games");
+		}catch(IOException e){
+			System.out.println(e.toString());
+		} catch (FicheroYaExistente e) {
+			e.printStackTrace();
+		}try{
+			if(p.get_usuari() != "invitado"){
+				Crear_directorio("./Games",p.get_usuari());
+			}
+		}catch(IOException e){
+			System.out.println(e.toString());
+		} catch (FicheroYaExistente e) {
+			e.printStackTrace();
+		}try{
+			Crear_archivo(".","Ranking.txt");
+		}catch(IOException e){
+			System.out.println(e.toString());
+		} catch (FicheroYaExistente e) {
+			e.printStackTrace();
+		}
+		try{
+			Crear_archivo(".","Profiles.txt");
+		}catch(IOException e){
+			System.out.println(e.toString());
+		} catch (FicheroYaExistente e) {
+			e.printStackTrace();
+		}
 	}
 
-	public static StringTokenizer getProfileInfo(String keyword, String dir, String file){
+	public StringTokenizer getProfileInfo(String keyword, String dir, String file){
 		//retorna una array de strings [marc,1234,20,20,100]  [0]-> usr; [1]->pass; [2:5] -> points
 		StringTokenizer st = new StringTokenizer(getInfoLine(keyword,dir,file),"\\s");
-		return st
+		return st;
 	}
 	public Boolean existsUser(StringTokenizer st){
 		/*Comprova dins del tokenizer que no sigui null*/
 		return st.countTokens() > 0;
 	}
 	public String getUserByToken(StringTokenizer st){
-		if(st.countTokens > 0) st.nextToken();
+		if(st.countTokens() > 0) return st.nextToken();
 		else return "";
 	}
 	public String getPassByToken(StringTokenizer st){
 		int i = 0;
-		if(st.countTokens > 0){
+		if(st.countTokens() > 0){
 			while(st.hasMoreTokens()){
 				if(i == 1) return st.nextToken();
 				st.nextToken();
 				++i;
 			}
 		}
+		return "";
 	}
 	public int[] getPuntuacio(StringTokenizer st){
 		int i = 0;
 		int[] punts = new int[3];
-		if(st.countTokens > 0){
+		if(st.countTokens() > 0){
 			while(st.hasMoreTokens()){
 				if(i>1) punts[i] = Integer.parseInt(st.nextToken());
 				else st.nextToken();
@@ -120,7 +150,18 @@ public class GestioDadesH  extends Gestio_Dades{
 			->fitxer on es troba el kenken a rsoldre
 			->mida del kenken
 		*/
-		return new StringTokenizer(Leer_string(file,"./"+username,"\n",4),'\n');
+		StringTokenizer st;
+		try{
+			st = new StringTokenizer(Leer_string(file,"./"+username,"\n",4),"\n"); 
+			return st;
+		}catch(IOException e){
+			System.out.println(e.toString());
+			return null;
+		} catch (FicheroNoExiste e) {
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 	public int[][] getPartidaValues(String file, String username, int mida){
 		int[][] caselles = new int[mida][mida];
@@ -137,8 +178,8 @@ public class GestioDadesH  extends Gestio_Dades{
 		       j = 0;
 		       ++i;
 		    }
-		}catch{
-			throw new IOException("No existeix el fitxer");
+		}catch(IOException e){
+			System.out.println(e.toString());
 		}
 		return caselles;
 	}
