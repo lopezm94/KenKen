@@ -65,16 +65,9 @@ public class GestioDadesH  extends Gestio_Dades{
 		}catch(IOException e){
 			System.out.println(e.toString());
 		} catch (FicheroYaExistente e) {
-<<<<<<< HEAD
-			e.printStackTrace();
-		}
-		try{
-			Crear_archivo(".","Ranking.txt");
-=======
 		}
 		try{
 			Crear_archivo("Ranking",".");
->>>>>>> 53a1278a47bd16c49b7570c99748a93d61d63759
 		}catch(IOException e){
 			System.out.println(e.toString()+"hola");
 		} catch (FicheroYaExistente e) {
@@ -180,4 +173,3 @@ public class GestioDadesH  extends Gestio_Dades{
 		return caselles;
 	}
 }
-
