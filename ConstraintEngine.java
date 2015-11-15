@@ -68,7 +68,7 @@ public class ConstraintEngine {
   *
   *@param x Posicion de la casilla en el eje X.
   *@param y Posicion de la casilla en el eje Y.
-  *@return HashSet<Integer> Coleccion con el dominio de la casilla.
+  *@return HashSet Coleccion con el dominio de la casilla.
   */
   public HashSet<Integer> getDomain(int x, int y) {
     return this.cellDomain.get(x).get(y);
@@ -79,7 +79,7 @@ public class ConstraintEngine {
   *Devuelve una coleccion con el dominio de una casilla.
   *
   *@param pos Posicion de la casilla.
-  *@return HashSet<Integer> Coleccion con el dominio de la casilla.
+  *@return HashSet Coleccion con el dominio de la casilla.
   */
   public HashSet<Integer> getDomain(Pair<Integer,Integer> pos) {
     return this.getDomain(pos.getFirst(),pos.getSecond());
