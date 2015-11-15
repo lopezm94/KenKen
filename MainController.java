@@ -20,12 +20,18 @@ public class MainController{
 				String nomUser = in.next();
 				System.out.println("Entra la contasenya");
 				String pass = in.next();
-				StringTokenizer st = dataEngine.getProfileInfo(nomUser, ".", "Profiles.txt"); 
-				if(dataEngine.existsUser(st)){
+				StringTokenizer st = dataEngine.getProfileInfo(nomUser, ".", "Profiles");
+				//Control String tokenizer
+				while (st.hasMoreElements()) {
+					System.out.println(st.nextElement());
+				}
+				if(dataEngine.existsUser(st,nomUser)){
 					//Buscar les dades al controlador gestio, si no el troba, 
 					//preguntar si vol crear un nou usuari
-					currentUser = new Perfil(nomUser,pass);
-					control = 1;
+					if(dataEngine.getPassByToken(st).equals(pass)){
+						currentUser = new Perfil(nomUser,pass);
+						control = 1;
+					}
 				}
 			}else if(te_usuari == 0){
 				System.out.println("Vols crear un usuari o vols entrar com a convidat? (0-convidat, 1-usuari nou) ");
@@ -82,7 +88,7 @@ public class MainController{
 
 	}
 	public void new_game(){
-		//Start a new game
+
 	}
 	public void load_game(){
 		//Load an existing game

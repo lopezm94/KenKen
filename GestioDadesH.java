@@ -82,12 +82,12 @@ public class GestioDadesH  extends Gestio_Dades{
 
 	public StringTokenizer getProfileInfo(String keyword, String dir, String file){
 		//retorna una array de strings [marc,1234,20,20,100]  [0]-> usr; [1]->pass; [2:5] -> points
-		StringTokenizer st = new StringTokenizer(getInfoLine(keyword,dir,file),"\\s");
+		StringTokenizer st = new StringTokenizer(getInfoLine(keyword,dir,file+".txt"),"\\s");
 		return st;
 	}
-	public Boolean existsUser(StringTokenizer st){
+	public Boolean existsUser(StringTokenizer st, String username){
 		/*Comprova dins del tokenizer que no sigui null*/
-		return st.countTokens() > 0;
+		return st.nextElemt().equals(username);
 	}
 	public String getUserByToken(StringTokenizer st){
 		if(st.countTokens() > 0) return st.nextToken();
