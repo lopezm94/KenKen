@@ -20,6 +20,15 @@ public class Casilla{
 		can = new ArrayList<Integer>(0);
 	}
 
+	public String toString(){
+		String res = "";
+		res = "valor: " + this.valor + ", "
+				+ "fija: " + this.fija + ", "
+				+ "solucion: " + this.solucion + ", "
+				+ "posibilidades: " + this.can;
+		return res;
+	}
+	
 	public Casilla (int valor, boolean fija, int solucion){
 		this.valor= valor;
 		this.fija = fija;

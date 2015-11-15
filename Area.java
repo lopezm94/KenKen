@@ -21,6 +21,16 @@ public class Area{
 		caselles = new ArrayList<Casilla>();
 	}
 
+	public String toString() {
+		String res="";
+		res = "pos: " + pos + ", "
+				+ "op: " + op + ", "
+				+ "res: " + this.res + ", "
+				+ "lista: " + caselles + ", "
+				+ "resact: " + resact + "\n ";
+		return res;
+	}
+	
 	public char get_operacio(){
 		return op;
 	}

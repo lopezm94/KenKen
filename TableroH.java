@@ -24,7 +24,7 @@ public class TableroH extends Tablero {
 
 	public void afegirArea(Area a, int ress){
 			a.set_res(ress);
-			System.out.println(ress);
+			//System.out.println(ress);
 	      areas.add(a);
 	      
 	}
@@ -34,6 +34,9 @@ public class TableroH extends Tablero {
 	  areas.get(c).afegir_casella(tauler[x][y]);
 	}
 
+	public void colocaRes(){
+		for (int i = 0; i < areas.size();++i) areas.get(i).calcular_resultat();
+	}
 
 	public int size(){
 		return this.files;
@@ -173,7 +176,7 @@ public class TableroH extends Tablero {
 		res = res + "\n";
 		res = res + "\n";
 		
-		System.out.println(areas);
+		//System.out.println(areas);
 		
 		return res;
 	}

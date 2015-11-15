@@ -114,8 +114,10 @@ public class ConstraintEngine {
     this.propValue(x,y,value,valid,dirtyArea);
     
 
-    while (!dirtyArea.isEmpty() && valid.getValue())
-      this.propLines(valid,dirtyArea);
+    while (!dirtyArea.isEmpty() && valid.getValue()){
+    	//System.out.println(dirtyArea);
+        this.propLines(valid,dirtyArea);
+    }
     //System.out.println(this.toString()); /*<-------------------------------------------------------------------------------*/
 
     //Vacia logTrack y pasarlo a log
@@ -362,7 +364,7 @@ public class ConstraintEngine {
       tmp = new Pair<Integer,Integer>(line.getValue(),line.getKey());
       res.add(new Pair<Pair<Integer, Integer>, Boolean>(tmp,ConstraintEngine.horizontal));
     }
-
+    //System.out.println("AQUI VAN LAS LINES: ______________________\n" + res);
     return res;
   }
 
