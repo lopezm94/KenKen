@@ -1,18 +1,18 @@
 public class Partida{
 	private String nomPartida;
 	private int time;
-	private String dificultat;
+	private int dificultat;
 	TableroH taulerPartida;
 	public Partida(String nomPartida, String username){
 		this.nomPartida = nomPartida;
 		this.time = 0;
-		dificultat = "";
+		dificultat = 0;
 		taulerPartida=null;
 	}
 	public String getNomPartida(){
 		return nomPartida;
 	}
-	public String getDificultat(){
+	public int getDificultat(){
 		return dificultat;
 	}
 	public int getTime(){
@@ -21,7 +21,7 @@ public class Partida{
 	public void setTime(int time){
 		this.time = time;
 	}
-	public void setDificultat(String dificultat){
+	public void setDificultat(int dificultat){
 		this.dificultat = dificultat; //enumtype
 	}
 	public void setTauler(TableroH t){
