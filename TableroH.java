@@ -4,20 +4,17 @@ import java.util.ArrayList;
 
 public class TableroH extends Tablero {
 	private int[][] idAreas;
-	//private Area[] cage;
 	private ArrayList<Area> areas;
-	//private int nombreAreas = 0;
-	//private int medida;
+
 
 
 	public TableroH(int medida){
 		super(medida,medida);
 		idAreas = new int[medida][medida];
+		for (int i = 0; i < files;++i){
+			for (int j= 0;j < files;++j) idAreas[i][j] = -1;
+		}
 		areas = new ArrayList<Area>();
-		//this.medida = medida;
-		//this.areas = new AreaCasilla[nombreAreas];
-		//this.m = medida;
-		//this.nombreAreas = nombreAreas;
 	}
 
 	public void afegirArea(Area a){
@@ -37,14 +34,12 @@ public class TableroH extends Tablero {
 		return areas.size();
 	}
 
-	public Area getArea(int n){ //n = area, retorna una llista
-		//if (n < 0 || n >=this.nombreAreas)
-		//	throw RuntimeException("Area no existente");
-		return areas.get(n);
-	}
-
 	public Boolean casillaIsFija(int x, int y) {
 		return this.tauler[x][y].getFija();
+	}
+
+	public Area getArea(int n){ //n = area, retorna una llista
+		return areas.get(n);
 	}
 
 	public Boolean areaContains(Area area, int x, int y) {
@@ -68,10 +63,7 @@ public class TableroH extends Tablero {
 	}
 
 	public Casilla getCasilla(int x, int y){
-		//Exception
-		//if (x < files and y < files)
 		return this.tauler[x][y];
-		//else return null;
 	}
 
 	public void setCasillaVal(int x, int y, int num){
@@ -102,15 +94,17 @@ public class TableroH extends Tablero {
 	}
 
 	public Boolean numerosCheck(){	//numeros no repes
+		Boolean vect[] = new Boolean[files];
+
 		for (int i = 0; i < files; ++i){
-			Boolean vect[] = new Boolean[files];
+			for (int k = 0; k < files; ++k) vect[k] = false;
 			for (int j = 0; j < files; ++j){
 				if (vect[(tauler[i][j].valor) -1 ]) return false;
 				vect[(tauler[i][j].valor)-1] = true;
 			}
 		}
 		for (int i = 0; i < files; ++i){
-			Boolean vect[] = new Boolean [files];
+			for (int k = 0; k < files; ++k) vect[k] = false;
 			for (int j = 0; j < files; ++j){
 				if (vect[(tauler[j][i].valor) -1 ]) return false;
 				vect[(tauler[j][i].valor)-1] = true;
@@ -126,5 +120,16 @@ public class TableroH extends Tablero {
 	public Area getArea(int x, int y){ // Devuelve el area asociada a la posicion x,y.
 		int a = this.idAreas[x][y];
 		return areas.get(a);
+	}
+
+	public String toString(){ //devuelve los contenidos de un tablero en una string
+		String res = "";
+		for (int i = 0; i < files;++i){
+			for (int j = 0; j < files; ++j){
+				res = res + getCasillaVal(i,j) + " ";
+			}
+			res = res + "\n";
+		}
+		return res;
 	}
 }

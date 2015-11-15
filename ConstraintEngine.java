@@ -78,7 +78,7 @@ public class ConstraintEngine {
   /**
   *Devuelve una coleccion con el dominio de una casilla.
   *
-  *@param Pair<Integer,Integer> Posicion de la casilla.
+  *@param pos Posicion de la casilla.
   *@return HashSet<Integer> Coleccion con el dominio de la casilla.
   */
   public HashSet<Integer> getDomain(Pair<Integer,Integer> pos) {
