@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 /*@version 1.0ermino
-*@author Reyes Vera
+*@author Reyes Vera y Juan Lopez
 */
 
 
