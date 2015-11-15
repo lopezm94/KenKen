@@ -20,11 +20,8 @@ public class MainController{
 				String nomUser = in.next();
 				System.out.println("Entra la contasenya");
 				String pass = in.next();
-				StringTokenizer st = dataEngine.getProfileInfo(nomUser, ".", "Profiles");
+				String[] st = dataEngine.getProfileInfo(nomUser, ".", "Profiles");
 				//Control String tokenizer
-				while (st.hasMoreElements()) {
-					System.out.println(st.nextElement());
-				}
 				if(dataEngine.existsUser(st,nomUser)){
 					//Buscar les dades al controlador gestio, si no el troba, 
 					//preguntar si vol crear un nou usuari
@@ -47,7 +44,7 @@ public class MainController{
 					System.out.println("Entra la contasenya");
 					String passr = in.next();
 					if(pass.equals(passr)){
-						StringTokenizer st = dataEngine.getProfileInfo(nomUser, ".", "Profiles"); 
+						String[] st = dataEngine.getProfileInfo(nomUser, ".", "Profiles"); 
 						if(dataEngine.existsUser(st)){
 							System.out.println("Ja existeix un usuari amb aquest nom.");
 						}else{

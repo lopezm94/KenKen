@@ -25,6 +25,7 @@ public class GestioDadesH  extends Gestio_Dades{
 		       		profiledata = line;
 		       }
 		    }
+		    br.close();
 		}catch(IOException e){
 			System.out.println(e.toString());
 		}
@@ -86,7 +87,7 @@ public class GestioDadesH  extends Gestio_Dades{
 	}
 	public Boolean existsUser(String[] st, String username){
 		/*Comprova dins del tokenizer que no sigui null*/
-		return st.length > 0;
+		return st[0].equals(username);
 	}
 	public String getUserByToken(String[] st){
 		if(st.length > 0) return st[0];
@@ -153,7 +154,7 @@ public class GestioDadesH  extends Gestio_Dades{
 		    while ((line = br.readLine()) != null) {
 		       String[] fila = line.split("\\s");
 		         for (int j=0; j<fila.length; j++)
-			       	caselles[i][j] = Integer.parseInt(fila[i][j]);
+			       	caselles[i][j] = Integer.parseInt(fila[j]);
 			       }
 		       ++i;
 		    }
@@ -162,12 +163,20 @@ public class GestioDadesH  extends Gestio_Dades{
 		}
 		return caselles;
 	}
-
+	/*
+		Exemple Partida.txt:
+		3
+		operacions + - * / * . +
+		casella0 0 2 6
+		casella1 0 3 1
+		casella2 1 2 2
+		casella3 1 1 4
+		...
+		casellax fija sol idarea --> fija (1 fija,0 no fija), sol(value), idarea(0...total areas)
+	*/
 	public void escriure_kenken(TableroH tauler){
-
+		//Funcio escriptura del KenKen
 	}
-
-	//RETRN 
 	public int getMidaKenken(String nomkenken, String dir){
 		int mida = -1;
 		try{
@@ -178,5 +187,46 @@ public class GestioDadesH  extends Gestio_Dades{
 			e.printStackTrace();
 		}
 		return mida;
+	}
+	public String[] getOperacions(String nomkenken, String dir){
+		String[] opnew;
+		try{
+			String[] op = getInfoLine("operacions", "./KenKens", nomkenken).split("\\s"); 
+			opnew = new String[op.lengh-1];
+			for(int i = 0; i< opnew.length;++i){
+				opnew[i] = op[i+1];
+			}
+		}catch(IOException e){
+			System.out.println(e.toString());
+		} catch (FicheroNoExiste e) {
+			e.printStackTrace();
+		}
+		return opnew;
+	}
+
+	/*
+	Exemple de contingut de variable de retorn:
+	1 2 3 --> casella 0 --> retorn[0]
+	1 3 2
+	2 2 2
+	3 4 6
+	1 2 6
+	Per cada fila de l'element de la matriu equival a una casella, i cada columna a les seves propietats:
+	- fija o no fija (1,0)
+	- solucio usuari temporal
+	- area a la que correspon
+	*/
+	public int[][] getCasellaValors(String nomkenken, String dir){
+		int mida = getMidaKenken(nomkenken,dir);
+		int casella_values[][] = new int[mida*mida][3];
+		for(int i = 0; i<mida; ++i){
+			for(int j = 0; j<mida; ++j){
+				String[] casellainfo = getInfoLine("casella"+(String)(i*mida+j),"./KenKens",nomkenken).split("\\s");
+				for(int i = 0; i < 3; ++i){
+					casilla_values[i][j] = Integer.parseInt(casellainfo[i+1]);
+				}
+			}
+		}
+		return casilla_values;
 	}
 }
