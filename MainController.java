@@ -1,10 +1,9 @@
-
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class MainController{
-	//Definició variables globals i controladors que necessitarem:
+	//DefiniciÃ³ variables globals i controladors que necessitarem:
 	private Perfil currentUser;
 	private GestioDadesH dataEngine;
 	Scanner in;
@@ -20,11 +19,8 @@ public class MainController{
 				String nomUser = in.next();
 				System.out.println("Entra la contasenya");
 				String pass = in.next();
-				StringTokenizer st = dataEngine.getProfileInfo(nomUser, ".", "Profiles");
+				String[] st = dataEngine.getProfileInfo(nomUser, ".", "Profiles");
 				//Control String tokenizer
-				while (st.hasMoreElements()) {
-					System.out.println(st.nextElement());
-				}
 				if(dataEngine.existsUser(st,nomUser)){
 					//Buscar les dades al controlador gestio, si no el troba, 
 					//preguntar si vol crear un nou usuari
@@ -47,7 +43,7 @@ public class MainController{
 					System.out.println("Entra la contasenya");
 					String passr = in.next();
 					if(pass.equals(passr)){
-						StringTokenizer st = dataEngine.getProfileInfo(nomUser, ".", "Profiles.txt"); 
+						String[] st = dataEngine.getProfileInfo(nomUser, ".", "Profiles"); 
 						if(dataEngine.existsUser(st)){
 							System.out.println("Ja existeix un usuari amb aquest nom.");
 						}else{
@@ -88,6 +84,7 @@ public class MainController{
 
 	}
 	public void new_game(){
+		Partida nova = new Partida();
 
 	}
 	public void load_game(){
