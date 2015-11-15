@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 
-public class Pair<F extends Comparable<F>, S extends Comparable<S>> implements Comparable<Pair<F,S>> {
+public class Pair<F, S> {
   private F first;
   private S second;
 
@@ -32,16 +32,6 @@ public class Pair<F extends Comparable<F>, S extends Comparable<S>> implements C
 
   public void setSecond(S second) {
     this.second = second;
-  }
-
-  @Override
-  public int compareTo(Pair<F,S> other) {
-      if (this.first.compareTo(other.getFirst()) < 0)
-        return -1;
-      else if (this.first.compareTo(other.getFirst()) > 0)
-        return 1;
-      else
-        return this.second.compareTo(other.getSecond());
   }
 
   @Override

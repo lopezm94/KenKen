@@ -1,5 +1,3 @@
-package domini;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Random;
@@ -11,10 +9,10 @@ public class DriverGenerar {
 		// TODO Auto-generated method stub
 		Scanner input = null;
 		File test = null;
-		
+
 		//try {
 			//test = new File("testGen");
-			System.out.println("Quieres poner tamaño al KenKen?(Si/No)");
+			System.out.println("Quieres poner tamaï¿½o al KenKen?(Si/No)");
 			input = new Scanner(System.in);
 			boolean ok =false;
 			TableroH tablero = null;
@@ -46,7 +44,7 @@ public class DriverGenerar {
 						edita = true;
 						tam = var;
 						while (var != 0){
-							System.out.println("Quieres tener un área de tipo? (+,-,*,/)");
+							System.out.println("Quieres tener un ï¿½rea de tipo? (+,-,*,/)");
 							String varS = input.next();
 							char var2[] = varS.toCharArray();
 							if (var2[0] == '+' || var2[0] == '-' || var2[0] == '*' || var2[0] == '/'){
@@ -73,7 +71,7 @@ public class DriverGenerar {
 							if (var == 1) c = '-';
 							else if (var == 2) c = '*';
 							else if (var == 3) c = '/';
-	
+
 							Area a = new Area(var-1,c);
 							tablero.afegirArea(a);
 							--var;
@@ -94,7 +92,7 @@ public class DriverGenerar {
 						int var2 = input.nextInt();
 						System.out.println("Posicion y:" + (tablero.size()-1) + ")");
 						int var3 = input.nextInt();
-						
+
 						if (! vect[var] && var2>= 0 && var2 < tablero.size() && var3 >= 0 && var3 < tablero.size()){
 							tablero.setid(var,var2,var3);
 							vect[var] = true;
@@ -120,7 +118,7 @@ public class DriverGenerar {
 									else if (var == tablero.getAreaID(var2-1,var3-1)) toca = true;
 									else if (var == tablero.getAreaID(var2,var3-1)) toca = true;
 									else if (var == tablero.getAreaID(var2-1,var3+1)) toca = true;
-		
+
 								}
 								else{
 									if (var3 == tablero.size()){
@@ -138,9 +136,9 @@ public class DriverGenerar {
 					}
 				}
 				else { //Poner casillas aleatorias
-					
+
 				}
-			
+
 		//}
 		/*catch (FileNotFoundException e) {
 	          e.printStackTrace();

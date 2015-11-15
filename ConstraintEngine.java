@@ -1,11 +1,10 @@
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.TreeSet;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Stack;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.lang.Math;
 import java.lang.RuntimeException;
 import java.lang.CloneNotSupportedException;
 
@@ -23,9 +22,9 @@ public class ConstraintEngine {
 
   private TableroH board;
   private ArrayList<ArrayList<HashSet<Integer>>> cellDomain;
-  private TreeSet<Pair<Integer,Pair<Integer,Integer>>> nextCell;
-  private HashMap<Integer,Pair<Integer,Pair<Integer,Integer>>> objectMap;
 
+  private Stack<Pair<Integer,LinkedList<Integer>>> log;
+  private HashMap<Integer,LinkedList<Integer>> logTrack;
 
   /**
   *Construye un nuevo motor, en base a un tablero de kenken.
@@ -35,67 +34,55 @@ public class ConstraintEngine {
   */
   public ConstraintEngine(TableroH board) {
     this.board = board;
-    this.cellDomain = new ArrayList<ArrayList<HashSet<Integer>>>();
-    this.objectMap = new HashMap<Integer,Pair<Integer,Pair<Integer,Integer>>>();
-    this.nextCell = new TreeSet<Pair<Integer,Pair<Integer,Integer>>>();
+    this.log = new Stack<Pair<Integer,LinkedList<Integer>>>();
+    this.logTrack = new HashMap<Integer,LinkedList<Integer>>();
 
-    Integer first;
-    Pair<Integer,Integer> second;
-    Pair<Integer,Pair<Integer,Integer>> object;
+    this.cellDomain = new ArrayList<ArrayList<HashSet<Integer>>>(this.board.size());
     for(int i=0; i<this.board.size(); i++) {
-      //Inicializar filas HashSet
-      this.cellDomain.add(i,new ArrayList<HashSet<Integer>>());
+      this.cellDomain.add(i,new ArrayList<HashSet<Integer>>(this.board.size()));
       for(int j=0; j<this.board.size(); j++) {
-
-        Casilla cell = this.board.getCasilla(i,j);
-
-        //Inicializar HashSet
         this.cellDomain.get(i).add(j,new HashSet<Integer>(this.board.getCasillaDomain(i,j)));
+      }
+    }
 
-        if (cell.getFija())
-          continue;
+    for (int i=0,limit=this.board.size()*this.board.size(); i<limit; i++) {
+      this.logTrack.put(i, new LinkedList<Integer>());
+    }
+  }
 
-        //Inicializar TreeSet
-        first = this.getDomain(i,j).size(); //asumo que se creara un nevo objeto Integer
-        second = new Pair<Integer,Integer>(i,j);
-        object = new Pair<Integer,Pair<Integer,Integer>>(first,second);
-        this.nextCell.add(object);
 
-        //Mapea el objeto para poder modificarlo despues
-        this.objectMap.put(this.getLinearPos(i,j),object);
+  /**
+  *Asigna la solucion de cada casilla al valor que tienen.
+  */
+  public void storeSolution() {
+    for (int i=0; i<this.board.size(); i++) {
+      for (int j=0; j<this.board.size(); j++) {
+        this.board.setCasillaSol(i,j,this.board.getCasillaVal(i,j));
       }
     }
   }
 
 
-  //La sustituira undo en el futuro
-  //confia es que no se quitara una casilla random
-  //Solo se agrega para mantener en una caja negra a la recursividad.
   /**
-  *Pone el valor a 0 en la casilla de la posicion solicitada.
+  *Devuelve una coleccion con el dominio de una casilla.
   *
   *@param x Posicion de la casilla en el eje X.
   *@param y Posicion de la casilla en el eje Y.
+  *@return HashSet<Integer> Coleccion con el dominio de la casilla.
   */
-  public void removeValue(int x, int y) {
-    this.board.setCasillaVal(x,y,-1);
+  public HashSet<Integer> getDomain(int x, int y) {
+    return this.cellDomain.get(x).get(y);
   }
 
 
   /**
-  *Retorna la posicion de la casilla no asignada con el dominio mas pequeño.
+  *Devuelve una coleccion con el dominio de una casilla.
   *
-  *@return Pair<Integer,Integer> Posicion de la casilla no asignada con el dominio mas pequeño.
+  *@param Pair<Integer,Integer> Posicion de la casilla.
+  *@return HashSet<Integer> Coleccion con el dominio de la casilla.
   */
-  public Pair<Integer,Integer> getNextCell() {
-    if (this.nextCell.isEmpty())
-      return null;
-    Pair<Integer,Integer> pos;
-    Pair<Integer,Pair<Integer,Integer>> aux;
-    aux = this.nextCell.pollFirst();
-    pos = aux.getSecond();
-    objectMap.remove(this.getLinearPos(pos));
-    return pos;
+  public HashSet<Integer> getDomain(Pair<Integer,Integer> pos) {
+    return this.getDomain(pos.getFirst(),pos.getSecond());
   }
 
 
@@ -110,16 +97,21 @@ public class ConstraintEngine {
   *KenKen, true en caso contrario.
   */
   public Boolean propagate(int x, int y, int value) {
+    if (this.board.casillaIsFija(x,y))
+      return true;
+
+    if (this.board.getCasillaVal(x,y) != -1) //Porsia temporal
+      throw new RuntimeException("No se puede cambiar una casilla ya inicializada");
+
+    Area area = this.board.getAreaByPos(x,y);
     MutableBoolean valid = new MutableBoolean();
     HashSet<Integer> dirtyArea = new HashSet<Integer>();
-    Area area = this.board.getAreaByPos(x,y);
 
-    if (this.nextCell.contains(this.getLinearPos(x,y))
-      || this.board.getCasillaVal(x,y) != -1)
-      throw new RuntimeException("No se puede cambiar una casilla ya asignada");
+    log.push(null);
 
     this.board.setCasillaVal(x,y,value);
 
+    logTrack.put(this.getLinearPos(x,y), new LinkedList<Integer>(this.getDomain(x,y)));
     this.getDomain(x,y).clear();
     this.getDomain(x,y).add(value);
 
@@ -129,12 +121,48 @@ public class ConstraintEngine {
     while (!dirtyArea.isEmpty() && valid.getValue())
       this.propLines(valid,dirtyArea);
 
+    //Vacia logTrack y pasarlo a log
+    int pos;
+    LinkedList<Integer> aux;
+    for (Map.Entry<Integer,LinkedList<Integer>> cellTrack : logTrack.entrySet()) {
+      pos = cellTrack.getKey();
+      aux = cellTrack.getValue();
+      if (aux.isEmpty())
+        continue;
+      log.push(new Pair<Integer,LinkedList<Integer>>(pos,aux));
+      cellTrack.setValue(new LinkedList<>());
+    }
+
     return valid.getValue();
   }
 
 
-  /*
-  *Cambia de una posicion matricial a una posicion linear.
+  /**
+  *Devuelve los cambios de la propagacion.
+  *
+  *@param x Posicion en el eje X de el tablero.
+  *@param y Posicion en el eje Y de el tablero.
+  */
+  public void depropagate(int x, int y) {
+    if (this.board.casillaIsFija(x,y))
+      return;
+
+    Pair<Integer,Integer> pos;
+    HashSet<Integer> aux;
+
+    this.board.setCasillaVal(x,y,-1);
+    while (log.peek() != null) {
+      pos = this.getMatrixPos(log.peek().getFirst());
+      aux = this.getDomain(pos);
+      for (Integer  value :  log.pop().getSecond())
+        aux.add(value);
+    }
+    log.pop();
+  }
+
+
+  /**
+  *Cambia de una posicion matricial a una posicion lineal.
   *
   *@param x Entero de la posicion en el eje X.
   *@param y Entero de la posicion en el eje Y.
@@ -145,19 +173,17 @@ public class ConstraintEngine {
   }
 
 
-  private HashSet<Integer> getDomain(int x, int y) {
-    return this.cellDomain.get(x).get(y);
-  }
-
-
-  /*
-  *Cambia de una posicion matricial a una posicion linear.
+  /**
+  *Cambia de posicion lineal a posicion matriceal.
   *
-  *@param pair Par que contiene la posicion matricial.
-  *@return int Posicion linear.
+  *@param pos Posicion lineal.
+  *@return Pair<Integer,Integer> Posicion matriceal.
   */
-  private int getLinearPos(Pair<Integer,Integer> pair) {
-    return this.getLinearPos(pair.getFirst(),pair.getSecond());
+  private Pair<Integer,Integer> getMatrixPos(int pos) {
+    int x,y;
+    x = pos % this.board.size();
+    y = pos/this.board.size();
+    return new Pair<Integer,Integer>(x,y);
   }
 
 
@@ -174,23 +200,23 @@ public class ConstraintEngine {
   *cambio de dominio.
   */
   private void propValue(int x, int y, int value, MutableBoolean valid, HashSet<Integer> dirtyArea) {
-    //Propagacion vertical
+    //Propagacion horizontal
     for (int i=0; i<this.board.size() && valid.getValue(); i++) {
         if (i == x || !this.getDomain(i,y).contains(value))
           continue;
         dirtyArea.add(this.board.getAreaID(i,y));
         this.getDomain(i,y).remove(value);
         valid.setAnd(!getDomain(i,y).isEmpty());
-        this.updateNextCell(i,y);
+        this.logTrack.get(this.getLinearPos(i,y)).add(value);
     }
-    //Propagacion horizontal
+    //Propagacion vertical
     for (int j=0; j<this.board.size() && valid.getValue(); j++) {
         if (j == y || !this.getDomain(x,j).contains(value))
           continue;
         dirtyArea.add(this.board.getAreaID(x,j));
         this.getDomain(x,j).remove(value);
         valid.setAnd(!getDomain(x,j).isEmpty());
-        this.updateNextCell(x,j);
+        this.logTrack.get(this.getLinearPos(x,j)).add(value);
     }
   }
 
@@ -214,7 +240,7 @@ public class ConstraintEngine {
       this.getDomain(x,j).remove(value);
       valid.setAnd(!getDomain(x,j).isEmpty());
       dirtyArea.add(this.board.getAreaID(x,j));
-      this.updateNextCell(x,j);
+      this.logTrack.get(this.getLinearPos(x,j)).add(value);
     }
   }
 
@@ -238,7 +264,7 @@ public class ConstraintEngine {
       this.getDomain(i,y).remove(value);
       valid.setAnd(!getDomain(i,y).isEmpty());
       dirtyArea.add(this.board.getAreaID(i,y));
-      this.updateNextCell(i,y);
+      this.logTrack.get(this.getLinearPos(i,y)).add(value);
     }
   }
 
@@ -274,10 +300,11 @@ public class ConstraintEngine {
         else if (direction.equals(ConstraintEngine.horizontal))
             propHLine(pos,area,value,valid,dirtyArea);
         else
-            throw new RuntimeException("Find lines esta mal");
+            throw new RuntimeException("Direccion no reconocida"); //**************************BORRAR***
       }
     }
   }
+
 
   /**
   *Encuentra valores implicitos y su direccion de propagacion dentro de una area.
@@ -302,8 +329,10 @@ public class ConstraintEngine {
         if (!this.board.areaContains(area,i,j))
           continue;
         aux = this.board.getCasillaVal(i,j);
-        if (taken[aux] && (lines.get(aux) == null || lines.get(aux) != i))
+        //Si ha sido tomado y ha sido removido o es una linea distinta.
+        if (taken[aux] && (lines.get(aux) == null || lines.get(aux) != i)) {
           lines.remove(aux);
+        }
         else {
           taken[aux] = true;
           lines.put(aux,i);
@@ -311,7 +340,7 @@ public class ConstraintEngine {
       }
     }
     for (Map.Entry<Integer,Integer> line : lines.entrySet()) {
-      tmp = new Pair<Integer,Integer>(line.getKey(),line.getValue());
+      tmp = new Pair<Integer,Integer>(line.getValue(),line.getKey());
       res.add(new Pair<Pair<Integer, Integer>, Boolean>(tmp,ConstraintEngine.vertical));
     }
 
@@ -323,8 +352,10 @@ public class ConstraintEngine {
         if (!this.board.areaContains(area,i,j))
           continue;
         aux = this.board.getCasillaVal(i,j);
-        if (taken[aux] && (lines.get(aux) == null || lines.get(aux) != j))
+        //Si ha sido tomado y ha sido removido o es una linea distinta.
+        if (taken[aux] && (lines.get(aux) == null || lines.get(aux) != j)) {
           lines.remove(aux);
+        }
         else {
           taken[aux] = true;
           lines.put(aux,j);
@@ -332,72 +363,11 @@ public class ConstraintEngine {
       }
     }
     for (Map.Entry<Integer,Integer> line : lines.entrySet()) {
-      tmp = new Pair<Integer,Integer>(line.getKey(),line.getValue());
+      tmp = new Pair<Integer,Integer>(line.getValue(),line.getKey());
       res.add(new Pair<Pair<Integer, Integer>, Boolean>(tmp,ConstraintEngine.horizontal));
     }
 
     return res;
-  }
-
-  /*
-  *Le resta una unidad al campo que representa el tamaño del dominio de la
-  *casilla solicitada. Luego de restarse se actualizan las posiciones de
-  *menor a mayor ocurrencias.
-  *
-  *@param x Posicion de la casilla en el eje X.
-  *@param y Posicion de la casilla en el eje Y.
-  */
-  private void updateNextCell(int x, int y) {
-    Integer aux = this.getLinearPos(x,y);
-    Pair<Integer,Pair<Integer,Integer>> object = objectMap.get(aux);
-    nextCell.remove(object);
-    object.setFirst(object.getFirst()-1);
-    nextCell.add(object);
-  }
-
-  /**
-  *Clona el motor de restricciones.
-  *
-  *@Override Obejct.clone().
-  *@throws CloneNotSupportedException.
-  *@return ConstraintEngine Retorna un clon del motor.
-  */
-  @Override
-  public ConstraintEngine clone() {
-    try {
-      ConstraintEngine newEngine = (ConstraintEngine) super.clone();
-      newEngine.board = this.board;
-      newEngine.cellDomain = new ArrayList<ArrayList<HashSet<Integer>>>();
-      newEngine.objectMap = new HashMap<Integer,Pair<Integer,Pair<Integer,Integer>>>();
-      newEngine.nextCell = new TreeSet<Pair<Integer,Pair<Integer,Integer>>>();
-
-      Integer first;
-      Pair<Integer,Integer> second;
-      Pair<Integer,Pair<Integer,Integer>> object;
-      for(int i=0; i<newEngine.board.size(); i++) {
-        //Inicializar filas HashSet
-        newEngine.cellDomain.add(i,new ArrayList<HashSet<Integer>>());
-        for(int j=0; j<newEngine.board.size(); j++) {
-
-          Casilla cell = newEngine.board.getCasilla(i,j);
-
-          //Inicializar HashSet
-          newEngine.cellDomain.get(i).add(j, new HashSet<Integer>(this.getDomain(i,j)));
-
-          //Inicializar TreeSet
-          first = newEngine.getDomain(i,j).size(); //asumo que se creara un nevo objeto Integer
-          second = new Pair<Integer,Integer>(i,j);
-          object = new Pair<Integer,Pair<Integer,Integer>>(first,second);
-          newEngine.nextCell.add(object);
-
-          //Mapea el objeto para poder modificarlo despues
-          newEngine.objectMap.put(newEngine.getLinearPos(i,j),object);
-        }
-      }
-      return newEngine;
-    } catch (CloneNotSupportedException e) {
-      throw new InternalError(e.toString());
-    }
   }
 
 
@@ -411,7 +381,6 @@ public class ConstraintEngine {
     return
       "tablero:\n" + this.board.toString() + "\n"
       + "dominio de casillas del motor:\n" + this.cellDomain.toString() + "\n"
-      + "nextCell:\n" + this.nextCell.toString() + "\n"
-      + "objectMap:\n" + this.objectMap.toString() + "\n";
+      + "log del motor:\n" + this.log.toString() + "\n";
   }
 }

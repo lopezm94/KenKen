@@ -43,6 +43,10 @@ public class TableroH extends Tablero {
 		return areas.get(n);
 	}
 
+	public Boolean casillaIsFija(int x, int y) {
+		return this.tauler[x][y].getFija();
+	}
+
 	public Boolean areaContains(Area area, int x, int y) {
 		int id = area.get_posicio();
 		return id == idAreas[x][y];

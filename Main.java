@@ -1,4 +1,3 @@
-import domini.*;
 import java.util.Scanner;
 import java.io.IOException;
 
@@ -38,7 +37,7 @@ public class Main{
 				case 5:
 					mc.showtutorial();
 					break;
-				default: 
+				default:
 					print_main_menu();
 					break;
 			}

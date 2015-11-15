@@ -5,12 +5,11 @@ import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
-import domini.*;
 
 public class GestioDadesH  extends Gestio_Dades{
 	/*
 	getInfoLine sirve tanto para Ranking como para Usuarios
-	Dado que tendremos dos ficheros (Profiles.txt i Ranking.txt) donde 
+	Dado que tendremos dos ficheros (Profiles.txt i Ranking.txt) donde
 	guardaremos los datos en formato:
 	username + info
 	he creado esta funcion getInfoLine para obtener a partir de una keyword (username)
@@ -96,6 +95,7 @@ public class GestioDadesH  extends Gestio_Dades{
 		}
 		return punts;
 	}
+	
 	/*
 		Exemple partida.txt:
 		HEADER PARTIDA:
@@ -141,3 +141,6 @@ public class GestioDadesH  extends Gestio_Dades{
 		return caselles;
 	}
 }
+=======
+}
+>>>>>>> b1e3df111b73fbcfaf79402c800bbedd96d4e712

@@ -1,4 +1,3 @@
-package domini;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -7,15 +6,15 @@ import java.io.*;
 
 
 public class DriverTablero {
-	
-	
+
+
 	public static void main(String[] args) {
 		Scanner input = null;
 		File test = null;
-		
+
 		try {
 			test = new File("test3");
-			System.out.println("Entra tamaño KenKen:");
+			System.out.println("Entra tamaï¿½o KenKen:");
 			input = new Scanner(test);
 			int var = input.nextInt();
 			int casellas;
@@ -33,7 +32,7 @@ public class DriverTablero {
 			}
 			var = input.nextInt();
 			while (var != -1){
-				System.out.println("Quieres tener un área de tipo? (+,-,*,/)");
+				System.out.println("Quieres tener un ï¿½rea de tipo? (+,-,*,/)");
 				String varS = input.next();
 				char var2[] = varS.toCharArray();
 				Area a = new Area(var,var2[0]);
@@ -57,11 +56,11 @@ public class DriverTablero {
 					int var2 = input.nextInt();
 					int var3 = input.nextInt();
 					tablero.setCasella(var,var2,var3);
-					--varC;	
+					--varC;
 				}
-				
+
 				System.out.println(tablero);
-				
+
 				Boolean resolv = false;
 				if (tablero.tableroCheck()){
 					if (tablero.numerosCheck()){
@@ -69,7 +68,7 @@ public class DriverTablero {
 						acabat = true;
 					}
 					else{
-						System.out.println("Tienes problemas en la colocación de los numeros");
+						System.out.println("Tienes problemas en la colocaciï¿½n de los numeros");
 						resolv = true;
 					}
 				}
@@ -80,7 +79,7 @@ public class DriverTablero {
 				if (resolv){
 					Boolean ok = false;
 					while (! ok){
-						System.out.println("Quieres ver la solución del KenKen? (Si/No)");
+						System.out.println("Quieres ver la soluciï¿½n del KenKen? (Si/No)");
 						String varS = input.next();
 						char var2[] = varS.toCharArray();
 						if (var2[0] == 'S' && var2[1] == 'i'){
@@ -107,9 +106,9 @@ public class DriverTablero {
 	            input.close();                      // Close the file scanner.
 	        }
 	    }
-		
 
-		
+
+
 	}
 
 }
