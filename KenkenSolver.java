@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 import java.io.IOException;
 
 /*@version 1.0ermino
+=======
+/*@version 1.0
+>>>>>>> c7467b778e02c0e80413c97674a1b80c6e3da45b
 *@author Reyes Vera
 */
 
@@ -9,13 +13,18 @@ public class KenkenSolver {
 
 	private TableroH tablero;
 
+<<<<<<< HEAD
 	public KenkenSolver(TableroH tablero){
+=======
+	public void KenKenSolver(TableroH tablero){
+>>>>>>> c7467b778e02c0e80413c97674a1b80c6e3da45b
 		this.tablero = tablero;
 		this.initDomain();
 	}
 
 	private Boolean FuncionRecursiva(int x, int y, ConstraintEngine ce) {
 		if (y == this.tablero.size()) {
+<<<<<<< HEAD
 			System.out.println("termino");
 			ce.storeSolution();
 			try{
@@ -28,10 +37,16 @@ public class KenkenSolver {
 			
 		}
 		Boolean check = false;
+=======
+			ce.storeSolution();
+			return true;
+		}
+>>>>>>> c7467b778e02c0e80413c97674a1b80c6e3da45b
 		Boolean done = false;
 		int newx = (x+1)%this.tablero.size();
 		int newy = y;
 		if (newx == 0) y++;
+<<<<<<< HEAD
 
 		for (Integer value : ce.getDomain(x,y)) {
 			//System.out.println("hola");
@@ -59,6 +74,12 @@ public class KenkenSolver {
 			catch(IOException e){      
 				                       
             }                          
+=======
+		for (Integer value : ce.getDomain(x,y)) {
+			if (ce.propagate(x, y, value))
+				done = this.FuncionRecursiva(newx,newy,ce);
+			ce.depropagate(x,y);
+>>>>>>> c7467b778e02c0e80413c97674a1b80c6e3da45b
 			if (done) break;
 		}
 		return done;

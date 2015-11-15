@@ -19,7 +19,7 @@ public class DriverTablero {
 
 		try {
 			test = new File("test3");
-			System.out.println("Entra tamaño KenKen:");
+			System.out.println("Entra tamaï¿½o KenKen:");
 			input = new Scanner(test);
 			int var = input.nextInt();
 			int casellas;
@@ -37,7 +37,11 @@ public class DriverTablero {
 			}
 			var = input.nextInt();
 			while (var != -1){
+<<<<<<< HEAD
 				System.out.println("Quieres tener un area de tipo? (+,-,*,/)");
+=======
+				System.out.println("Quieres tener un ï¿½rea de tipo? (+,-,*,/)");
+>>>>>>> c7467b778e02c0e80413c97674a1b80c6e3da45b
 				String varS = input.next();
 				char var2[] = varS.toCharArray();
 				Area a = new Area(var,var2[0]);
