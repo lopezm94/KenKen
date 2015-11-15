@@ -26,7 +26,7 @@ public class Main{
 					System.out.println("Sesion cerrada\n");
 					exit = 1;
 					break;
-				case 1:	
+				case 1:
 					mc.new_game();
 					break;
 				case 2:
@@ -54,5 +54,6 @@ public class Main{
 					break;
 			}
 		}
+	in.close();
 	}
 }

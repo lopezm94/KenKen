@@ -1,10 +1,10 @@
-import java.lang.RuntimeException;
+//import java.lang.RuntimeException;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileWriter;
+//import java.io.File;
+//import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.StringTokenizer;
+//import java.util.StringTokenizer;
 
 public class GestioDadesH  extends Gestio_Dades{
 	/*
@@ -30,6 +30,25 @@ public class GestioDadesH  extends Gestio_Dades{
 			System.out.println(e.toString());
 		}
 		return profiledata;
+	}
+	public int getLine(String keyword, String dir, String file){
+		int contador = 0;
+		Boolean control = false;
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("./"+file));
+		    String line;
+		    while ((line = br.readLine()) != null && !control) {
+		       if(line.contains(keyword)){
+		       		control = true;
+		       }else{
+		    	   contador++;
+		       }
+		    }
+		    br.close();
+		}catch(IOException e){
+			System.out.println(e.toString());
+		}
+		return contador;
 	}
 
 	public GestioDadesH(Perfil p){
@@ -95,15 +114,15 @@ public class GestioDadesH  extends Gestio_Dades{
 	}
 	public String getPassByToken(String[] st){
 		if(st.length > 0){
-			st[1];
+			return st[1];
 		}
 		return "";
 	}
 	public int[] getPuntuacio(String[] st){
 		int i = 0;
 		int[] punts = new int[3];
-		if(length > 0){
-			for (int i = 2; i<5; ++i) {
+		if(st.length > 0){
+			for (i = 2; i<5; ++i) {
 				punts[i] = Integer.parseInt(st[i]);
 			}
 		}
@@ -153,9 +172,9 @@ public class GestioDadesH  extends Gestio_Dades{
 		    String line;
 		    while ((line = br.readLine()) != null) {
 		       String[] fila = line.split("\\s");
-		         for (int j=0; j<fila.length; j++)
+		         for (int j=0; j<fila.length; j++){
 			       	caselles[i][j] = Integer.parseInt(fila[j]);
-			       }
+			      }
 		       ++i;
 		    }
 		}catch(IOException e){
@@ -164,23 +183,25 @@ public class GestioDadesH  extends Gestio_Dades{
 		return caselles;
 	}
 	/*
-		Exemple Partida.txt:
-		3
-		operacions + - * / * . +
-		casella0 0 2 6
-		casella1 0 3 1
-		casella2 1 2 2
-		casella3 1 1 4
-		...
-		casellax fija sol idarea --> fija (1 fija,0 no fija), sol(value), idarea(0...total areas)
-	*/
+	Exemple Partida.txt:
+	3
+	operacions + - * / * . +
+	casella0 0 2 6
+	casella1 0 3 1
+	casella2 1 2 2
+	casella3 1 1 4
+	...
+	casellax fija sol idarea --> fija (1 fija,0 no fija), sol(value), idarea(0...total areas)
+*/
 	public void escriure_kenken(TableroH tauler){
-		//Funcio escriptura del KenKen
+
 	}
+
+	//RETRN 
 	public int getMidaKenken(String nomkenken, String dir){
 		int mida = -1;
 		try{
-			mida = Integer.parseInt(Leer_string(file,"./KenKens","\n",1)); 
+			mida = Integer.parseInt(Leer_string(nomkenken,"./KenKens","\n",1)); 
 		}catch(IOException e){
 			System.out.println(e.toString());
 		} catch (FicheroNoExiste e) {
@@ -190,17 +211,11 @@ public class GestioDadesH  extends Gestio_Dades{
 	}
 	public String[] getOperacions(String nomkenken, String dir){
 		String[] opnew;
-		try{
-			String[] op = getInfoLine("operacions", "./KenKens", nomkenken).split("\\s"); 
-			opnew = new String[op.lengh-1];
-			for(int i = 0; i< opnew.length;++i){
-				opnew[i] = op[i+1];
-			}
-		}catch(IOException e){
-			System.out.println(e.toString());
-		} catch (FicheroNoExiste e) {
-			e.printStackTrace();
-		}
+		String[] op = getInfoLine("operacions", "./KenKens", nomkenken).split("\\s"); 
+		opnew = new String[op.length-1];
+		for(int i = 0; i< opnew.length;++i){
+			opnew[i] = op[i+1];
+		}		
 		return opnew;
 	}
 
@@ -219,14 +234,13 @@ public class GestioDadesH  extends Gestio_Dades{
 	public int[][] getCasellaValors(String nomkenken, String dir){
 		int mida = getMidaKenken(nomkenken,dir);
 		int casella_values[][] = new int[mida*mida][3];
-		for(int i = 0; i<mida; ++i){
-			for(int j = 0; j<mida; ++j){
-				String[] casellainfo = getInfoLine("casella"+(String)(i*mida+j),"./KenKens",nomkenken).split("\\s");
-				for(int i = 0; i < 3; ++i){
-					casilla_values[i][j] = Integer.parseInt(casellainfo[i+1]);
-				}
+		for(int i = 0; i<mida*mida; ++i){
+			String[] casellainfo = getInfoLine("casella"+i,"./KenKens",nomkenken).split("\\s");
+			for(int k = 0; k < 3; ++k){
+				casella_values[i][k] = Integer.parseInt(casellainfo[k+1]);
 			}
 		}
-		return casilla_values;
+		return casella_values;
 	}
 }
+
