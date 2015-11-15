@@ -1,20 +1,18 @@
-package domini;
-
 /*@version 1.0
 *@author Reyes Vera
 */
 
 
 public class KenkenSolver {
-	
+
 	private Boolean Ok = false;
 	private TableroH tablero;
-	
+
 	public void KenKenSolver(TableroH tablero){
 		this.tablero = tablero;
 		this.initDomain();
 	}
-	
+
 	private Boolean FuncionRecursiva(int x, int y, ConstraintEngine ce) {
 		if (y == this.tablero.size())
 			return true;
@@ -29,13 +27,13 @@ public class KenkenSolver {
 			if (done) break;
 		}
 	}
-	
+
 	public Boolean solveKenken(){
 		ConstraintEngine ce = new ConstraintEngine(tablero);
 		Ok = this.FuncionRecursiva(0,0,ce);
 		return Ok;
 	}
-	
+
 	public void initDomain(){
 		for (int i = 0; i < tablero.size(); ++i){
 			for (int j = 0; j < tablero.size();++j){
@@ -45,6 +43,6 @@ public class KenkenSolver {
 			}
 		}
 	}
-	
-	
+
+
 }
