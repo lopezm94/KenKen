@@ -8,31 +8,36 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.TimerTask;
 
-/**
-*@version 1.0
+/*@version 1.0
 *@author Reyes Vera
 */
+
+
 public class Generar {
-
-TableroH tablero;
-
+	
+	public TableroH tablero;
+	
 	public Generar(){
 		tablero = null;
 	}
-
+	
 	public TableroH genera(){
 		Scanner input = null;
 		File test = null;
 
 		try {
-			test = new File("testGen2");
 			System.out.println("Juego de prueba o manual? (0 = prueba, 1 = manual)");
+			System.out.println("Juegos de prueba: testGen, testGen2, testP");
 			input = new Scanner(System.in);
 			int ar = input.nextInt();
 			if (ar == 0){
+				String text = "";
+				System.out.println("Que juego de prueba quieres utilizar?");
+				text = input.next();
+				test = new File(text);
 				input = new Scanner(test);
 			}
-			System.out.println("Quieres poner tama�o al KenKen?(Si/No)");
+			System.out.println("Quieres poner tamano al KenKen?(Si/No)");
 
 			boolean ok =false;
 			while (! ok){
@@ -52,7 +57,7 @@ TableroH tablero;
 					if (var < 3) var = 3;
 					tablero = new TableroH(var);
 					ok = true;
-					System.out.println("Tama�o generado: "+ tablero.size());
+					System.out.println("tamano generado: "+ tablero.size());
 				}
 				else System.out.println("Como?");
 			}
@@ -78,7 +83,7 @@ TableroH tablero;
 							String varS = input.next();
 							char var2[] = varS.toCharArray();
 							if (var2[0] == '+' || var2[0] == '-' || var2[0] == '*' || var2[0] == '/'){
-
+								
 								Area a = new Area(at,var2[0]);
 								System.out.println("Que resultado tiene que dar este area?");
 								int var3 = input.nextInt();
@@ -152,9 +157,9 @@ TableroH tablero;
 								}
 							}
 						}
-
+						
 						tablero.colocaRes();
-
+						
 						//System.out.println(tablero);
 						ok = true;
 						System.out.println("Areas generadas: "+ are);
@@ -165,7 +170,7 @@ TableroH tablero;
 				if (! rand){
 					Boolean vect[] = new Boolean[tam];
 					for (int i = 0; i < tam; ++i) vect[i] = false;
-
+	
 					System.out.println("Quieres ponerle a cada area sus casillas?(Si/No)");
 					Boolean CasillasP = false;
 					edita = true;
@@ -179,11 +184,11 @@ TableroH tablero;
 						}
 						else System.out.println("Como?");
 					}
-
-					int tama�o = tam;
+	
+					int tamano = tam;
 					if (edita){
 						System.out.println("Que area le quieres poner a cada casilla?");
-						System.out.println("Area: " + "1 - "+ tama�o);
+						System.out.println("Area: " + "1 - "+ tamano);
 						int var = input.nextInt();
 						int numC = tablero.size()*tablero.size();
 						while (numC > 0){
@@ -192,7 +197,7 @@ TableroH tablero;
 							int var2 = input.nextInt();
 							System.out.println("Posicion y: (Min: 0, Max: "+ (tablero.size()-1) + ")");
 							int var3 = input.nextInt();
-
+	
 						if (var2 >= 0 && var2 < tablero.size() && var3 >= 0 && var3 < tablero.size()){
 								if (! vect[var] && var2>= 0 && var2 < tablero.size() && var3 >= 0 && var3 < tablero.size()){
 									tablero.setid(var,var2,var3);
@@ -212,7 +217,7 @@ TableroH tablero;
 											if (var3 > 0 && var3 <= (tablero.size()-1)){
 												if (var == tablero.getAreaID(var2-1,var3)) toca = true;
 												else if (var == tablero.getAreaID(var2,var3-1)) toca = true;
-
+	
 											}
 										}
 									}
@@ -232,19 +237,19 @@ TableroH tablero;
 						}
 					}
 					else { //Poner area a casillas aleatorio
-						--tama�o;
+						--tamano;
 						rand = true;
 						int num = (tablero.size())^2;
 						for (int i = 0; i < tablero.size();++i){
 							for (int j = 0; j < tablero.size(); ++j){
-								tablero.setid(tama�o,i,j);
+								tablero.setid(tamano,i,j);
 								--num;
-								if (tama�o != 0){
+								if (tamano != 0){
 									Random rnd = new Random();
 									int var = rnd.nextInt();
 									var = Math.abs(var);
-									if (var%tablero.size() == 0) --tama�o;
-									else if (num <= tama�o) --tama�o;
+									if (var%tablero.size() == 0) --tamano;
+									else if (num <= tamano) --tamano;
 								}
 							}
 						}
@@ -264,7 +269,7 @@ TableroH tablero;
 							else System.out.println("Como?");
 						}
 						if (edita){
-							System.out.println("Recuerda que tu Kenken es de tama�o "+ tablero.size()+ " (Para salir teclea -1)");
+							System.out.println("Recuerda que tu Kenken es de tamano "+ tablero.size()+ " (Para salir teclea -1)");
 							System.out.println("Valor casilla fija: (las casillas fijas no se modifican, tienes que poner un valor correcto");
 							int var = input.nextInt();
 							while (var != -1){
@@ -280,20 +285,20 @@ TableroH tablero;
 						}
 					}
 				}
-
+				
 				//tablero.checkarea();
-
+				
 				System.out.println("Vamos a comprobar que tu Kenken es correcto");
-
+				
 				//System.out.println(tablero);
-
+				
 				KenkenSolver solucion = new KenkenSolver(tablero);
 				Boolean solu = false;
-
+				
 			/*	Timer timer = new Timer();
 				timer.schedule(enlace("www.elperiodico.com/es/"), 10000);
 				//pondremos tiempo a la hora de hacer la interficie grafica para que no se haga muy pesado el tiempo de espera de KenKens grandes
-
+				
 				*/
 				if (solucion.solveKenken()){
 					System.out.println("Tu Kenken es correcto :)");
@@ -302,8 +307,8 @@ TableroH tablero;
 				else System.out.println("Vuelve a intentarlo, tu Kenken no tiene solucion :(");
 
 				//System.out.println(tablero);
-
-
+				
+				
 				if (solu){
 					System.out.println("Quieres ver la solucion de tu Kenken?");
 					Boolean resol = false;
@@ -341,8 +346,8 @@ TableroH tablero;
 		return tablero;
 
 	}
-
-
+	
+	
 	private static TimerTask enlace (String enlaceAAceder){
         Desktop enlace=Desktop.getDesktop();
         System.out.println("Has visto las noticias de hoy? VAMOS A VER COMO ESTA EL MUNDO :)");
