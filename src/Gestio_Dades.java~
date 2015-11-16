@@ -225,7 +225,7 @@ public class Gestio_Dades {
     }
 
 
-    //Funcion privada para el borrado de ficheros. Se encarga de borrar de manera recursiva todos los ficheros
+    //Función privada para el borrado de ficheros. Se encarga de borrar de manera recursiva todos los ficheros
     // de un directorio.
     private static void delete(File f) throws IOException, FicheroNoExiste {
         if (f.exists()) {
