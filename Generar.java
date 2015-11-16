@@ -6,6 +6,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Timer;
 import java.util.TimerTask;
 
 /*@version 1.0
@@ -16,6 +17,7 @@ import java.util.TimerTask;
 public class Generar {
 	
 	public TableroH tablero;
+	Timer timer;
 	
 	public Generar(){
 		tablero = null;
@@ -295,12 +297,11 @@ public class Generar {
 				KenkenSolver solucion = new KenkenSolver(tablero);
 				Boolean solu = false;
 				
-			/*	Timer timer = new Timer();
-				timer.schedule(enlace("www.elperiodico.com/es/"), 10000);
+				timer = new Timer();
+				timer.schedule(task, 10000);
 				//pondremos tiempo a la hora de hacer la interficie grafica para que no se haga muy pesado el tiempo de espera de KenKens grandes
-				
-				*/
 				if (solucion.solveKenken()){
+					timer.cancel();
 					System.out.println("Tu Kenken es correcto :)");
 					solu = true;
 				}
@@ -347,16 +348,17 @@ public class Generar {
 
 	}
 	
-	
-	private static TimerTask enlace (String enlaceAAceder){
-        Desktop enlace=Desktop.getDesktop();
-        System.out.println("Has visto las noticias de hoy? VAMOS A VER COMO ESTA EL MUNDO :)");
-        for (int i = 0; i < 10000000; ++i);
-        try {
-                enlace.browse(new URI(enlaceAAceder));
-        } catch (IOException | URISyntaxException e) {
-            e.getMessage();
-        }
-		return null;
+	TimerTask task = new TimerTask() {
+		public void run() {
+			Desktop enlace=Desktop.getDesktop();
+	        System.out.println("Has visto las noticias de hoy? VAMOS A VER COMO ESTA EL MUNDO :)");
+	        for (int i = 0; i < 1000; ++i);
+	        try {
+	                enlace.browse(new URI("http://www.elperiodico.com/es/"));
+	        } catch (IOException | URISyntaxException e) {
+	            e.getMessage();
+	        }
+		}
+			
+		};
     }
-}
