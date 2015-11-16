@@ -146,7 +146,7 @@ public class GestioDadesH  extends Gestio_Dades{
 			3 1 2
 			2 3 1
 	*/
-	public String[] getPartidaHeaderInfo(String file, String username){
+	public String[] getPartidaHeaderInfo(String file, String username, int linea){
 		/*
 			getPartidaHeaderInfo retorna els valors:
 			->temps de partida
@@ -154,7 +154,7 @@ public class GestioDadesH  extends Gestio_Dades{
 		*/
 		String[] headerinfo = null;
 		try{
-			headerinfo = Leer_string(file,"./"+username,"\n",4).split("\n"); 
+			headerinfo = Leer_string(file,"./Games/"+username,"\n",linea).split("\n"); 
 		}catch(IOException e){
 			System.out.println(e.toString());
 			return null;
@@ -169,19 +169,54 @@ public class GestioDadesH  extends Gestio_Dades{
 		int[][] caselles = new int[mida][mida];
 		int i;
 		i = 0;
-		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+		try (BufferedReader br = new BufferedReader(new FileReader("Games/"+username+"/"+file+".txt"))) {
 		    String line;
 		    while ((line = br.readLine()) != null) {
-		       String[] fila = line.split("\\s");
-		         for (int j=0; j<fila.length; j++){
-			       	caselles[i][j] = Integer.parseInt(fila[j]);
-			      }
+		    	if(i >= 2){
+			       String[] fila = line.split("\\s");
+			         for (int j=0; j<fila.length; j++){
+				       	caselles[i-2][j] = Integer.parseInt(fila[j]);
+				      }	
+		    	}
 		       ++i;
 		    }
 		}catch(IOException e){
 			System.out.println(e.toString());
 		}
 		return caselles;
+	}
+
+	public void guardarPartida(Perfil p,String nomkenken){
+		String username = p.get_usuari();
+		String nompartida = p.get_partida().getNomPartida();
+		try {
+			Crear_archivo(nompartida,"./Games/"+username);
+		} catch (IOException e) {
+		} catch (FicheroYaExistente e) {
+			try {
+				Borrar_archivo(nompartida,"./Games/"+username);
+			} catch (FicheroNoExiste | IOException e1) {
+			}
+				try {
+					Crear_archivo(nompartida,"./Games/"+username);
+				} catch (IOException | FicheroYaExistente e1) {
+				}
+				
+				
+		}
+		try {
+			Escribir_string(""+p.get_partida().getTime(),"\n",nompartida,"./Games/"+username);
+			Escribir_string(nomkenken,"\n",nompartida,"./Games/"+username);
+			String fila =  "";
+			for(int i = 0; i < p.get_partida().getTauler().size(); ++i){
+				fila = "";
+				for(int j = 0; j < p.get_partida().getTauler().size(); ++j){
+					fila += p.get_partida().getTauler().getCasillaVal(i, j)+" ";
+				}
+				Escribir_string(fila,"\n",nompartida,"./Games/"+username);
+			}
+		} catch (IOException | FicheroNoExiste e) {
+		}
 	}
 	/*
 	Exemple Kenken.txt:
@@ -250,5 +285,6 @@ public class GestioDadesH  extends Gestio_Dades{
 		}
 		return casella_values;
 	}
+	
 }
 
