@@ -8,6 +8,11 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.TimerTask;
 
+/*@version 1.0
+*@author Reyes Vera
+*/
+
+
 public class Generar {
 	
 TableroH tablero;
