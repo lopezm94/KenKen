@@ -38,10 +38,6 @@ public class DriverTablero {
 			var = input.nextInt();
 			while (var != -1){
 				System.out.println("Quieres tener un area de tipo? (+,-,*,/)");
-<<<<<<< HEAD
-=======
-				System.out.println("Quieres tener un �rea de tipo? (+,-,*,/)");
->>>>>>> 5bd503a30e6c0dbe52058502aec09ee756f2ed30
 				String varS = input.next();
 				char var2[] = varS.toCharArray();
 				Area a = new Area(var,var2[0]);
