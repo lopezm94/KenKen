@@ -42,7 +42,8 @@ public class OrderedMapByValue {
 
 
   /**
-  *Agrega un elemento al mapa permitiendo las repeticiones de llaves.
+  *Agrega un elemento al mapa permitiendo las repeticiones de llaves y
+  *manteniendo el orden de la coleccion.
   *
   *@param user El identicador del usuario.
   *@param score La puntuacion del usuario.
