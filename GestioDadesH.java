@@ -183,9 +183,9 @@ public class GestioDadesH  extends Gestio_Dades{
 		return caselles;
 	}
 	/*
-	Exemple Partida.txt:
+	Exemple KenKen.txt:
 	3
-	operacions + - * / * . +
+	operacions + - * / * .
 	casella0 0 2 6
 	casella1 0 3 1
 	casella2 1 2 2
@@ -209,12 +209,12 @@ public class GestioDadesH  extends Gestio_Dades{
 		}
 		return mida;
 	}
-	public int getDificultatKenken(String nomkenken){
+	/*public int getDificultatKenken(String nomkenken){
 		int dificultat = 0;
 		String[] op = getInfoLine("dificultat", "./KenKens", nomkenken+".txt").split("\\s"); 
 		int dificultat = Integer.parseInt(op[1]);
 		return dificultat;
-	}
+	}*/
 	public String[] getOperacions(String nomkenken, String dir){
 		String[] opnew;
 		String[] op = getInfoLine("operacions", "./KenKens", nomkenken+".txt").split("\\s"); 

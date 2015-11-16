@@ -15,6 +15,54 @@ public class MainController{
 	private void play(){
 		// interacció amb l'usuari per jugar
 	}
+	private TableroH creaTauler(String nomkenken, Boolean carregada, String nompartida){
+		int mida = dataEngine.getMidaKenken(nomkenken);
+		TableroH tablero = new TableroH(mida);
+		try{
+			int[][] caselles;
+			int casellas_nofijas = tablero.files * tablero.files;
+			for (int i = 0; i < tablero.files;++i){
+				for (int j = 0; j < tablero.files;++j){
+					caselles = dataEngine.getCasellValor(nomkenken);
+					int valor = -1;
+					Boolean fija;
+					int sol = caselles[i*j][1];
+					if(caselles[i*j][2] == 1){
+						fija = true;
+						--casellas_nofijas
+						valor = sol;
+					}else{
+						fija = false;
+					}
+					Casilla cas = new Casilla(valor,fija,sol);
+					tablero.setCasilla(cas,i,j);
+				}
+			}
+			/*Creem cada àrea*/
+			String[] operacions = dataEngine.getOperacions(nomkenken);
+			int total_areas = operacions.lenght;
+			int idarea = 0;
+			while (idarea <= total_areas){
+				String varS = operacions[idarea];
+				char var2[] = varS.toCharArray();
+				Area a = new Area(idarea,var2[0]);
+				tablero.afegirArea(a,0);
+				++idarea;
+			}
+			int casellestotal = tablero.files * tablero.files;
+			while(casellestotal!= 0){
+				int idarea = caselles[casellestotal][1]; 
+				tablero.setid(idarea,casellestotal/mida,casellestotal%mida);
+				--casellestotal;
+			}
+			tablero.colocaRes();
+		} catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (in != null) {
+	        in.close();                      // Close the file scanner.
+	    }
+	}
 	public Perfil login(){
 		int control = 0;
 		while(control == 0){
@@ -94,17 +142,7 @@ public class MainController{
 		Partida nova = new Partida(nompartida,currentUser.get_usuari());
 		currentUser.assignar_nova_partida(nova);
 		int mida = dataEngine.getMidaKenken(nomkenken);
-		TableroH tablero = new TableroH(mida);
-		int casellas = tablero.files * tablero.files;
-			for (int i = 0; i < tablero.files;++i){
-				for (int j = 0; j < tablero.files;++j){
-					int[][] caselles = dataEngine.getCasellValor(nomkenken);
-
-					Casilla cas = new Casilla(var,var2,var3);
-					tablero.setCasilla(cas,i,j);
-					if (var2) --casellas;
-				}
-			}
+		
 		/*inicialitzar 
 		tablero
 			set_casillasol
