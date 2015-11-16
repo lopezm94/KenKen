@@ -146,7 +146,6 @@ public class GestioDadesH  extends Gestio_Dades{
 	public String[] getPartidaHeaderInfo(String file, String username){
 		/*
 			getPartidaHeaderInfo retorna els valors:
-			->nom de partida
 			->temps de partida
 			->dificultat de partida(int)
 			->fitxer on es troba el kenken a rsoldre
