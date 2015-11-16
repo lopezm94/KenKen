@@ -1,9 +1,14 @@
 import java.util.Scanner;
 import java.io.IOException;
 
+/**
+*@version 1.0
+*@author Joan Grau
+*@author Marc Ortiz
+*/
 public class Main{
 	private static void print_main_menu(){
-		//buscar dades_gestió dades
+		//buscar dades_gestiï¿½ dades
 		System.out.println("Escull alguna d'aquestes opcions: ");
 		System.out.println("1- Crear Partida \n"+
 				"2- Carregar Partida (Per usuaris registrats) \n"+

@@ -5,11 +5,10 @@ import java.util.Scanner;
 //import java.io.*;
 
 
-/*@version 1.0
+/**
+*@version 1.0
 *@author Reyes Vera
 */
-
-
 public class DriverTablero {
 
 
@@ -19,7 +18,7 @@ public class DriverTablero {
 
 		try {
 			test = new File("test3");
-			System.out.println("Entra tamaño KenKen:");
+			System.out.println("Entra tamaï¿½o KenKen:");
 			input = new Scanner(test);
 			int var = input.nextInt();
 			int casellas;

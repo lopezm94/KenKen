@@ -1,7 +1,10 @@
-
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+*@version 1.0
+*@author Joan Grau
+*/
 public class DriverArea{
 	public static void main (String args[]) throws IOException{
 		Area a = null;
@@ -143,11 +146,11 @@ public class DriverArea{
                 System.out.println("Accion introducida no es correcta. Intentelo de nuevo.");
                 break;
 			}
-			
+
 		}
 		in.close();
 	}
-	
+
 	private static int action(Scanner in1) throws IOException{
 		System.out.println(	"1 - Crear Area amb parametres\n"+
 							"2 - Obtenir operacio de l'area\n"+

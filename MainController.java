@@ -1,11 +1,11 @@
 import java.io.IOException;
 import java.util.Scanner;
 
-/*@version 1.0
+/**
+*@version 1.0
 *@author Marc Ortiz
 *@author Joan Grau
 */
-
 public class MainController{
 	//Definici√≥ variables globals i controladors que necessitarem:
 	private Perfil currentUser;
@@ -13,25 +13,107 @@ public class MainController{
 	Scanner in;
 	//Login_Usuari:
 	//Comprovem que l'usuari existeixi a la base de dades o sino entrar com  a convidat
-	private void play(){
-		int mida = currentUser.get_partida().getTauler().size();
-		TableroH tauler = currentUser.get_partida().getTauler();
-		
-		for(int i=0; i < mida; ++i){
-			for(int j=0; j < mida; ++j){
-				System.out.print(tauler.getCasillaSol(i, j)+" ");
-			}
-			System.out.println("");
-		}
-		for(int i=0; i < mida; ++i){
-			for(int j=0; j < mida; ++j){
-				System.out.print(tauler.getCasillaVal(i, j)+" ");
-			}
-			System.out.println("");
-		}
-		// interacciÛ amb l'usuari per jugar
+	private static int action(Scanner in1) throws IOException{
+		System.out.println(	"1 - Introduir casella\n"+
+							"2 - Comprovar solucio\n"+
+							"3 - Guardar i sortir\n"+
+							"4 - Mostrar solucio\n"+
+							"0 - Sortir");
+		int res = in1.nextInt();
+		return res;
 	}
-	
+	//Login_Usuari:
+	//Comprovem que l'usuari existeixi a la base de dades o sino entrar com  a convidat
+	private void imprimir_tauler(){
+		int mida = currentUser.get_partida().getTauler().size();
+		for(int i=0; i < currentUser.get_partida().getTauler().getNumAreas(); ++i){
+			System.out.println(i+": "+currentUser.get_partida().getTauler().getArea(i).get_operacio()+" "+currentUser.get_partida().getTauler().getArea(i).get_resultat());
+		}
+		for(int i=0; i < mida; ++i ){
+			for(int j=0; j < mida; ++j){
+				System.out.print("|"+currentUser.get_partida().getTauler().getCasillaVal(i, j)+","+currentUser.get_partida().getTauler().getAreaID(i, j)+"|");
+			}
+			System.out.print("\n");
+		}
+		System.out.print("\n");
+	}
+	private void imprimir_solucio(){
+		int mida = currentUser.get_partida().getTauler().size();
+		for(int i=0; i < mida; ++i ){
+			for(int j=0; j < mida; ++j){
+				System.out.print(" "+currentUser.get_partida().getTauler().getCasillaSol(i, j));
+			}
+			System.out.print("\n");
+		}
+		System.out.print("\n");
+	}
+
+	private int tiempo(long tiempo_start){
+		long time_end = System.currentTimeMillis();
+		int timeextra = currentUser.get_partida().getTime();
+		tiempo_start  = time_end/1000 - tiempo_start/1000;
+		timeextra += (int)tiempo_start;
+		return timeextra;
+	}
+
+	private void play(String nomkenken){
+		long time_start;
+		time_start = System.currentTimeMillis();
+		Boolean end = false;
+		imprimir_tauler();
+		while(!end){
+			try {
+				switch(action(in)){
+				case 0:
+					end = true;
+					break;
+				case 1:
+					//introduir casella
+					System.out.println("Introdueix el valor de la casella: \n"+
+										"posx,posy,valor_nou (ex: 0,2,8)");
+					int x = in.nextInt();
+					int y = in.nextInt();
+					int valor = in.nextInt();
+					currentUser.get_partida().getTauler().setCasillaVal(x,y,valor);
+					imprimir_tauler();
+					System.out.println("Temps: "+tiempo(time_start));
+					break;
+				case 2:
+					Boolean correcte = currentUser.get_partida().getTauler().tableroCheck() &&
+										currentUser.get_partida().getTauler().numerosCheck();
+					if(correcte) {
+						System.out.println("KenKen correcte! Felicitats");
+						System.out.println("Temps total: "+tiempo(time_start));
+						end = true;
+					}else{
+						System.out.println("KenKen incorrecte!");
+					}
+					break;
+				case 3:
+					System.out.println("Temps: "+tiempo(time_start));
+					currentUser.get_partida().setTime(tiempo(time_start));
+					dataEngine.guardarPartida(currentUser,nomkenken);
+					end = true;
+					break;
+				case 4:
+					imprimir_solucio();
+					break;
+				default:
+				    System.out.println("Accion introducida no es correcta");
+				    break;
+				}
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
+		in.close();
+	}
+
+
+
 	private TableroH creaTauler(String nomkenken){
 		int mida = dataEngine.getMidaKenken(nomkenken);
 		TableroH tablero = new TableroH(mida);
@@ -53,7 +135,7 @@ public class MainController{
 					tablero.setCasilla(cas,i,j);
 				}
 			}
-			/*Creem cada ‡rea*/
+			/*Creem cada ÔøΩrea*/
 			String[] operacions = dataEngine.getOperacions(nomkenken);
 			int total_areas = operacions.length;
 			int idarea = 0;
@@ -72,15 +154,15 @@ public class MainController{
 			}
 			tablero.colocaRes();
 		} finally {
-	        if (in != null) {
+	      /*  if (in != null) {
 	        in.close();
-	        }// Close the file scanner.
+	        }// Close the file scanner.*/
 	    }
 		return tablero;
 	}
-	
 
-	
+
+
 	private void omplirTauler(TableroH tauler, String nomficher){
 		int mida = tauler.size();
 		int caselles[][] = dataEngine.getPartidaValues(nomficher,currentUser.get_usuari(),mida);
@@ -90,7 +172,7 @@ public class MainController{
 			}
 		}
 	}
-	
+
 	public Perfil login(){
 		int control = 0;
 		while(control == 0){
@@ -104,7 +186,7 @@ public class MainController{
 				String[] st = dataEngine.getProfileInfo(nomUser, ".", "Profiles");
 				//Control String tokenizer
 				if(dataEngine.existsUser(st,nomUser)){
-					//Buscar les dades al controlador gestio, si no el troba, 
+					//Buscar les dades al controlador gestio, si no el troba,
 					//preguntar si vol crear un nou usuari
 					if(dataEngine.getPassByToken(st).equals(pass)){
 						currentUser = new Perfil(nomUser,pass);
@@ -125,7 +207,7 @@ public class MainController{
 					System.out.println("Entra la contasenya");
 					String passr = in.next();
 					if(pass.equals(passr)){
-						String[] st = dataEngine.getProfileInfo(nomUser, ".", "Profiles"); 
+						String[] st = dataEngine.getProfileInfo(nomUser, ".", "Profiles");
 						if(dataEngine.existsUser(st,nomUser)){
 							System.out.println("Ja existeix un usuari amb aquest nom.");
 						}else{
@@ -166,27 +248,28 @@ public class MainController{
 
 	}
 	public void new_game(String nompartida, String nomkenken){
-		//pre: current user ja est‡ inicialitzat
+		//pre: current user ja estÔøΩ inicialitzat
 		Partida nova = new Partida(nompartida,currentUser.get_usuari());
 		currentUser.assignar_nova_partida(nova);
 		TableroH tablero = creaTauler(nomkenken);
 		nova.setTauler(tablero);
-		play();
+		play(nomkenken);
 	}
-	
+
 	public void load_game(String nomsaved){
 		Partida load = new Partida(nomsaved,currentUser.get_usuari());
 		currentUser.assignar_nova_partida(load);
-		String st[] = dataEngine.getPartidaHeaderInfo(nomsaved,currentUser.get_usuari());
+		String st[] = dataEngine.getPartidaHeaderInfo(nomsaved,currentUser.get_usuari(),0);
 		load.setTime(Integer.parseInt(st[0]));
-		TableroH tauler = creaTauler(st[1]);
+		String st1[] = dataEngine.getPartidaHeaderInfo(nomsaved,currentUser.get_usuari(),1);
+		TableroH tauler = creaTauler(st1[0]);
 		omplirTauler(tauler,nomsaved);
 		load.setTauler(tauler);
-		play();
+		play(st1[0]);
 		//Load an existing game
-	}	
-	
-	
+	}
+
+
 	public void create_kenken(){
 		//create a new kenken
 

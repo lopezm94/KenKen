@@ -1,6 +1,9 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+*@author Marc Ortiz
+*/
 public class DriverPerfil {
 	public static void main(String[] args) throws IOException {
 		Boolean end = false;
@@ -62,7 +65,7 @@ public class DriverPerfil {
                 System.out.println("Acció no reconeguda");
                 break;
 			}
-			
+
 		}
 		in.close();
 	}
