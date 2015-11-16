@@ -136,7 +136,6 @@ public class GestioDadesH  extends Gestio_Dades{
 		HEADER PARTIDA:
 			Partida_dificil_marc
 			1234
-			32
 			Kenken2.txt
 			3
 		VALUES PARTIDA:
@@ -147,7 +146,6 @@ public class GestioDadesH  extends Gestio_Dades{
 	public String[] getPartidaHeaderInfo(String file, String username){
 		/*
 			getPartidaHeaderInfo retorna els valors:
-			->nom de partida
 			->temps de partida
 			->dificultat de partida(int)
 			->fitxer on es troba el kenken a rsoldre
@@ -185,9 +183,9 @@ public class GestioDadesH  extends Gestio_Dades{
 		return caselles;
 	}
 	/*
-	Exemple Partida.txt:
+	Exemple KenKen.txt:
 	3
-	operacions + - * / * . +
+	operacions + - * / * .
 	casella0 0 2 6
 	casella1 0 3 1
 	casella2 1 2 2
@@ -200,10 +198,10 @@ public class GestioDadesH  extends Gestio_Dades{
 	}
 
 	//RETRN 
-	public int getMidaKenken(String nomkenken, String dir){
+	public int getMidaKenken(String nomkenken){
 		int mida = -1;
 		try{
-			mida = Integer.parseInt(Leer_string(nomkenken,"./KenKens","\n",1)); 
+			mida = Integer.parseInt(Leer_string(nomkenken+".txt","./KenKens","\n",1)); 
 		}catch(IOException e){
 			System.out.println(e.toString());
 		} catch (FicheroNoExiste e) {
@@ -211,17 +209,15 @@ public class GestioDadesH  extends Gestio_Dades{
 		}
 		return mida;
 	}
-	public int getMidaKenken(String nomkenken, String dir){
+	/*public int getDificultatKenken(String nomkenken){
 		int dificultat = 0;
-		String[] op = getInfoLine("operacions", "./KenKens", nomkenken).split("\\s"); 
-		opnew = new String[op.length-1];
-		for(int i = 0; i< opnew.length;++i){
-			opnew[i] = op[i+1];
-		}		
-	}
+		String[] op = getInfoLine("dificultat", "./KenKens", nomkenken+".txt").split("\\s"); 
+		int dificultat = Integer.parseInt(op[1]);
+		return dificultat;
+	}*/
 	public String[] getOperacions(String nomkenken, String dir){
 		String[] opnew;
-		String[] op = getInfoLine("operacions", "./KenKens", nomkenken).split("\\s"); 
+		String[] op = getInfoLine("operacions", "./KenKens", nomkenken+".txt").split("\\s"); 
 		opnew = new String[op.length-1];
 		for(int i = 0; i< opnew.length;++i){
 			opnew[i] = op[i+1];
@@ -241,11 +237,11 @@ public class GestioDadesH  extends Gestio_Dades{
 	- solucio usuari temporal
 	- area a la que correspon
 	*/
-	public int[][] getCasellaValors(String nomkenken, String dir){
-		int mida = getMidaKenken(nomkenken,dir);
+	public int[][] getCasellaValors(String nomkenken){
+		int mida = getMidaKenken(nomkenken);
 		int casella_values[][] = new int[mida*mida][3];
 		for(int i = 0; i<mida*mida; ++i){
-			String[] casellainfo = getInfoLine("casella"+i,"./KenKens",nomkenken).split("\\s");
+			String[] casellainfo = getInfoLine("casella"+i,"./KenKens",nomkenken+".txt").split("\\s");
 			for(int k = 0; k < 3; ++k){
 				casella_values[i][k] = Integer.parseInt(casellainfo[k+1]);
 			}

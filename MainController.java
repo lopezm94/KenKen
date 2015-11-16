@@ -1,6 +1,10 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+/*@version 1.0
+*@author Marc Ortiz
+*/
+
 public class MainController{
 	//Definició variables globals i controladors que necessitarem:
 	private Perfil currentUser;
@@ -8,6 +12,57 @@ public class MainController{
 	Scanner in;
 	//Login_Usuari:
 	//Comprovem que l'usuari existeixi a la base de dades o sino entrar com  a convidat
+	private void play(){
+		// interacció amb l'usuari per jugar
+	}
+	private TableroH creaTauler(String nomkenken, Boolean carregada, String nompartida){
+		int mida = dataEngine.getMidaKenken(nomkenken);
+		TableroH tablero = new TableroH(mida);
+		try{
+			int[][] caselles;
+			int casellas_nofijas = tablero.files * tablero.files;
+			for (int i = 0; i < tablero.files;++i){
+				for (int j = 0; j < tablero.files;++j){
+					caselles = dataEngine.getCasellValor(nomkenken);
+					int valor = -1;
+					Boolean fija;
+					int sol = caselles[i*j][1];
+					if(caselles[i*j][2] == 1){
+						fija = true;
+						--casellas_nofijas
+						valor = sol;
+					}else{
+						fija = false;
+					}
+					Casilla cas = new Casilla(valor,fija,sol);
+					tablero.setCasilla(cas,i,j);
+				}
+			}
+			/*Creem cada àrea*/
+			String[] operacions = dataEngine.getOperacions(nomkenken);
+			int total_areas = operacions.lenght;
+			int idarea = 0;
+			while (idarea <= total_areas){
+				String varS = operacions[idarea];
+				char var2[] = varS.toCharArray();
+				Area a = new Area(idarea,var2[0]);
+				tablero.afegirArea(a,0);
+				++idarea;
+			}
+			int casellestotal = tablero.files * tablero.files;
+			while(casellestotal!= 0){
+				int idarea = caselles[casellestotal][1]; 
+				tablero.setid(idarea,casellestotal/mida,casellestotal%mida);
+				--casellestotal;
+			}
+			tablero.colocaRes();
+		} catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (in != null) {
+	        in.close();                      // Close the file scanner.
+	    }
+	}
 	public Perfil login(){
 		int control = 0;
 		while(control == 0){
@@ -82,14 +137,26 @@ public class MainController{
 		dataEngine = new GestioDadesH(p);
 
 	}
-	public void new_game(String nompartida){
+	public void new_game(String nompartida,String nomkenken){
 		//pre: current user ja està inicialitzat
 		Partida nova = new Partida(nompartida,currentUser.get_usuari());
 		currentUser.assignar_nova_partida(nova);
-		/*Ara hem d'inicialitzar un tauler i assignar-lo a la partida, 
-		  L'usuari ha de seleccionar un tauler ja existent per començar la partida:
+		int mida = dataEngine.getMidaKenken(nomkenken);
+		
+		/*inicialitzar 
+		tablero
+			set_casillasol
+			set_casillaval
+			set_casilla_fija
+			set_id (casella-area)
+		area
+			
+		casilla, 
+
+
 		*/
-		TableroH tablero = new TableroH();
+
+		//play_game()
 	}
 	public void load_game(){
 		//Load an existing game
