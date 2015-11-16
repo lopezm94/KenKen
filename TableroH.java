@@ -188,9 +188,9 @@ public class TableroH extends Tablero {
 		
 		res = res + "\n";
 		res = res + "\n";
-		*/
-		//System.out.println(areas);
 		
+		System.out.println(areas);
+		*/
 		return res;
 	}
 }

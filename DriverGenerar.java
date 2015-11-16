@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 //import java.io.FileNotFoundException;
 //import java.io.FileNotFoundException;
 import java.util.Random;
@@ -17,9 +18,10 @@ public class DriverGenerar {
 
 		try {
 			test = new File("testGen");
+			//input = new Scanner(System.in);
+			input = new Scanner(test);
+
 			System.out.println("Quieres poner tamaño al KenKen?(Si/No)");
-			input = new Scanner(System.in);
-			//input = new Scanner(test);
 
 			boolean ok =false;
 			TableroH tablero = null;
@@ -88,7 +90,7 @@ public class DriverGenerar {
 						int pos = rnd.nextInt();
 						pos = pos%tablero.size();
 						pos = Math.abs(pos);
-						if(pos == 0) pos =1;
+						++pos;
 						for (int i = 0; i < tablero.size(); ++i){
 							for (int j = 0; j < tablero.size();++j){
 								tablero.setCasillaSol(i, j, pos);
@@ -269,6 +271,7 @@ public class DriverGenerar {
 					solu = true;
 				}
 				else System.out.println("Vuelve a intentarlo, tu Kenken no tiene solucion :(");
+				//System.out.println(tablero);
 				if (solu){
 					System.out.println("Quieres ver la solucion de tu Kenken?");
 					Boolean resol = false;
@@ -294,9 +297,9 @@ public class DriverGenerar {
 						System.out.println(res);
 					}
 				}
-		}/* catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
          e.printStackTrace();
-       }*/
+       }
 		finally {
 	          if (input != null) {
 	            input.close();                      // Close the file scanner.
