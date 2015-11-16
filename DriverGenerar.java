@@ -26,11 +26,14 @@ public class DriverGenerar {
 		File test = null;
 
 		try {
-			test = new File("testGen2");
 			System.out.println("Juego de prueba o manual? (0 = prueba, 1 = manual)");
 			input = new Scanner(System.in);
 			int ar = input.nextInt();
 			if (ar == 0){
+				String text = "";
+				System.out.println("Que juego de prueba quieres utilizar?");
+				text = input.next();
+				test = new File(text);
 				input = new Scanner(test);
 			}
 			System.out.println("Quieres poner tamaño al KenKen?(Si/No)");
