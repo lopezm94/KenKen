@@ -1,7 +1,7 @@
 public class Partida{
 	private String nomPartida;
 	private int time;
-	TableroH taulerPartida;
+	private TableroH taulerPartida;
 	public Partida(String nomPartida, String username){
 		this.nomPartida = nomPartida;
 		this.time = 0;
