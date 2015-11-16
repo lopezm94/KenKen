@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 /*@version 1.0
 *@author Marc Ortiz
+*@author Joan Grau
 */
 
 public class MainController{
@@ -13,23 +14,37 @@ public class MainController{
 	//Login_Usuari:
 	//Comprovem que l'usuari existeixi a la base de dades o sino entrar com  a convidat
 	private void play(){
-		// interacci√≥ amb l'usuari per jugar
+		int mida = currentUser.get_partida().getTauler().size();
+		TableroH tauler = currentUser.get_partida().getTauler();
+		
+		for(int i=0; i < mida; ++i){
+			for(int j=0; j < mida; ++j){
+				System.out.print(tauler.getCasillaSol(i, j)+" ");
+			}
+			System.out.println("");
+		}
+		for(int i=0; i < mida; ++i){
+			for(int j=0; j < mida; ++j){
+				System.out.print(tauler.getCasillaVal(i, j)+" ");
+			}
+			System.out.println("");
+		}
+		// interacciÛ amb l'usuari per jugar
 	}
-	private TableroH creaTauler(String nomkenken, Boolean carregada, String nompartida){
+	
+	private TableroH creaTauler(String nomkenken){
 		int mida = dataEngine.getMidaKenken(nomkenken);
 		TableroH tablero = new TableroH(mida);
 		try{
 			int[][] caselles;
-			int casellas_nofijas = tablero.files * tablero.files;
-			for (int i = 0; i < tablero.files;++i){
-				for (int j = 0; j < tablero.files;++j){
-					caselles = dataEngine.getCasellValor(nomkenken);
+			caselles = dataEngine.getCasellaValors(nomkenken);
+			for (int i = 0; i < mida;++i){
+				for (int j = 0; j < mida;++j){
 					int valor = -1;
 					Boolean fija;
-					int sol = caselles[i*j][1];
-					if(caselles[i*j][2] == 1){
+					int sol = caselles[i*mida+j][1];
+					if(caselles[i*mida+j][0] == 1){
 						fija = true;
-						--casellas_nofijas
 						valor = sol;
 					}else{
 						fija = false;
@@ -38,31 +53,44 @@ public class MainController{
 					tablero.setCasilla(cas,i,j);
 				}
 			}
-			/*Creem cada √†rea*/
+			/*Creem cada ‡rea*/
 			String[] operacions = dataEngine.getOperacions(nomkenken);
-			int total_areas = operacions.lenght;
+			int total_areas = operacions.length;
 			int idarea = 0;
-			while (idarea <= total_areas){
+			while (idarea < total_areas){
 				String varS = operacions[idarea];
 				char var2[] = varS.toCharArray();
 				Area a = new Area(idarea,var2[0]);
 				tablero.afegirArea(a,0);
 				++idarea;
 			}
-			int casellestotal = tablero.files * tablero.files;
-			while(casellestotal!= 0){
-				int idarea = caselles[casellestotal][1]; 
-				tablero.setid(idarea,casellestotal/mida,casellestotal%mida);
-				--casellestotal;
+			for(int i = 0;i < mida; i++){
+				for(int j=0; j < mida; j++){
+					idarea = caselles[i*mida+j][2];
+					tablero.setid(idarea, i, j);
+				}
 			}
 			tablero.colocaRes();
-		} catch (FileNotFoundException e) {
-	        e.printStackTrace();
-	    } finally {
+		} finally {
 	        if (in != null) {
-	        in.close();                      // Close the file scanner.
+	        in.close();
+	        }// Close the file scanner.
 	    }
+		return tablero;
 	}
+	
+
+	
+	private void omplirTauler(TableroH tauler, String nomficher){
+		int mida = tauler.size();
+		int caselles[][] = dataEngine.getPartidaValues(nomficher,currentUser.get_usuari(),mida);
+		for(int i=0; i < mida; ++i){
+			for(int j=0; j < mida; ++j){
+				tauler.setCasillaVal(i, j, caselles[i][j]);
+			}
+		}
+	}
+	
 	public Perfil login(){
 		int control = 0;
 		while(control == 0){
@@ -137,30 +165,28 @@ public class MainController{
 		dataEngine = new GestioDadesH(p);
 
 	}
-	public void new_game(String nompartida,String nomkenken){
-		//pre: current user ja est√† inicialitzat
+	public void new_game(String nompartida, String nomkenken){
+		//pre: current user ja est‡ inicialitzat
 		Partida nova = new Partida(nompartida,currentUser.get_usuari());
 		currentUser.assignar_nova_partida(nova);
-		int mida = dataEngine.getMidaKenken(nomkenken);
-		
-		/*inicialitzar 
-		tablero
-			set_casillasol
-			set_casillaval
-			set_casilla_fija
-			set_id (casella-area)
-		area
-			
-		casilla, 
-
-
-		*/
-
-		//play_game()
+		TableroH tablero = creaTauler(nomkenken);
+		nova.setTauler(tablero);
+		play();
 	}
-	public void load_game(){
+	
+	public void load_game(String nomsaved){
+		Partida load = new Partida(nomsaved,currentUser.get_usuari());
+		currentUser.assignar_nova_partida(load);
+		String st[] = dataEngine.getPartidaHeaderInfo(nomsaved,currentUser.get_usuari());
+		load.setTime(Integer.parseInt(st[0]));
+		TableroH tauler = creaTauler(st[1]);
+		omplirTauler(tauler,nomsaved);
+		load.setTauler(tauler);
+		play();
 		//Load an existing game
-	}
+	}	
+	
+	
 	public void create_kenken(){
 		//create a new kenken
 

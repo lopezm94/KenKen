@@ -20,7 +20,8 @@ public class Main{
 		int exit = 0;
 		while(exit==0){
 			print_main_menu();
-			opcio = in.nextInt();
+			if(in.hasNextInt()) opcio = in.nextInt();
+			else opcio = 0;
 			switch(opcio){
 				case 0:
 					System.out.println("Sesion cerrada\n");
@@ -28,13 +29,16 @@ public class Main{
 					break;
 				case 1:
 					System.out.println("Entra el nom de la partida que vols crear:");
-					mc.new_game(in.next());
+					String st = in.next();
+					System.out.println("Entra el nom del kenken que vols obrir:");
+					mc.new_game(st,in.next());
 					break;
 				case 2:
 					if(user.get_usuari().equals("invitado")){
 						System.out.println("Els usuaris convidats no poden carregar partida\n");
 					}else{
-						mc.load_game();
+						System.out.println("Introdueix el nom de la partida a carregar");
+						mc.load_game(in.next());
 					}
 					break;
 				case 3:
