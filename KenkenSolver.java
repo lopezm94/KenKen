@@ -1,34 +1,52 @@
 import java.io.IOException;
 import java.util.LinkedList;
 
-/*@version 1.0ermino
+/**
+*<h1>KenkenSolver</h1>
+*Se encarga de resolver un Kenken y guardar la solucion en el tablero.
+*
+*@version 1.0
 *@author Reyes Vera y Juan Lopez
 */
-
-
 public class KenkenSolver {
 
+	//Referencia al tablero pasado en la construccion.
 	private TableroH tablero;
 
+	/**
+	*Construye un KenkenSolver para el tablero pasado.
+	*/
 	public KenkenSolver(TableroH tablero){
 		this.tablero = tablero;
 		this.initDomain();
 	}
 
+
+	/**
+	*Resuelve el Kenken y guarda la solucion dentro del tablero.
+	*
+	*@return Boolean true si el tablero tiene solucion, false en caso contrario.
+	*/
+	public Boolean solveKenken(){
+		ConstraintEngine ce = new ConstraintEngine(tablero);
+		return this.FuncionRecursiva(0,0,ce);
+	}
+
+
+	/**
+	*Funcion que resuelve el Kenken por medio de DFS usando el ConstraintEngine.
+	*En cada llamada se encarga de propagar un valores en la casilla de la posicion
+	*(x,y) hasta encontrar encontrar un resultado.
+	*
+	*@param x Posicion en el eje x de la casilla.
+	*@param y
+	*@param ce ConstraintEngine que usara.
+	*@return Boolean
+	*/
 	private Boolean FuncionRecursiva(int x, int y, ConstraintEngine ce) {
 		if (y == this.tablero.size()) {
-			//System.out.println("termino");
 			ce.storeSolution();
-			//System.out.println(tablero);
-
-		/*	try{
-				System.in.read();
-			}
-			catch(IOException e){
-				
-			}*/
 			return true;
-			
 		}
 		Boolean check = false;
 		Boolean done = false;
@@ -37,44 +55,21 @@ public class KenkenSolver {
 		if (newx == 0) newy++;
 
 		for (Integer value : new LinkedList<Integer>(ce.getDomain(x,y))) {
-			//System.out.println("hola");
 			check = ce.propagate(x, y, value);
-			//System.out.println(ce);
-			//System.out.println("x: " + x + " y: " + y + " value: " + value + " entra");
-
-			/*try{                       
-				System.in.read();      
-			}                          
-			catch(IOException e){      
-				                       
-			}    */                    
-			if (check){
-				//System.out.println("x: " + x + " y: " + y + " value: " + value + " entra");
+			if (check)
 				done = this.FuncionRecursiva(newx,newy,ce);
-			}
-			else {
-			//	System.out.println("no entra");
-			}
 			ce.depropagate(x,y);
-			//System.out.println(ce);
-
-			/*try{                       
-				System.in.read();      
-			}                          
-			catch(IOException e){      
-				                       
-            }   */                      
 			if (done) break;
 		}
 		return done;
 	}
 
-	public Boolean solveKenken(){
-		ConstraintEngine ce = new ConstraintEngine(tablero);
-		return this.FuncionRecursiva(0,0,ce);
-	}
 
-	public void initDomain(){
+	/**
+	*Iniciliza el dominio de las casillas para que puedan tener cualquier valor
+	*entre 1 y el tamaño del tablero.
+	*/
+	private void initDomain(){
 		for (int i = 0; i < tablero.size(); ++i){
 			for (int j = 0; j < tablero.size();++j){
 				for (int k = 1; k <= tablero.size();++k){
@@ -82,9 +77,6 @@ public class KenkenSolver {
 				}
 			}
 		}
-	//	System.out.println(tablero);
-
 	}
-
 
 }
