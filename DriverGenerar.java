@@ -4,14 +4,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-//import java.sql.Date;
+import java.sql.Date;
 //import java.io.FileNotFoundException;
 //import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.Scanner;
-//import java.util.Timer;
+import java.util.Timer;
 import java.util.TimerTask;
-//import java.time.*;
+import java.time.*;
 
 /*@version 1.0
 *@author Reyes Vera
@@ -291,11 +291,11 @@ public class DriverGenerar {
 				KenkenSolver solucion = new KenkenSolver(tablero);
 				Boolean solu = false;
 				
-				/*Timer timer = new Timer();
-				//Date time;
-				//time = 100000;
-				timer.schedule(enlace("www.elperiodico.com/es/"), 10000);*/
+			/*	Timer timer = new Timer();
+				timer.schedule(enlace("www.elperiodico.com/es/"), 10000);
+				//pondremos tiempo a la hora de hacer la interficie grafica para que no se haga muy pesado el tiempo de espera de KenKens grandes
 				
+				*/
 				if (solucion.solveKenken()){
 					System.out.println("Tu Kenken es correcto :)");
 					solu = true;
