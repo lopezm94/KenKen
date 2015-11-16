@@ -6,14 +6,13 @@ import java.util.Stack;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.lang.RuntimeException;
-//import java.lang.CloneNotSupportedException;
 
 /**
 *<h1>ConstraintEngine</h1>
 *Implementa un motor de restricciones para resolver el juego KenKen.
 *
 *@version 1.0
-*@author Juan López
+*@author Juan LÃ³pez
 */
 public class ConstraintEngine {
 
@@ -112,13 +111,11 @@ public class ConstraintEngine {
 
     valid.setValue(area.check(this.board.size()));
     this.propValue(x,y,value,valid,dirtyArea);
-    
 
-    while (!dirtyArea.isEmpty() && valid.getValue()){
-    	//System.out.println(dirtyArea);
+
+    while (!dirtyArea.isEmpty() && valid.getValue())
         this.propLines(valid,dirtyArea);
-    }
-    //System.out.println(this.toString()); /*<-------------------------------------------------------------------------------*/
+
 
     //Vacia logTrack y pasarlo a log
     int pos;
@@ -298,7 +295,7 @@ public class ConstraintEngine {
         else if (direction.equals(ConstraintEngine.horizontal))
             propHLine(pos,area,value,valid,dirtyArea);
         else
-            throw new RuntimeException("Direccion no reconocida"); //**************************BORRAR***
+            throw new RuntimeException("Direccion no reconocida");
       }
     }
   }
@@ -364,7 +361,7 @@ public class ConstraintEngine {
       tmp = new Pair<Integer,Integer>(line.getValue(),line.getKey());
       res.add(new Pair<Pair<Integer, Integer>, Boolean>(tmp,ConstraintEngine.horizontal));
     }
-    //System.out.println("AQUI VAN LAS LINES: ______________________\n" + res);
+
     return res;
   }
 
@@ -380,7 +377,7 @@ public class ConstraintEngine {
       "tablero:\n" + this.board.toString() + "\n"
       + "dominio de casillas del motor:\n" + this.cellDomain.toString() + "\n"
       + "logtrack: \n" + this.logTrack.toString() + "\n"
-      + "log del motor:\n" + this.log.toString() 
+      + "log del motor:\n" + this.log.toString()
       + "\n";
   }
 }
