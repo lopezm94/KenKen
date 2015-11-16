@@ -1,3 +1,6 @@
+/*@version 1.0
+*@author Marc Ortiz 
+*/
 public class Perfil{
 	private String usuari;
 	private String contrasenya;
