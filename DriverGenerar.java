@@ -12,14 +12,14 @@ import java.util.Scanner;
 public class DriverGenerar {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		Scanner input = null;
 		File test = null;
 
 		try {
 			test = new File("testGen");
-			//input = new Scanner(System.in);
-			input = new Scanner(test);
+			input = new Scanner(System.in);
+			//input = new Scanner(test);
 
 			System.out.println("Quieres poner tamaño al KenKen?(Si/No)");
 
@@ -297,9 +297,9 @@ public class DriverGenerar {
 						System.out.println(res);
 					}
 				}
-		} catch (FileNotFoundException e) {
+		} /*/catch (FileNotFoundException e) {
          e.printStackTrace();
-       }
+       }*/
 		finally {
 	          if (input != null) {
 	            input.close();                      // Close the file scanner.
