@@ -2,14 +2,32 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
-public abstract class OrderedMapByValue {
+/**
+*<h1>OrderedMapByValue</h1>
+*Implementa un Map de llave String a Valor, las llaves pueden
+*no ser unicas. Los elementos se encuentran ordenados
+*por valor de forma ascendente o descendente
+*dependiendo del parametro puesto a la hora de construir.s
+*
+*@author Juan López
+*/
+public class OrderedMapByValue {
+
   //Es el comparador que se usara
   protected Comparator<Integer> comp;
   //Lista de map
   protected LinkedList<Pair<String, Integer> > map;
 
-  //naturalOrder: ordena ascendentemente
-  //reverseOrder: ordena descendentemente
+
+  /**
+  *Construye un mapa vacio con la funcion de ordenamiento
+  *denotada por el parametro comp. Si comp es igual a
+  *"naturalOrder" entonces se ordenara de forma creciente,
+  *si en cambio es igual a reverseOrder se ordena de forma
+  *decreciente.
+  *
+  *@param comp String que representa funcion de ordenamiento.
+  */
   public OrderedMapByValue(String comp) {
     this.map = new LinkedList<Pair<String, Integer> >();
     switch(comp) {
@@ -22,8 +40,13 @@ public abstract class OrderedMapByValue {
     }
   }
 
-  //Agrega un entrada al map sin importar repeticiones de usuarios.
-  //Si no quieres que se permitan las repeticiones, implementar el tuyo
+
+  /**
+  *Agrega un elemento al mapa permitiendo las repeticiones de llaves.
+  *
+  *@param user El identicador del usuario.
+  *@param score La puntuacion del usuario.
+  */
   public void push(String user, Integer score) {
     int tmp;
     ListIterator<Pair<String,Integer> > it = this.listIterator();
@@ -39,7 +62,13 @@ public abstract class OrderedMapByValue {
     it.add(new Pair<String, Integer>(user, score));
   }
 
-  //Quita todas las instancias de un usuario de la tabla
+
+  /**
+  *Remueve todas las instancias de los elementos con la llave
+  *user del Map.
+  *
+  *@param user El identificador del usuario.
+  */
   public void remove(String user) {
     Pair<String, Integer> tmp;
     ListIterator<Pair<String,Integer> > it = this.listIterator();
@@ -51,13 +80,23 @@ public abstract class OrderedMapByValue {
   }
 
   //Devuelve un iterador
+  /**
+  *Devuelve un Iterador sobre los elemento del Map.
+  *
+  *@return ListIterator<Pair<String,Integer>> Iterador del Map.
+  */
   public ListIterator<Pair<String,Integer>> listIterator() {
     return this.map.listIterator();
   }
 
-  //Busca el primer pair asociado al nombre del usuario.
-  //Retorna el objeto si lo encuentra.
-  //Retorna null si no lo encuentra.
+
+  /**
+  *Busca el primer Pair asociado al identificador del usuario.
+  *
+  *@return Pair<String, Integer> Devuelve el primer par asociado
+  *al identificador del usuario. En caso de no estar presente
+  *devuelve null.
+  */
   public Pair<String, Integer> getPair(String user) {
 
     Pair<String, Integer> tmp;
@@ -71,12 +110,22 @@ public abstract class OrderedMapByValue {
     return null;
   }
 
-  //Retorna el tamaño de la lista del map.
+
+  /**
+  *Numero de elementos en el Map
+  *
+  *@return int Devuelve el numero de elementos en el mapa.
+  */
   public int size() {
     return this.map.size();
   }
 
   //Imprime el contenido de la lista del map.
+  /**
+  *Crea un String que represente los contenidos del Map.
+  *
+  *@return String String que representa los contenidos del Map.
+  */
   public String toString() {
     return this.map.toString();
   }
