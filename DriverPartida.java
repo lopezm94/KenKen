@@ -1,3 +1,6 @@
+/*@version 1.0
+*@author Marc Ortiz 
+*/
 import java.io.IOException;
 import java.util.Scanner;
 
