@@ -6,6 +6,11 @@ import java.io.FileReader;
 import java.io.IOException;
 //import java.util.StringTokenizer;
 
+/*@version 1.0
+*@author Marc Ortiz
+*/
+
+
 public class GestioDadesH  extends Gestio_Dades{
 	/*
 	getInfoLine sirve tanto para Ranking como para Usuarios
@@ -18,7 +23,7 @@ public class GestioDadesH  extends Gestio_Dades{
 	private String getInfoLine(String keyword, String dir, String file){
 		String profiledata = "";
 		try {
-			BufferedReader br = new BufferedReader(new FileReader("./"+file));
+			BufferedReader br = new BufferedReader(new FileReader(dir+"/"+file));
 		    String line;
 		    while ((line = br.readLine()) != null) {
 		       if(line.contains(keyword)){
@@ -32,7 +37,7 @@ public class GestioDadesH  extends Gestio_Dades{
 		return profiledata;
 	}
 
-	//ObtÃ© la lÃ­nia a que es troba en el fitxer donada una keyword
+	//Obté la línia a que es troba en el fitxer donada una keyword
 	public int getLine(String keyword, String dir, String file){
 		int contador = 0;
 		Boolean control = false;
@@ -71,7 +76,7 @@ public class GestioDadesH  extends Gestio_Dades{
 						Game3.txt
 					Pepe
 						Game1.txt
-					AlÃ­_el_MagrebÃ­
+					Alí_el_Magrebí
 						Game1.txt
 				->Ranking.txt
 
@@ -134,10 +139,8 @@ public class GestioDadesH  extends Gestio_Dades{
 	/*
 		Exemple partida.txt:
 		HEADER PARTIDA:
-			Partida_dificil_marc
 			1234
 			Kenken2.txt
-			3
 		VALUES PARTIDA:
 			1 2 3
 			3 1 2
@@ -147,9 +150,7 @@ public class GestioDadesH  extends Gestio_Dades{
 		/*
 			getPartidaHeaderInfo retorna els valors:
 			->temps de partida
-			->dificultat de partida(int)
 			->fitxer on es troba el kenken a rsoldre
-			->mida del kenken
 		*/
 		String[] headerinfo = null;
 		try{
@@ -183,9 +184,10 @@ public class GestioDadesH  extends Gestio_Dades{
 		return caselles;
 	}
 	/*
-	Exemple KenKen.txt:
+	Exemple Kenken.txt:
 	3
-	operacions + - * / * .
+	operacions + - * / * . +
+	dificultat 0
 	casella0 0 2 6
 	casella1 0 3 1
 	casella2 1 2 2
@@ -201,7 +203,7 @@ public class GestioDadesH  extends Gestio_Dades{
 	public int getMidaKenken(String nomkenken){
 		int mida = -1;
 		try{
-			mida = Integer.parseInt(Leer_string(nomkenken+".txt","./KenKens","\n",1)); 
+			mida = Integer.parseInt(Leer_string(nomkenken,"./KenKens","\n",0)); 
 		}catch(IOException e){
 			System.out.println(e.toString());
 		} catch (FicheroNoExiste e) {
@@ -209,13 +211,13 @@ public class GestioDadesH  extends Gestio_Dades{
 		}
 		return mida;
 	}
-	/*public int getDificultatKenken(String nomkenken){
+/*	public int getDificultatKenken(String nomkenken){
 		int dificultat = 0;
 		String[] op = getInfoLine("dificultat", "./KenKens", nomkenken+".txt").split("\\s"); 
-		int dificultat = Integer.parseInt(op[1]);
+		dificultat = Integer.parseInt(op[1]);
 		return dificultat;
 	}*/
-	public String[] getOperacions(String nomkenken, String dir){
+	public String[] getOperacions(String nomkenken){
 		String[] opnew;
 		String[] op = getInfoLine("operacions", "./KenKens", nomkenken+".txt").split("\\s"); 
 		opnew = new String[op.length-1];
