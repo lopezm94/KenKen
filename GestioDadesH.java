@@ -203,7 +203,7 @@ public class GestioDadesH  extends Gestio_Dades{
 	public int getMidaKenken(String nomkenken, String dir){
 		int mida = -1;
 		try{
-			mida = Integer.parseInt(Leer_string(nomkenken,"./KenKens","\n",1)); 
+			mida = Integer.parseInt(Leer_string(nomkenken+".txt","./KenKens","\n",1)); 
 		}catch(IOException e){
 			System.out.println(e.toString());
 		} catch (FicheroNoExiste e) {
@@ -211,17 +211,15 @@ public class GestioDadesH  extends Gestio_Dades{
 		}
 		return mida;
 	}
-	public int getMidaKenken(String nomkenken, String dir){
+	public int getDificultatKenken(String nomkenken, String dir){
 		int dificultat = 0;
-		String[] op = getInfoLine("operacions", "./KenKens", nomkenken).split("\\s"); 
-		opnew = new String[op.length-1];
-		for(int i = 0; i< opnew.length;++i){
-			opnew[i] = op[i+1];
-		}		
+		String[] op = getInfoLine("dificultat", "./KenKens", nomkenken+".txt").split("\\s"); 
+		int dificultat = Integer.parseInt(op[1]);
+		return dificultat;
 	}
 	public String[] getOperacions(String nomkenken, String dir){
 		String[] opnew;
-		String[] op = getInfoLine("operacions", "./KenKens", nomkenken).split("\\s"); 
+		String[] op = getInfoLine("operacions", "./KenKens", nomkenken+".txt").split("\\s"); 
 		opnew = new String[op.length-1];
 		for(int i = 0; i< opnew.length;++i){
 			opnew[i] = op[i+1];
@@ -245,7 +243,7 @@ public class GestioDadesH  extends Gestio_Dades{
 		int mida = getMidaKenken(nomkenken,dir);
 		int casella_values[][] = new int[mida*mida][3];
 		for(int i = 0; i<mida*mida; ++i){
-			String[] casellainfo = getInfoLine("casella"+i,"./KenKens",nomkenken).split("\\s");
+			String[] casellainfo = getInfoLine("casella"+i,"./KenKens",nomkenken+".txt").split("\\s");
 			for(int k = 0; k < 3; ++k){
 				casella_values[i][k] = Integer.parseInt(casellainfo[k+1]);
 			}

@@ -8,6 +8,9 @@ public class MainController{
 	Scanner in;
 	//Login_Usuari:
 	//Comprovem que l'usuari existeixi a la base de dades o sino entrar com  a convidat
+	private void play(){
+		// interacció amb l'usuari per jugar
+	}
 	public Perfil login(){
 		int control = 0;
 		while(control == 0){
@@ -82,14 +85,28 @@ public class MainController{
 		dataEngine = new GestioDadesH(p);
 
 	}
-	public void new_game(String nompartida){
+	public void new_game(String nompartida,String nomkenken){
 		//pre: current user ja està inicialitzat
 		Partida nova = new Partida(nompartida,currentUser.get_usuari());
 		currentUser.assignar_nova_partida(nova);
 		/*Ara hem d'inicialitzar un tauler i assignar-lo a la partida, 
 		  L'usuari ha de seleccionar un tauler ja existent per començar la partida:
 		*/
-		TableroH tablero = new TableroH();
+
+		TableroH tablero = new TableroH(mida);
+		/*inicialitzar 
+		tablero
+			set_casillasol
+			set_casillaval
+			set_casilla_fija
+			set_id (casella-area)
+		area
+			
+		casilla, 
+
+
+		*/
+		//play_game()
 	}
 	public void load_game(){
 		//Load an existing game
