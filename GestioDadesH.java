@@ -136,7 +136,6 @@ public class GestioDadesH  extends Gestio_Dades{
 		HEADER PARTIDA:
 			Partida_dificil_marc
 			1234
-			32
 			Kenken2.txt
 			3
 		VALUES PARTIDA:
@@ -200,7 +199,7 @@ public class GestioDadesH  extends Gestio_Dades{
 	}
 
 	//RETRN 
-	public int getMidaKenken(String nomkenken, String dir){
+	public int getMidaKenken(String nomkenken){
 		int mida = -1;
 		try{
 			mida = Integer.parseInt(Leer_string(nomkenken+".txt","./KenKens","\n",1)); 
@@ -211,7 +210,7 @@ public class GestioDadesH  extends Gestio_Dades{
 		}
 		return mida;
 	}
-	public int getDificultatKenken(String nomkenken, String dir){
+	public int getDificultatKenken(String nomkenken){
 		int dificultat = 0;
 		String[] op = getInfoLine("dificultat", "./KenKens", nomkenken+".txt").split("\\s"); 
 		int dificultat = Integer.parseInt(op[1]);
@@ -239,8 +238,8 @@ public class GestioDadesH  extends Gestio_Dades{
 	- solucio usuari temporal
 	- area a la que correspon
 	*/
-	public int[][] getCasellaValors(String nomkenken, String dir){
-		int mida = getMidaKenken(nomkenken,dir);
+	public int[][] getCasellaValors(String nomkenken){
+		int mida = getMidaKenken(nomkenken);
 		int casella_values[][] = new int[mida*mida][3];
 		for(int i = 0; i<mida*mida; ++i){
 			String[] casellainfo = getInfoLine("casella"+i,"./KenKens",nomkenken+".txt").split("\\s");

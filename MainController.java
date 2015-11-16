@@ -1,6 +1,10 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+/*@version 1.0
+*@author Marc Ortiz
+*/
+
 public class MainController{
 	//Definició variables globals i controladors que necessitarem:
 	private Perfil currentUser;
@@ -89,11 +93,18 @@ public class MainController{
 		//pre: current user ja està inicialitzat
 		Partida nova = new Partida(nompartida,currentUser.get_usuari());
 		currentUser.assignar_nova_partida(nova);
-		/*Ara hem d'inicialitzar un tauler i assignar-lo a la partida, 
-		  L'usuari ha de seleccionar un tauler ja existent per començar la partida:
-		*/
-
+		int mida = dataEngine.getMidaKenken(nomkenken);
 		TableroH tablero = new TableroH(mida);
+		int casellas = tablero.files * tablero.files;
+			for (int i = 0; i < tablero.files;++i){
+				for (int j = 0; j < tablero.files;++j){
+					int[][] caselles = dataEngine.getCasellValor(nomkenken);
+
+					Casilla cas = new Casilla(var,var2,var3);
+					tablero.setCasilla(cas,i,j);
+					if (var2) --casellas;
+				}
+			}
 		/*inicialitzar 
 		tablero
 			set_casillasol
@@ -106,6 +117,7 @@ public class MainController{
 
 
 		*/
+
 		//play_game()
 	}
 	public void load_game(){
