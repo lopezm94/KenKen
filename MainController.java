@@ -59,7 +59,7 @@ public class MainController{
 			
 		}
 		in.close();
-	}
+	} 
 	
 	private TableroH creaTauler(String nomkenken){
 		int mida = dataEngine.getMidaKenken(nomkenken);
