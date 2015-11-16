@@ -2,34 +2,63 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /*@version 1.0
-*@author Marc Ortiz
+*@author Marc Ortiz 
 *@author Joan Grau
 */
 
 public class MainController{
-	//Definici√≥ variables globals i controladors que necessitarem:
+	//Definici√É¬≥ variables globals i controladors que necessitarem:
 	private Perfil currentUser;
 	private GestioDadesH dataEngine;
 	Scanner in;
+	private static int action(Scanner in1) throws IOException{
+		System.out.println(	"1 - Introduir casella\n"+
+							"2 - solucionar\n"+
+							"3 - Guardar i sortir\n");
+		int res = in1.nextInt();
+		return res;
+	}
 	//Login_Usuari:
 	//Comprovem que l'usuari existeixi a la base de dades o sino entrar com  a convidat
 	private void play(){
-		int mida = currentUser.get_partida().getTauler().size();
-		TableroH tauler = currentUser.get_partida().getTauler();
-		
-		for(int i=0; i < mida; ++i){
-			for(int j=0; j < mida; ++j){
-				System.out.print(tauler.getCasillaSol(i, j)+" ");
+		int opcio;
+		Boolean end = false;
+		while(!end){
+			switch(action(in)){
+			case 0:
+				end = true;
+				break;
+			case 1:
+				//introduir casella
+				System.out.println("Introdueix el valor de la casella: \n
+									posx,posy,valor_nou (ex: 0,2,8).
+					");
+				String elements = in.next();
+				int x = elements.split(",")[0];
+				int y = elements.split(",")[1];
+				int valor = elements.split(",")[2];
+				currentUser.get_partida().getTauler().setCasillaVal(x,y,valor);
+				break;
+			case 2:
+				Boolean correcte = currentUser.get_partida().getTauler().tableroCheck() && 
+									currentUser.get_partida().getTauler().numerosCheck();
+				if(correcte) 
+					System.out.println("KenKen correcte! Felicitats");
+					end = true;
+				else
+					System.out.println("KenKen incorrecte!");
+				break;
+			case 3:
+				guardarPartida();
+				end = true;
+				break;
+			default:
+                System.out.println("Accion introducida no es correcta");
+                break;
 			}
-			System.out.println("");
+			
 		}
-		for(int i=0; i < mida; ++i){
-			for(int j=0; j < mida; ++j){
-				System.out.print(tauler.getCasillaVal(i, j)+" ");
-			}
-			System.out.println("");
-		}
-		// interacciÛ amb l'usuari per jugar
+		in.close();
 	}
 	
 	private TableroH creaTauler(String nomkenken){
@@ -53,7 +82,7 @@ public class MainController{
 					tablero.setCasilla(cas,i,j);
 				}
 			}
-			/*Creem cada ‡rea*/
+			/*Creem cada √†rea*/
 			String[] operacions = dataEngine.getOperacions(nomkenken);
 			int total_areas = operacions.length;
 			int idarea = 0;
@@ -166,7 +195,7 @@ public class MainController{
 
 	}
 	public void new_game(String nompartida, String nomkenken){
-		//pre: current user ja est‡ inicialitzat
+		//pre: current user ja est√† inicialitzat
 		Partida nova = new Partida(nompartida,currentUser.get_usuari());
 		currentUser.assignar_nova_partida(nova);
 		TableroH tablero = creaTauler(nomkenken);
