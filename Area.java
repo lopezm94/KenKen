@@ -1,18 +1,23 @@
 import java.util.ArrayList;
 import java.lang.Math;
+
+/**
+*@version 1.0
+*@author Joan Grau
+*/
 public class Area{
 
 	//Atributs
-	
+
 	private int pos;//identificador area, va de 0 a nombreAreas-1
 	private char op;//tipus operacio, sense op es casella sola
 	private ArrayList<Casilla > caselles;//conte la llista de caselles
 	private int res;//resultat real de l'area
 	private int resact;
-	
-	
-	//Metodes	
-	
+
+
+	//Metodes
+
 	public Area(int pos, char op){//tenir en compte la operacio per despres afegir caselles
 		this.pos = pos;
 		this.op = op;
@@ -30,7 +35,7 @@ public class Area{
 				+ "resact: " + resact + "\n ";
 		return res;
 	}
-	
+
 	public char get_operacio(){
 		return op;
 	}
@@ -43,37 +48,37 @@ public class Area{
 		this.calcular_resultatactual();
 		return resact;
 	}
-	
+
 	public int get_posicio(){
 		return pos;
 	}
-	
+
 	public Boolean correcte(){
 		this.calcular_resultatactual();
 		if(res == 0) this.calcular_resultat();
 		return res == resact;
 	}
-	
+
 	public void afegir_casella(Casilla cas){//es fara 1 cop si =;2 per - i /; 2 o mes * i +
 		caselles.add(cas);
 	}
-	
+
 	public int get_tamany(){
 		return caselles.size();
 	}
-	
+
 	public Casilla get_casella(int i){
 		return caselles.get(i);
 	}
-	
+
 	public void set_casella(Casilla cas, int i){
 		caselles.set(i,cas);
 	}
-	
+
 	public void set_res(int res){
 		this.res = res;
 	}
-	
+
 	public Boolean check(int n){
 		Boolean b1;
 		switch(op){
@@ -188,7 +193,7 @@ public class Area{
 						}
 					}
 				}
-				
+
 				break;
 			case '.':
 				b1 = true;
@@ -200,7 +205,7 @@ public class Area{
 		return b1;
 
 	}
-	
+
 	public void calcular_resultat(){
 		switch(op){
 			case '+':
@@ -233,7 +238,7 @@ public class Area{
 				break;
 		}
 	}
-	
+
 	public void calcular_resultatactual(){
 		switch(op){
 			case '+':
@@ -266,5 +271,5 @@ public class Area{
 				break;
 		}
 	}
-	
+
 }

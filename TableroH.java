@@ -1,16 +1,13 @@
 import java.util.LinkedList;
-//import java.lang.RuntimeException;
 import java.util.ArrayList;
 
-/*@version 1.0
+/**
 *@author Reyes Vera
 */
-
-
 public class TableroH extends Tablero {
 	private int[][] idAreas;
 	private ArrayList<Area> areas;
-	
+
 
 
 	public TableroH(int medida){
@@ -26,7 +23,7 @@ public class TableroH extends Tablero {
 			a.set_res(ress);
 			//System.out.println(ress);
 	      areas.add(a);
-	      
+
 	}
 
 	public void setid(int c, int x, int y){
@@ -81,7 +78,7 @@ public class TableroH extends Tablero {
 	public void setCasillaVal(int x, int y, int num){
 		if  (! this.tauler[x][y].getFija()) this.tauler[x][y].valor = num;
 	}
-	
+
 	public void setCasillaFija(int val, int x, int y){
 		this.tauler[x][y].fija = true;
 		this.tauler[x][y].solucion = val;
@@ -91,7 +88,7 @@ public class TableroH extends Tablero {
 	public int getCasillaVal(int x, int y) {
 		return this.tauler[x][y].valor;
 	}
-	
+
 /*	public void checkarea(){
 		for (int i = 0; i < this.areas.size(); ++i) areas.get(i).calcular_resultatactual();
 	}*/
@@ -138,13 +135,13 @@ public class TableroH extends Tablero {
 	public int getAreaID(int x, int y){
 		return this.idAreas[x][y];
 	}
-	
+
 
 	public Area getArea(int x, int y){ // Devuelve el area asociada a la posicion x,y.
 		int a = this.idAreas[x][y];
 		return areas.get(a);
 	}
-	
+
 	public int calcuDif(){
 		int var = 0;
 		for (int i = 0; i < files; ++i){
@@ -175,20 +172,20 @@ public class TableroH extends Tablero {
 			}
 			res = res + "\n";
 		}
-		
+
 		res = res + "\n";
 		res = res + "\n";
-		
+
 		for (int i = 0; i < files;++i){
 			for (int j = 0; j < files; ++j){
 				res = res + idAreas[i][j] + " ";
 			}
 			res = res + "\n";
 		}
-		
+
 		res = res + "\n";
 		res = res + "\n";
-		
+
 		System.out.println(areas);
 		*/
 		return res;

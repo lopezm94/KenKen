@@ -1,11 +1,11 @@
 import java.io.IOException;
 import java.util.Scanner;
 
-/*@version 1.0
+/**
+*@version 1.0
 *@author Marc Ortiz
 *@author Joan Grau
 */
-
 public class MainController{
 	//DefiniciÃ³ variables globals i controladors que necessitarem:
 	private Perfil currentUser;
@@ -35,7 +35,7 @@ public class MainController{
 			}
 			System.out.print("\n");
 		}
-		System.out.print("\n");			
+		System.out.print("\n");
 	}
 	private void imprimir_solucio(){
 		int mida = currentUser.get_partida().getTauler().size();
@@ -45,9 +45,9 @@ public class MainController{
 			}
 			System.out.print("\n");
 		}
-		System.out.print("\n");			
+		System.out.print("\n");
 	}
-	
+
 	private int tiempo(long tiempo_start){
 		long time_end = System.currentTimeMillis();
 		int timeextra = currentUser.get_partida().getTime();
@@ -55,7 +55,7 @@ public class MainController{
 		timeextra += (int)tiempo_start;
 		return timeextra;
 	}
-	
+
 	private void play(String nomkenken){
 		long time_start;
 		time_start = System.currentTimeMillis();
@@ -79,7 +79,7 @@ public class MainController{
 					System.out.println("Temps: "+tiempo(time_start));
 					break;
 				case 2:
-					Boolean correcte = currentUser.get_partida().getTauler().tableroCheck() && 
+					Boolean correcte = currentUser.get_partida().getTauler().tableroCheck() &&
 										currentUser.get_partida().getTauler().numerosCheck();
 					if(correcte) {
 						System.out.println("KenKen correcte! Felicitats");
@@ -107,13 +107,13 @@ public class MainController{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 		}
 		in.close();
 	}
-	
 
-	
+
+
 	private TableroH creaTauler(String nomkenken){
 		int mida = dataEngine.getMidaKenken(nomkenken);
 		TableroH tablero = new TableroH(mida);
@@ -135,7 +135,7 @@ public class MainController{
 					tablero.setCasilla(cas,i,j);
 				}
 			}
-			/*Creem cada àrea*/
+			/*Creem cada ï¿½rea*/
 			String[] operacions = dataEngine.getOperacions(nomkenken);
 			int total_areas = operacions.length;
 			int idarea = 0;
@@ -160,9 +160,9 @@ public class MainController{
 	    }
 		return tablero;
 	}
-	
 
-	
+
+
 	private void omplirTauler(TableroH tauler, String nomficher){
 		int mida = tauler.size();
 		int caselles[][] = dataEngine.getPartidaValues(nomficher,currentUser.get_usuari(),mida);
@@ -172,7 +172,7 @@ public class MainController{
 			}
 		}
 	}
-	
+
 	public Perfil login(){
 		int control = 0;
 		while(control == 0){
@@ -186,7 +186,7 @@ public class MainController{
 				String[] st = dataEngine.getProfileInfo(nomUser, ".", "Profiles");
 				//Control String tokenizer
 				if(dataEngine.existsUser(st,nomUser)){
-					//Buscar les dades al controlador gestio, si no el troba, 
+					//Buscar les dades al controlador gestio, si no el troba,
 					//preguntar si vol crear un nou usuari
 					if(dataEngine.getPassByToken(st).equals(pass)){
 						currentUser = new Perfil(nomUser,pass);
@@ -207,7 +207,7 @@ public class MainController{
 					System.out.println("Entra la contasenya");
 					String passr = in.next();
 					if(pass.equals(passr)){
-						String[] st = dataEngine.getProfileInfo(nomUser, ".", "Profiles"); 
+						String[] st = dataEngine.getProfileInfo(nomUser, ".", "Profiles");
 						if(dataEngine.existsUser(st,nomUser)){
 							System.out.println("Ja existeix un usuari amb aquest nom.");
 						}else{
@@ -248,14 +248,14 @@ public class MainController{
 
 	}
 	public void new_game(String nompartida, String nomkenken){
-		//pre: current user ja està inicialitzat
+		//pre: current user ja estï¿½ inicialitzat
 		Partida nova = new Partida(nompartida,currentUser.get_usuari());
 		currentUser.assignar_nova_partida(nova);
 		TableroH tablero = creaTauler(nomkenken);
 		nova.setTauler(tablero);
 		play(nomkenken);
 	}
-	
+
 	public void load_game(String nomsaved){
 		Partida load = new Partida(nomsaved,currentUser.get_usuari());
 		currentUser.assignar_nova_partida(load);
@@ -267,9 +267,9 @@ public class MainController{
 		load.setTauler(tauler);
 		play(st1[0]);
 		//Load an existing game
-	}	
-	
-	
+	}
+
+
 	public void create_kenken(){
 		//create a new kenken
 

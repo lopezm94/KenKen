@@ -6,7 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 //import java.util.StringTokenizer;
 
-/*@version 1.0
+/**
+*@version 1.0
 *@author Marc Ortiz
 */
 
@@ -37,7 +38,7 @@ public class GestioDadesH  extends Gestio_Dades{
 		return profiledata;
 	}
 
-	//Obté la línia a que es troba en el fitxer donada una keyword
+	//Obtï¿½ la lï¿½nia a que es troba en el fitxer donada una keyword
 	public int getLine(String keyword, String dir, String file){
 		int contador = 0;
 		Boolean control = false;
@@ -76,11 +77,11 @@ public class GestioDadesH  extends Gestio_Dades{
 						Game3.txt
 					Pepe
 						Game1.txt
-					Alí_el_Magrebí
+					Alï¿½_el_Magrebï¿½
 						Game1.txt
 				->Ranking.txt
 
-		*/ 
+		*/
 		try{
 			Crear_directorio(".","KenKens");
 		}catch(IOException e){
@@ -154,7 +155,7 @@ public class GestioDadesH  extends Gestio_Dades{
 		*/
 		String[] headerinfo = null;
 		try{
-			headerinfo = Leer_string(file,"./Games/"+username,"\n",linea).split("\n"); 
+			headerinfo = Leer_string(file,"./Games/"+username,"\n",linea).split("\n");
 		}catch(IOException e){
 			System.out.println(e.toString());
 			return null;
@@ -176,7 +177,7 @@ public class GestioDadesH  extends Gestio_Dades{
 			       String[] fila = line.split("\\s");
 			         for (int j=0; j<fila.length; j++){
 				       	caselles[i-2][j] = Integer.parseInt(fila[j]);
-				      }	
+				      }
 		    	}
 		       ++i;
 		    }
@@ -201,8 +202,8 @@ public class GestioDadesH  extends Gestio_Dades{
 					Crear_archivo(nompartida,"./Games/"+username);
 				} catch (IOException | FicheroYaExistente e1) {
 				}
-				
-				
+
+
 		}
 		try {
 			Escribir_string(""+p.get_partida().getTime(),"\n",nompartida,"./Games/"+username);
@@ -234,11 +235,11 @@ public class GestioDadesH  extends Gestio_Dades{
 
 	}
 
-	//RETRN 
+	//RETRN
 	public int getMidaKenken(String nomkenken){
 		int mida = -1;
 		try{
-			mida = Integer.parseInt(Leer_string(nomkenken,"./KenKens","\n",0)); 
+			mida = Integer.parseInt(Leer_string(nomkenken,"./KenKens","\n",0));
 		}catch(IOException e){
 			System.out.println(e.toString());
 		} catch (FicheroNoExiste e) {
@@ -248,17 +249,17 @@ public class GestioDadesH  extends Gestio_Dades{
 	}
 /*	public int getDificultatKenken(String nomkenken){
 		int dificultat = 0;
-		String[] op = getInfoLine("dificultat", "./KenKens", nomkenken+".txt").split("\\s"); 
+		String[] op = getInfoLine("dificultat", "./KenKens", nomkenken+".txt").split("\\s");
 		dificultat = Integer.parseInt(op[1]);
 		return dificultat;
 	}*/
 	public String[] getOperacions(String nomkenken){
 		String[] opnew;
-		String[] op = getInfoLine("operacions", "./KenKens", nomkenken+".txt").split("\\s"); 
+		String[] op = getInfoLine("operacions", "./KenKens", nomkenken+".txt").split("\\s");
 		opnew = new String[op.length-1];
 		for(int i = 0; i< opnew.length;++i){
 			opnew[i] = op[i+1];
-		}		
+		}
 		return opnew;
 	}
 
@@ -285,6 +286,5 @@ public class GestioDadesH  extends Gestio_Dades{
 		}
 		return casella_values;
 	}
-	
-}
 
+}

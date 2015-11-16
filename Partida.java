@@ -1,8 +1,8 @@
 
-/*@version 1.0
-*@author Marc Ortiz 
+/**
+*@version 1.0
+*@author Marc Ortiz
 */
-
 public class Partida{
 	private String nomPartida;
 	private int time;

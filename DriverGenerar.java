@@ -13,15 +13,15 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.time.*;
 
-/*@version 1.0
+/**
+*@version 1.0
 *@author Reyes Vera
 */
-
 public class DriverGenerar {
 
-	
+
 	public static void main(String[] args) {
-		
+
 		Scanner input = null;
 		File test = null;
 
@@ -33,7 +33,7 @@ public class DriverGenerar {
 			if (ar == 0){
 				input = new Scanner(test);
 			}
-			System.out.println("Quieres poner tamaño al KenKen?(Si/No)");
+			System.out.println("Quieres poner tamaï¿½o al KenKen?(Si/No)");
 
 			boolean ok =false;
 			TableroH tablero = null;
@@ -54,7 +54,7 @@ public class DriverGenerar {
 					if (var < 3) var = 3;
 					tablero = new TableroH(var);
 					ok = true;
-					System.out.println("Tamaño generado: "+ tablero.size());
+					System.out.println("Tamaï¿½o generado: "+ tablero.size());
 				}
 				else System.out.println("Como?");
 			}
@@ -80,7 +80,7 @@ public class DriverGenerar {
 							String varS = input.next();
 							char var2[] = varS.toCharArray();
 							if (var2[0] == '+' || var2[0] == '-' || var2[0] == '*' || var2[0] == '/'){
-								
+
 								Area a = new Area(at,var2[0]);
 								System.out.println("Que resultado tiene que dar este area?");
 								int var3 = input.nextInt();
@@ -154,9 +154,9 @@ public class DriverGenerar {
 								}
 							}
 						}
-						
+
 						tablero.colocaRes();
-						
+
 						//System.out.println(tablero);
 						ok = true;
 						System.out.println("Areas generadas: "+ are);
@@ -167,7 +167,7 @@ public class DriverGenerar {
 				if (! rand){
 					Boolean vect[] = new Boolean[tam];
 					for (int i = 0; i < tam; ++i) vect[i] = false;
-	
+
 					System.out.println("Quieres ponerle a cada area sus casillas?(Si/No)");
 					Boolean CasillasP = false;
 					edita = true;
@@ -181,11 +181,11 @@ public class DriverGenerar {
 						}
 						else System.out.println("Como?");
 					}
-	
-					int tamaño = tam;
+
+					int tamaï¿½o = tam;
 					if (edita){
 						System.out.println("Que area le quieres poner a cada casilla?");
-						System.out.println("Area: " + "1 - "+ tamaño);
+						System.out.println("Area: " + "1 - "+ tamaï¿½o);
 						int var = input.nextInt();
 						int numC = tablero.size()*tablero.size();
 						while (numC > 0){
@@ -194,7 +194,7 @@ public class DriverGenerar {
 							int var2 = input.nextInt();
 							System.out.println("Posicion y: (Min: 0, Max: "+ (tablero.size()-1) + ")");
 							int var3 = input.nextInt();
-	
+
 						if (var2 >= 0 && var2 < tablero.size() && var3 >= 0 && var3 < tablero.size()){
 								if (! vect[var] && var2>= 0 && var2 < tablero.size() && var3 >= 0 && var3 < tablero.size()){
 									tablero.setid(var,var2,var3);
@@ -214,7 +214,7 @@ public class DriverGenerar {
 											if (var3 > 0 && var3 <= (tablero.size()-1)){
 												if (var == tablero.getAreaID(var2-1,var3)) toca = true;
 												else if (var == tablero.getAreaID(var2,var3-1)) toca = true;
-	
+
 											}
 										}
 									}
@@ -234,19 +234,19 @@ public class DriverGenerar {
 						}
 					}
 					else { //Poner area a casillas aleatorio
-						--tamaño;
+						--tamaï¿½o;
 						rand = true;
 						int num = (tablero.size())^2;
 						for (int i = 0; i < tablero.size();++i){
 							for (int j = 0; j < tablero.size(); ++j){
-								tablero.setid(tamaño,i,j);
+								tablero.setid(tamaï¿½o,i,j);
 								--num;
-								if (tamaño != 0){
+								if (tamaï¿½o != 0){
 									Random rnd = new Random();
 									int var = rnd.nextInt();
 									var = Math.abs(var);
-									if (var%tablero.size() == 0) --tamaño;
-									else if (num <= tamaño) --tamaño;
+									if (var%tablero.size() == 0) --tamaï¿½o;
+									else if (num <= tamaï¿½o) --tamaï¿½o;
 								}
 							}
 						}
@@ -266,7 +266,7 @@ public class DriverGenerar {
 							else System.out.println("Como?");
 						}
 						if (edita){
-							System.out.println("Recuerda que tu Kenken es de tamaño "+ tablero.size()+ " (Para salir teclea -1)");
+							System.out.println("Recuerda que tu Kenken es de tamaï¿½o "+ tablero.size()+ " (Para salir teclea -1)");
 							System.out.println("Valor casilla fija: (las casillas fijas no se modifican, tienes que poner un valor correcto");
 							int var = input.nextInt();
 							while (var != -1){
@@ -282,20 +282,20 @@ public class DriverGenerar {
 						}
 					}
 				}
-				
+
 				//tablero.checkarea();
-				
+
 				System.out.println("Vamos a comprobar que tu Kenken es correcto");
-				
+
 				//System.out.println(tablero);
-				
+
 				KenkenSolver solucion = new KenkenSolver(tablero);
 				Boolean solu = false;
-				
+
 			/*	Timer timer = new Timer();
 				timer.schedule(enlace("www.elperiodico.com/es/"), 10000);
 				//pondremos tiempo a la hora de hacer la interficie grafica para que no se haga muy pesado el tiempo de espera de KenKens grandes
-				
+
 				*/
 				if (solucion.solveKenken()){
 					System.out.println("Tu Kenken es correcto :)");
@@ -304,8 +304,8 @@ public class DriverGenerar {
 				else System.out.println("Vuelve a intentarlo, tu Kenken no tiene solucion :(");
 
 				//System.out.println(tablero);
-				
-				
+
+
 				if (solu){
 					System.out.println("Quieres ver la solucion de tu Kenken?");
 					Boolean resol = false;
@@ -331,7 +331,7 @@ public class DriverGenerar {
 						System.out.println(res);
 					}
 				}
-		} 
+		}
 		catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -342,8 +342,8 @@ public class DriverGenerar {
 	}
 
 	}
-	
-	
+
+
 	public static TimerTask enlace (String enlaceAAceder){
         Desktop enlace=Desktop.getDesktop();
         System.out.println("Has visto las noticias de hoy? VAMOS A VER COMO ESTA EL MUNDO :)");
