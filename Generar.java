@@ -27,6 +27,7 @@ public class Generar {
 
 		try {
 			System.out.println("Juego de prueba o manual? (0 = prueba, 1 = manual)");
+			System.out.println("Juegos de prueba: testGen, testGen2, testP");
 			input = new Scanner(System.in);
 			int ar = input.nextInt();
 			if (ar == 0){
@@ -36,7 +37,7 @@ public class Generar {
 				test = new File(text);
 				input = new Scanner(test);
 			}
-			System.out.println("Quieres poner tamaño al KenKen?(Si/No)");
+			System.out.println("Quieres poner tamano al KenKen?(Si/No)");
 
 			boolean ok =false;
 			while (! ok){
@@ -56,7 +57,7 @@ public class Generar {
 					if (var < 3) var = 3;
 					tablero = new TableroH(var);
 					ok = true;
-					System.out.println("Tamaño generado: "+ tablero.size());
+					System.out.println("tamano generado: "+ tablero.size());
 				}
 				else System.out.println("Como?");
 			}
@@ -184,10 +185,10 @@ public class Generar {
 						else System.out.println("Como?");
 					}
 	
-					int tamaño = tam;
+					int tamano = tam;
 					if (edita){
 						System.out.println("Que area le quieres poner a cada casilla?");
-						System.out.println("Area: " + "1 - "+ tamaño);
+						System.out.println("Area: " + "1 - "+ tamano);
 						int var = input.nextInt();
 						int numC = tablero.size()*tablero.size();
 						while (numC > 0){
@@ -236,19 +237,19 @@ public class Generar {
 						}
 					}
 					else { //Poner area a casillas aleatorio
-						--tamaño;
+						--tamano;
 						rand = true;
 						int num = (tablero.size())^2;
 						for (int i = 0; i < tablero.size();++i){
 							for (int j = 0; j < tablero.size(); ++j){
-								tablero.setid(tamaño,i,j);
+								tablero.setid(tamano,i,j);
 								--num;
-								if (tamaño != 0){
+								if (tamano != 0){
 									Random rnd = new Random();
 									int var = rnd.nextInt();
 									var = Math.abs(var);
-									if (var%tablero.size() == 0) --tamaño;
-									else if (num <= tamaño) --tamaño;
+									if (var%tablero.size() == 0) --tamano;
+									else if (num <= tamano) --tamano;
 								}
 							}
 						}
@@ -268,7 +269,7 @@ public class Generar {
 							else System.out.println("Como?");
 						}
 						if (edita){
-							System.out.println("Recuerda que tu Kenken es de tamaño "+ tablero.size()+ " (Para salir teclea -1)");
+							System.out.println("Recuerda que tu Kenken es de tamano "+ tablero.size()+ " (Para salir teclea -1)");
 							System.out.println("Valor casilla fija: (las casillas fijas no se modifican, tienes que poner un valor correcto");
 							int var = input.nextInt();
 							while (var != -1){
