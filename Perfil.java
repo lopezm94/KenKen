@@ -2,7 +2,7 @@ public class Perfil{
 	private String usuari;
 	private String contrasenya;
 	private Puntuacio puntuacio = new Puntuacio();
-	Partida partidaActual;
+	private Partida partidaActual;
 	public Perfil(){
 		this.usuari = "invitado";
 		this.contrasenya = "";
