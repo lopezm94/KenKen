@@ -4,24 +4,19 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.sql.Date;
-//import java.io.FileNotFoundException;
-//import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.Timer;
 import java.util.TimerTask;
-import java.time.*;
 
-/*@version 1.0
-*@author Reyes Vera
-*/
-
-public class DriverGenerar {
-
+public class Generar {
 	
-	public static void main(String[] args) {
-		
+TableroH tablero;
+	
+	public Generar(){
+		tablero = null;
+	}
+	
+	public TableroH genera(){
 		Scanner input = null;
 		File test = null;
 
@@ -36,7 +31,6 @@ public class DriverGenerar {
 			System.out.println("Quieres poner tamaño al KenKen?(Si/No)");
 
 			boolean ok =false;
-			TableroH tablero = null;
 			while (! ok){
 				String varS = input.next();
 				char var2[] = varS.toCharArray();
@@ -331,7 +325,7 @@ public class DriverGenerar {
 						System.out.println(res);
 					}
 				}
-		} 
+		}
 		catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -340,11 +334,12 @@ public class DriverGenerar {
 	            input.close();                      // Close the file scanner.
 	        }
 	}
+		return tablero;
 
 	}
 	
 	
-	public static TimerTask enlace (String enlaceAAceder){
+	private static TimerTask enlace (String enlaceAAceder){
         Desktop enlace=Desktop.getDesktop();
         System.out.println("Has visto las noticias de hoy? VAMOS A VER COMO ESTA EL MUNDO :)");
         for (int i = 0; i < 10000000; ++i);
