@@ -6,6 +6,8 @@ import java.util.Scanner;
 */
 public class DriverPerfil {
 	public static void main(String[] args) throws IOException {
+		String pssw,user;
+		Perfil p = null;
 		Boolean end = false;
 		Scanner in = new Scanner(System.in);
 		while(!end){
@@ -15,39 +17,39 @@ public class DriverPerfil {
 				break;
 			case 1: //Crear un perfil convidat:
 				System.out.println("Creació de un usuari convidat:");
-				Perfil p = new Perfil();
+				p = new Perfil();
 				System.out.println("Username: " + p.get_usuari());
 				System.out.println("Contrasenya: " + p.get_contrasenya());
 				break;
 			case 2: //Crear un nou perfil amb usuari conegut:
 				System.out.println("Escull el nom d'usuari i contrasenya amb el que carregar el perfil:");
 				System.out.println("Entra el nom d'usuari:");
-				String user = in.next();
+				user = in.next();
 				System.out.println("Entra la contrasenya:");
-				String pssw = in.next();
-				Perfil p = new Perfil(user,pssw);
+				pssw = in.next();
+				p = new Perfil(user,pssw);
 				System.out.println("Nom d'usuari del perfil: " + p.get_usuari());
 				System.out.println("Contrasenya bdel perfil: " + p.get_contrasenya());
 				break;
 			case 3: //Crear perfil + assignarli una partida al perfil
 				System.out.println("Escull el nom d'usuari i contrasenya amb el que carregar el perfil:");
 				System.out.println("Entra el nom d'usuari:");
-				String user = in.next();
+				user = in.next();
 				System.out.println("Entra la contrasenya:");
-				String pssw = in.next();
-				Perfil p = new Perfil(user,pssw);
-				Partida game = new Partida("Partida_prova_"+p.get_usuari(),p);
+				pssw = in.next();
+				p = new Perfil(user,pssw);
+				Partida game = new Partida("Partida_prova_" + p.get_usuari(),p.get_usuari());
 				p.assignar_nova_partida(game);
 				System.out.println("Nom de la partida assignada: ");
-				System.out.println(p.getPartida().getNomPartida());
+				System.out.println(p.get_partida().getNomPartida());
 				break;
 			case 4: //Afegir puntuacio al perfil:
 				System.out.println("Escull el nom d'usuari i contrasenya amb el que carregar el perfil:");
 				System.out.println("Entra el nom d'usuari:");
-				String user = in.next();
+				user = in.next();
 				System.out.println("Entra la contrasenya:");
-				String pssw = in.next();
-				Perfil p = new Perfil(user,pssw);
+				pssw = in.next();
+				p = new Perfil(user,pssw);
 				System.out.println("Entra les puntuacions a afegir a l'usuari:");
 				System.out.println("Puntuacio de kenkens fàcils:");
 				int pfa = in.nextInt();

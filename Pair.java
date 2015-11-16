@@ -1,9 +1,3 @@
-import java.lang.CloneNotSupportedException;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.ListIterator;
-
-
 /**
 *<h1>Pair</h1>
 *Implementa una coleccion de un par de elementos genericos.

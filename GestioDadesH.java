@@ -1,17 +1,13 @@
-//import java.lang.RuntimeException;
+import Excepcions.*;
+import Persistencia.Gestio_Dades;
 import java.io.BufferedReader;
-//import java.io.File;
-//import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
-//import java.util.StringTokenizer;
 
 /**
 *@version 1.0
 *@author Marc Ortiz
 */
-
-
 public class GestioDadesH  extends Gestio_Dades{
 	/*
 	getInfoLine sirve tanto para Ranking como para Usuarios
