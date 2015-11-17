@@ -9,20 +9,19 @@ import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/*@version 1.0
+/**
+*@version 1.0
 *@author Reyes Vera
 */
-
-
 public class Generar {
-	
+
 	public TableroH tablero;
 	Timer timer;
-	
+
 	public Generar(){
 		tablero = null;
 	}
-	
+
 	public TableroH genera(){
 		Scanner input = null;
 		File test = null;
@@ -63,12 +62,6 @@ public class Generar {
 				}
 				else System.out.println("Como?");
 			}
-			for (int i = 0;i< tablero.size();++i){
-				for (int j = 0; j < tablero.size();++j){
-					Casilla cas1 = new Casilla();
-					tablero.setCasilla(cas1,i,j);
-				}
-			}
 				System.out.println("Cuantas areas quieres poner?(0 si no quieres ponerlas tu)");
 				ok = false;
 				int tam = 0;
@@ -85,7 +78,7 @@ public class Generar {
 							String varS = input.next();
 							char var2[] = varS.toCharArray();
 							if (var2[0] == '+' || var2[0] == '-' || var2[0] == '*' || var2[0] == '/'){
-								
+
 								Area a = new Area(at,var2[0]);
 								System.out.println("Que resultado tiene que dar este area?");
 								int var3 = input.nextInt();
@@ -159,9 +152,9 @@ public class Generar {
 								}
 							}
 						}
-						
+
 						tablero.colocaRes();
-						
+
 						//System.out.println(tablero);
 						ok = true;
 						System.out.println("Areas generadas: "+ are);
@@ -172,7 +165,7 @@ public class Generar {
 				if (! rand){
 					Boolean vect[] = new Boolean[tam];
 					for (int i = 0; i < tam; ++i) vect[i] = false;
-	
+
 					System.out.println("Quieres ponerle a cada area sus casillas?(Si/No)");
 					Boolean CasillasP = false;
 					edita = true;
@@ -186,7 +179,7 @@ public class Generar {
 						}
 						else System.out.println("Como?");
 					}
-	
+
 					int tamano = tam;
 					if (edita){
 						System.out.println("Que area le quieres poner a cada casilla?");
@@ -199,7 +192,7 @@ public class Generar {
 							int var2 = input.nextInt();
 							System.out.println("Posicion y: (Min: 0, Max: "+ (tablero.size()-1) + ")");
 							int var3 = input.nextInt();
-	
+
 						if (var2 >= 0 && var2 < tablero.size() && var3 >= 0 && var3 < tablero.size()){
 								if (! vect[var] && var2>= 0 && var2 < tablero.size() && var3 >= 0 && var3 < tablero.size()){
 									tablero.setid(var,var2,var3);
@@ -219,7 +212,7 @@ public class Generar {
 											if (var3 > 0 && var3 <= (tablero.size()-1)){
 												if (var == tablero.getAreaID(var2-1,var3)) toca = true;
 												else if (var == tablero.getAreaID(var2,var3-1)) toca = true;
-	
+
 											}
 										}
 									}
@@ -287,20 +280,20 @@ public class Generar {
 						}
 					}
 				}
-				
+
 				//tablero.checkarea();
-				
+
 				System.out.println("Vamos a comprobar que tu Kenken es correcto");
-				
+
 				//System.out.println(tablero);
-				
-				KenkenSolver solucion = new KenkenSolver(tablero);
+
+				KenkenHandler solucion = new KenkenHandler();
 				Boolean solu = false;
-				
+
 				timer = new Timer();
 				timer.schedule(task, 10000);
 				//pondremos tiempo a la hora de hacer la interficie grafica para que no se haga muy pesado el tiempo de espera de KenKens grandes
-				if (solucion.solveKenken()){
+				if (solucion.solveKenken(tablero)){
 					timer.cancel();
 					System.out.println("Tu Kenken es correcto :)");
 					solu = true;
@@ -308,8 +301,8 @@ public class Generar {
 				else System.out.println("Vuelve a intentarlo, tu Kenken no tiene solucion :(");
 
 				//System.out.println(tablero);
-				
-				
+
+
 				if (solu){
 					System.out.println("Quieres ver la solucion de tu Kenken?");
 					Boolean resol = false;
@@ -347,7 +340,7 @@ public class Generar {
 		return tablero;
 
 	}
-	
+
 	TimerTask task = new TimerTask() {
 		public void run() {
 			Desktop enlace=Desktop.getDesktop();
@@ -359,6 +352,6 @@ public class Generar {
 	            e.getMessage();
 	        }
 		}
-			
+
 		};
     }

@@ -13,22 +13,22 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.time.*;*/
 
-/*@version 1.0
+/**
+*@version 1.0
 *@author Reyes Vera
 */
-
 public class DriverGenerar {
 
-	
+
 	public static void main(String[] args) {
 		TableroH tablero = null;
 		System.out.println("Vamos a generar un KenKen:");
-		
+
 		Generar ge = new Generar();
-		
+
 		tablero = ge.genera();
 	}
-		
-	
-	
+
+
+
 }

@@ -40,6 +40,10 @@ public class Area{
 		return op;
 	}
 
+	public void set_operacio(char op){
+		this.op = op;
+	}
+
 	public int get_resultat(){
 		return res;
 	}
