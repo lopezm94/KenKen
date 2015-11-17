@@ -8,5 +8,5 @@ else: *.java
 	javac -cp ./ *.java
 
 clean:
-	rm *.class
-	rm -rf Excepcions Persistencia
+	rm -f *.class *~ Profiles.txt Ranking.txt
+	rm -rf Excepcions Persistencia Games KenKens
