@@ -28,6 +28,22 @@ public class BoardEngine extends ConstraintEngine {
 
 
   /**
+	*Iniciliza el dominio de las casillas para que puedan tener cualquier valor
+	*entre 1 y el tamaño del tablero.
+	*/
+  protected void initDomain(){
+		for (int i = 0; i < this.board.size(); ++i) {
+			for (int j = 0; j < this.board.size(); ++j) {
+				this.board.getCasilla(i,j).borrarcandidatos();
+				for (int k = 1; k <= this.board.size(); ++k) {
+					this.board.getCasilla(i,j).addCan(k);
+				}
+			}
+		}
+	}
+
+
+  /**
   *Asigna el valor dada a la casilla en la posicion (x,y).
   *Propaga el valor para reducir los dominios de las casillas en el tablero.
   *

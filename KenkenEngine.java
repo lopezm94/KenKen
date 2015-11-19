@@ -28,6 +28,36 @@ public class KenkenEngine extends ConstraintEngine {
 
 
   /**
+	*Iniciliza el dominio de las casillas para que puedan tener cualquier valor
+	*entre 1 y el tamaño del tablero.
+	*/
+	protected void initDomain(){
+		for (int i = 0; i < this.board.size(); ++i) {
+			for (int j = 0; j < this.board.size(); ++j) {
+				this.board.getCasilla(i,j).borrarcandidatos();
+				for (int k = 1; k <= this.board.size(); ++k) {
+					this.board.getCasilla(i,j).addCan(k);
+				}
+			}
+		}
+	}
+
+
+  /**
+	*Iniciliza el dominio de las casillas para que puedan tener cualquier valor
+	*entre 1 y el tamaño del tablero.
+	*/
+  /*Es un palaso sin cambiar agregarle mas cosas a casilla.
+	protected void initDomain() {
+    for (int i=0; i<this.board.size(); i++) {
+      for (int j=0; j<this.board.size(); j++) {
+        prepare
+      }
+    }
+	}
+  */
+
+  /**
   *Asigna el valor dada a la casilla en la posicion (x,y).
   *Propaga el valor para reducir los dominios de las casillas en el tablero.
   *
@@ -53,10 +83,7 @@ public class KenkenEngine extends ConstraintEngine {
 
     valid.setValue(area.check(super.board.size()));
     this.propValue(x,y,value,valid,dirtyArea);
-
-
-    while (!dirtyArea.isEmpty() && valid.getValue())
-        this.propLines(valid,dirtyArea);
+    this.propLines(valid,dirtyArea);
 
 
     //Vacia logTrack y pasarlo a log
@@ -172,23 +199,25 @@ public class KenkenEngine extends ConstraintEngine {
     Pair<Integer, Integer> tuple;
     LinkedList<Pair<Pair<Integer, Integer>, Boolean>> packOfLines;
 
-    for (int i=0; i<super.board.getNumAreas() && valid.getValue(); i++) {
-      if (!dirtyArea.contains(i))
-        continue;
-      dirtyArea.remove(i);
-      area = super.board.getArea(i);
-      packOfLines = this.findLines(area);
-      for (Pair<Pair<Integer, Integer>, Boolean> line : packOfLines) {
-        tuple = line.getFirst();
-        pos = tuple.getFirst();
-        value = tuple.getSecond();
-        direction = line.getSecond();
-        if (direction.equals(ConstraintEngine.vertical))
-            this.propVLine(pos,area,value,valid,dirtyArea);
-        else if (direction.equals(ConstraintEngine.horizontal))
-            this.propHLine(pos,area,value,valid,dirtyArea);
-        else
-            throw new RuntimeException("Direccion no reconocida");
+    while (!dirtyArea.isEmpty() && valid.getValue()) {
+      for (int i=0; i<super.board.getNumAreas() && valid.getValue(); i++) {
+        if (!dirtyArea.contains(i))
+          continue;
+        dirtyArea.remove(i);
+        area = super.board.getArea(i);
+        packOfLines = this.findLines(area);
+        for (Pair<Pair<Integer, Integer>, Boolean> line : packOfLines) {
+          tuple = line.getFirst();
+          pos = tuple.getFirst();
+          value = tuple.getSecond();
+          direction = line.getSecond();
+          if (direction.equals(ConstraintEngine.vertical))
+              this.propVLine(pos,area,value,valid,dirtyArea);
+          else if (direction.equals(ConstraintEngine.horizontal))
+              this.propHLine(pos,area,value,valid,dirtyArea);
+          else
+              throw new RuntimeException("Direccion no reconocida");
+        }
       }
     }
   }

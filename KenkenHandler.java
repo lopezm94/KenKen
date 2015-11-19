@@ -56,9 +56,9 @@ public class KenkenHandler {
 	*@return Boolean true si el tablero tiene solucion, false en caso contrario.
 	*/
 	public Boolean solveKenken(TableroH tablero){
-		this.initDomain(tablero);
 		KenkenEngine ke = new KenkenEngine(tablero);
 		return this.funcionRecursiva(tablero,0,0,ke);
+		//Poner un warning de unica solucion.
 	}
 
 
@@ -71,8 +71,6 @@ public class KenkenHandler {
 	*/
 	public TableroH generateAndSolveKenken(Integer size, String dificultad) {
 		TableroH tablero = new TableroH(size);
-
-		this.initDomain(tablero);
 		BoardEngine be = new BoardEngine(tablero);
 
 		this.funcionRecursiva(tablero,0,0,be);
@@ -213,22 +211,6 @@ public class KenkenHandler {
 				break;
 		}
 		area.calcular_resultat();
-	}
-
-
-	/**
-	*Iniciliza el dominio de las casillas para que puedan tener cualquier valor
-	*entre 1 y el tamaño del tablero.
-	*/
-	private void initDomain(TableroH tablero ){
-		for (int i = 0; i < tablero.size(); ++i) {
-			for (int j = 0; j < tablero.size(); ++j) {
-				tablero.getCasilla(i,j).borrarcandidatos();
-				for (int k = 1; k <= tablero.size(); ++k) {
-					tablero.getCasilla(i,j).addCan(k);
-				}
-			}
-		}
 	}
 
 }

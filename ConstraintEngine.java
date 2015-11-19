@@ -36,6 +36,7 @@ public abstract class ConstraintEngine {
     this.log = new Stack<Pair<Integer,LinkedList<Integer>>>();
     this.logTrack = new HashMap<Integer,LinkedList<Integer>>();
 
+    this.initDomain();
     this.cellDomain = new ArrayList<ArrayList<HashSet<Integer>>>(this.board.size());
     for(int i=0; i<this.board.size(); i++) {
       this.cellDomain.add(i,new ArrayList<HashSet<Integer>>(this.board.size()));
@@ -119,6 +120,12 @@ public abstract class ConstraintEngine {
     }
     log.pop();
   }
+
+
+  /**
+	*Iniciliza el dominio de las casillas para reducir el espacio de busqueda.
+	*/
+	protected abstract void initDomain();
 
 
   /**
