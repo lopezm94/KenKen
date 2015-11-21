@@ -294,6 +294,10 @@ public class Generar {
 				timer.schedule(task, 10000);
 				//pondremos tiempo a la hora de hacer la interficie grafica para que no se haga muy pesado el tiempo de espera de KenKens grandes
 				if (solucion.solveKenken(tablero)){
+					System.out.println(tablero.getAllAreas());
+			    System.out.println(tablero);
+			    System.out.println(tablero.getAreas());
+			    System.out.println(tablero.getSolucion());
 					timer.cancel();
 					System.out.println("Tu Kenken es correcto :)");
 					solu = true;

@@ -2,6 +2,7 @@ import java.util.Random;
 import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.lang.Math;
 
 /**
 *<h1>KenkenHandler</h1>
@@ -18,35 +19,114 @@ public class KenkenHandler {
 
 
 	/**
-	*Funcion que resuelve el Kenken por medio de DFS usando el ConstraintEngine.
+	*Soluciona un tablero.
+	*
+	*@param tablero Tablero.
+	*@param ce ConstraintEngine.
+	*@return Boolean Devuelve true si tiene solucion.
+	*/
+	private Boolean solve(TableroH tablero, ConstraintEngine ce) {
+		if (ce instanceof BoardEngine) {
+			return DFSSolve(tablero,0,0,(BoardEngine)ce);
+		}
+		else if (ce instanceof KenkenEngine) {
+			return domainSolve(tablero,0,0,(KenkenEngine)ce);
+		}
+		else
+			return false;
+	}
+
+
+	/**
+	*Metodo que resuelve el Kenken por medio de DFS usando el BoardEngine.
 	*En cada llamada se encarga de propagar un valores en la casilla de la posicion
 	*(x,y) hasta encontrar encontrar un resultado.
 	*
 	*@param x Posicion en el eje x de la casilla.
 	*@param y
-	*@param ke ConstraintEngine que usara.
+	*@param be BoardEngine que usara.
 	*@return Boolean
 	*/
-	private Boolean funcionRecursiva(TableroH tablero, int x, int y, ConstraintEngine ce) {
+	private Boolean DFSSolve(TableroH tablero, int x, int y, BoardEngine be) {
 		if (x == tablero.size()) {
-			ce.storeSolution();
+			be.storeSolution();
 			return true;
 		}
 		Boolean done = false;
 		int newy = (y+1)%tablero.size();
 		int newx = x;
 		if (newy == 0) newx++;
-		ArrayList<Integer> domain = new ArrayList<Integer>(ce.getDomain(x,y));
-		if (ce instanceof BoardEngine)
-			Collections.shuffle(domain);
+		ArrayList<Integer> domain = new ArrayList<Integer>(be.getDomain(x,y));
+		Collections.shuffle(domain);
 		for (Integer value : domain) {
-			if (ce.propagate(x,y,value))
-				done = this.funcionRecursiva(tablero,newx,newy,ce);
-			ce.depropagate(x,y);
+			if (be.propagate(x,y,value))
+				done = this.DFSSolve(tablero,newx,newy,be);
+			be.depropagate(x,y);
 			if (done)
 				break;
 		}
 		return done;
+	}
+
+
+	/**
+	*Funcion recursiva que resuelve el Kenken cuya funcion de busqueda viene
+	*dada por getNext().
+	*
+	*@param tablero Tablero.
+	*@param x Posicion en el eje X.
+	*@param y Posicion en el eje Y.
+	*@param ke KenkenEngine.
+	*@return Boolean True si el kenken tiene solucion.
+	*/
+	private Boolean domainSolve(TableroH tablero, int x, int y, KenkenEngine ke) {
+		if (x == tablero.size()) {
+			ke.storeSolution();
+			return true;
+		}
+		Boolean done = false;
+		ArrayList<Integer> domain = new ArrayList<Integer>(ke.getDomain(x,y));
+		/*
+		if (domain.size() > 1)
+			tablero.setCasillaFija(tablero.getCasillaSol(x,y),x,y);
+		*/
+		for (Integer value : domain) {
+			if (ke.propagate(x,y,value)) {
+				Pair<Integer,Integer> pos = this.getNext(tablero,ke);
+				done = this.domainSolve(tablero,pos.getFirst(),pos.getSecond(),ke);
+			}
+			ke.depropagate(x,y);
+			if (done)
+				break;
+		}
+		return done;
+	}
+
+
+	/**
+	*Obtiene la posicion de la siguiente casilla con dominio
+	*de menor cardinalidad
+	*
+	*@param tablero Tablero.
+	*@param ce ConstraintEngine.
+	*@return Pair<Integer,Integer> Posicion de la siguiente casilla con dominio
+	*de menor cardinalidad.
+	*/
+	private Pair<Integer,Integer> getNext(TableroH tablero, ConstraintEngine ce) {
+		int x=tablero.size(),y=tablero.size();
+		int min = 0x7FFFFFFF;
+		for (int i=0; i<tablero.size(); i++) {
+			for (int j=0; j<tablero.size(); j++) {
+				if (tablero.getCasillaVal(i,j) != -1)
+					continue;
+				if (tablero.getCasillaDomain(i,j).size() < min) {
+					x = i;
+					y = j;
+					min = tablero.getCasillaDomain(i,j).size();
+				}
+			}
+		}
+		return new Pair<Integer,Integer>(x,y);
 	}
 
 
@@ -57,7 +137,7 @@ public class KenkenHandler {
 	*/
 	public Boolean solveKenken(TableroH tablero){
 		KenkenEngine ke = new KenkenEngine(tablero);
-		return this.funcionRecursiva(tablero,0,0,ke);
+		return this.solve(tablero,ke);
 		//Poner un warning de unica solucion.
 	}
 
@@ -73,7 +153,7 @@ public class KenkenHandler {
 		TableroH tablero = new TableroH(size);
 		BoardEngine be = new BoardEngine(tablero);
 
-		this.funcionRecursiva(tablero,0,0,be);
+		this.solve(tablero,be);
 		this.setAreas(tablero);
 		this.setDifficulty(tablero,dificultad);
 		return tablero;
@@ -122,6 +202,8 @@ public class KenkenHandler {
 			limit -= rand.nextInt(32)+17;
 		else
 			limit -= rand.nextInt(32)+49;
+
+		limit = Math.max(limit,tablero.size());
 
 		i = 0;
 		casillas = tablero.getAllCasillas();

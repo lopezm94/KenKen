@@ -26,6 +26,10 @@ public class Area{
 		caselles = new ArrayList<Casilla>();
 	}
 
+	public ArrayList<Casilla> getCasellas() {
+		return caselles;
+	}
+
 	public String toString() {
 		String res="";
 		res = "pos: " + pos + ", "

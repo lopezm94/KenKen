@@ -21,6 +21,7 @@ public class DriverKenkenHandler {
     dificultad = in.nextLine();
 
     TableroH sol = ke.generateAndSolveKenken(size,dificultad);
+    ke.solveKenken(sol);
     System.out.println(sol.getAllAreas());
     System.out.println(sol);
     System.out.println(sol.getAreas());

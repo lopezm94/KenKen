@@ -31,31 +31,130 @@ public class KenkenEngine extends ConstraintEngine {
 	*Iniciliza el dominio de las casillas para que puedan tener cualquier valor
 	*entre 1 y el tamaño del tablero.
 	*/
-	protected void initDomain(){
-		for (int i = 0; i < this.board.size(); ++i) {
-			for (int j = 0; j < this.board.size(); ++j) {
-				this.board.getCasilla(i,j).borrarcandidatos();
-				for (int k = 1; k <= this.board.size(); ++k) {
-					this.board.getCasilla(i,j).addCan(k);
-				}
+  //Este metodo y sus llamadas internas fueron un infierno de programar.
+	protected void initDomain() {
+    Area area;
+    Integer aux;
+    Casilla tmp;
+    HashMap<Casilla,HashSet<Integer>> domains =
+      new HashMap<Casilla,HashSet<Integer>>();
+    ArrayList<Pair<Pair<Integer,Integer>,Casilla>> order =
+      new ArrayList<Pair<Pair<Integer,Integer>,Casilla>>();
+
+    Boolean[][] col = new Boolean[super.board.size()][super.board.size()+1];
+    Boolean[][] row = new Boolean[super.board.size()][super.board.size()+1];
+    Boolean[][] visit = new Boolean[super.board.size()][super.board.size()];
+
+    for (int i = 0; i<super.board.size(); i++) {
+			for (int j = 0; j<super.board.size(); j++) {
+        row[i][j+1] = false;
+        col[i][j+1] = false;
+        visit[i][j] = false;
+        tmp = super.board.getCasilla(i,j);
+        domains.put(tmp,new HashSet<Integer>());
 			}
 		}
+
+    for (int i=0; i<super.board.size(); i++) {
+      for (int j=0; j<super.board.size(); j++) {
+        if (!visit[i][j]) {
+          aux = super.board.getAreaID(i,j);
+          area = super.board.getArea(aux);
+          makeOrder(order,visit,area,aux,i,j);
+          setAreaDomain(order,domains,area,col,row,0);
+          order.clear();
+        }
+      }
+    }
+
+    for (Map.Entry<Casilla,HashSet<Integer>> entry : domains.entrySet()) {
+      entry.getKey().borrarcandidatos();
+      for (Integer value : entry.getValue()) {
+        entry.getKey().addCan(value);
+      }
+    }
 	}
 
 
   /**
-	*Iniciliza el dominio de las casillas para que puedan tener cualquier valor
-	*entre 1 y el tamaño del tablero.
-	*/
-  /*Es un palaso sin cambiar agregarle mas cosas a casilla.
-	protected void initDomain() {
-    for (int i=0; i<this.board.size(); i++) {
-      for (int j=0; j<this.board.size(); j++) {
-        prepare
+  *Modifica el arraylist order para que tenga todas las casillas pertenecientes
+  *al area pasada.
+  *
+  *@param order Arraylist donde se encontraran las casillas del area.
+  *@param visit Matrix con el control del DFS.
+  *@param area Area.
+  *@param id Id del area.
+  *@param i Posicion en el eje X.
+  *@param j Posicion en el eje Y.
+  */
+  private void makeOrder(ArrayList<Pair<Pair<Integer,Integer>,Casilla>> order,
+    Boolean[][] visit, Area area, Integer id, int i, int j) {
+    if (i < 0 || j < 0 || i == super.board.size() || j == super.board.size())
+      return;
+    if (visit[i][j] || !id.equals(super.board.getAreaID(i,j)))
+      return;
+    visit[i][j] = true;
+    order.add(new Pair<Pair<Integer,Integer>,Casilla>(
+      new Pair<Integer,Integer>(i,j), super.board.getCasilla(i,j)) );
+    this.makeOrder(order,visit,area,id,i+1,j);
+    this.makeOrder(order,visit,area,id,i-1,j);
+    this.makeOrder(order,visit,area,id,i,j+1);
+    this.makeOrder(order,visit,area,id,i,j-1);
+  }
+
+
+  /**
+  *Parea por las casillas del area y restringe el dominio en base a las restricciones
+  *de fila, columna, operacion y resultado.
+  *
+  *@param order Arraylist donde se encuentran las casillas del area.
+  *@param domains Lleva la cuenta de los dominios de las casillas.
+  *@param area Area.
+  *@param col Lleva el control de la restriccion de columna.
+  *@param row Lleva el control de la restriccion de fila.
+  *@param depth Indica por que elemento de order estamos.
+  */
+  private void setAreaDomain(ArrayList<Pair<Pair<Integer,Integer>,Casilla>> order,
+    HashMap<Casilla,HashSet<Integer>> domains, Area area,
+    Boolean[][] col, Boolean[][] row, int depth) {
+    if (!area.check(super.board.size()))
+      return;
+    if (depth == order.size()) {
+      for (Casilla casilla : area.getCasellas()) {
+        domains.get(casilla).add(casilla.getValor());
+      }
+      return;
+    }
+
+    int i,j;
+    i = order.get(depth).getFirst().getFirst();
+    j = order.get(depth).getFirst().getSecond();
+    Casilla casilla = order.get(depth).getSecond();
+    if (casilla.getValor() == -1) {
+      for (int v=1; v<=super.board.size(); v++) {
+        if (col[i][v] || row[j][v])
+          continue;
+        casilla.setValor(v);
+        col[i][v] = true;
+        row[j][v] = true;
+        this.setAreaDomain(order,domains,area,col,row,depth+1);
+        col[i][v] = false;
+        row[j][v] = false;
+        casilla.setValor(-1);
       }
     }
-	}
-  */
+    else {
+      int v = casilla.getValor();
+      if (col[i][v] || row[j][v])
+        return;
+      col[i][v] = true;
+      row[j][v] = true;
+      this.setAreaDomain(order,domains,area,col,row,depth+1);
+      col[i][v] = false;
+      row[j][v] = false;
+    }
+  }
+
 
   /**
   *Asigna el valor dada a la casilla en la posicion (x,y).
