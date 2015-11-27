@@ -18,7 +18,7 @@ public class Gestio_Dades {
     /* Crea un nuevo directorio en el directorio pasado como parametro "directorio"
      con el nombre pasado por el parametro "nombre", siempre y cuando el directorio "nombre"
       no exista ya en la ruta parametro.. En caso de no ser directorio una ruta correcta
-      esta será creada.*/
+      esta sera creada.*/
     public static void Crear_directorio(String nombre, String directorio) throws FicheroYaExistente, IOException {
 
         File carpeta = new File(directorio + "/" + nombre);
@@ -143,7 +143,7 @@ public class Gestio_Dades {
     }
 
 
-    /* Lee del archivo "nombre_archivo".txt del directorio "directorio" toda la información que hay entre el string
+    /* Lee del archivo "nombre_archivo".txt del directorio "directorio" toda la informacion que hay entre el string
         "separador" numero n_veces y el n_veces+1. El archivo "nombre_archivo".txt debe existir y "directorio"
         debe ser una ruta valida. La primera linea de un fichero es la numero 0. Es recomendable usar
         "\n" como separador. Este se usa introduciendo como separador la palabra "salto". */
@@ -225,7 +225,7 @@ public class Gestio_Dades {
     }
 
 
-    //Función privada para el borrado de ficheros. Se encarga de borrar de manera recursiva todos los ficheros
+    //Funcion privada para el borrado de ficheros. Se encarga de borrar de manera recursiva todos los ficheros
     // de un directorio.
     private static void delete(File f) throws IOException, FicheroNoExiste {
         if (f.exists()) {

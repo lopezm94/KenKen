@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -27,7 +26,6 @@ public class DriverMutableBoolean {
     //Instrucciones
     System.out.println(instrucciones);
 
-    OrderedMapByValue map = null;
     Boolean value;
     MutableBoolean mb = null;
     Boolean end = false;

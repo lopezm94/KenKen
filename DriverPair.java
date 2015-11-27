@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -26,7 +25,7 @@ public class DriverPair {
     //Instrucciones
     System.out.println(instrucciones);
 
-    Pair pair = null;
+    Pair<String,Integer> pair = null;
     String first;
     Integer second;
     Boolean end = false;

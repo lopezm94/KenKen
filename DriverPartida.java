@@ -1,9 +1,10 @@
-/*@version 1.0
-*@author Marc Ortiz 
-*/
 import java.io.IOException;
 import java.util.Scanner;
 
+
+/**
+*@author Marc Ortiz
+*/
 public class DriverPartida {
 	public static void main(String[] args) throws IOException {
 		boolean end = false;
@@ -47,7 +48,7 @@ public class DriverPartida {
                 System.out.println("Acció no reconeguda");
                 break;
 			}
-			
+
 		}
 		in.close();
 	}

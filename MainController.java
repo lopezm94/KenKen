@@ -1,3 +1,5 @@
+import Excepcions.*;
+import Persistencia.Gestio_Dades;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -271,9 +273,23 @@ public class MainController{
 
 
 	public void create_kenken(){
-		//create a new kenken
-
+		Generar g = new Generar();
+		TableroH th =g.genera();
+		System.out.println("Quieres guardar y jugar a tu KenKen? (0-1)");
+		if(in.nextInt() == 1){
+			System.out.println("Introduce el nombre del kenken:");
+			String st = in.next();
+			System.out.println("Introduce el nombre de tu partida:");
+			String s2t = in.next();
+			Partida nova = new Partida(s2t,currentUser.get_usuari());
+			currentUser.assignar_nova_partida(nova);
+			nova.setTauler(th);
+			dataEngine.guardar_kenken(th,st);
+			play(st);
+		}
 	}
+	
+	
 	public void delete_user(){
 		//delete my current username
 		int linea = dataEngine.getLine(currentUser.get_usuari(),".","Profiles.txt");

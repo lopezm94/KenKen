@@ -1,8 +1,3 @@
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.ListIterator;
-
-
 /**
 *<h1>Ranking</h1>
 *Implementa un Ranking de jugadores con puntuaciones.
@@ -10,8 +5,6 @@ import java.util.ListIterator;
 *@author Juan López
 */
 public class Ranking extends OrderedMapByValue {
-  //Cuando se tenga la interfaz grafica se imprimira los primeros 10;
-  private final int limit = 10;
 
   /**
   *Construye un ranking vacio con la funcion de ordenamiento
