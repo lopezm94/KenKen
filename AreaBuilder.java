@@ -1,6 +1,8 @@
 import java.lang.RuntimeException;
 
 /**
+*Un Factory Constructor para Area.
+*
 *@author Joan Grau
 *@author Juan López
 */

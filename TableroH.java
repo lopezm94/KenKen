@@ -58,6 +58,10 @@ public class TableroH extends Tablero {
 	  areas.get(c).afegir_casella(tauler[x][y]);
 	}
 
+	public void setId(int c, int x, int y) {
+	  idAreas[x][y] = c;
+	}
+
 	public void colocaRes() {
 		for (int i = 0; i < areas.size();++i) areas.get(i).calcular_resultat();
 	}

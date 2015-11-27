@@ -19,25 +19,6 @@ public class KenkenHandler {
 
 
 	/**
-	*Soluciona un tablero.
-	*
-	*@param tablero Tablero.
-	*@param ce ConstraintEngine.
-	*@return Boolean Devuelve true si tiene solucion.
-	*/
-	private Boolean solve(TableroH tablero, ConstraintEngine ce) {
-		if (ce instanceof BoardEngine) {
-			return DFSSolve(tablero,0,0,(BoardEngine)ce);
-		}
-		else if (ce instanceof KenkenEngine) {
-			return domainSolve(tablero,0,0,(KenkenEngine)ce);
-		}
-		else
-			return false;
-	}
-
-
-	/**
 	*Metodo que resuelve el Kenken por medio de DFS usando el BoardEngine.
 	*En cada llamada se encarga de propagar un valores en la casilla de la posicion
 	*(x,y) hasta encontrar encontrar un resultado.
@@ -137,7 +118,7 @@ public class KenkenHandler {
 	*/
 	public Boolean solveKenken(TableroH tablero){
 		KenkenEngine ke = new KenkenEngine(tablero);
-		return this.solve(tablero,ke);
+		return this.domainSolve(tablero,0,0,ke);
 		//Poner un warning de unica solucion.
 	}
 
@@ -153,7 +134,7 @@ public class KenkenHandler {
 		TableroH tablero = new TableroH(size);
 		BoardEngine be = new BoardEngine(tablero);
 
-		this.solve(tablero,be);
+		this.DFSSolve(tablero,0,0,be);
 		this.setAreas(tablero);
 		this.setDifficulty(tablero,dificultad);
 		return tablero;
@@ -166,19 +147,27 @@ public class KenkenHandler {
 	*@param tablero Tablero.
 	*/
 	private void setAreas(TableroH tablero) {
-		int size;
-		Area area;
 		Random rand = new Random();
 
 		for (int i=0; i<tablero.size(); i++) {
 			for (int j=0; j<tablero.size(); j++) {
 				if (tablero.getAreaID(i,j) != -1)
 					continue;
+				int size;
+				char op;
+				Area area;
+				LinkedList<Pair<Integer,Integer>> bag = new LinkedList<Pair<Integer,Integer>>();
 				size = rand.nextInt(8)+1;
-				area = new Area(tablero.getNumAreas(),'.');
+				this.randomDFS(i,j,tablero,bag,size);
+				op = this.pickOpAndRes(tablero,bag);
+				area = AreaBuilder.newArea(tablero.getNumAreas(),op);
+				for (Pair<Integer, Integer> b : bag) {
+					area.afegir_casella(
+						tablero.getCasilla(b.getFirst(),b.getSecond())
+					);
+				}
 				tablero.afegirArea(area,0);
-				this.randomDFS(i,j,tablero,area,size);
-				this.pickOpAndRes(area);
+				area.calcular_resultat();
 			}
 		}
 	}
@@ -225,10 +214,11 @@ public class KenkenHandler {
 	*@param tablero Tablero.
 	*@param size tamaño del area a asignar.
 	*/
-	private void randomDFS(int x, int y, TableroH tablero, Area area, int size) {
-		if (tablero.getAreaID(x,y) != -1 || area.get_tamany() == size)
+	private void randomDFS(int x, int y, TableroH tablero, LinkedList<Pair<Integer,Integer>> bag, int size) {
+		if (tablero.getAreaID(x,y) != -1 || bag.size() == size)
 			return;
-		tablero.setid(tablero.getNumAreas()-1,x,y);
+		tablero.setId(tablero.getNumAreas(),x,y);
+		bag.add(new Pair<Integer,Integer>(x,y));
 		ArrayList<Direccion> dirs = new ArrayList<Direccion>();
 		if (x>0 && tablero.getAreaID(x-1,y) == -1)
 			dirs.add(Direccion.Left);
@@ -243,16 +233,16 @@ public class KenkenHandler {
 		for (Direccion dir : dirs) {
 			switch(dir) {
 				case Left:
-					this.randomDFS(x-1,y,tablero,area,size);
+					this.randomDFS(x-1,y,tablero,bag,size);
 					break;
 				case Up:
-					this.randomDFS(x,y-1,tablero,area,size);
+					this.randomDFS(x,y-1,tablero,bag,size);
 					break;
 				case Right:
-					this.randomDFS(x+1,y,tablero,area,size);
+					this.randomDFS(x+1,y,tablero,bag,size);
 					break;
 				default:
-					this.randomDFS(x,y+1,tablero,area,size);
+					this.randomDFS(x,y+1,tablero,bag,size);
 					break;
 			}
 		}
@@ -263,36 +253,37 @@ public class KenkenHandler {
 	*Decide que operacion colocarle a cada area del tablero y con esa operacion
 	*el correspondiente resultado.
 	*
-	*@param area Area.
+	*@param bag Area.
 	*/
-	private void pickOpAndRes(Area area) {
-		int op,size = area.get_tamany();
+	private char pickOpAndRes(TableroH tablero, LinkedList<Pair<Integer,Integer>> bag) {
+		int op;
+		char res;
 		Random rand = new Random();
-		switch (size) {
+		switch (bag.size()) {
 			case 1:
-				area.set_operacio('.');
+				res = '.';
 				break;
 			case 2:
-				int a = area.get_casella(0).getSolucion();
-				int b = area.get_casella(1).getSolucion();
+				int a = tablero.getCasilla(bag.get(0).getFirst(),bag.get(0).getSecond()).getSolucion();
+				int b = tablero.getCasilla(bag.get(1).getFirst(),bag.get(1).getSecond()).getSolucion();
 				if (((a>b) && (a%b==0)) || ((b>a) && (b%a==0)))
-					area.set_operacio('/');
+					res = '/';
 				else
-					area.set_operacio('-');
+					res = '-';
 				break;
 			default:
 				op = rand.nextInt(2);
 				switch(op) {
 					case 0:
-						area.set_operacio('+');;
+						res = '+';
 						break;
-					case 1:
-						area.set_operacio('*');;
+					default:
+						res = '*';
 						break;
 				}
 				break;
 		}
-		area.calcular_resultat();
+		return res;
 	}
 
 }

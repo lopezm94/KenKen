@@ -5,11 +5,11 @@
 
 public class Divisio extends Area{
 	private static final char op = '/';
-	
+
 	public Divisio(int pos){
 		super(pos);
 	}
-	
+
 	public String toString(){
 		String res="";
 		res = "pos: " + pos + ", "
@@ -19,7 +19,7 @@ public class Divisio extends Area{
 				+ "resact: " + resact + "\n ";
 		return res;
 	}
-	
+
 	public char get_operacio(){
 		return op;
 	}
@@ -47,7 +47,7 @@ public class Divisio extends Area{
 		}
 		return b1;
 	}
-	
+
 	public void calcular_resultat(){
 		if(caselles.get(0).getSolucion() > caselles.get(1).getSolucion()){
 			res = caselles.get(0).getSolucion() / caselles.get(1).getSolucion();
@@ -55,7 +55,7 @@ public class Divisio extends Area{
 			res = caselles.get(1).getSolucion() / caselles.get(0).getSolucion();
 		}
 	}
-	
+
 	public void calcular_resultatactual(){
 		if(caselles.get(0).getValor() > caselles.get(1).getValor()){
 			resact = caselles.get(0).getValor() / caselles.get(1).getValor();
@@ -63,5 +63,5 @@ public class Divisio extends Area{
 			resact = caselles.get(1).getValor() / caselles.get(0).getValor();
 		}
 	}
-	
+
 }
