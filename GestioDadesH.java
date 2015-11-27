@@ -243,9 +243,9 @@ public class GestioDadesH  extends Gestio_Dades{
 				st += " "+tauler.getArea(i).get_operacio();
 			}
 			Escribir_string(st,"\n",nomkenken,"./KenKens");
-			st = "dificultat";
+			/*st = "dificultat";
 			st += " "+tauler.calcuDif();
-			Escribir_string(st,"\n",nomkenken,"./KenKens");
+			Escribir_string(st,"\n",nomkenken,"./KenKens");*/
 			for(int i=0; i < tauler.getFiles(); ++i){
 				for(int j=0; j < tauler.getFiles(); ++j){
 					st = "casella";
@@ -256,6 +256,7 @@ public class GestioDadesH  extends Gestio_Dades{
 					st += " "+k;
 					st += " "+tauler.getCasillaSol(i, j);
 					st += " "+tauler.getAreaID(i, j);
+					Escribir_string(st,"\n",nomkenken,"./KenKens");
 				}
 			}
 		} catch (IOException | FicheroNoExiste e) {

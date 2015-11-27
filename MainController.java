@@ -285,7 +285,7 @@ public class MainController{
 			currentUser.assignar_nova_partida(nova);
 			nova.setTauler(th);
 			dataEngine.guardar_kenken(th,st);
-			play(s2t);
+			play(st);
 		}
 	}
 	
