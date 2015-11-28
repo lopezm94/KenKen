@@ -22,6 +22,9 @@ public class DriverKenkenHandler {
 
     TableroH sol = ke.generateAndSolveKenken(size,dificultad);
     ke.solveKenken(sol);
+    sol.setResultToValue();
+    if (!sol.numerosCheck())
+      System.out.println("Hay algo mal");
     System.out.println(sol.getAllAreas());
     System.out.println(sol);
     System.out.println(sol.getAreas());

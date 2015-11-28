@@ -24,6 +24,15 @@ public class TableroH extends Tablero {
 		areas = new ArrayList<Area>();
 	}
 
+	//Borrar, solo testeo
+	public void setResultToValue() {
+		for (int i=0; i<files; i++) {
+			for (int j=0; j<files; j++) {
+				tauler[i][j].valor = tauler[i][j].solucion;
+			}
+		}
+	}
+
 	public LinkedList<Casilla> getAllCasillas() {
 		LinkedList<Casilla> res = new LinkedList<Casilla>();
 		for (int i=0; i<this.files; i++) {
