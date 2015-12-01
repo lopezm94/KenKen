@@ -1,0 +1,11 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch Domain_Optimization
+# Your branch is up-to-date with 'origin/Domain_Optimization'.
+#
+# Changes to be committed:
+#	new file:   ControladorGen.java
+#	modified:   Generar.java
+#
+
