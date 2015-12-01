@@ -2,6 +2,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+*@version 1.0
+*@author Reyes Vera
+*/
+
 public class login extends Frame implements ActionListener{
 	private Button b1;
 	
@@ -12,9 +17,9 @@ public class login extends Frame implements ActionListener{
 		String str1 = cont.getText();
 		String str2 = cont2.getText();
 		MainController a = new MainController();
-		//if (str1 == str2)
+		if (str1 == str2)
 		a.login(str,str1);   //para entrar valores
-		//else add.(Panel)
+		new Menu();
 	}
 	
 	

@@ -39,7 +39,7 @@ public class DriverTablero {
 				System.out.println("Quieres tener un area de tipo? (+,-,*,/)");
 				String varS = input.next();
 				char var2[] = varS.toCharArray();
-				Area a = new Area(var,var2[0]);
+				Area a = AreaBuilder.newArea(var,var2[0]);
 	/*---->*/			tablero.afegirArea(a,0);
 				var = input.nextInt();
 			}

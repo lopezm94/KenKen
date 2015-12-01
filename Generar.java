@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/*@version 1.0
+/**@version 1.0
 *@author Reyes Vera
 */
 

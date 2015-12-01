@@ -4,6 +4,11 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Timer;
 
+/**
+*@version 1.0
+*@author Reyes Vera
+*/
+
 public class ControladorGen {
 
 		

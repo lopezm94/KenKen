@@ -1,5 +1,5 @@
-import Excepcions.*;
-import Persistencia.Gestio_Dades;
+//import Excepcions.*;
+//import Persistencia.Gestio_Dades;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -144,7 +144,7 @@ public class MainController{
 			while (idarea < total_areas){
 				String varS = operacions[idarea];
 				char var2[] = varS.toCharArray();
-				Area a = new Area(idarea,var2[0]);
+				Area a = AreaBuilder.newArea(idarea,var2[0]);
 				tablero.afegirArea(a,0);
 				++idarea;
 			}
@@ -175,27 +175,27 @@ public class MainController{
 		}
 	}
 
-	public Perfil login(){
+	public Perfil login(String a, String b){
 		int control = 0;
 		while(control == 0){
-			System.out.println("Tens un usuari? (0-no, 1-si)");
+			//System.out.println("Tens un usuari? (0-no, 1-si)");
 			int te_usuari = in.nextInt();
-			if(te_usuari == 1){
+			//if(te_usuari == 1){
 				System.out.println("Entra el nom d'usuari");
-				String nomUser = in.next();
-				System.out.println("Entra la contasenya");
-				String pass = in.next();
-				String[] st = dataEngine.getProfileInfo(nomUser, ".", "Profiles");
+				//String nomUser = in.next();
+				//System.out.println("Entra la contasenya");
+				//String pass = in.next();
+				String[] st = dataEngine.getProfileInfo(a, ".", "Profiles");
 				//Control String tokenizer
-				if(dataEngine.existsUser(st,nomUser)){
+				if(dataEngine.existsUser(st,a)){
 					//Buscar les dades al controlador gestio, si no el troba,
 					//preguntar si vol crear un nou usuari
-					if(dataEngine.getPassByToken(st).equals(pass)){
-						currentUser = new Perfil(nomUser,pass);
+					if(dataEngine.getPassByToken(st).equals(b)){
+						currentUser = new Perfil(a,b);
 						control = 1;
 					}
-				}
-			}else if(te_usuari == 0){
+				//}
+			}/*else if(te_usuari == 0){
 				System.out.println("Vols crear un usuari o vols entrar com a convidat? (0-convidat, 1-usuari nou) ");
 				int usuari_nou = in.nextInt();
 				if(usuari_nou == 0){
@@ -239,7 +239,7 @@ public class MainController{
 				}
 			}else{
 				System.out.println("Has d'introduir 1 o 0.");
-			}
+			}*/
 		}
 		return currentUser;
 	}
