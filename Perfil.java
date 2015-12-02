@@ -3,6 +3,7 @@
 *@author Marc Ortiz
 */
 public class Perfil{
+    
 	private String usuari;
 	private String contrasenya;
 	private Puntuacio puntuacio = new Puntuacio();

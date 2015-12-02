@@ -209,7 +209,7 @@ public class KenkenEngine extends ConstraintEngine {
   *@param id Id del area.
   *@return Boolean Checkeo de que el area cumple con los dominios de las casillas.
   */
-  private Boolean checkArea(Area area, int id) {
+  /*private Boolean checkArea(Area area, int id) {
     LinkedList<Pair<Pair<Integer,Integer>,HashSet<Integer>>> push = new LinkedList<Pair<Pair<Integer,Integer>,HashSet<Integer>>>();
     for (int i=0; i<this.board.size(); i++) {
       for (int j=0; j<this.board.size(); j++) {
@@ -224,8 +224,8 @@ public class KenkenEngine extends ConstraintEngine {
       }
     }
 
-    return area.domainCheck(push);
-  }
+   // return area.domainCheck(push);
+  }*/
   /*************************************************************************************************************************
 
 

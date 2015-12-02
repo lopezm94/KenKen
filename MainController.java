@@ -9,7 +9,7 @@ import java.util.Scanner;
 *@author Joan Grau
 */
 public class MainController{
-	//DefiniciÃ³ variables globals i controladors que necessitarem:
+	//Definició variables globals i controladors que necessitarem:
 	private Perfil currentUser;
 	private GestioDadesH dataEngine;
 	Scanner in;
@@ -137,7 +137,7 @@ public class MainController{
 					tablero.setCasilla(cas,i,j);
 				}
 			}
-			/*Creem cada ï¿½rea*/
+			/*Creem cada area*/
 			String[] operacions = dataEngine.getOperacions(nomkenken);
 			int total_areas = operacions.length;
 			int idarea = 0;
@@ -174,7 +174,37 @@ public class MainController{
 			}
 		}
 	}
-
+           
+        public void guest(){
+               currentUser = new Perfil();
+        }
+        
+        public Perfil login_reg(String a, String b, String c) throws IOException{
+            String nomUser = a;
+            String pass = b;
+            String passr = c;
+            if(pass.equals(passr)){
+                    String[] st = dataEngine.getProfileInfo(nomUser, ".", "Profiles");
+                    if(dataEngine.existsUser(st,nomUser)){
+                    }else{
+                            try{
+                                    GestioDadesH.Escribir_string(nomUser+" "+pass+" 0 0 0", "\n", "Profiles", ".");
+                            }catch(IOException e){
+                                    System.out.println(e.toString());
+                            } catch (FicheroNoExiste f) {
+                                    f.printStackTrace();
+                            }
+                            try{
+                                    GestioDadesH.Crear_directorio(nomUser,"./Games");
+                            } catch (FicheroYaExistente e) {
+                                    e.printStackTrace();
+                            }
+                            currentUser = new Perfil(nomUser,pass);
+            }
+                   
+        }
+            return currentUser; 
+        }
 	public Perfil login(String a, String b){
 		int control = 0;
 		while(control == 0){
@@ -250,12 +280,12 @@ public class MainController{
 
 	}
 	public void new_game(String nompartida, String nomkenken){
-		//pre: current user ja estï¿½ inicialitzat
+		//pre: current user ja esta inicialitzat
 		Partida nova = new Partida(nompartida,currentUser.get_usuari());
 		currentUser.assignar_nova_partida(nova);
 		TableroH tablero = creaTauler(nomkenken);
 		nova.setTauler(tablero);
-		play(nomkenken);
+		play(nomkenken); /*cambiar para inter*/
 	}
 
 	public void load_game(String nomsaved){
@@ -267,7 +297,7 @@ public class MainController{
 		TableroH tauler = creaTauler(st1[0]);
 		omplirTauler(tauler,nomsaved);
 		load.setTauler(tauler);
-		play(st1[0]);
+		play(st1[0]); /*cambiar para inter*/
 		//Load an existing game
 	}
 

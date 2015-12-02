@@ -16,7 +16,7 @@ public class ControladorGen {
 		Scanner in = new Scanner(System.in);
 
 		
-		public int tamaño(){
+		public int tamano(){
 			int var = 0;
 				//in = new Scanner(System.in);
 				System.out.println("Quieres poner tamano al KenKen?(Si/No)");

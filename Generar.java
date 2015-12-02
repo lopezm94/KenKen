@@ -31,7 +31,7 @@ public class Generar {
 			
 			ControladorGen crida = new ControladorGen();
 			
-			tablero = new TableroH(crida.tamaño());
+			tablero = new TableroH(crida.tamano());
 					
 			for (int i = 0;i< tablero.size();++i){
 				for (int j = 0; j < tablero.size();++j){
