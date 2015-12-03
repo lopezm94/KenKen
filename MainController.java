@@ -1,12 +1,16 @@
 //import Excepcions.*;
 //import Persistencia.Gestio_Dades;
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Scanner;
 
 /**
 *@version 1.0
 *@author Marc Ortiz
 *@author Joan Grau
+*@author reyes vera(interficie)
 */
 public class MainController{
 	//Definició variables globals i controladors que necessitarem:
@@ -57,7 +61,20 @@ public class MainController{
 		timeextra += (int)tiempo_start;
 		return timeextra;
 	}
-
+	
+	public void posar_pos(int x, int y, int valor){
+		currentUser.get_partida().getTauler().setCasillaVal(x,y,valor);
+	}
+	
+	public Boolean comp(){
+		Boolean correcte = currentUser.get_partida().getTauler().tableroCheck() &&
+		currentUser.get_partida().getTauler().numerosCheck();
+		if(correcte) {
+				return true;
+		}
+		return false;
+	}
+	
 	private void play(String nomkenken){
 		long time_start;
 		time_start = System.currentTimeMillis();
@@ -179,6 +196,15 @@ public class MainController{
                currentUser = new Perfil();
         }
         
+        public Boolean user_exists(String a){
+        	String[] st = dataEngine.getProfileInfo(a, ".", "Profiles");
+            if(dataEngine.existsUser(st,a)){
+            	return true;
+            }	
+            return false;
+        }
+        
+        
         public Perfil login_reg(String a, String b, String c) throws IOException{
             String nomUser = a;
             String pass = b;
@@ -205,13 +231,24 @@ public class MainController{
         }
             return currentUser; 
         }
+        
+        public Boolean user_ok(String a, String b){
+        	String[] st = dataEngine.getProfileInfo(a, ".", "Profiles");
+        	if(dataEngine.existsUser(st,a)){
+				if(dataEngine.getPassByToken(st).equals(b)){
+					return true;
+				}
+        	}
+        	return false;
+        }
+        
 	public Perfil login(String a, String b){
 		int control = 0;
 		while(control == 0){
 			//System.out.println("Tens un usuari? (0-no, 1-si)");
-			int te_usuari = in.nextInt();
+			//int te_usuari = in.nextInt();
 			//if(te_usuari == 1){
-				System.out.println("Entra el nom d'usuari");
+				//System.out.println("Entra el nom d'usuari");
 				//String nomUser = in.next();
 				//System.out.println("Entra la contasenya");
 				//String pass = in.next();
@@ -297,7 +334,7 @@ public class MainController{
 		TableroH tauler = creaTauler(st1[0]);
 		omplirTauler(tauler,nomsaved);
 		load.setTauler(tauler);
-		play(st1[0]); /*cambiar para inter*/
+		play(st1[0]);   /*cambiar para inter*/
 		//Load an existing game
 	}
 
@@ -335,6 +372,13 @@ public class MainController{
 	}
 	public void show_tutorial(){
 		//show a simple text
-		System.out.println("Tutorial per jugar:\n http://www.kenkenpuzzle.com/howto/solve");
+		//System.out.println("Tutorial per jugar:\n http://www.kenkenpuzzle.com/howto/solve");
+		
+		Desktop enlace=Desktop.getDesktop();
+		try {
+            enlace.browse(new URI("http://www.kenkenpuzzle.com/howto/solve"));
+		} catch (IOException | URISyntaxException e) {
+			e.getMessage();
+		}
 	}
 }

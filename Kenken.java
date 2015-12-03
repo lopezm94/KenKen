@@ -63,7 +63,7 @@ public class Kenken extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        jButton4.setText("Salir");
+        jButton4.setText("Sortir");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -119,26 +119,27 @@ public class Kenken extends javax.swing.JFrame implements Runnable {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-       // new NewLog();
+    	Contrkenken c = new Contrkenken();
+        c.reg();
         dispose();
     }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        new Log();
+    	Contrkenken c = new Contrkenken();
+        c.carga();
         dispose();
     }                                        
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        System.exit(ABORT);
+        dispose();
     }                                        
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        MainController mc = new MainController();
-       // mc.guest();
-        new Menu();
+    	Contrkenken c = new Contrkenken();
+        c.guest();
         dispose();
     }                                        
 
@@ -179,7 +180,7 @@ public class Kenken extends javax.swing.JFrame implements Runnable {
 
     @Override
 	public void run() {
-		//new Kenken();
+		new Kenken();
 	}
     
     // Variables declaration - do not modify                     

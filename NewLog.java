@@ -143,17 +143,14 @@ public class NewLog extends javax.swing.JFrame {
     }                                           
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-                String str = jTextField1.getText();
+        String str = jTextField1.getText();
 		String str1 = jPasswordField1.getText();
 		String str2 = jPasswordField2.getText();
-		MainController a = new MainController();
-        try {
-            a.login_reg(str,str1,str2);   //para entrar valores
-        } catch (IOException ex) {
-            Logger.getLogger(NewLog.class.getName()).log(Level.SEVERE, null, ex);
-        }
-		new Menu();
-                dispose();
+		ContrUser a = new ContrUser();
+		if (! a.esta(str)){
+			a.newU(str,str1,str2);
+			dispose();
+		}
     }                                        
 
     /**
