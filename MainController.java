@@ -1,15 +1,19 @@
-import Excepcions.*;
-import Persistencia.Gestio_Dades;
+//import Excepcions.*;
+//import Persistencia.Gestio_Dades;
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Scanner;
 
 /**
 *@version 1.0
 *@author Marc Ortiz
 *@author Joan Grau
+*@author reyes vera(interficie)
 */
 public class MainController{
-	//DefiniciÃ³ variables globals i controladors que necessitarem:
+	//Definició variables globals i controladors que necessitarem:
 	private Perfil currentUser;
 	private GestioDadesH dataEngine;
 	Scanner in;
@@ -57,7 +61,20 @@ public class MainController{
 		timeextra += (int)tiempo_start;
 		return timeextra;
 	}
-
+	
+	public void posar_pos(int x, int y, int valor){
+		currentUser.get_partida().getTauler().setCasillaVal(x,y,valor);
+	}
+	
+	public Boolean comp(){
+		Boolean correcte = currentUser.get_partida().getTauler().tableroCheck() &&
+		currentUser.get_partida().getTauler().numerosCheck();
+		if(correcte) {
+				return true;
+		}
+		return false;
+	}
+	
 	private void play(String nomkenken){
 		long time_start;
 		time_start = System.currentTimeMillis();
@@ -137,14 +154,14 @@ public class MainController{
 					tablero.setCasilla(cas,i,j);
 				}
 			}
-			/*Creem cada ï¿½rea*/
+			/*Creem cada area*/
 			String[] operacions = dataEngine.getOperacions(nomkenken);
 			int total_areas = operacions.length;
 			int idarea = 0;
 			while (idarea < total_areas){
 				String varS = operacions[idarea];
 				char var2[] = varS.toCharArray();
-				Area a = new Area(idarea,var2[0]);
+				Area a = AreaBuilder.newArea(idarea,var2[0]);
 				tablero.afegirArea(a,0);
 				++idarea;
 			}
@@ -174,28 +191,78 @@ public class MainController{
 			}
 		}
 	}
-
-	public Perfil login(){
+           
+        public void guest(){
+               currentUser = new Perfil();
+        }
+        
+        public Boolean user_exists(String a){
+        	String[] st = dataEngine.getProfileInfo(a, ".", "Profiles");
+            if(dataEngine.existsUser(st,a)){
+            	return true;
+            }	
+            return false;
+        }
+        
+        
+        public Perfil login_reg(String a, String b, String c) throws IOException{
+            String nomUser = a;
+            String pass = b;
+            String passr = c;
+            if(pass.equals(passr)){
+                    String[] st = dataEngine.getProfileInfo(nomUser, ".", "Profiles");
+                    if(dataEngine.existsUser(st,nomUser)){
+                    }else{
+                            try{
+                                    GestioDadesH.Escribir_string(nomUser+" "+pass+" 0 0 0", "\n", "Profiles", ".");
+                            }catch(IOException e){
+                                    System.out.println(e.toString());
+                            } catch (FicheroNoExiste f) {
+                                    f.printStackTrace();
+                            }
+                            try{
+                                    GestioDadesH.Crear_directorio(nomUser,"./Games");
+                            } catch (FicheroYaExistente e) {
+                                    e.printStackTrace();
+                            }
+                            currentUser = new Perfil(nomUser,pass);
+            }
+                   
+        }
+            return currentUser; 
+        }
+        
+        public Boolean user_ok(String a, String b){
+        	String[] st = dataEngine.getProfileInfo(a, ".", "Profiles");
+        	if(dataEngine.existsUser(st,a)){
+				if(dataEngine.getPassByToken(st).equals(b)){
+					return true;
+				}
+        	}
+        	return false;
+        }
+        
+	public Perfil login(String a, String b){
 		int control = 0;
 		while(control == 0){
-			System.out.println("Tens un usuari? (0-no, 1-si)");
-			int te_usuari = in.nextInt();
-			if(te_usuari == 1){
-				System.out.println("Entra el nom d'usuari");
-				String nomUser = in.next();
-				System.out.println("Entra la contasenya");
-				String pass = in.next();
-				String[] st = dataEngine.getProfileInfo(nomUser, ".", "Profiles");
+			//System.out.println("Tens un usuari? (0-no, 1-si)");
+			//int te_usuari = in.nextInt();
+			//if(te_usuari == 1){
+				//System.out.println("Entra el nom d'usuari");
+				//String nomUser = in.next();
+				//System.out.println("Entra la contasenya");
+				//String pass = in.next();
+				String[] st = dataEngine.getProfileInfo(a, ".", "Profiles");
 				//Control String tokenizer
-				if(dataEngine.existsUser(st,nomUser)){
+				if(dataEngine.existsUser(st,a)){
 					//Buscar les dades al controlador gestio, si no el troba,
 					//preguntar si vol crear un nou usuari
-					if(dataEngine.getPassByToken(st).equals(pass)){
-						currentUser = new Perfil(nomUser,pass);
+					if(dataEngine.getPassByToken(st).equals(b)){
+						currentUser = new Perfil(a,b);
 						control = 1;
 					}
-				}
-			}else if(te_usuari == 0){
+				//}
+			}/*else if(te_usuari == 0){
 				System.out.println("Vols crear un usuari o vols entrar com a convidat? (0-convidat, 1-usuari nou) ");
 				int usuari_nou = in.nextInt();
 				if(usuari_nou == 0){
@@ -239,7 +306,7 @@ public class MainController{
 				}
 			}else{
 				System.out.println("Has d'introduir 1 o 0.");
-			}
+			}*/
 		}
 		return currentUser;
 	}
@@ -250,12 +317,12 @@ public class MainController{
 
 	}
 	public void new_game(String nompartida, String nomkenken){
-		//pre: current user ja estï¿½ inicialitzat
+		//pre: current user ja esta inicialitzat
 		Partida nova = new Partida(nompartida,currentUser.get_usuari());
 		currentUser.assignar_nova_partida(nova);
 		TableroH tablero = creaTauler(nomkenken);
 		nova.setTauler(tablero);
-		play(nomkenken);
+		play(nomkenken); /*cambiar para inter*/
 	}
 
 	public void load_game(String nomsaved){
@@ -267,7 +334,7 @@ public class MainController{
 		TableroH tauler = creaTauler(st1[0]);
 		omplirTauler(tauler,nomsaved);
 		load.setTauler(tauler);
-		play(st1[0]);
+		play(st1[0]);   /*cambiar para inter*/
 		//Load an existing game
 	}
 
@@ -305,6 +372,13 @@ public class MainController{
 	}
 	public void show_tutorial(){
 		//show a simple text
-		System.out.println("Tutorial per jugar:\n http://www.kenkenpuzzle.com/howto/solve");
+		//System.out.println("Tutorial per jugar:\n http://www.kenkenpuzzle.com/howto/solve");
+		
+		Desktop enlace=Desktop.getDesktop();
+		try {
+            enlace.browse(new URI("http://www.kenkenpuzzle.com/howto/solve"));
+		} catch (IOException | URISyntaxException e) {
+			e.getMessage();
+		}
 	}
 }
