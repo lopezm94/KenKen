@@ -10,11 +10,14 @@
  */
 public class CrearPartida extends javax.swing.JFrame {
 
+	MainController mc = null;
+	
     /**
      * Creates new form CrearPartida
      */
-    public CrearPartida() {
+    public CrearPartida(MainController a) {
         initComponents();
+        mc = a;
     }
 
     /**
@@ -105,10 +108,9 @@ public class CrearPartida extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        MainController mc = new MainController();
-        mc.new_game(jTextField1.getText(), jTextField1.getText());
-        //Game g = new Game();
-        //g.setVisible();
+        mc.new_game(jTextField1.getText(), jTextField2.getText());
+        Game3 g = new Game3();
+        g.setVisible(true);
         dispose();
     }                                        
 
@@ -142,7 +144,7 @@ public class CrearPartida extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CrearPartida().setVisible(true);
+                new CrearPartida(null).setVisible(true);
             }
         });
     }

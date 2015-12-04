@@ -10,11 +10,13 @@
  */
 public class Menu extends javax.swing.JFrame {
 
+	MainController mc = null;
     /**
      * Creates new form Menu
      */
-    public Menu() {
+    public Menu(MainController a) {
         initComponents();
+        mc = a;
     }
 
     /**
@@ -151,7 +153,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        CrearPartida c = new CrearPartida();
+        CrearPartida c = new CrearPartida(mc);
         c.setVisible(true);
         dispose();
     }                                        
@@ -225,7 +227,7 @@ public class Menu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Menu().setVisible(true);
+                new Menu(null).setVisible(true);
             }
         });
     }

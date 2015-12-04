@@ -18,7 +18,7 @@ public class ContrUser {
 	public void carga(String str, String str1){
 		MainController a = new MainController();
 			a.login(str,str1);   //para entrar valores
-			Menu m = new Menu();
+			Menu m = new Menu(a);
 	        m.setVisible(true);        
 	}
 	
@@ -27,7 +27,7 @@ public class ContrUser {
         try {
         	if (! a.user_exists(str)){
         		a.login_reg(str,str1,str2);   //para entrar valores
-        		Menu m = new Menu();
+        		Menu m = new Menu(a);
         		m.setVisible(true);
         	}
         	} catch (IOException ex) {

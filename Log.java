@@ -128,10 +128,9 @@ public class Log extends javax.swing.JFrame {
         // TODO add your handling code here:
           String str = jTextField1.getText();
 		String str1 = jPasswordField1.getText();
-		MainController a = new MainController();
-		a.login(str,str1);   //para entrar valores
-		new Menu();
-                dispose();
+		ContrUser a = new ContrUser();
+		if (a.esta(str)) a.carga(str, str1);
+        dispose();
     }                                        
 
     /**

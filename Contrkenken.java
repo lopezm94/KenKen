@@ -13,7 +13,7 @@ public class Contrkenken {
 	public void guest(){
 		MainController mc = new MainController();
         mc.guest();
-        Menu m = new Menu();
+        Menu m = new Menu(mc);
         m.setVisible(true);
 	}
 }
