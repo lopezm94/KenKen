@@ -1,0 +1,11 @@
+/**
+*@author Marc Ortiz
+**/
+
+/*La classe DomainController serà la principal de gestionar tot el sistema*/
+public class DomainController(){
+	private GestionUsuario GUser;
+	public DomainController(){
+		//Inicialitzar controladors??
+	}
+}
