@@ -84,7 +84,7 @@ public class Felicitats extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    	Menu m = new Menu();
+    	Menu m = new Menu(null);
     	m.setVisible(true);
     	dispose();
     }                                        

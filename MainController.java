@@ -66,6 +66,14 @@ public class MainController{
 		currentUser.get_partida().getTauler().setCasillaVal(x,y,valor);
 	}
 	
+	public int area(int x, int y){
+		return currentUser.get_partida().getTauler().getAreaID(x, y);
+	}
+	
+	public int tam(){
+		return currentUser.get_partida().getTauler().getNumAreas();
+	}
+	
 	public Boolean comp(){
 		Boolean correcte = currentUser.get_partida().getTauler().tableroCheck() &&
 		currentUser.get_partida().getTauler().numerosCheck();
@@ -73,6 +81,11 @@ public class MainController{
 				return true;
 		}
 		return false;
+	}
+	
+	public void imprimir(){
+		imprimir_tauler();
+		imprimir_solucio();
 	}
 	
 	private void play(String nomkenken){
@@ -322,7 +335,7 @@ public class MainController{
 		currentUser.assignar_nova_partida(nova);
 		TableroH tablero = creaTauler(nomkenken);
 		nova.setTauler(tablero);
-		play(nomkenken); /*cambiar para inter*/
+		//play(nomkenken); /*cambiar para inter*/
 	}
 
 	public void load_game(String nomsaved){

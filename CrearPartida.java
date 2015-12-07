@@ -16,10 +16,9 @@ public class CrearPartida extends javax.swing.JFrame {
      * Creates new form CrearPartida
      */
     public CrearPartida(MainController a) {
-        initComponents();
-        mc = a;
+    	mc = a;
+    	initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -109,7 +108,7 @@ public class CrearPartida extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         mc.new_game(jTextField1.getText(), jTextField2.getText());
-        Game3 g = new Game3();
+        Game3 g = new Game3(mc);
         g.setVisible(true);
         dispose();
     }                                        

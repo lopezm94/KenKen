@@ -1,4 +1,8 @@
-	/*
+import java.util.Vector;
+
+import javax.swing.JButton;
+
+/*
 	 * To change this license header, choose License Headers in Project Properties.
 	 * To change this template file, choose Tools | Templates
 	 * and open the template in the editor.
@@ -10,11 +14,28 @@
 	 */
 	public class Game3 extends javax.swing.JFrame {
 
+		MainController mc = null;
+		Vector<Integer> areas = null;
+		Vector<Integer> areas2 = null;
+
 	    /**
 	     * Creates new form Game3
 	     */
-	    public Game3() {
-	        initComponents();
+	    public Game3(MainController a) {
+	        mc = a;
+	        areas = new Vector<Integer>(mc.tam());
+	        int c = 0;
+			for (int i = 0; i < mc.tam(); ++i){
+				areas.add(c);
+				c += 20;
+			}
+			areas2 = new Vector<Integer>(mc.tam());
+		    c = 255;
+			for (int i = 0; i < mc.tam(); ++i){
+				areas2.add(c);
+				c -= 20;
+			}
+	    	initComponents();
 	    }
 
 	    /**
@@ -45,8 +66,11 @@
 
 	        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
 	        jLabel1.setText("Kenken");
-
-	        jTextField1.setText("jTextField1");
+	        
+	        
+	        
+	        
+	        jTextField1.setBackground(new java.awt.Color(((int) areas.get(mc.area(0,0))), ((int) areas2.get(mc.area(0,0))), 255));
 	        jTextField1.setPreferredSize(new java.awt.Dimension(44, 22));
 	        jTextField1.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,7 +78,7 @@
 	            }
 	        });
 
-	        jTextField2.setText("jTextField2");
+	        jTextField2.setBackground(new java.awt.Color(((int) areas.get(mc.area(0,1))), ((int) areas2.get(mc.area(0,1))), 255));
 	        jTextField2.setPreferredSize(new java.awt.Dimension(44, 22));
 	        jTextField2.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,7 +86,7 @@
 	            }
 	        });
 
-	        jTextField3.setText("jTextField3");
+	        jTextField3.setBackground(new java.awt.Color(((int) areas.get(mc.area(0,2))), ((int) areas2.get(mc.area(0,2))), 255));
 	        jTextField3.setPreferredSize(new java.awt.Dimension(44, 22));
 	        jTextField3.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,7 +94,7 @@
 	            }
 	        });
 
-	        jTextField4.setText("jTextField4");
+	        jTextField4.setBackground(new java.awt.Color(((int) areas.get(mc.area(1,0))), ((int) areas2.get(mc.area(1,0))), 255));
 	        jTextField4.setPreferredSize(new java.awt.Dimension(44, 22));
 	        jTextField4.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,7 +102,7 @@
 	            }
 	        });
 
-	        jTextField5.setText("jTextField5");
+	        jTextField5.setBackground(new java.awt.Color(((int) areas.get(mc.area(1,1))), ((int) areas2.get(mc.area(1,1))), 255));
 	        jTextField5.setPreferredSize(new java.awt.Dimension(44, 22));
 	        jTextField5.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,7 +110,7 @@
 	            }
 	        });
 
-	        jTextField6.setText("jTextField6");
+	        jTextField6.setBackground(new java.awt.Color(((int) areas.get(mc.area(1,2))), ((int) areas2.get(mc.area(1,2))), 255));
 	        jTextField6.setPreferredSize(new java.awt.Dimension(44, 22));
 	        jTextField6.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +118,8 @@
 	            }
 	        });
 
-	        jTextField7.setText("jTextField7");
+	        
+	        jTextField7.setBackground(new java.awt.Color(((int) areas.get(mc.area(2,0))), ((int) areas2.get(mc.area(2,0))), 255));
 	        jTextField7.setPreferredSize(new java.awt.Dimension(44, 22));
 	        jTextField7.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,7 +127,8 @@
 	            }
 	        });
 
-	        jTextField8.setText("jTextField8");
+	        
+	        jTextField8.setBackground(new java.awt.Color(((int) areas.get(mc.area(2,1))), ((int) areas2.get(mc.area(2,1))), 255));
 	        jTextField8.setPreferredSize(new java.awt.Dimension(44, 22));
 	        jTextField8.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,7 +136,8 @@
 	            }
 	        });
 
-	        jTextField9.setText("jTextField9");
+	        
+	        jTextField9.setBackground(new java.awt.Color(((int) areas.get(mc.area(2,2))), ((int) areas2.get(mc.area(2,2))), 255));
 	        jTextField9.setPreferredSize(new java.awt.Dimension(44, 22));
 	        jTextField9.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,16 +145,18 @@
 	            }
 	        });
 
-	        jButton1.setText("Resoldre");
 
+	        jButton1.setText("Resoldre");
+	        jButton1.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButton1ActionPerformed(evt);
+	            }
+	        });
+	        
 	        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
 	        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
 	        jInternalFrame1Layout.setHorizontalGroup(
 	            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
-	                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	                .addComponent(jButton1)
-	                .addContainerGap())
 	            .addGroup(jInternalFrame1Layout.createSequentialGroup()
 	                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
@@ -150,7 +179,12 @@
 	                        .addContainerGap()
 	                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
 	                .addContainerGap(205, Short.MAX_VALUE))
-	        );
+	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
+	                .addGap(0, 0, Short.MAX_VALUE)
+	                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+	                    .addComponent(jButton1)
+	                .addGap(34, 34, 34))));
+	        
 	        jInternalFrame1Layout.setVerticalGroup(
 	            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	            .addGroup(jInternalFrame1Layout.createSequentialGroup()
@@ -171,9 +205,10 @@
 	                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 	                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 	                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-	                .addGap(18, 18, 18)
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
 	                .addComponent(jButton1)
-	                .addContainerGap(28, Short.MAX_VALUE))
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+	                .addGap(62, 62, 62))
 	        );
 
 	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -192,65 +227,11 @@
 	        );
 
 	        pack();
-	    }// </editor-fold>                        
-
-	    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-	        // TODO add your handling code here: 0 2 
-	    	Jugar j = new Jugar();
-	    	j.poner(0,2,jTextField3.getText());
-	    }                                           
-
-	    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-	        // TODO add your handling code here:   0 0
-	    	Jugar j = new Jugar();
-	    	j.poner(0,0,jTextField1.getText());
-	    }                                           
-
-	    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-	        // TODO add your handling code here: 0 1
-	    	Jugar j = new Jugar();
-	    	j.poner(0,1,jTextField2.getText());
-	    }                                           
-
-	    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-	        // TODO add your handling code here: 1 0
-	    	Jugar j = new Jugar();
-	    	j.poner(1,0,jTextField4.getText());
-	    }                                           
-
-	    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-	        // TODO add your handling code here: 1 1
-	    	Jugar j = new Jugar();
-	    	j.poner(1,1,jTextField5.getText());
-	    }                                           
-
-	    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-	        // TODO add your handling code here: 1 2
-	    	Jugar j = new Jugar();
-	    	j.poner(1,2,jTextField6.getText());
-	    }                                           
-
-	    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-	        // TODO add your handling code here: 2 0
-	    	Jugar j = new Jugar();
-	    	j.poner(2,0,jTextField7.getText());
-	    }                                           
-
-	    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-	        // TODO add your handling code here: 2 1
-	    	Jugar j = new Jugar();
-	    	j.poner(2,1,jTextField8.getText());
-	    }                                           
-
-	    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-	        // TODO add your handling code here: 2 2
-	    	Jugar j = new Jugar();
-	    	j.poner(2,2,jTextField9.getText());
-	    }                                           
-
+	    }// </editor-fold> 
+	    
 	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 	        // TODO add your handling code here:
-	    	Jugar j = new Jugar();
+	    	Jugar j = new Jugar(mc);
 	    	if (j.comprobar()){
 	    		Felicitats f =new Felicitats();
 	    		f.setVisible(true);
@@ -260,7 +241,74 @@
 	    		Torna t =new Torna();
 	    		t.setVisible(true);
 	    	}
-	    }   
+	    }      
+	    
+	    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+	        // TODO add your handling code here: 0 2 
+	    	Jugar j = new Jugar(mc);
+	    	j.poner(0,2,jTextField3.getText());
+	    }                                           
+
+	    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+	        // TODO add your handling code here:   0 0
+	    	Jugar j = new Jugar(mc);
+	    	j.poner(0,0,jTextField1.getText());
+	    }                                           
+
+	    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+	        // TODO add your handling code here: 0 1
+	    	Jugar j = new Jugar(mc);
+	    	j.poner(0,1,jTextField2.getText());
+	    }                                           
+
+	    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+	        // TODO add your handling code here: 1 0
+	    	Jugar j = new Jugar(mc);
+	    	j.poner(1,0,jTextField4.getText());
+	    }                                           
+
+	    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+	        // TODO add your handling code here: 1 1
+	    	Jugar j = new Jugar(mc);
+	    	j.poner(1,1,jTextField5.getText());
+	    }                                           
+
+	    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+	        // TODO add your handling code here: 1 2
+	    	Jugar j = new Jugar(mc);
+	    	j.poner(1,2,jTextField6.getText());
+	    }                                           
+
+	    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+	        // TODO add your handling code here: 2 0
+	    	Jugar j = new Jugar(mc);
+	    	j.poner(2,0,jTextField7.getText());
+	    }                                           
+
+	    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+	        // TODO add your handling code here: 2 1
+	    	Jugar j = new Jugar(mc);
+	    	j.poner(2,1,jTextField8.getText());
+	    }                                           
+
+	    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+	        // TODO add your handling code here: 2 2
+	    	Jugar j = new Jugar(mc);
+	    	j.poner(2,2,jTextField9.getText());
+	    }                                           
+
+	   /* private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+	    	Jugar j = new Jugar(mc);
+	    	if (j.comprobar()){
+	    		Felicitats f =new Felicitats();
+	    		f.setVisible(true);
+	    		dispose();
+	    	}
+	    	else{
+	    		Torna t =new Torna();
+	    		t.setVisible(true);
+	    	}
+	    }  */ 
 	    
 	    /**
 	     * @param args the command line arguments
@@ -292,7 +340,7 @@
 	        /* Create and display the form */
 	        java.awt.EventQueue.invokeLater(new Runnable() {
 	            public void run() {
-	                new Game3().setVisible(true);
+	                new Game3(null).setVisible(true);
 	            }
 	        });
 	    }
