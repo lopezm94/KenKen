@@ -108,8 +108,25 @@ public class CrearPartida extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         mc.new_game(jTextField1.getText(), jTextField2.getText());
-        Game3 g = new Game3(mc);
-        g.setVisible(true);
+        switch (mc.tamany()){
+        case 3:
+        	Game3 g = new Game3(mc,jTextField2.getText());
+            g.setVisible(true);
+        	break;
+        case 4:
+        	break;
+        case 5:
+        	break;
+        case 6:
+        	break;
+        case 7:
+        	break;
+        case 8:
+        	break;
+        case 9:
+        	break;
+        }
+        
         dispose();
     }                                        
 

@@ -1,4 +1,5 @@
 /*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -10,11 +11,17 @@
  */
 public class GenerarKenken extends javax.swing.JFrame {
 
-    /**
+	MainController mc = null;
+    
+	/**
      * Creates new form GenerarKenken
      */
-    public GenerarKenken() {
-        initComponents();
+    public GenerarKenken(MainController a) {
+        mc = a;
+    	initComponents();
+    	dificultad.add(jRadioButton1);
+    	dificultad.add(jRadioButton2);
+    	dificultad.add(jRadioButton3);
     }
 
     /**
@@ -26,7 +33,7 @@ public class GenerarKenken extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        dificultad = new javax.swing.ButtonGroup();
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -47,8 +54,18 @@ public class GenerarKenken extends javax.swing.JFrame {
         jLabel1.setText("Generar Kenken");
 
         jButton1.setText("Aleatorio");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Manual");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jRadioButton1.setText("Facil");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -58,11 +75,22 @@ public class GenerarKenken extends javax.swing.JFrame {
         });
 
         jRadioButton2.setText("Intermedio");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         jRadioButton3.setText("Dificil");
+        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Elige una opcion:");
 
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(3, 3, 9, 1));
         jSpinner1.setMaximumSize(new java.awt.Dimension(9, 9));
         jSpinner1.setMinimumSize(new java.awt.Dimension(3, 3));
 
@@ -136,9 +164,30 @@ public class GenerarKenken extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
+    }// </editor-fold>                             
+
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+    }                                             
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+    	
+    	
+    	dispose();  /*aleatorio*/
+    }                                        
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:ç
+    	dispose(); /*manual*/
+    }                                        
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+    }                                             
+
+    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
     }                                             
 
@@ -172,13 +221,13 @@ public class GenerarKenken extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GenerarKenken().setVisible(true);
+                new GenerarKenken(null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify                     
-    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup dificultad;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JInternalFrame jInternalFrame1;

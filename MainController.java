@@ -62,6 +62,14 @@ public class MainController{
 		return timeextra;
 	}
 	
+	public Boolean es_fija(int x, int y){
+		return currentUser.get_partida().getTauler().casillaIsFija(x, y);
+	}
+	
+	public int numC (int x , int y){
+		return currentUser.get_partida().getTauler().getCasillaVal(x, y);
+	}
+	
 	public void posar_pos(int x, int y, int valor){
 		currentUser.get_partida().getTauler().setCasillaVal(x,y,valor);
 	}
@@ -143,8 +151,15 @@ public class MainController{
 		}
 		in.close();
 	}
-
-
+	
+	public int tamany(){
+		return currentUser.get_partida().getTauler().getFiles();
+	}
+	
+	public void guarda(String a){
+		currentUser.get_partida().setTime(tiempo(0));
+		dataEngine.guardarPartida(currentUser,a);
+	}
 
 	private TableroH creaTauler(String nomkenken){
 		int mida = dataEngine.getMidaKenken(nomkenken);
@@ -347,7 +362,7 @@ public class MainController{
 		TableroH tauler = creaTauler(st1[0]);
 		omplirTauler(tauler,nomsaved);
 		load.setTauler(tauler);
-		play(st1[0]);   /*cambiar para inter*/
+		//play(st1[0]);   /*cambiar para inter*/
 		//Load an existing game
 	}
 

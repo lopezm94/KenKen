@@ -38,7 +38,7 @@ public class Log extends javax.swing.JFrame {
 
         jInternalFrame1.setVisible(true);
 
-        jPasswordField1.setText("jPasswordField1");
+        jPasswordField1.setText("Pass");
 
         jLabel2.setText("User:");
 
@@ -55,7 +55,7 @@ public class Log extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Login");
 
-        jTextField1.setText("UserName");
+        jTextField1.setText("User");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);

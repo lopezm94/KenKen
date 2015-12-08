@@ -160,14 +160,15 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        CarregarPartida c = new CarregarPartida();
+        CarregarPartida c = new CarregarPartida(mc);
         c.setVisible(true);
         dispose();
     }                                        
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        new GenerarKenken();
+        GenerarKenken k = new GenerarKenken(mc);
+        k.setVisible(true);
         dispose();
     }                                        
 

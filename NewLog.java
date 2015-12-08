@@ -45,11 +45,11 @@ public class NewLog extends javax.swing.JFrame {
 
         jInternalFrame1.setVisible(true);
 
-        jPasswordField1.setText("jPasswordField1");
+        jPasswordField1.setText("Pass");
 
-        jPasswordField2.setText("jPasswordField2");
+        jPasswordField2.setText("Pass");
 
-        jTextField1.setText("UserName");
+        jTextField1.setText("User");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);

@@ -1,6 +1,7 @@
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /*
 	 * To change this license header, choose License Headers in Project Properties.
@@ -12,16 +13,16 @@ import javax.swing.JButton;
 	 *
 	 * @author reyes
 	 */
-	public class Game3 extends javax.swing.JFrame {
+	public class Game3 extends javax.swing.JFrame  {
 
 		MainController mc = null;
 		Vector<Integer> areas = null;
 		Vector<Integer> areas2 = null;
-
+		String nom = null;
 	    /**
 	     * Creates new form Game3
 	     */
-	    public Game3(MainController a) {
+	    public Game3(MainController a, String b) {
 	        mc = a;
 	        areas = new Vector<Integer>(mc.tam());
 	        int c = 0;
@@ -35,6 +36,7 @@ import javax.swing.JButton;
 				areas2.add(c);
 				c -= 20;
 			}
+			nom = b;
 	    	initComponents();
 	    }
 
@@ -59,6 +61,8 @@ import javax.swing.JButton;
 	        jTextField8 = new javax.swing.JTextField();
 	        jTextField9 = new javax.swing.JTextField();
 	        jButton1 = new javax.swing.JButton();
+	        jButton3 = new javax.swing.JButton();
+	        jButton4 = new javax.swing.JButton();
 
 	        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,7 +156,20 @@ import javax.swing.JButton;
 	                jButton1ActionPerformed(evt);
 	            }
 	        });
-	        
+	        jButton3.setText("Guardar");
+	        jButton3.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButton3ActionPerformed(evt);
+	            }
+	        });
+
+	        jButton4.setText("Sortir");
+	        jButton4.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButton4ActionPerformed(evt);
+	            }
+	        });
+
 	        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
 	        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
 	        jInternalFrame1Layout.setHorizontalGroup(
@@ -181,10 +198,13 @@ import javax.swing.JButton;
 	                .addContainerGap(205, Short.MAX_VALUE))
 	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
 	                .addGap(0, 0, Short.MAX_VALUE)
-	                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-	                    .addComponent(jButton1)
-	                .addGap(34, 34, 34))));
-	        
+	                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+	                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                    .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+	                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+	                .addGap(34, 34, 34))
+	        );
 	        jInternalFrame1Layout.setVerticalGroup(
 	            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	            .addGroup(jInternalFrame1Layout.createSequentialGroup()
@@ -205,10 +225,13 @@ import javax.swing.JButton;
 	                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 	                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 	                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
 	                .addComponent(jButton1)
+	                .addGap(18, 18, 18)
+	                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
 	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-	                .addGap(62, 62, 62))
+	                .addComponent(jButton4)
+	                .addGap(19, 19, 19))
 	        );
 
 	        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -225,77 +248,143 @@ import javax.swing.JButton;
 	                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 	                .addGap(0, 0, Short.MAX_VALUE))
 	        );
-
+	        Jugar j = new Jugar(mc);
+	    	int a = j.num(0,0);
+	    	if (a > 0) jTextField1.setText(Integer.toString(a));
+		    a = j.num(0,2);
+		    if (a != -1) jTextField3.setText(Integer.toString(a));
+	    	a = j.num(0,1);
+	    	if (a != -1) jTextField2.setText(Integer.toString(a));
+	    	a = j.num(1,0);
+	    	if (a != -1) jTextField4.setText(Integer.toString(a));
+	    	a = j.num(1,1);
+	    	if (a != -1) jTextField5.setText(Integer.toString(a));
+	    	a = j.num(1,2);
+	    	if (a != -1) jTextField6.setText(Integer.toString(a));
+	    	a = j.num(2,0);
+	    	if (a != -1) jTextField7.setText(Integer.toString(a));
+	    	a = j.num(2,1);
+	    	if (a != -1) jTextField8.setText(Integer.toString(a));
+	    	a = j.num(2,2);
+	    	if (a != -1) jTextField9.setText(Integer.toString(a));
 	        pack();
-	    }// </editor-fold> 
+	    }// </editor-fold>                   
 	    
 	    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 	        // TODO add your handling code here:
 	    	Jugar j = new Jugar(mc);
 	    	if (j.comprobar()){
-	    		Felicitats f =new Felicitats();
+	    		JOptionPane.showMessageDialog(this, "FELICITATS!!");
+	    		Menu f =new Menu(mc);
 	    		f.setVisible(true);
 	    		dispose();
 	    	}
 	    	else{
-	    		Torna t =new Torna();
-	    		t.setVisible(true);
+	    		JOptionPane.showMessageDialog(this, "Torna, esta malament :'(");
 	    	}
 	    }      
 	    
 	    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {                                            
 	        // TODO add your handling code here: 0 2 
 	    	Jugar j = new Jugar(mc);
-	    	j.poner(0,2,jTextField3.getText());
+	    	int a = j.num(0,2);
+	    	if (a != -1) jTextField3.setText(Integer.toString(a));
+	    	if (! j.fija(0,2)){
+	    		j.poner(0,2,jTextField3.getText());
+	    	}
 	    }                                           
 
 	    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
 	        // TODO add your handling code here:   0 0
 	    	Jugar j = new Jugar(mc);
-	    	j.poner(0,0,jTextField1.getText());
+	    	if (! j.fija(0,0)){
+	    		j.poner(0,0,jTextField1.getText());
+	    	}
 	    }                                           
 
 	    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {                                            
 	        // TODO add your handling code here: 0 1
 	    	Jugar j = new Jugar(mc);
-	    	j.poner(0,1,jTextField2.getText());
+	    	int a = j.num(0,1);
+	    	if (a != -1) jTextField2.setText(Integer.toString(a));
+	    	if (! j.fija(0,1)){
+	    		j.poner(0,1,jTextField2.getText());
+	    	}
 	    }                                           
 
 	    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {                                            
 	        // TODO add your handling code here: 1 0
 	    	Jugar j = new Jugar(mc);
-	    	j.poner(1,0,jTextField4.getText());
+	    	int a = j.num(1,0);
+	    	if (a != -1) jTextField4.setText(Integer.toString(a));
+	    	if (! j.fija(1,0)){
+	    		j.poner(1,0,jTextField4.getText());
+	    	}
 	    }                                           
 
 	    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {                                            
 	        // TODO add your handling code here: 1 1
 	    	Jugar j = new Jugar(mc);
-	    	j.poner(1,1,jTextField5.getText());
-	    }                                           
+	    	int a = j.num(1,1);
+	    	if (a != -1) jTextField5.setText(Integer.toString(a));
+	    	if (! j.fija(1,1)){
+	    		j.poner(1,1,jTextField5.getText());
+	    	}
+	    }
 
 	    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {                                            
 	        // TODO add your handling code here: 1 2
 	    	Jugar j = new Jugar(mc);
-	    	j.poner(1,2,jTextField6.getText());
-	    }                                           
+	    	int a = j.num(1,2);
+	    	if (a != -1) jTextField6.setText(Integer.toString(a));
+	    	if (! j.fija(1,2)){
+	    		j.poner(1,2,jTextField6.getText());
+	    	}
+	    }
 
 	    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {                                            
 	        // TODO add your handling code here: 2 0
 	    	Jugar j = new Jugar(mc);
-	    	j.poner(2,0,jTextField7.getText());
-	    }                                           
+	    	int a = j.num(2,0);
+	    	if (a != -1) jTextField7.setText(Integer.toString(a));
+	    	if (! j.fija(2,0)){
+	    		j.poner(2,0,jTextField7.getText());
+	    	}                                  
+	    }
 
 	    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {                                            
 	        // TODO add your handling code here: 2 1
 	    	Jugar j = new Jugar(mc);
-	    	j.poner(2,1,jTextField8.getText());
-	    }                                           
+	    	int a = j.num(2,1);
+	    	if (a != -1) jTextField8.setText(Integer.toString(a));
+	    	if (! j.fija(2,1)){
+	    		j.poner(2,1,jTextField8.getText());
+	    	}
+    	}                                           
 
 	    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {                                            
 	        // TODO add your handling code here: 2 2
 	    	Jugar j = new Jugar(mc);
-	    	j.poner(2,2,jTextField9.getText());
-	    }                                           
+	    	int a = j.num(2,2);
+	    	if (a != -1) jTextField9.setText(Integer.toString(a));
+	    	if (! j.fija(2,2)){
+	    		j.poner(2,2,jTextField9.getText());
+	    	}
+	    }     
+	    
+	    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+	        // TODO add your handling code here:
+	    	/*guarda*/
+	    	Jugar j = new Jugar(mc);
+	    	j.guardar(nom);
+	    }                                        
+
+	    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+	        // TODO add your handling code here:
+	    	Menu m = new Menu(mc);
+	    	m.setVisible(true);
+	    	dispose();
+	    }    
 
 	   /* private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                          
 	    	Jugar j = new Jugar(mc);
@@ -340,7 +429,7 @@ import javax.swing.JButton;
 	        /* Create and display the form */
 	        java.awt.EventQueue.invokeLater(new Runnable() {
 	            public void run() {
-	                new Game3(null).setVisible(true);
+	                new Game3(null,null).setVisible(true);
 	            }
 	        });
 	    }
@@ -358,6 +447,8 @@ import javax.swing.JButton;
 	    private javax.swing.JTextField jTextField7;
 	    private javax.swing.JTextField jTextField8;
 	    private javax.swing.JTextField jTextField9;
+	    private javax.swing.JButton jButton3;
+	    private javax.swing.JButton jButton4;
 	    // End of variables declaration                   
 	}
 
