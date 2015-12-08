@@ -72,7 +72,7 @@ public class Multiplicacio extends Area{
 	public void calcular_resultatactual(){
 		res = 1;
 		for(int i=0; i < caselles.size(); ++i){
-			res *= caselles.get(i).getValor();
+			resact *= caselles.get(i).getValor();
 		}
 	}
 	
