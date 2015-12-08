@@ -21,7 +21,6 @@ public class Jugar {
 	}
 	
 	public Boolean comprobar(){
-		mc.imprimir();
 		if (mc.comp()) return true;
 		return false;
 	}

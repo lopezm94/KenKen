@@ -154,7 +154,6 @@ public class TableroH extends Tablero {
 
 	public Boolean numerosCheck() {	//numeros no repes
 		Boolean vect[] = new Boolean[files];
-
 		for (int i = 0; i < files; ++i){
 			for (int k = 0; k < files; ++k) vect[k] = false;
 			for (int j = 0; j < files; ++j) {
