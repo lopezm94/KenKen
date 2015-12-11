@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 /**
 *<h1>Ranking</h1>
 *Implementa un Ranking de jugadores con puntuaciones.
@@ -17,6 +19,13 @@ public class Ranking extends OrderedMapByValue {
   */
   public Ranking(String comp) {
     super(comp);
+  }
+
+  /**
+  *Devuelve una lista con el ranking
+  */
+  public LinkedList<Pair<String, Integer>> getRank() {
+    return new LinkedList<Pair<String, Integer>>(super.map);
   }
 
   /**

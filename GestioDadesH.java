@@ -3,84 +3,19 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.LinkedList;
 
 /**
 *@version 1.0
 *@author Marc Ortiz
 *@author Joan Grau
+*@author Juan Lopez
 */
 
 
 public class GestioDadesH  extends Gestio_Dades{
-	/*
-	getInfoLine sirve tanto para Ranking como para Usuarios
-	Dado que tendremos dos ficheros (Profiles.txt i Ranking.txt) donde
-	guardaremos los datos en formato:
-	username + info
-	he creado esta funcion getInfoLine para obtener a partir de una keyword (username)
-	muy similar a un select(keyword) en base de datos
-	*/
-	private String getInfoLine(String keyword, String dir, String file){
-		String profiledata = "";
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(dir+"/"+file));
-		    String line;
-		    while ((line = br.readLine()) != null) {
-		       if(line.contains(keyword)){
-		       		profiledata = line;
-		       }
-		    }
-		    br.close();
-		}catch(IOException e){
-			System.out.println(e.toString());
-		}
-		return profiledata;
-	}
 
-	//Obt� la l�nia a que es troba en el fitxer donada una keyword
-	public int getLine(String keyword, String dir, String file){
-		int contador = 0;
-		Boolean control = false;
-		try {
-			BufferedReader br = new BufferedReader(new FileReader("./"+file));
-		    String line;
-		    while ((line = br.readLine()) != null && !control) {
-		       if(line.contains(keyword)){
-		       		control = true;
-		       }else{
-		    	   contador++;
-		       }
-		    }
-		    br.close();
-		}catch(IOException e){
-			System.out.println(e.toString());
-		}
-		return contador;
-	}
-
-	public GestioDadesH(Perfil p){
-		//Creem els fitxers necessaris, si existeixen llavors no es crearan, si no existeixen es crearan.
-		/*
-			Create if not exist --> all txt database files and dir's needed.
-			Directory structure:
-			./
-				./KenKens
-					Kenken1.txt
-					KenKen2.txt
-					KenKen3.txt
-				->Profiles.txt
-				./Games
-					MarcOrtiz
-						Game1.txt
-						Game2.txt
-						Game3.txt
-					Pepe
-						Game1.txt
-					Al�_el_Magreb�
-						Game1.txt
-				->Ranking.txt
-
-		*/
+	static {
 		try{
 			Crear_directorio(".","KenKens");
 		}catch(IOException e){
@@ -107,25 +42,110 @@ public class GestioDadesH  extends Gestio_Dades{
 		}
 	}
 
-	public String[] getProfileInfo(String keyword, String dir, String file){
+	/*
+	getInfoLine sirve tanto para Ranking como para Usuarios
+	Dado que tendremos dos ficheros (Profiles.txt i Ranking.txt) donde
+	guardaremos los datos en formato:
+	username + info
+	he creado esta funcion getInfoLine para obtener a partir de una keyword (username)
+	muy similar a un select(keyword) en base de datos
+	*/
+	private static String getInfoLine(String keyword, String dir, String file){
+		String profiledata = "";
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(dir+"/"+file));
+		    String line;
+		    while ((line = br.readLine()) != null) {
+		       if(line.contains(keyword)){
+		       		profiledata = line;
+		       }
+		    }
+		    br.close();
+		}catch(IOException e){
+			System.out.println(e.toString());
+		}
+		return profiledata;
+	}
+
+	public static LinkedList<Pair<String,Integer>> readScores(
+		String dificultad, String dir, String file) {
+    		Integer index = null;
+		LinkedList<Pair<String,Integer>> lista =
+			new LinkedList<Pair<String,Integer>>();
+	
+		switch (dificultad.charAt(0)) {
+			case 'F':
+				index = 2;
+				break;
+			case 'M':
+				index = 3;
+				break;
+			case 'D':
+				index = 4;
+				break;
+		}
+
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(dir+"/"+file));
+			String line;
+			String[] info;
+			while ((line = br.readLine()) != null) {
+				info = line.split("\\s");
+				Integer puntuacion = Integer.parseInt(info[index]);
+				if (puntuacion == 0)
+				puntuacion = Integer.MAX_VALUE;
+				lista.add(new Pair<String,Integer>(
+				info[0],
+				puntuacion
+				));
+			}
+		}catch(IOException e) {
+			System.out.println(e.toString());
+		}
+
+		return lista;
+	}
+
+	//Obt� la l�nia a que es troba en el fitxer donada una keyword
+	public static int getLine(String keyword, String dir, String file){
+		int contador = 0;
+		Boolean control = false;
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("./"+file));
+		    String line;
+		    while ((line = br.readLine()) != null && !control) {
+		       if(line.contains(keyword)){
+		       		control = true;
+		       }else{
+		    	   contador++;
+		       }
+		    }
+		    br.close();
+		}catch(IOException e){
+			System.out.println(e.toString());
+		}
+		return contador;
+	}
+
+	public static String[] getProfileInfo(String keyword, String dir, String file){
 		//retorna una array de strings [marc,1234,20,20,100]  [0]-> usr; [1]->pass; [2:5] -> points
 		return getInfoLine(keyword,dir,file+".txt").split("\\s");
 	}
-	public Boolean existsUser(String[] st, String username){
+	public static Boolean existsUser(String[] st, String username){
 		/*Comprova dins del tokenizer que no sigui null*/
 		return st[0].equals(username);
 	}
-	public String getUserByToken(String[] st){
+	public static String getUserByToken(String[] st){
 		if(st.length > 0) return st[0];
 		else return "";
 	}
-	public String getPassByToken(String[] st){
+	public static String getPassByToken(String[] st){
 		if(st.length > 0){
 			return st[1];
 		}
 		return "";
 	}
-	public int[] getPuntuacio(String[] st){
+	public static int[] getPuntuacio(String[] st){
 		int i = 0;
 		int[] punts = new int[3];
 		if(st.length > 0){
@@ -146,7 +166,7 @@ public class GestioDadesH  extends Gestio_Dades{
 			3 1 2
 			2 3 1
 	*/
-	public String[] getPartidaHeaderInfo(String file, String username, int linea){
+	public static String[] getPartidaHeaderInfo(String file, String username, int linea){
 		/*
 			getPartidaHeaderInfo retorna els valors:
 			->temps de partida
@@ -165,7 +185,7 @@ public class GestioDadesH  extends Gestio_Dades{
 		return headerinfo;
 
 	}
-	public int[][] getPartidaValues(String file, String username, int mida){
+	public static int[][] getPartidaValues(String file, String username, int mida){
 		int[][] caselles = new int[mida][mida];
 		int i;
 		i = 0;
@@ -186,7 +206,7 @@ public class GestioDadesH  extends Gestio_Dades{
 		return caselles;
 	}
 
-	public void guardarPartida(Perfil p,String nomkenken){
+	public static void guardarPartida(Perfil p,String nomkenken){
 		String username = p.get_usuari();
 		String nompartida = p.get_partida().getNomPartida();
 		try {
@@ -230,8 +250,8 @@ public class GestioDadesH  extends Gestio_Dades{
 	...
 	casellax fija sol idarea --> fija (1 fija,0 no fija), sol(value), idarea(0...total areas)
 */
-	
-	public void guardar_kenken(TableroH tauler, String nomkenken){
+
+	public static void guardar_kenken(TableroH tauler, String nomkenken){
 		try {
 			Crear_archivo(nomkenken,"./KenKens");
 		} catch (IOException | FicheroYaExistente e) {
@@ -263,13 +283,13 @@ public class GestioDadesH  extends Gestio_Dades{
 			e.printStackTrace();
 		}
 	}
-	
-	public void escriure_kenken(TableroH tauler){
+
+	public static void escriure_kenken(TableroH tauler){
 
 	}
 
 	//RETRN
-	public int getMidaKenken(String nomkenken){
+	public static int getMidaKenken(String nomkenken){
 		int mida = -1;
 		try{
 			mida = Integer.parseInt(Leer_string(nomkenken,"./KenKens","\n",0));
@@ -286,7 +306,7 @@ public class GestioDadesH  extends Gestio_Dades{
 		dificultat = Integer.parseInt(op[1]);
 		return dificultat;
 	}*/
-	public String[] getOperacions(String nomkenken){
+	public static String[] getOperacions(String nomkenken){
 		String[] opnew;
 		String[] op = getInfoLine("operacions", "./KenKens", nomkenken+".txt").split("\\s");
 		opnew = new String[op.length-1];
@@ -308,7 +328,7 @@ public class GestioDadesH  extends Gestio_Dades{
 	- solucio usuari temporal
 	- area a la que correspon
 	*/
-	public int[][] getCasellaValors(String nomkenken){
+	public static int[][] getCasellaValors(String nomkenken){
 		int mida = getMidaKenken(nomkenken);
 		int casella_values[][] = new int[mida*mida][3];
 		for(int i = 0; i<mida*mida; ++i){
