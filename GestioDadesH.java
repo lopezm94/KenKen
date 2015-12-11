@@ -69,42 +69,42 @@ public class GestioDadesH  extends Gestio_Dades{
 
 	public static LinkedList<Pair<String,Integer>> readScores(
 		String dificultad, String dir, String file) {
-    Integer index = null;
-    LinkedList<Pair<String,Integer>> lista =
-      new LinkedList<Pair<String,Integer>>();
-
-    switch (dificultad.charAt(0)) {
-      case 'F':
-        index = 2;
-        break;
-      case 'M':
-        index = 3;
-        break;
-      case 'D':
-        index = 4;
-        break;
-    }
+    		Integer index = null;
+		LinkedList<Pair<String,Integer>> lista =
+			new LinkedList<Pair<String,Integer>>();
+	
+		switch (dificultad.charAt(0)) {
+			case 'F':
+				index = 2;
+				break;
+			case 'M':
+				index = 3;
+				break;
+			case 'D':
+				index = 4;
+				break;
+		}
 
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(dir+"/"+file));
-	    String line;
-      String[] info;
-	    while ((line = br.readLine()) != null) {
-	       info = line.split("\\s");
-         Integer puntuacion = Integer.parseInt(info[index]);
-         if (puntuacion == 0)
-           puntuacion = Integer.MAX_VALUE;
-         lista.add(new Pair<String,Integer>(
-           info[0],
-           puntuacion
-         ));
-	    }
+			String line;
+			String[] info;
+			while ((line = br.readLine()) != null) {
+				info = line.split("\\s");
+				Integer puntuacion = Integer.parseInt(info[index]);
+				if (puntuacion == 0)
+				puntuacion = Integer.MAX_VALUE;
+				lista.add(new Pair<String,Integer>(
+				info[0],
+				puntuacion
+				));
+			}
 		}catch(IOException e) {
 			System.out.println(e.toString());
 		}
 
 		return lista;
-  }
+	}
 
 	//Obt� la l�nia a que es troba en el fitxer donada una keyword
 	public static int getLine(String keyword, String dir, String file){
