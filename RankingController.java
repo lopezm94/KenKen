@@ -2,7 +2,7 @@ import java.util.LinkedList;
 
 /**
 *<h1>RankingController</h1>
-*Implementa un Ranking de jugadores con puntuaciones.
+*Maneja el Ranking de jugadores con puntuaciones.
 *
 *@author Juan López
 */
@@ -12,6 +12,13 @@ public class RankingController {
   private static final String file = "Profiles.txt";
   private static final String order = "naturalOrder";
 
+
+  /**
+  *Obtiene la puntuacion de todos los usuarios en la dificultad elegida.
+  *
+  *@param dificultad Dificultad
+  *@return LinkedList<Pair<String,Integer>> Pares (usuario,puntuacion)
+  */
   public static LinkedList<Pair<String,Integer>> getRanking(String dificultad) {
     Ranking ranking = new Ranking(order);
     LinkedList<Pair<String,Integer>> lista = GestioDadesH.readScores(

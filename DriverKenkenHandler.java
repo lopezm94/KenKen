@@ -14,15 +14,14 @@ public class DriverKenkenHandler {
     String dificultad;
     String line;
     in = new Scanner(System.in);
-    KenkenHandler ke = new KenkenHandler();
 
     System.out.println("De que tamaño quiere el tablero? (3-9)");
     size = Integer.parseInt(in.nextLine());
     System.out.println("Que dificultad desea? (Facil, Medio o Dificil)");
     dificultad = in.nextLine();
 
-    TableroH sol = ke.generateAndSolveKenken(size,dificultad);
-    ke.solveKenken(sol);
+    TableroH sol = KenkenHandler.generateAndSolveKenken(size,dificultad);
+    KenkenHandler.solveKenken(sol);
     sol.setResultToValue();
     if (!sol.numerosCheck())
       System.out.println("Hay algo mal");
@@ -41,6 +40,7 @@ public class DriverKenkenHandler {
     System.out.println();
     System.out.println(sol.getAreas());
     System.out.println(sol.getSolucion());
+    System.out.println("La dificultad es " + KenkenHandler.getDifficulty(sol));
   }
 
 }
