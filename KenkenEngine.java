@@ -104,7 +104,7 @@ public class KenkenEngine extends ConstraintEngine {
 
 
   /**
-  *Parea por las casillas del area y restringe el dominio en base a las restricciones
+  *Pasea por las casillas del area y restringe el dominio en base a las restricciones
   *de fila, columna, operacion y resultado.
   *
   *@param order Arraylist donde se encuentran las casillas del area.

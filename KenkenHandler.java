@@ -157,7 +157,7 @@ public class KenkenHandler {
 				char op;
 				Area area;
 				LinkedList<Pair<Integer,Integer>> bag = new LinkedList<Pair<Integer,Integer>>();
-				size = rand.nextInt(8)+1;
+				size = rand.nextInt(6)+1;
 				this.randomDFS(i,j,tablero,bag,size);
 				op = this.pickOpAndRes(tablero,bag);
 				area = AreaBuilder.newArea(tablero.getNumAreas(),op);
