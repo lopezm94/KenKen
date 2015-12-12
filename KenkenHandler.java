@@ -67,10 +67,7 @@ public class KenkenHandler {
 		}
 		Boolean done = false;
 		ArrayList<Integer> domain = new ArrayList<Integer>(ke.getDomain(x,y));
-		/*
-		if (domain.size() > 1)
-			tablero.setCasillaFija(tablero.getCasillaSol(x,y),x,y);
-		*/
+
 		for (Integer value : domain) {
 			if (ke.propagate(x,y,value)) {
 				Pair<Integer,Integer> pos = this.getNext(tablero,ke);
@@ -119,7 +116,6 @@ public class KenkenHandler {
 	public Boolean solveKenken(TableroH tablero){
 		KenkenEngine ke = new KenkenEngine(tablero);
 		return this.domainSolve(tablero,0,0,ke);
-		//Poner un warning de unica solucion.
 	}
 
 
