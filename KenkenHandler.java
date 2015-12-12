@@ -176,7 +176,7 @@ public class KenkenHandler {
 	*@param dificultad Dificultad.
 	*/
 	private void setDifficulty(TableroH tablero, String dificultad) {
-		int i,limit,minimum;
+		int i,limit,minimum,maximum;
 		Random rand = new Random();
 		LinkedList<Casilla> casillas;
 
@@ -191,30 +191,39 @@ public class KenkenHandler {
 		switch (tablero.size()){
 			case 3:
 				minimum = 0;
+				maximum = 0;
 				break;
 			case 4:
-				minimum = 1;
+				minimum = 0;
+				maximum = 4;
 				break;
 			case 5:
-				minimum = 2;
+				minimum = 0;
+				maximum = 9;
 				break;
 			case 6:
-				minimum = 3;
+				minimum = 0;
+				maximum = 20;
 				break;
 			case 7:
-				minimum = 5;
+				minimum = 0;
+				maximum = 33;
 				break;
 			case 8:
 				minimum = 7;
+				maximum = 48;
 				break;
 			case 9:
 				minimum = 9;
+				maximum = 65;
 				break;
 			default:
 				minimum = tablero.size();
+				maximum = tablero.size()/3;
 				break;
 		}
 		limit = Math.max(limit,minimum);
+		limit = Math.min(limit,maximum);
 
 		i = 0;
 		casillas = tablero.getAllCasillas();
