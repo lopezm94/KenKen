@@ -12,6 +12,7 @@ public class DriverKenkenHandler {
   public static void main(String[] args) {
     int size;
     String dificultad;
+    String line;
     in = new Scanner(System.in);
     KenkenHandler ke = new KenkenHandler();
 
@@ -26,7 +27,18 @@ public class DriverKenkenHandler {
     if (!sol.numerosCheck())
       System.out.println("Hay algo mal");
     System.out.println(sol.getAllAreas());
-    System.out.println(sol);
+    for (int i=0,cas; i<size; i++) {
+      line = "";
+      for (int j=0; j<size; j++) {
+        if (sol.casillaIsFija(i,j))
+          cas = sol.getCasillaVal(i,j);
+        else
+          cas = -1;
+        line = line + cas + " ";
+      }
+      System.out.println(line);
+    }
+    System.out.println();
     System.out.println(sol.getAreas());
     System.out.println(sol.getSolucion());
   }
