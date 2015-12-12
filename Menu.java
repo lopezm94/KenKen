@@ -174,7 +174,9 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        //new Elimina();
+        //new Elimina();ç
+    	Elimina e = new Elimina(mc);
+    	e.setVisible(true);
         dispose();
     }                                        
 
@@ -187,8 +189,9 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        //new rank();
-        //dispose();
+        RankingI r = new RankingI(mc);
+        r.setVisible(true);
+        dispose();
     }                                        
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {                                         

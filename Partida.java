@@ -6,10 +6,15 @@ public class Partida{
 	private String nomPartida;
 	private int time;
 	private TableroH taulerPartida;
-	public Partida(String nomPartida, String username){
+	private String nomkenken;
+	public Partida(String nomPartida, String username,String nomkenken){
 		this.nomPartida = nomPartida;
 		this.time = 0;
+		this.nomkenken = nomkenken;
 		taulerPartida=null;
+	}
+	public String getNomKenken(){
+		return nomkenken;
 	}
 	public String getNomPartida(){
 		return nomPartida;

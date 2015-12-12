@@ -49,8 +49,7 @@ public class TableroH extends Tablero {
 
 	public void afegirArea(Area a, int ress) {
 			a.set_res(ress);
-			//System.out.println(ress);
-	      areas.add(a);
+			areas.add(a);
 
 	}
 
@@ -64,12 +63,14 @@ public class TableroH extends Tablero {
 
 	public void setid(int c, int x, int y) {
 	  idAreas[x][y] = c;
+	  System.out.println(c+" " + areas + " ");
 	  areas.get(c).afegir_casella(tauler[x][y]);
 	}
 
 	public void setId(int c, int x, int y) {
 	  idAreas[x][y] = c;
 	}
+	
 
 	public void colocaRes() {
 		for (int i = 0; i < areas.size();++i) areas.get(i).calcular_resultat();
@@ -90,7 +91,21 @@ public class TableroH extends Tablero {
 	public Area getArea(int n) { //n = area, retorna una llista
 		return areas.get(n);
 	}
+	
+	public Boolean getAreaNum(int n) { //n = area, retorna una llista
+		if (areas.size() > n)
+		return true;
+		else return false;
+	}
 
+	public void config(){
+		for (int i = 0; i < files; ++i){
+			for (int j = 0; j < files; ++j){
+				areas.get(idAreas[i][j]).afegir_casella(tauler[i][j]);
+			}
+		}
+	}
+	
 	public Boolean areaContains(Area area, int x, int y) {
 		int id = area.get_posicio();
 		return id == idAreas[x][y];
@@ -238,6 +253,18 @@ public class TableroH extends Tablero {
 			}
 			res = res + "\n";
 		}
+		
+		for (int i = 0; i < files;++i){
+			for (int j = 0; j < files; ++j){
+				res = res + getCasillaSol(i,j) + " ";
+			}
+			res = res + "\n";
+		}
+		
+		
+		
+		
+		for (int i = 0; i < areas.size();++i) res  = res + areas.get(i);
 
 		return res;
 	}

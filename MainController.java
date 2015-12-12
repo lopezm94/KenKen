@@ -156,6 +156,10 @@ public class MainController{
 		return currentUser.get_partida().getTauler().getFiles();
 	}
 	
+	public String nomKenken(){
+		return currentUser.get_partida().getNomKenken();
+	}
+	
 	public void guarda(String a){
 		currentUser.get_partida().setTime(tiempo(0));
 		dataEngine.guardarPartida(currentUser,a);
@@ -341,20 +345,45 @@ public class MainController{
 	public MainController(){
 		in = new Scanner(System.in);
 		Perfil p = new Perfil();
-		dataEngine = new GestioDadesH(p);
+		dataEngine = new GestioDadesH();
 
 	}
 	public void new_game(String nompartida, String nomkenken){
 		//pre: current user ja esta inicialitzat
-		Partida nova = new Partida(nompartida,currentUser.get_usuari());
+		Partida nova = new Partida(nompartida,currentUser.get_usuari(),nomkenken);
 		currentUser.assignar_nova_partida(nova);
 		TableroH tablero = creaTauler(nomkenken);
 		nova.setTauler(tablero);
 		//play(nomkenken); /*cambiar para inter*/
 	}
-
+	
+	public String areaTipo(int x, int y){
+		String a = null;
+		a = Character.toString(currentUser.get_partida().getTauler().getArea(x, y).get_operacio());
+		a += "   ";
+		a += Integer.toString(currentUser.get_partida().getTauler().getArea(x, y).get_resultat());
+		return a;
+	}
+	
+	public void genera(String nomkenken, String a, int b){
+		KenkenHandler ke = new KenkenHandler();
+		TableroH tablero = ke.generateAndSolveKenken(b,a);
+		dataEngine.guardar_kenken(tablero,nomkenken);
+	}
+	public Boolean generaMan(Generar a,String nomkenken){
+		TableroH tablero = a.getTablero();
+		KenkenHandler ke = new KenkenHandler();
+		ke.solveKenken(tablero);
+		return true;
+	}
+	
+	public void guarda_gen (Generar a, String nomkenken){
+		TableroH tablero = a.getTablero();
+		dataEngine.guardar_kenken(tablero,nomkenken);
+	}
+	
 	public void load_game(String nomsaved){
-		Partida load = new Partida(nomsaved,currentUser.get_usuari());
+		Partida load = new Partida(nomsaved,currentUser.get_usuari(),nomKenken());
 		currentUser.assignar_nova_partida(load);
 		String st[] = dataEngine.getPartidaHeaderInfo(nomsaved,currentUser.get_usuari(),0);
 		load.setTime(Integer.parseInt(st[0]));
@@ -376,7 +405,7 @@ public class MainController{
 			String st = in.next();
 			System.out.println("Introduce el nombre de tu partida:");
 			String s2t = in.next();
-			Partida nova = new Partida(s2t,currentUser.get_usuari());
+			Partida nova = new Partida(s2t,currentUser.get_usuari(),nomKenken());
 			currentUser.assignar_nova_partida(nova);
 			nova.setTauler(th);
 			dataEngine.guardar_kenken(th,st);
@@ -391,11 +420,11 @@ public class MainController{
 		try{
 			Gestio_Dades.modificarString("Profiles", ".", linea, "\n", "\n");
 		}catch(IOException e){
-			System.out.println(e.toString());
+			//System.out.println(e.toString());
 		}catch(FicheroNoExiste f){
-			System.out.println("El fichero no existe\n");
+			//System.out.println("El fichero no existe\n");
 		}catch(FicheroYaExistente f1){
-			System.out.println("El fichero ya existe\n");
+			//System.out.println("El fichero ya existe\n");
 		}
 	}
 	public void show_tutorial(){

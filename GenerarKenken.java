@@ -1,3 +1,7 @@
+import javax.swing.ButtonModel;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+
 /*
  /*
  * To change this license header, choose License Headers in Project Properties.
@@ -44,6 +48,7 @@ public class GenerarKenken extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jSpinner1 = new javax.swing.JSpinner();
         jLabel3 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,6 +101,8 @@ public class GenerarKenken extends javax.swing.JFrame {
 
         jLabel3.setText("Tamaño");
 
+        jTextField1.setText("Nom Partida");
+
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
@@ -128,6 +135,10 @@ public class GenerarKenken extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(107, 107, 107))
+            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                .addGap(169, 169, 169)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +156,9 @@ public class GenerarKenken extends javax.swing.JFrame {
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2)
                     .addComponent(jRadioButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -174,12 +187,47 @@ public class GenerarKenken extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     	
-    	
+    	CrearKenken c = new CrearKenken(mc);
+    	String a = "Medio";
+
+    	if (jRadioButton1.isSelected() == true) a = "Facil";
+    	else if (jRadioButton2.isSelected() == true) a = "Medio";
+    	else if (jRadioButton3.isSelected() == true) a = "Dificil";
+    	c.genera(jTextField1.getText() ,a, (int)jSpinner1.getValue());
+    	Menu m = new Menu(mc);
+    	m.setVisible(true);
     	dispose();  /*aleatorio*/
     }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:ç
+    	String a = "Medio";
+
+    	if (jRadioButton1.isSelected() == true) a = "Facil";
+    	else if (jRadioButton2.isSelected() == true) a = "Medio";
+    	else if (jRadioButton3.isSelected() == true) a = "Dificil";
+    	
+    	switch ((int)jSpinner1.getValue()){
+	        case 3:
+	        	Generar ge = new Generar();
+	        	ge.mida(3);
+	        	JOptionPane.showMessageDialog(this, "Les areas comencen des de 0 i incrementa de 1 en 1");
+	        	Gen3 g = new Gen3(mc,jTextField1.getText(),ge);
+	            g.setVisible(true);
+	        	break;
+	        case 4:
+	        	break;
+	        case 5:
+	        	break;
+	        case 6:
+	        	break;
+	        case 7:
+	        	break;
+	        case 8:
+	        	break;
+	        case 9:
+	        	break;
+        }
     	dispose(); /*manual*/
     }                                        
 
@@ -238,5 +286,6 @@ public class GenerarKenken extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration                   
 }

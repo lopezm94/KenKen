@@ -4,7 +4,7 @@ import java.util.LinkedList;
 *<h1>Ranking</h1>
 *Implementa un Ranking de jugadores con puntuaciones.
 *
-*@author Juan LÃ³pez
+*@author Juan López
 */
 public class Ranking extends OrderedMapByValue {
 

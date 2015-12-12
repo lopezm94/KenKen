@@ -127,6 +127,7 @@ public class CarregarPartida extends javax.swing.JFrame {
         // TODO add your handling code here:
         String str = jTextField1.getText();
         mc.load_game(str);
+        str = mc.nomKenken();
         switch (mc.tamany()){
         case 3:
         	Game3 g = new Game3(mc,str);

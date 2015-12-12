@@ -91,6 +91,7 @@ public class GestioDadesH  extends Gestio_Dades{
 			String[] info;
 			while ((line = br.readLine()) != null) {
 				info = line.split("\\s");
+
 				Integer puntuacion = Integer.parseInt(info[index]);
 				if (puntuacion == 0)
 				puntuacion = Integer.MAX_VALUE;

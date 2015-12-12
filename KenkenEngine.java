@@ -117,7 +117,8 @@ public class KenkenEngine extends ConstraintEngine {
   private void setAreaDomain(ArrayList<Pair<Pair<Integer,Integer>,Casilla>> order,
     HashMap<Casilla,HashSet<Integer>> domains, Area area,
     Boolean[][] col, Boolean[][] row, int depth) {
-    if (!area.check(super.board.size()))
+    if (!area.check(
+    		super.board.size()))
       return;
     if (depth == order.size()) {
       for (Casilla casilla : area.getCasellas()) {

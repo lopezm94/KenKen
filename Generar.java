@@ -16,11 +16,46 @@ import java.util.TimerTask;
 
 public class Generar {
 	
-	public TableroH tablero;
+	TableroH tablero;
 	Timer timer;
 	
-	public Generar(){
-		tablero = null;
+	
+	public void mida(int a){
+		tablero = new TableroH(a);
+		
+		for (int i = 0;i< tablero.size();++i){
+			for (int j = 0; j < tablero.size();++j){
+				Casilla cas1 = new Casilla();
+				tablero.setCasilla(cas1,i,j);
+			}
+		}
+	}
+	
+	public int num(int x, int y){
+		return tablero.getCasillaSol(x, y);
+	}
+	
+	public void fija(int a, int x, int y){
+		tablero.setCasillaFija(a, x, y);
+	}
+	
+	public void areas(int at, char op, int res){
+		Area a = AreaBuilder.newArea(at,op);
+		if (tablero.getAreaNum(at) == false){
+			tablero.afegirArea(a,res);
+		}
+	}
+
+	public void colocA (int a, int x, int y){
+		tablero.setId(a,x,y);
+	}
+	
+	public void colocAreas(){
+		tablero.config();
+	}
+	
+	public TableroH getTablero(){
+		return tablero;
 	}
 	
 	public TableroH genera(){
@@ -52,7 +87,7 @@ public class Generar {
 						edita = true;
 						int at = 0;
 						while (at < var){
-							Area a = crida.tipoArea(at);
+							Area a = crida.tipoArea(at,'p');
 							int res = crida.resArea();
 							tablero.afegirArea(a,res);
 							++at;

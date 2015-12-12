@@ -26,15 +26,27 @@ import javax.swing.JOptionPane;
 	        mc = a;
 	        areas = new Vector<Integer>(mc.tam());
 	        int c = 0;
+	        int var = 20;
 			for (int i = 0; i < mc.tam(); ++i){
 				areas.add(c);
-				c += 20;
+				c += var;
+				if (c >= 255){
+					var += 10;
+					if (var >= 255) var = 20;
+					c = 0;
+				}
 			}
 			areas2 = new Vector<Integer>(mc.tam());
 		    c = 255;
-			for (int i = 0; i < mc.tam(); ++i){
+		    var = 40;
+			for (int i = 1; i <= mc.tam(); ++i){
 				areas2.add(c);
-				c -= 20;
+				c -= var;
+				if (c >= 255){
+					var += 30; 
+					if (var >= 255) var = 40;
+					c = 0;
+				}
 			}
 			nom = b;
 	    	initComponents();
@@ -72,7 +84,15 @@ import javax.swing.JOptionPane;
 	        jLabel1.setText("Kenken");
 	        
 	        
-	        
+	        jTextField1.setText(mc.areaTipo(0,0));
+	        jTextField2.setText(mc.areaTipo(0,1));
+	        jTextField3.setText(mc.areaTipo(0,2));
+	        jTextField4.setText(mc.areaTipo(1,0));
+	        jTextField5.setText(mc.areaTipo(1,1));
+	        jTextField6.setText(mc.areaTipo(1,2));
+	        jTextField7.setText(mc.areaTipo(2,0));
+	        jTextField8.setText(mc.areaTipo(2,1));
+	        jTextField9.setText(mc.areaTipo(2,2));
 	        
 	        jTextField1.setBackground(new java.awt.Color(((int) areas.get(mc.area(0,0))), ((int) areas2.get(mc.area(0,0))), 255));
 	        jTextField1.setPreferredSize(new java.awt.Dimension(44, 22));

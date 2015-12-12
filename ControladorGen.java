@@ -52,11 +52,8 @@ public class ControladorGen {
 		return var;
 	}
 	
-	public Area tipoArea(int at){
-			System.out.println("Quieres tener un area de tipo? (+,-,*,/)");
-			String varS = in.next();
-			char var2[] = varS.toCharArray();
-			Area a = AreaBuilder.newArea(at,var2[0]);
+	public Area tipoArea(int at, char op){
+			Area a = AreaBuilder.newArea(at,op);
 			return a;
 	
 	}
