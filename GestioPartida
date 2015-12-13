@@ -1,7 +1,9 @@
+import java.io.IOException;
+
 /**
 *@author Marc Ortiz
 **/
-public class GestioPartida extends Transaction{
+public class GestioPartida{
 	private long tstart;
 	private Partida p;
 	private String nomUser;
@@ -10,57 +12,100 @@ public class GestioPartida extends Transaction{
 		//Omplim el tauler amb els valors de la partida anterior
 		TableroH tauler = p.getTauler();
 		int mida = tauler.size();
-		int caselles[][] = dataEngine.getPartidaValues(nomficher,nomUser,mida);
+		int caselles[][] = GestioDadesH.getPartidaValues(p.getNomPartida(),nomUser,mida);
 		for(int i=0; i < mida; ++i){
 			for(int j=0; j < mida; ++j){
 				tauler.setCasillaVal(i, j, caselles[i][j]);
 			}
 		}
 	}
+	
 	public GestioPartida(String nompartida, Boolean novaPartida, String nomkenken,String nomUser){
 		//LOADING GAME
 		this.nomUser = nomUser;
-		this.nomkenken = nomkenken;
-		GestioTauler ceator = new GestioTauler();
+		GestioTauler creator = new GestioTauler();
 		if(novaPartida){
-			p = new Partida(nompartida);
+			this.nomkenken = nomkenken;
+			p = new Partida(nompartida,nomkenken);
 			p.setTime(0);
 			p.setTauler(creator.creaTauler(nomkenken));
-			//inicialitzar partida al sistema de dades
-			dataEngine.guardarPartida(p,nomkenken);
 		}else{
-			//carrega la partida des de memòria
-			String st[] = dataEngine.getPartidaHeaderInfo(nompartida,nomUser,0);
+			//carrega la partida des de memoria
+			String st[] = GestioDadesH.getPartidaHeaderInfo(nompartida,nomUser,0);
+			String st1[] = GestioDadesH.getPartidaHeaderInfo(nompartida,nomUser,1);
+			this.nomkenken = st1[0];
+			p = new Partida(nompartida,this.nomkenken);
 			p.setTime(Integer.parseInt(st[0]));
-			String st1[] = dataEngine.getPartidaHeaderInfo(nompartida,nomUser,1);
 			p.setTauler(creator.creaTauler(st1[0]));
 			ompleTauler();
 		}
 	}
+	
+	public void TancarPartida(){
+		p = null;
+		nomUser = null;
+		nomkenken = null;
+	}
+	
+	public Partida getPartida(){
+		return p;
+	}	
+	
 	public void start(){
 		tstart = System.currentTimeMillis();
 	}
-	public void setValue(x,y,value){
-		p.getTauler().setCasillaVal(x,y,valor);
-	}
-	public int getValue(x,y){
-		return p.getTauler().getCasillaVal(x,y);
-	}
+
 	public long getTime(){
 		long time_end = System.currentTimeMillis();
 		long timeextra = p.getTime();
 		timeextra  += (time_end/1000 - tstart/1000);
 		return timeextra;
 	}
-	public boolean check(){
-		return partida.getTauler().tableroCheck() && partida.getTauler().numerosCheck();
+	
+	public void setValue(int x,int y,int value){
+		p.getTauler().setCasillaVal(x,y,value);
 	}
-	public void saveGame(){
-		dataEngine.guardarPartida(p,nomkenken);
-	}	
+	
+	public int getValue(int x,int y){
+		return p.getTauler().getCasillaVal(x,y);
+	}
+
+	public Boolean fija(int x, int y){
+		return p.getTauler().casillaIsFija(x, y);
+	}
+	
+	public int getTamany(){
+		return p.getTauler().getFiles();
+	}
+	
+	public int getNumAreas(){
+		return p.getTauler().getNumAreas();
+	}
+	
+	public int getAreaID(int x, int y){
+		return p.getTauler().getAreaID(x, y);
+	}
+	
+	public char getOperacio(int x, int y){
+		return p.getTauler().getArea(x, y).get_operacio();
+	}
+	
+	public int getResultatArea(int x, int y){
+		return p.getTauler().getArea(x, y).get_resultat();
+	}
+	
+	public boolean check(){
+		return p.getTauler().tableroCheck() && p.getTauler().numerosCheck();
+	}
+	
+	public void saveGame(Perfil p1){
+		p1.get_partida().setTime((int)getTime());
+		GestioDadesH.guardarPartida(p1,nomkenken);
+	}
+	
 	public void deleteGame() throws IOException,FicheroNoExiste{
 		try{
-			dataEngine.Borrar_archivo("./"+nomUser,nompartida);
+			GestioDadesH.Borrar_archivo("./"+nomUser,p.getNomPartida());
 		}catch(IOException e){
 			throw e;
 		}catch(FicheroNoExiste f){
