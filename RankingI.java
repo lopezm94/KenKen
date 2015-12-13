@@ -16,11 +16,13 @@ public class RankingI extends javax.swing.JFrame {
 	LinkedList<Pair<String,Integer>> lista;
 	LinkedList<Pair<String,Integer>> lista2;
 	LinkedList<Pair<String,Integer>> lista3;
+	Boolean guest;
     /**
      * Creates new form RankingII
      */
-    public RankingI(MainController a) {
+    public RankingI(MainController a, Boolean b) {
     	mc = a;
+    	guest = b;
     	lista = RankingController.getRanking("Facil");
     	lista2 =RankingController.getRanking("Medio");
     	lista3 = RankingController.getRanking("Dificil");
@@ -562,7 +564,7 @@ public class RankingI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    	Menu m = new Menu(mc);
+    	Menu m = new Menu(mc,guest);
     	m.setVisible(true);
     	dispose();
     }                                        
@@ -597,7 +599,7 @@ public class RankingI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RankingI(null).setVisible(true);
+                new RankingI(null, null).setVisible(true);
             }
         });
     }

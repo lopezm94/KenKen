@@ -1,3 +1,5 @@
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,12 +15,14 @@ public class Guarda extends javax.swing.JFrame {
 	MainController mc = null;
 	String nomP = null;
 	Generar g = null;
+	Boolean guest; 
 	
     /**
      * Creates new form Guarda
      */
-    public Guarda(MainController a, String b, Generar c) {
+    public Guarda(MainController a, String b, Generar c, Boolean p) {
     	mc = a;
+    	guest = p;
     	nomP = b;
     	g = c;
         initComponents();
@@ -102,17 +106,22 @@ public class Guarda extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here: /*mostra*/
-    	MostraT m = new MostraT(mc,nomP,g);
+    	MostraT m = new MostraT(mc,nomP,g,guest);
     	m.setVisible(true);
     	dispose();
     }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here: /*guarda*/
+    	if (!guest){
     	mc.guarda_gen(g,nomP);
-    	Menu m = new Menu(mc);
+    	Menu m = new Menu(mc,guest);
     	m.setVisible(true);
     	dispose();
+    	}
+    	else {
+    		JOptionPane.showMessageDialog(this, "Ets un convidat");
+    	}
     }                                        
 
     /**
@@ -145,7 +154,7 @@ public class Guarda extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Guarda(null,null,null).setVisible(true);
+                new Guarda(null,null,null,null).setVisible(true);
             }
         });
     }

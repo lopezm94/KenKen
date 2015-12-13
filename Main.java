@@ -20,7 +20,7 @@ public class Main{
 	public static void main (String args[]) throws IOException{
 		Scanner in = new Scanner(System.in);
 		MainController mc = new MainController();
-		Perfil user = mc.login();
+		Perfil user = mc.login(null, null);
 		int opcio;
 		int exit = 0;
 		while(exit==0){

@@ -14,6 +14,24 @@ public class Jugar {
 		mc = a;
 	}
 	
+	public int ponerAjuda(int x, int y){
+		int var = mc.getCas(x,y);
+		mc.posar_pos(x,y,var);
+		return var;
+	}
+	
+	public void neteja(){
+		for (int x = 0; x < mc.tamany(); ++x){
+			for (int y = 0; y < mc.tamany(); ++y){
+				mc.posar_pos(x,y,-1);
+			}
+		}
+	}
+	
+	public int show(int x,int y){
+		return mc.getCas(x, y);
+	}
+	
 	public Boolean fija(int x, int y){
 		return mc.es_fija(x,y);
 	}

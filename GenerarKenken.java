@@ -16,12 +16,13 @@ import javax.swing.JRadioButton;
 public class GenerarKenken extends javax.swing.JFrame {
 
 	MainController mc = null;
-    
+    Boolean guest;
 	/**
      * Creates new form GenerarKenken
      */
-    public GenerarKenken(MainController a) {
+    public GenerarKenken(MainController a, Boolean b) {
         mc = a;
+        guest = b;
     	initComponents();
     	dificultad.add(jRadioButton1);
     	dificultad.add(jRadioButton2);
@@ -186,17 +187,24 @@ public class GenerarKenken extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    	
-    	CrearKenken c = new CrearKenken(mc);
-    	String a = "Medio";
-
-    	if (jRadioButton1.isSelected() == true) a = "Facil";
-    	else if (jRadioButton2.isSelected() == true) a = "Medio";
-    	else if (jRadioButton3.isSelected() == true) a = "Dificil";
-    	c.genera(jTextField1.getText() ,a, (int)jSpinner1.getValue());
-    	Menu m = new Menu(mc);
-    	m.setVisible(true);
-    	dispose();  /*aleatorio*/
+    	if (! guest){
+	    	CrearKenken c = new CrearKenken(mc);
+	    	String a = "Medio";
+	
+	    	if (jRadioButton1.isSelected() == true) a = "Facil";
+	    	else if (jRadioButton2.isSelected() == true) a = "Medio";
+	    	else if (jRadioButton3.isSelected() == true) a = "Dificil";
+	    	c.genera(jTextField1.getText() ,a, (int)jSpinner1.getValue());
+	    	Menu m = new Menu(mc,guest);
+	    	m.setVisible(true);
+	    	dispose();  /*aleatorio*/
+    	}
+    	else {
+    		JOptionPane.showMessageDialog(this, "Ets un convidat");
+    		Menu m = new Menu(mc,guest);
+	    	m.setVisible(true);
+	    	dispose();
+    	}
     }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -212,7 +220,7 @@ public class GenerarKenken extends javax.swing.JFrame {
 	        	Generar ge = new Generar();
 	        	ge.mida(3);
 	        	JOptionPane.showMessageDialog(this, "Les areas comencen des de 0 i incrementa de 1 en 1");
-	        	Gen3 g = new Gen3(mc,jTextField1.getText(),ge);
+	        	Gen3 g = new Gen3(mc,jTextField1.getText(),ge, guest);
 	            g.setVisible(true);
 	        	break;
 	        case 4:
@@ -269,7 +277,7 @@ public class GenerarKenken extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GenerarKenken(null).setVisible(true);
+                new GenerarKenken(null,null).setVisible(true);
             }
         });
     }

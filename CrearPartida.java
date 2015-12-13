@@ -11,12 +11,13 @@
 public class CrearPartida extends javax.swing.JFrame {
 
 	MainController mc = null;
-	
+	Boolean guest;
     /**
      * Creates new form CrearPartida
      */
-    public CrearPartida(MainController a) {
+    public CrearPartida(MainController a,Boolean b) {
     	mc = a;
+    	guest = b;
     	initComponents();
     }
     /**
@@ -42,11 +43,6 @@ public class CrearPartida extends javax.swing.JFrame {
         jLabel1.setText("Crear Partida");
 
         jTextField1.setText("Nom Partida");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
 
         jTextField2.setText("Nom Kenken");
 
@@ -100,17 +96,14 @@ public class CrearPartida extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>                        
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }                                           
+                                        
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         mc.new_game(jTextField1.getText(), jTextField2.getText());
         switch (mc.tamany()){
         case 3:
-        	Game3 g = new Game3(mc,jTextField2.getText());
+        	Game3 g = new Game3(mc,jTextField2.getText(),guest);
             g.setVisible(true);
         	break;
         case 4:
@@ -160,7 +153,7 @@ public class CrearPartida extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CrearPartida(null).setVisible(true);
+                new CrearPartida(null,null).setVisible(true);
             }
         });
     }

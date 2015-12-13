@@ -11,7 +11,6 @@
 public class CarregarPartida extends javax.swing.JFrame {
 
 	MainController mc = null;
-	
     /**
      * Creates new form CarregarPartida
      */
@@ -119,7 +118,7 @@ public class CarregarPartida extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    	Menu m = new Menu(mc);
+    	Menu m = new Menu(mc,false);
     	m.setVisible(true);
     	dispose();
     }
@@ -130,7 +129,7 @@ public class CarregarPartida extends javax.swing.JFrame {
         str = mc.nomKenken();
         switch (mc.tamany()){
         case 3:
-        	Game3 g = new Game3(mc,str);
+        	Game3 g = new Game3(mc,str,false);
             g.setVisible(true);
         	break;
         case 4:

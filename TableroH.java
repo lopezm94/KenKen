@@ -63,7 +63,6 @@ public class TableroH extends Tablero {
 
 	public void setid(int c, int x, int y) {
 	  idAreas[x][y] = c;
-	  System.out.println(c+" " + areas + " ");
 	  areas.get(c).afegir_casella(tauler[x][y]);
 	}
 

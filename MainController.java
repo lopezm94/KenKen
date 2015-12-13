@@ -91,6 +91,15 @@ public class MainController{
 		return false;
 	}
 	
+	public int getCas(int x, int y){
+		return currentUser.get_partida().getTauler().getCasilla(x, y).getSolucion();
+	}
+	
+	public void actualizaRank(){
+		/*int b = currentUser.     acabar<---------------------------------------
+		currentUser.add_puntuacio(b);*/
+	}
+	
 	public void imprimir(){
 		imprimir_tauler();
 		imprimir_solucio();

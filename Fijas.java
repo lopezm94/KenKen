@@ -15,12 +15,14 @@ public class Fijas extends javax.swing.JFrame {
 	MainController mc = null;
 	Generar g	= null;
 	String nomP;
+	Boolean guest;
 	
     /**
      * Creates new form Fijas
      */
-    public Fijas(MainController a, Generar b, String c) {
+    public Fijas(MainController a, Generar b, String c, Boolean h) {
     	mc = a;
+    	guest = h;
     	g = b;
     	nomP = c;
         initComponents();
@@ -192,13 +194,13 @@ public class Fijas extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     	if (mc.generaMan(g,nomP)){
-    		Guarda gu = new Guarda(mc,nomP,g);
+    		Guarda gu = new Guarda(mc,nomP,g,guest);
     		gu.setVisible(true);
     		dispose();
     	}
     	else{
     		JOptionPane.showMessageDialog(this, "No té solució :(");
-    		Menu m = new Menu(mc);
+    		Menu m = new Menu(mc,guest);
     		m.setVisible(true);
     		dispose();
     	}
@@ -281,7 +283,7 @@ public class Fijas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Fijas(null,null,null).setVisible(true);
+                new Fijas(null,null,null,null).setVisible(true);
             }
         });
     }

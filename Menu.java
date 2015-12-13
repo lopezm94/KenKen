@@ -1,3 +1,5 @@
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,10 +13,12 @@
 public class Menu extends javax.swing.JFrame {
 
 	MainController mc = null;
+	Boolean guest;
     /**
      * Creates new form Menu
      */
-    public Menu(MainController a) {
+    public Menu(MainController a, Boolean b) {
+    	guest = b;
         initComponents();
         mc = a;
     }
@@ -153,21 +157,26 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        CrearPartida c = new CrearPartida(mc);
+        CrearPartida c = new CrearPartida(mc,guest);
         c.setVisible(true);
         dispose();
     }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        CarregarPartida c = new CarregarPartida(mc);
-        c.setVisible(true);
-        dispose();
+    	if (! guest){
+    		CarregarPartida c = new CarregarPartida(mc);
+        	c.setVisible(true);
+        	dispose();
+    	}
+    	else {
+    		JOptionPane.showMessageDialog(this, "Ets un convidat");
+    	}
     }                                        
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        GenerarKenken k = new GenerarKenken(mc);
+        GenerarKenken k = new GenerarKenken(mc, guest);
         k.setVisible(true);
         dispose();
     }                                        
@@ -175,9 +184,14 @@ public class Menu extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         //new Elimina();ç
+    	if (! guest){
     	Elimina e = new Elimina(mc);
     	e.setVisible(true);
         dispose();
+    	}
+    	else {
+    		JOptionPane.showMessageDialog(this, "Ets un convidat");
+    	}
     }                                        
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -189,7 +203,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        RankingI r = new RankingI(mc);
+        RankingI r = new RankingI(mc,guest);
         r.setVisible(true);
         dispose();
     }                                        
@@ -231,7 +245,7 @@ public class Menu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Menu(null).setVisible(true);
+                new Menu(null,null).setVisible(true);
             }
         });
     }

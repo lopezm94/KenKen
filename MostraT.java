@@ -1,3 +1,5 @@
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,12 +15,14 @@ public class MostraT extends javax.swing.JFrame {
 	MainController mc = null;
 	String nomP = null;
 	Generar g = null;
+	Boolean guest;
 	
     /**
      * Creates new form MostraT
      */
-    public MostraT(MainController a, String b, Generar c) {
+    public MostraT(MainController a, String b, Generar c, Boolean j) {
     	mc = a;
+    	guest = j;
     	nomP = b;
     	g = c;
         initComponents();
@@ -168,15 +172,20 @@ public class MostraT extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    	mc.guarda_gen(g, nomP);
-    	Menu m = new Menu(mc);
-    	m.setVisible(true);
-    	dispose();
+    	if (!guest){
+    		mc.guarda_gen(g, nomP);
+    		Menu m = new Menu(mc,guest);
+    		m.setVisible(true);
+    		dispose();
+    	}
+    	else {
+    		JOptionPane.showMessageDialog(this, "Ets un convidat");
+    	}
     }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    	Menu m = new Menu(mc);
+    	Menu m = new Menu(mc,guest);
     	m.setVisible(true);
     	dispose();
     }                                        
@@ -211,7 +220,7 @@ public class MostraT extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MostraT(null,null,null).setVisible(true);
+                new MostraT(null,null,null,null).setVisible(true);
             }
         });
     }

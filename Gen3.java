@@ -15,12 +15,14 @@ public class Gen3 extends javax.swing.JFrame {
 	MainController mc = null;
 	String nomP = null;
 	Generar g = null;
+	Boolean guest;
 	
     /**
      * Creates new form Gen3
      */
-    public Gen3(MainController a, String b, Generar d) {
+    public Gen3(MainController a, String b, Generar d, Boolean f) {
     	mc = a;
+    	guest = f;
     	nomP = b;
     	g = d;
         initComponents();
@@ -224,7 +226,7 @@ public class Gen3 extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here: /*casillas*/
     	g.colocAreas();
-    	Fijas f = new Fijas(mc,g,nomP);
+    	Fijas f = new Fijas(mc,g,nomP,guest);
 		f.setVisible(true);
 		dispose();
     }                                        
@@ -233,13 +235,13 @@ public class Gen3 extends javax.swing.JFrame {
         // TODO add your handling code here: /*resol*/
     	g.colocAreas();
     	if (mc.generaMan(g,nomP)){
-    		Guarda gu = new Guarda(mc,nomP,g);
+    		Guarda gu = new Guarda(mc,nomP,g,guest);
     		gu.setVisible(true);
     		dispose();
     	}
     	else{
     		JOptionPane.showMessageDialog(this, "No té solució :(");
-    		Menu m = new Menu(mc);
+    		Menu m = new Menu(mc,guest);
     		m.setVisible(true);
     		dispose();
     	}
@@ -247,63 +249,63 @@ public class Gen3 extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    	Valores v = new Valores(g,0,0,mc,nomP);
+    	Valores v = new Valores(g,0,0,mc,nomP,guest);
     	v.setVisible(true);
     	dispose();
     }                                        
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    	Valores v = new Valores(g,0,1,mc,nomP);
+    	Valores v = new Valores(g,0,1,mc,nomP,guest);
     	v.setVisible(true);
     	dispose();
     }                                        
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    	Valores v = new Valores(g,0,2,mc,nomP);
+    	Valores v = new Valores(g,0,2,mc,nomP,guest);
     	v.setVisible(true);
     	dispose();
     }                                        
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    	Valores v = new Valores(g,1,0,mc,nomP);
+    	Valores v = new Valores(g,1,0,mc,nomP,guest);
     	v.setVisible(true);
     	dispose();
     }                                        
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    	Valores v = new Valores(g,1,1,mc,nomP);
+    	Valores v = new Valores(g,1,1,mc,nomP,guest);
     	v.setVisible(true);
     	dispose();
     }                                        
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    	Valores v = new Valores(g,1,2,mc,nomP);
+    	Valores v = new Valores(g,1,2,mc,nomP,guest);
     	v.setVisible(true);
     	dispose();
     }                                        
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    	Valores v = new Valores(g,2,0,mc,nomP);
+    	Valores v = new Valores(g,2,0,mc,nomP,guest);
     	v.setVisible(true);
     	dispose();
     }                                        
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-    	Valores v = new Valores(g,2,1,mc,nomP);
+    	Valores v = new Valores(g,2,1,mc,nomP,guest);
     	v.setVisible(true);
     	dispose();
     }                                         
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-    	Valores v = new Valores(g,2,2,mc,nomP);
+    	Valores v = new Valores(g,2,2,mc,nomP,guest);
     	v.setVisible(true);
     	dispose();
     }                                         
@@ -338,7 +340,7 @@ public class Gen3 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Gen3(null,null,null).setVisible(true);
+                new Gen3(null,null,null,null).setVisible(true);
             }
         });
     }

@@ -118,7 +118,7 @@ public class Elimina extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    	Menu m = new Menu(mc);
+    	Menu m = new Menu(mc,false);
     	m.setVisible(true);
     	dispose();
     }                                        

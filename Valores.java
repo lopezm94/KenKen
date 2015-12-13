@@ -15,11 +15,13 @@ public class Valores extends javax.swing.JFrame {
 	int x;
 	int y;
 	String nomP;
+	Boolean guest;
     /**
      * Creates new form Valores
      */
-    public Valores(Generar a, int b, int c, MainController d, String nom) {
+    public Valores(Generar a, int b, int c, MainController d, String nom, Boolean gu) {
     	g = a;
+    	guest = gu; 
     	x = b;
     	y = c;
     	mc = d;
@@ -140,7 +142,7 @@ public class Valores extends javax.swing.JFrame {
         // TODO add your handling code here:
     	g.areas( Integer.parseInt(jTextField1.getText()), jTextField2.getText().charAt(0), Integer.parseInt(jTextField3.getText()) );
     	g.colocA( Integer.parseInt(jTextField1.getText()), x, y);
-    	Gen3 ge = new Gen3(mc,nomP,g);
+    	Gen3 ge = new Gen3(mc,nomP,g,guest);
     	ge.setVisible(true);
     	dispose();
     }                                        
@@ -175,7 +177,7 @@ public class Valores extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Valores(null,0,0,null,null).setVisible(true);
+                new Valores(null,0,0,null,null,null).setVisible(true);
             }
         });
     }
