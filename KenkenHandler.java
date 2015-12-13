@@ -183,8 +183,8 @@ public class KenkenHandler {
 				LinkedList<Pair<Integer,Integer>> bag = new LinkedList<Pair<Integer,Integer>>();
 
 				size = rand.nextInt(6)+1;
-				this.randomDFS(i,j,tablero,bag,size);
-				op = this.pickOpAndRes(tablero,bag);
+				KenkenHandler.randomDFS(i,j,tablero,bag,size);
+				op = KenkenHandler.pickOpAndRes(tablero,bag);
 				area = AreaBuilder.newArea(tablero.getNumAreas(),op);
 				for (Pair<Integer, Integer> b : bag) {
 					area.afegir_casella(
