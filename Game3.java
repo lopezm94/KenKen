@@ -295,7 +295,6 @@ public class Game3 extends javax.swing.JFrame  {
 			dispose();
 		}
 		else{
-			TableroH t1 = MainController.getInstance().getTauler();
 			JOptionPane.showMessageDialog(this, "Torna, esta malament :'(");
 		}
 	}      
