@@ -86,6 +86,9 @@ public class GestioDadesH  extends Gestio_Dades{
 			String[] info;
 			while ((line = br.readLine()) != null) {
 				info = line.split("\\s");
+				if (info.length < 5)
+					continue;
+				System.out.println(info.length);
 				System.out.println(line);
 				Integer puntuacion = Integer.parseInt(info[index]);
 				lista.add(new Pair<String,Integer>(info[0],puntuacion));
