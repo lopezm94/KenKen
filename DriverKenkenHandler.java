@@ -23,9 +23,10 @@ public class DriverKenkenHandler {
     TableroH sol = KenkenHandler.generateAndSolveKenken(size,dificultad);
     KenkenHandler.solveKenken(sol);
     sol.setResultToValue();
-    if (!sol.numerosCheck())
-      System.out.println("Hay algo mal");
+
+    System.out.println("contenido de las areas: ");
     System.out.println(sol.getAllAreas());
+    System.out.println("valores: ");
     for (int i=0,cas; i<size; i++) {
       line = "";
       for (int j=0; j<size; j++) {
@@ -38,9 +39,22 @@ public class DriverKenkenHandler {
       System.out.println(line);
     }
     System.out.println();
+    System.out.println("areas: ");
     System.out.println(sol.getAreas());
+    System.out.println("solucion: ");
     System.out.println(sol.getSolucion());
+    for (int i=0,cas; i<size; i++) {
+      line = "";
+      for (int j=0; j<size; j++) {
+        cas = sol.getCasillaVal(i,j);
+        line = line + cas + " ";
+      }
+      System.out.println(line);
+    }
+    System.out.println();
     System.out.println("La dificultad es " + KenkenHandler.getDifficulty(sol));
+    if (!(sol.numerosCheck() && sol.tableroCheck()))
+      System.out.println("Hay algo mal");
+    System.out.println(sol.getAllAreas());
   }
-
 }
