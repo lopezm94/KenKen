@@ -29,12 +29,6 @@ public class GestioDadesH  extends Gestio_Dades{
 		} catch (FicheroYaExistente e) {
 		}
 		try{
-			Crear_archivo("Ranking",".");
-		}catch(IOException e){
-			System.out.println(e.toString()+"hola");
-		} catch (FicheroYaExistente e) {
-		}
-		try{
 			Crear_archivo("Profiles",".");
 		}catch(IOException e){
 			System.out.println(e.toString()+"2hola");

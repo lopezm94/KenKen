@@ -10,7 +10,7 @@ public class RankingController {
 
   private static final String dir = ".";
   private static final String file = "Profiles.txt";
-  private static final String order = "naturalOrder";
+  private static final String order = "reverseOrder";
 
 
   /**
