@@ -128,10 +128,12 @@ public class CarregarPartida extends javax.swing.JFrame {
         MainController.getInstance().load_game(str);
         switch (MainController.getInstance().tamany()){
         case 3:
-        	Game3 g = new Game3();
-            g.setVisible(true);
+        	Game3 g3 = new Game3();
+            g3.setVisible(true);
         	break;
         case 4:
+        	Game4 g4 = new Game4();
+            g4.setVisible(true);
         	break;
         case 5:
         	break;

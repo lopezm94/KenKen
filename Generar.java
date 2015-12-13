@@ -1,6 +1,4 @@
 import java.awt.Desktop;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -41,7 +39,7 @@ public class Generar {
 	
 	public void areas(int at, char op, int res){
 		Area a = AreaBuilder.newArea(at,op);
-		if (tablero.getAreaNum(at) == false){
+		if (tablero.getNumAreas() <= at){
 			tablero.afegirArea(a,res);
 		}
 	}
@@ -60,7 +58,6 @@ public class Generar {
 	
 	public TableroH genera(){
 		Scanner input = null;
-		File test = null;
 
 		try {
 			
@@ -87,7 +84,7 @@ public class Generar {
 						edita = true;
 						int at = 0;
 						while (at < var){
-							Area a = crida.tipoArea(at,'p');
+							Area a = crida.tipoArea(at);
 							int res = crida.resArea();
 							tablero.afegirArea(a,res);
 							++at;
@@ -95,8 +92,7 @@ public class Generar {
 					ok = true;
 					}
 					else if (var == 0){
-						KenkenHandler ke = new KenkenHandler();
-					    tablero = ke.generateAndSolveKenken(tablero.size(),crida.dif());
+					    tablero = KenkenHandler.generateAndSolveKenken(tablero.size(),crida.dif());
 					    rand = true;
 						ok = true;
 					}
@@ -142,13 +138,12 @@ public class Generar {
 				
 				//System.out.println(tablero);
 				
-				KenkenHandler solucion = new KenkenHandler();
 				Boolean solu = false;
 				
 				timer = new Timer();
 				timer.schedule(task, 10000);
 				//pondremos tiempo a la hora de hacer la interficie grafica para que no se haga muy pesado el tiempo de espera de KenKens grandes
-				if (solucion.solveKenken(tablero)){
+				if (KenkenHandler.solveKenken(tablero)){
 					timer.cancel();
 					System.out.println("Tu Kenken es correcto :)");
 					solu = true;

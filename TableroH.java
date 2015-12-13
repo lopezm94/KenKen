@@ -171,6 +171,14 @@ public class TableroH extends Tablero {
 		}
 		return true;
 	}
+	
+	public void config(){
+		for(int i=0; i < files; ++i){
+			for(int j=0; j < files; ++j){
+				areas.get(idAreas[i][j]).afegir_casella(tauler[i][j]);
+			}
+		}
+	}
 
 	public int getAreaID(int x, int y) {
 		return this.idAreas[x][y];

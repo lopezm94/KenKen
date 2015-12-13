@@ -21,8 +21,7 @@ public class RankingController {
   */
   public static LinkedList<Pair<String,Integer>> getRanking(String dificultad) {
     Ranking ranking = new Ranking(order);
-    LinkedList<Pair<String,Integer>> lista = GestioDadesH.readScores(
-      dificultad,dir,file);
+    LinkedList<Pair<String,Integer>> lista = GestioDadesH.readScores(dificultad,dir,file);
     for (Pair<String,Integer> p : lista)
       ranking.push(p);
     return ranking.getRank();

@@ -192,7 +192,7 @@ public class Gestio_Dades {
             BufferedReader br = new BufferedReader(new FileReader(archivo));
             String s = br.readLine();
             int i = 0;
-            String c = nombre_archivo + "2";
+            String c = nombre_archivo+"2";
             Crear_archivo(c, directorio);
 
             if (separador.equals("salto") || separador.equals("\n")) {

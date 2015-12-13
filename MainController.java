@@ -49,6 +49,14 @@ public class MainController{
 		}
 	}
 	
+	public void delete_user(){
+		try {
+			gestionus.DeleteUser();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}
+	}
+	
 	public void CrearPartida(String nomkenken, String nompartida){
 		gestionpart = new GestioPartida(nompartida,true,nomkenken,gestionus.getProfile().get_usuari());
 		gestionus.assignarPartida(gestionpart.getPartida());
@@ -61,8 +69,47 @@ public class MainController{
 		gestionpart.start();
 	}
 	
+	public void delete_game(){
+		try {
+			gestionpart.deleteGame();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FicheroNoExiste e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void genera(String nomkenken, String a, int b){
+		TableroH tablero = KenkenHandler.generateAndSolveKenken(b, a);
+		GestioDadesH.guardar_kenken(tablero, nomkenken);
+	}
+	
+	public Boolean generaMan(Generar a, String nomkenken){
+		TableroH tablero = a.getTablero();
+		return KenkenHandler.solveKenken(tablero);
+	}
+	
+	public void guarda_gen(Generar a, String nomkenken){
+		GestioDadesH.guardar_kenken(a.getTablero(), nomkenken);
+	}
+	
+	public String getDifficulty(){
+		return gestionpart.getDiff();
+	}
+	
+	public void actualizar_punt(){
+		int punt = (getVacias()*10000)/((int)getTemps()*tamany()*10);
+		gestionus.afegirPunt(punt, getDifficulty());
+	}
+	
 	public long getTemps(){
 		return gestionpart.getTime();
+	}
+	
+	public int getVacias(){
+		return gestionpart.getVacias();
 	}
 	
 	public void posar_pos(int x, int y, String valor){
@@ -97,8 +144,16 @@ public class MainController{
 		return gestionpart.getValue(x,y);
 	}
 	
+	public int show(int x, int y){
+		return gestionpart.getSol(x,y);
+	}
+	
 	public Boolean comp(){
 		return gestionpart.check();
+	}
+	
+	public void neteja(){
+		gestionpart.neteja();
 	}
 	
 	public String areaTipo(int x, int y){
@@ -111,6 +166,10 @@ public class MainController{
            
     public void guest(){
     	gestionus.invitado();
+    }
+    
+    public Boolean es_guest(){
+    	return gestionus.es_invitado();
     }
 
 }

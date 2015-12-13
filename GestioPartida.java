@@ -62,12 +62,24 @@ public class GestioPartida{
 		return timeextra;
 	}
 	
+	public String getDiff(){
+		return KenkenHandler.getDifficulty(p.getTauler());
+	}
+	
+	public int getVacias(){
+		return KenkenHandler.getEmptyCells(p.getTauler());
+	}
+	
 	public void setValue(int x,int y,int value){
 		p.getTauler().setCasillaVal(x,y,value);
 	}
 	
 	public int getValue(int x,int y){
 		return p.getTauler().getCasillaVal(x,y);
+	}
+	
+	public int getSol(int x,int y){
+		return p.getTauler().getCasillaSol(x, y);
 	}
 
 	public Boolean fija(int x, int y){
@@ -98,6 +110,12 @@ public class GestioPartida{
 		return p.getTauler().tableroCheck() && p.getTauler().numerosCheck();
 	}
 	
+	public void neteja(){
+		for(int i=0; i < getTamany(); ++i)
+			for(int j=0; j < getTamany(); ++j)
+				setValue(i,j,-1);
+	}
+	
 	public void saveGame(Perfil p1){
 		p1.get_partida().setTime((int)getTime());
 		GestioDadesH.guardarPartida(p1,nomkenken);
@@ -105,7 +123,7 @@ public class GestioPartida{
 	
 	public void deleteGame() throws IOException,FicheroNoExiste{
 		try{
-			GestioDadesH.Borrar_archivo("./"+nomUser,p.getNomPartida());
+			Gestio_Dades.Borrar_archivo(p.getNomPartida(),"./Games/"+nomUser);
 		}catch(IOException e){
 			throw e;
 		}catch(FicheroNoExiste f){

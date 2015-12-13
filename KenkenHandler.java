@@ -42,7 +42,6 @@ public class KenkenHandler {
 
 	public static int getEmptyCells(TableroH tablero) {
 		int count = 0;
-		String res;
 		for (int i=0; i<tablero.size(); i++) {
       for (int j=0; j<tablero.size(); j++) {
         if (!tablero.casillaIsFija(i,j))
@@ -157,7 +156,7 @@ public class KenkenHandler {
 	/**
 	*Construye un tablero Kenken desde cero.
 	*
-	*@param size TamaÃ±o del nuevo tablero.
+	*@param size Tamaño del nuevo tablero.
 	*@param dificultad La dificultad del tablero(Facil,Medio,Dificil).
 	*@return TableroH Devuelve un kenken sin resolver.
 	*/
@@ -278,7 +277,7 @@ public class KenkenHandler {
 	*@param x Posicion en el eje X.
 	*@param y Posicion en el eje Y.
 	*@param tablero Tablero.
-	*@param size tamaÃ±o del area a asignar.
+	*@param size tamaño del area a asignar.
 	*/
 	private static void randomDFS(int x, int y, TableroH tablero, LinkedList<Pair<Integer,Integer>> bag, int size) {
 		if (tablero.getAreaID(x,y) != -1 || bag.size() == size)

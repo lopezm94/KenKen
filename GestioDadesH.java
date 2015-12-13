@@ -1,6 +1,7 @@
 //import Excepcions.*;
 //import Persistencia.Gestio_Dades;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -64,8 +65,7 @@ public class GestioDadesH  extends Gestio_Dades{
 	public static LinkedList<Pair<String,Integer>> readScores(
 		String dificultad, String dir, String file) {
     Integer index = null;
-    LinkedList<Pair<String,Integer>> lista =
-      new LinkedList<Pair<String,Integer>>();
+    LinkedList<Pair<String,Integer>> lista = new LinkedList<Pair<String,Integer>>();
 
     switch (dificultad.charAt(0)) {
       case 'F':
@@ -80,17 +80,17 @@ public class GestioDadesH  extends Gestio_Dades{
     }
 
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(dir+"/"+file));
-	    String line;
-      String[] info;
-	    while ((line = br.readLine()) != null) {
-	       info = line.split("\\s");
-         Integer puntuacion = Integer.parseInt(info[index]);
-         lista.add(new Pair<String,Integer>(
-           info[0],
-           puntuacion
-         ));
-	    }
+			File archivo = new File(dir+"/"+file);
+			BufferedReader br = new BufferedReader(new FileReader(archivo));
+			String line;
+			String[] info;
+			while ((line = br.readLine()) != null) {
+				info = line.split("\\s");
+				System.out.println(line);
+				Integer puntuacion = Integer.parseInt(info[index]);
+				lista.add(new Pair<String,Integer>(info[0],puntuacion));
+		    }
+			br.close();
 		}catch(IOException e) {
 			System.out.println(e.toString());
 		}
@@ -98,7 +98,7 @@ public class GestioDadesH  extends Gestio_Dades{
 		return lista;
   }
 
-	//Obt� la l�nia a que es troba en el fitxer donada una keyword
+	//Obte la linia a que es troba en el fitxer donada una keyword
 	public static int getLine(String keyword, String dir, String file){
 		int contador = 0;
 		Boolean control = false;

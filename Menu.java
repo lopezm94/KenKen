@@ -1,3 +1,5 @@
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -173,8 +175,13 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        //new Elimina();
-        dispose();
+        if(!MainController.getInstance().es_guest()){
+        	Elimina e = new Elimina();
+        	e.setVisible(true);
+        	dispose();
+        }else{
+        	JOptionPane.showMessageDialog(this, "Ets un convidat");
+        }
     }                                        
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -186,8 +193,9 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        //new rank();
-        //dispose();
+        RankingI r = new RankingI();
+        r.setVisible(true);
+        dispose();
     }                                        
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {                                         

@@ -108,10 +108,12 @@ public class CrearPartida extends javax.swing.JFrame {
         MainController.getInstance().CrearPartida(jTextField2.getText(), jTextField1.getText());
         switch (MainController.getInstance().tamany()){
 	        case 3:
-	        	Game3 g = new Game3();
-	            g.setVisible(true);
+	        	Game3 g3 = new Game3();
+	            g3.setVisible(true);
 	        	break;
 	        case 4:
+	        	Game4 g4 = new Game4();
+	            g4.setVisible(true);
 	        	break;
 	        case 5:
 	        	break;

@@ -23,6 +23,11 @@ public class GestionUsuario{
 	public void invitado(){
 		perfilActual = new Perfil();
 	}
+	
+	public Boolean es_invitado(){
+		return perfilActual.get_usuari().equals("invitado");
+	}
+	
 	public void newUser(String usuari, String password) throws IOException{
 		String[] st = GestioDadesH.getProfileInfo(usuari, ".", "Profiles");
 		if(GestioDadesH.existsUser(st,usuari)){
@@ -55,6 +60,36 @@ public class GestionUsuario{
 	}
 	public Perfil getProfile(){
 		return perfilActual;
+	}
+	
+	public void afegirPunt(int punt, String diff){
+		String[] str = GestioDadesH.getProfileInfo(perfilActual.get_usuari(), ".", "Profiles");
+		String strpunt;
+		switch(diff.charAt(0)){
+			case 'F':
+				strpunt = str[2];
+				punt += Integer.parseInt(strpunt);
+				str[2] = String.valueOf(punt);
+				break;
+			case 'M':
+				strpunt = str[3];
+				punt += Integer.parseInt(strpunt);
+				str[3] = String.valueOf(punt);
+				break;
+			case 'D':
+				strpunt = str[4];
+				punt += Integer.parseInt(strpunt);
+				str[4] = String.valueOf(punt);
+				break;
+		}
+		try {
+			DeleteUser();
+			GestioDadesH.Escribir_string(str[0]+" "+str[1]+" "+str[2]+" "+str[3]+" "+str[4], "\n", "Profiles", ".");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		} catch (FicheroNoExiste e) {
+			// TODO Auto-generated catch block
+		}
 	}
 }
 
