@@ -224,6 +224,11 @@ public class GenerarKenken extends javax.swing.JFrame {
 	            g.setVisible(true);
 	        	break;
 	        case 4:
+	        	Generar gen = new Generar();
+	        	gen.mida(4);
+	        	JOptionPane.showMessageDialog(this, "Les areas comencen des de 0 i incrementa de 1 en 1");
+	        	Gen3 ge4 = new Gen3(mc,jTextField1.getText(),gen, guest);
+	            ge4.setVisible(true);
 	        	break;
 	        case 5:
 	        	break;
