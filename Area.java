@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.lang.Math;
 
 /**
 *@version 2.0
@@ -9,8 +8,7 @@ public abstract class Area{
 
 	//Atributs
 
-	protected int pos;//identificador area, va de 0 a nombreAreas-1
-//	private char op;//tipus operacio, sense op es casella sola
+	protected int pos;//identificador area, va de 0 a nombreAreas-1	
 	protected ArrayList<Casilla > caselles;//conte la llista de caselles
 	protected int res;//resultat real de l'area
 	protected int resact;

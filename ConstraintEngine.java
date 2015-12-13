@@ -1,11 +1,8 @@
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Stack;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.lang.RuntimeException;
 
 /**
 *<h1>ConstraintEngine</h1>

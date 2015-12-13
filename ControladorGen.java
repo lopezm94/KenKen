@@ -1,8 +1,5 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.Timer;
 
 /**
 *@version 1.0

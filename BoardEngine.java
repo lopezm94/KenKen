@@ -1,8 +1,4 @@
-import java.util.HashSet;
-import java.util.ArrayList;
 import java.util.Map;
-import java.util.Stack;
-import java.util.HashMap;
 import java.util.LinkedList;
 
 
@@ -12,7 +8,7 @@ import java.util.LinkedList;
 *donde los valores por columna y fila son unicos.
 *
 *@version 1.0
-*@author Juan López
+*@author Juan Lopez
 */
 public class BoardEngine extends ConstraintEngine {
 
