@@ -25,14 +25,8 @@ public class KenkenHandler {
 	*@return String ["Facil"|"Medio"|"Dificil"]
 	*/
 	public static String getDifficulty(TableroH tablero) {
-		int count = 0;
 		String res;
-		for (int i=0; i<tablero.size(); i++) {
-      for (int j=0; j<tablero.size(); j++) {
-        if (!tablero.casillaIsFija(i,j))
-          count++;
-      }
-    }
+		int count = KenkenHandler.getEmptyCells(tablero);
 		if (count <= 16) {
 			res = "Facil";
 		}
@@ -43,6 +37,19 @@ public class KenkenHandler {
 			res = "Dificil";
 		}
 		return res;
+	}
+
+
+	public static int getEmptyCells(TableroH tablero) {
+		int count = 0;
+		String res;
+		for (int i=0; i<tablero.size(); i++) {
+      for (int j=0; j<tablero.size(); j++) {
+        if (!tablero.casillaIsFija(i,j))
+          count++;
+      }
+    }
+		return count;
 	}
 
 
