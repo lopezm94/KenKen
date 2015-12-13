@@ -2,7 +2,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Stack;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.lang.RuntimeException;
@@ -200,34 +199,6 @@ public class KenkenEngine extends ConstraintEngine {
 
     return valid.getValue();
   }
-
-  /*************************************************************************************************************************
-  /**
-  *Dada el id de un area, devuelve las casillas que pertenecen al area con sus posiciones
-  *correspondientes.
-  *
-  *@param Area Area.
-  *@param id Id del area.
-  *@return Boolean Checkeo de que el area cumple con los dominios de las casillas.
-  */
-  /*private Boolean checkArea(Area area, int id) {
-    LinkedList<Pair<Pair<Integer,Integer>,HashSet<Integer>>> push = new LinkedList<Pair<Pair<Integer,Integer>,HashSet<Integer>>>();
-    for (int i=0; i<this.board.size(); i++) {
-      for (int j=0; j<this.board.size(); j++) {
-        if (this.board.getAreaID(i,j) == id) {
-          push.add(
-            new Pair<Pair<Integer,Integer>,HashSet<Integer>>(
-              new Pair<Integer,Integer>(i,j),
-              this.getDomain(i,j)
-            )
-          );
-        }
-      }
-    }
-
-   // return area.domainCheck(push);
-  }*/
-  /*************************************************************************************************************************
 
 
   /**

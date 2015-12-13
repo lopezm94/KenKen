@@ -9,12 +9,40 @@ import java.lang.Math;
 *Se encarga de crear y resolver Kenkens.
 *
 *@version 1.0
-*@author Reyes Vera y Juan Lopez
+*@author Juan Lopez
 */
 public class KenkenHandler {
 
-	public enum Direccion {
+	private enum Direccion {
     Left, Up, Right, Down
+	}
+
+
+	/**
+	*Devuelve la dificultad del tablero basandose en nuestra definicion.
+	*
+	*@param tablero Tablero
+	*@return String ["Facil"|"Medio"|"Dificil"]
+	*/
+	public static String getDifficulty(TableroH tablero) {
+		int count = 0;
+		String res;
+		for (int i=0; i<tablero.size(); i++) {
+      for (int j=0; j<tablero.size(); j++) {
+        if (!tablero.casillaIsFija(i,j))
+          count++;
+      }
+    }
+		if (count <= 16) {
+			res = "Facil";
+		}
+		else if (count <= 48) {
+			res = "Medio";
+		}
+		else {
+			res = "Dificil";
+		}
+		return res;
 	}
 
 
@@ -28,7 +56,7 @@ public class KenkenHandler {
 	*@param be BoardEngine que usara.
 	*@return Boolean
 	*/
-	private Boolean DFSSolve(TableroH tablero, int x, int y, BoardEngine be) {
+	private static Boolean DFSSolve(TableroH tablero, int x, int y, BoardEngine be) {
 		if (x == tablero.size()) {
 			be.storeSolution();
 			return true;
@@ -41,7 +69,7 @@ public class KenkenHandler {
 		Collections.shuffle(domain);
 		for (Integer value : domain) {
 			if (be.propagate(x,y,value))
-				done = this.DFSSolve(tablero,newx,newy,be);
+				done = KenkenHandler.DFSSolve(tablero,newx,newy,be);
 			be.depropagate(x,y);
 			if (done)
 				break;
@@ -60,21 +88,18 @@ public class KenkenHandler {
 	*@param ke KenkenEngine.
 	*@return Boolean True si el kenken tiene solucion.
 	*/
-	private Boolean domainSolve(TableroH tablero, int x, int y, KenkenEngine ke) {
+	private static Boolean domainSolve(TableroH tablero, int x, int y, KenkenEngine ke) {
 		if (x == tablero.size()) {
 			ke.storeSolution();
 			return true;
 		}
 		Boolean done = false;
 		ArrayList<Integer> domain = new ArrayList<Integer>(ke.getDomain(x,y));
-		/*
-		if (domain.size() > 1)
-			tablero.setCasillaFija(tablero.getCasillaSol(x,y),x,y);
-		*/
+
 		for (Integer value : domain) {
 			if (ke.propagate(x,y,value)) {
-				Pair<Integer,Integer> pos = this.getNext(tablero,ke);
-				done = this.domainSolve(tablero,pos.getFirst(),pos.getSecond(),ke);
+				Pair<Integer,Integer> pos = KenkenHandler.getNext(tablero,ke);
+				done = KenkenHandler.domainSolve(tablero,pos.getFirst(),pos.getSecond(),ke);
 			}
 			ke.depropagate(x,y);
 			if (done)
@@ -93,7 +118,7 @@ public class KenkenHandler {
 	*@return Pair<Integer,Integer> Posicion de la siguiente casilla con dominio
 	*de menor cardinalidad.
 	*/
-	private Pair<Integer,Integer> getNext(TableroH tablero, ConstraintEngine ce) {
+	private static Pair<Integer,Integer> getNext(TableroH tablero, ConstraintEngine ce) {
 		int x=tablero.size(),y=tablero.size();
 		int min = 0x7FFFFFFF;
 		for (int i=0; i<tablero.size(); i++) {
@@ -116,10 +141,9 @@ public class KenkenHandler {
 	*
 	*@return Boolean true si el tablero tiene solucion, false en caso contrario.
 	*/
-	public Boolean solveKenken(TableroH tablero){
+	public static Boolean solveKenken(TableroH tablero){
 		KenkenEngine ke = new KenkenEngine(tablero);
-		return this.domainSolve(tablero,0,0,ke);
-		//Poner un warning de unica solucion.
+		return KenkenHandler.domainSolve(tablero,0,0,ke);
 	}
 
 
@@ -130,13 +154,13 @@ public class KenkenHandler {
 	*@param dificultad La dificultad del tablero(Facil,Medio,Dificil).
 	*@return TableroH Devuelve un kenken sin resolver.
 	*/
-	public TableroH generateAndSolveKenken(Integer size, String dificultad) {
+	public static TableroH generateAndSolveKenken(Integer size, String dificultad) {
 		TableroH tablero = new TableroH(size);
 		BoardEngine be = new BoardEngine(tablero);
 
-		this.DFSSolve(tablero,0,0,be);
-		this.setAreas(tablero);
-		this.setDifficulty(tablero,dificultad);
+		KenkenHandler.DFSSolve(tablero,0,0,be);
+		KenkenHandler.setAreas(tablero);
+		KenkenHandler.setDifficulty(tablero,dificultad);
 		return tablero;
 	}
 
@@ -146,7 +170,7 @@ public class KenkenHandler {
 	*
 	*@param tablero Tablero.
 	*/
-	private void setAreas(TableroH tablero) {
+	private static void setAreas(TableroH tablero) {
 		Random rand = new Random();
 
 		for (int i=0; i<tablero.size(); i++) {
@@ -157,6 +181,7 @@ public class KenkenHandler {
 				char op;
 				Area area;
 				LinkedList<Pair<Integer,Integer>> bag = new LinkedList<Pair<Integer,Integer>>();
+
 				size = rand.nextInt(6)+1;
 				this.randomDFS(i,j,tablero,bag,size);
 				op = this.pickOpAndRes(tablero,bag);
@@ -179,8 +204,8 @@ public class KenkenHandler {
 	*@param tablero Tablero.
 	*@param dificultad Dificultad.
 	*/
-	private void setDifficulty(TableroH tablero, String dificultad) {
-		int i,limit;
+	private static void setDifficulty(TableroH tablero, String dificultad) {
+		int i,limit,minimum,maximum;
 		Random rand = new Random();
 		LinkedList<Casilla> casillas;
 
@@ -192,7 +217,42 @@ public class KenkenHandler {
 		else
 			limit -= rand.nextInt(32)+49;
 
-		limit = Math.max(limit,tablero.size());
+		switch (tablero.size()){
+			case 3:
+				minimum = 0;
+				maximum = 0;
+				break;
+			case 4:
+				minimum = 0;
+				maximum = 4;
+				break;
+			case 5:
+				minimum = 0;
+				maximum = 9;
+				break;
+			case 6:
+				minimum = 0;
+				maximum = 20;
+				break;
+			case 7:
+				minimum = 0;
+				maximum = 33;
+				break;
+			case 8:
+				minimum = 7;
+				maximum = 48;
+				break;
+			case 9:
+				minimum = 9;
+				maximum = 65;
+				break;
+			default:
+				minimum = tablero.size();
+				maximum = tablero.size()/3;
+				break;
+		}
+		limit = Math.max(limit,minimum);
+		limit = Math.min(limit,maximum);
 
 		i = 0;
 		casillas = tablero.getAllCasillas();
@@ -214,7 +274,7 @@ public class KenkenHandler {
 	*@param tablero Tablero.
 	*@param size tamaño del area a asignar.
 	*/
-	private void randomDFS(int x, int y, TableroH tablero, LinkedList<Pair<Integer,Integer>> bag, int size) {
+	private static void randomDFS(int x, int y, TableroH tablero, LinkedList<Pair<Integer,Integer>> bag, int size) {
 		if (tablero.getAreaID(x,y) != -1 || bag.size() == size)
 			return;
 		tablero.setId(tablero.getNumAreas(),x,y);
@@ -233,16 +293,16 @@ public class KenkenHandler {
 		for (Direccion dir : dirs) {
 			switch(dir) {
 				case Left:
-					this.randomDFS(x-1,y,tablero,bag,size);
+					KenkenHandler.randomDFS(x-1,y,tablero,bag,size);
 					break;
 				case Up:
-					this.randomDFS(x,y-1,tablero,bag,size);
+					KenkenHandler.randomDFS(x,y-1,tablero,bag,size);
 					break;
 				case Right:
-					this.randomDFS(x+1,y,tablero,bag,size);
+					KenkenHandler.randomDFS(x+1,y,tablero,bag,size);
 					break;
 				default:
-					this.randomDFS(x,y+1,tablero,bag,size);
+					KenkenHandler.randomDFS(x,y+1,tablero,bag,size);
 					break;
 			}
 		}
@@ -255,7 +315,7 @@ public class KenkenHandler {
 	*
 	*@param bag Area.
 	*/
-	private char pickOpAndRes(TableroH tablero, LinkedList<Pair<Integer,Integer>> bag) {
+	private static char pickOpAndRes(TableroH tablero, LinkedList<Pair<Integer,Integer>> bag) {
 		int op;
 		char res;
 		Random rand = new Random();
