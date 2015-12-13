@@ -8,15 +8,14 @@
  *
  * @author reyes.vera
  */
+@SuppressWarnings("serial")
 public class Menu extends javax.swing.JFrame {
 
-	MainController mc = null;
     /**
      * Creates new form Menu
      */
-    public Menu(MainController a) {
+    public Menu() {
         initComponents();
-        mc = a;
     }
 
     /**
@@ -153,7 +152,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        CrearPartida c = new CrearPartida(mc);
+        CrearPartida c = new CrearPartida();
         c.setVisible(true);
         dispose();
     }                                        
@@ -167,8 +166,9 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        new GenerarKenken();
-        dispose();
+    	GenerarKenken k = new GenerarKenken();
+        k.setVisible(true);
+    	dispose();
     }                                        
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -179,8 +179,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        MainController mc =new MainController();
-        mc.show_tutorial();
+    //    MainController mc =new MainController();
+    //    mc.show_tutorial();
         //dispose();
     }                                        
 
@@ -227,7 +227,7 @@ public class Menu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Menu(null).setVisible(true);
+                new Menu().setVisible(true);
             }
         });
     }
