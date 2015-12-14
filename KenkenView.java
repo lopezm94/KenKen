@@ -9,6 +9,7 @@ public class KenkenView extends JPanel {
 	JButton button;
 	Vector<Integer> areas = null;
 	Vector<Integer> areas2 = null;
+	Vector<Integer> areas3 = null;
 	//NumOptions nums;
 	public JPanel container;
 	
@@ -20,6 +21,19 @@ public class KenkenView extends JPanel {
 	/*public optionView() {
 	
 	}*/
+	
+	public Vector<Integer> areas(){
+		return areas;
+	}
+	
+	public Vector<Integer> areas2(){
+		return areas2;
+	}
+	
+	public Vector<Integer> areas3(){
+		return areas3;
+	}
+	
 	
 	public void setButton(JButton button) {
 	  this.button = button;
@@ -93,7 +107,7 @@ public class KenkenView extends JPanel {
 	                }
 	            });
 	
-	            build.setBackground(new java.awt.Color(((int) areas.get(MainController.getInstance().area(r,v))), ((int) areas2.get(MainController.getInstance().area(r,v))), 255));
+	            build.setBackground(new java.awt.Color(((int) areas.get(MainController.getInstance().area(r,v))), ((int) areas2.get(MainController.getInstance().area(r,v))), ((int) areas3.get(MainController.getInstance().area(r,v)))));
 	 	       if (MainController.getInstance().num(r, v) != -1)
 	            build.setText(Integer.toString(MainController.getInstance().num(r, v)));
 	            panel1.add(build);
