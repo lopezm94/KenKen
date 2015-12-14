@@ -178,6 +178,7 @@ public class MainController{
 		b = Character.toString(gestionpart.getOperacioA(i));
 		b += "   ";
 		b += Integer.toString(gestionpart.getResultatAreaA(i));
+		b += "  Area:" + Integer.toString(i);
 		return b;
 	}
            
