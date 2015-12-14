@@ -1,7 +1,8 @@
 import java.awt.Component;
 import java.util.Random;
+import javax.swing.*;
+import java.awt.GridLayout;
 import java.util.Vector;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -19,8 +20,9 @@ import javax.swing.JTextField;
  */
 @SuppressWarnings("serial")
 public class Game extends javax.swing.JFrame {
-    
-	
+
+
+  JPanel board;
 	KenkenView a = null;
 	int ayuda = MainController.getInstance().tamany();
 	/**
@@ -48,6 +50,9 @@ public class Game extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         a = new KenkenView();
         jPanel2 = a.matriu();
+
+        this.board = a.getBoard();
+
         jComboBox1 = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
 
@@ -100,7 +105,7 @@ public class Game extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        
+
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>());
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,14 +130,14 @@ public class Game extends javax.swing.JFrame {
                 .addComponent(jPanel2)
                 .addContainerGap(53, Short.MAX_VALUE))
         );
-        
+
         Vector<Integer> areas = a.areas();
-    	
+
     	Vector<Integer>  areas2 = a.areas2();
-    	
+
     	Vector<Integer>  areas3 = a.areas3();
-    	
-    	
+
+
         for (int i = 0; i < MainController.getInstance().tam(); ++i){
         	String area = MainController.getInstance().areaTipoA(i);
         	/*JTextField d = new JTextField();
@@ -140,8 +145,8 @@ public class Game extends javax.swing.JFrame {
         	d.setBackground(new java.awt.Color(areas.get(i), areas2.get(i), areas3.get(i)));*/
         	jComboBox1.addItem(area);
         }
-        
-        
+
+
         jTextField1.setText("Color Area");
 
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
@@ -215,9 +220,10 @@ public class Game extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>  
+    }// </editor-fold>
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     	if (ayuda > 0){
     		Random r = new Random();
@@ -241,41 +247,57 @@ public class Game extends javax.swing.JFrame {
 
     	}
     	else{
-    		JOptionPane.showMessageDialog(this, "Ja no pots tenir més ajudes");
+    		JOptionPane.showMessageDialog(this, "Ja no pots tenir mï¿½s ajudes");
     	}
-    	Game b = new Game();
-    	b.setVisible(true);
-    	dispose();
-    }                                        
+    	this.actualizar();
+    }
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {  
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
     	MainController.getInstance().neteja();//cal netejar botons
-    	
-    }      
-    
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+      this.actualizar();
+    }
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     	Vector<Integer> areas = a.areas();
-    	
-    	Vector<Integer>  areas2 = a.areas2();
-    	
-    	Vector<Integer>  areas3 = a.areas3();
-    	
-    	jTextField1.setBackground(new java.awt.Color(areas.get(jComboBox1.getSelectedIndex()), areas2.get(jComboBox1.getSelectedIndex()), areas3.get(jComboBox1.getSelectedIndex())));
-	      
-    	
-    } 
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    	Vector<Integer>  areas2 = a.areas2();
+
+    	Vector<Integer>  areas3 = a.areas3();
+
+    	jTextField1.setBackground(new java.awt.Color(areas.get(jComboBox1.getSelectedIndex()), areas2.get(jComboBox1.getSelectedIndex()), areas3.get(jComboBox1.getSelectedIndex())));
+
+
+    }
+
+    private void actualizar() {
+      JButton tmp;
+      int size = MainController.getInstance().tamany();
+      for (int i=0; i<size*size; i++) {
+        tmp = ((JButton)this.board.getComponent(i));
+        if (MainController.getInstance().num(i/size, i%size) != -1)
+          tmp.setText(Integer.toString(MainController.getInstance().num(i/size, i%size)));
+        else
+          tmp.setText("");
+      }
+    }
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
     	//ensenyar resultat
+      JButton tmp;
+      int size = MainController.getInstance().tamany();
+      for (int i=0; i<size*size; i++) {
+        tmp = ((JButton)this.board.getComponent(i));
+        tmp.setText(Integer.toString(MainController.getInstance().getSolAt(i/size, i%size)));
+      }
     	JOptionPane.showMessageDialog(this, ":(");
     	MainController.getInstance().delete_game();
     	Menu m = new Menu();
     	m.setVisible(true);
     	dispose();
-    }                                        
+    }
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     	if (MainController.getInstance().comp()){
 			if (!MainController.getInstance().es_guest()){
@@ -291,25 +313,25 @@ public class Game extends javax.swing.JFrame {
     	else{
     		JOptionPane.showMessageDialog(this, "Torna, esta malament :'(");
     	}
-    }                                        
+    }
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     	if (!MainController.getInstance().es_guest()){
     		MainController.getInstance().save();
-    	}   
+    	}
     	else {
     		JOptionPane.showMessageDialog(this, "Ets un convidat");
     	}
-    }                                        
+    }
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     	MainController.getInstance().sortir();
     	Menu m = new Menu();
     	m.setVisible(true);
     	dispose();
-    }                                        
+    }
 
     /**
      * @param args the command line arguments
@@ -318,7 +340,7 @@ public class Game extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -346,7 +368,7 @@ public class Game extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify                     
+    // Variables declaration - do not modify
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -357,7 +379,9 @@ public class Game extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    //*******LO VI Y NO LO BORRE
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JTextField jTextField1;
-    // End of variables declaration                   
+    // End of variables declaration
+
 }
