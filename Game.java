@@ -1,9 +1,5 @@
-import java.awt.GridLayout;
 import java.util.Random;
-
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,15 +11,14 @@ import javax.swing.JPanel;
  *
  * @author reyes
  */
+@SuppressWarnings("serial")
 public class Game extends javax.swing.JFrame {
     
-	int mida;
 	int ayuda = MainController.getInstance().tamany();
 	/**
      * Creates new form Game
      */
-    public Game(int a) {
-    	mida = a;
+    public Game() {
     	initComponents();
     }
 
@@ -185,16 +180,16 @@ public class Game extends javax.swing.JFrame {
 	    	while (! ok){
 	    		int var = r.nextInt();
 	    		var = Math.abs(var);
-	    		var = var%3;
+	    		var = var%MainController.getInstance().tamany();
 	    		int var2 = r.nextInt();
 	    		var2 = Math.abs(var2);
-	    		var2 = var2%3;
+	    		var2 = var2%MainController.getInstance().tamany();
 	    		int a = MainController.getInstance().num(var,var2);
 	    		if (a == -1) {
 	    			int b = MainController.getInstance().show(var,var2);
-	    			MainController.getInstance().posar_pos(var2, var2, String.valueOf(b));
-	    			int c = MainController.getInstance().num(0,0);
-	    	    /*	if (c > 0) jTextField1.setText(Integer.toString(c));
+	    			MainController.getInstance().posar_pos(var, var2, String.valueOf(b));
+	    		/*	int c = MainController.getInstance().num(0,0);
+	    	    	if (c > 0) jTextField1.setText(Integer.toString(c));
 	    		    c = MainController.getInstance().num(0,2);
 	    		    if (c != -1) jTextField3.setText(Integer.toString(c));
 	    	    	c = MainController.getInstance().num(0,1);
@@ -221,12 +216,17 @@ public class Game extends javax.swing.JFrame {
     	}
     }                                        
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {  
+    	MainController.getInstance().neteja();//cal netejar botons
     }                                        
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+    	//ensenyar resultat
+    	JOptionPane.showMessageDialog(this, ":(");
+    	MainController.getInstance().delete_game();
+    	Menu m = new Menu();
+    	m.setVisible(true);
+    	dispose();
     }                                        
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -294,7 +294,7 @@ public class Game extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Game(0).setVisible(true);
+                new Game().setVisible(true);
             }
         });
     }

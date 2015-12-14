@@ -1,3 +1,5 @@
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -114,10 +116,13 @@ public class CrearPartida extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        MainController.getInstance().CrearPartida(String.valueOf(jComboBox1.getSelectedItem()), jTextField1.getText());
-	    Game g = new Game(MainController.getInstance().tamany());
-	    g.setVisible(true);
-        dispose();
+		if(MainController.getInstance().CrearPartida(String.valueOf(jComboBox1.getSelectedItem()), jTextField1.getText())){
+			Game g = new Game();
+			g.setVisible(true);
+			dispose();
+		}else{
+			JOptionPane.showMessageDialog(this, "Ja existeix una partida amb aquest nom");
+		}
     }                                        
 
     /**

@@ -327,7 +327,7 @@ public class GestioDadesH  extends Gestio_Dades{
 		int mida = getMidaKenken(nomkenken);
 		int casella_values[][] = new int[mida*mida][3];
 		for(int i = 0; i<mida*mida; ++i){
-			String[] casellainfo = getInfoLine("casella"+i,"./KenKens",nomkenken+".txt").split("\\s");
+			String[] casellainfo = getInfoLine("casella"+i+" ","./KenKens",nomkenken+".txt").split("\\s");
 			for(int k = 0; k < 3; ++k){
 				casella_values[i][k] = Integer.parseInt(casellainfo[k+1]);
 			}
@@ -347,11 +347,12 @@ public class GestioDadesH  extends Gestio_Dades{
 		return partides.substring(0,partides.length()-1).split(",");
 	}
 	
-	public static Boolean existeixPartida(String nompartida){
+	public static Boolean existeixPartida(String nompartida, String username){
 		File[] files = new File("./Games/"+username).listFiles();
 		for (File file:files){
-			if(file.isFile() && file.getName().equals(nompartida+"txt")) return false;
+			if(file.isFile() && file.getName().equals(nompartida+".txt")) return true;
 		}
+		return false;
 	}
 	
 	public static String[] getKenkens(){

@@ -120,7 +120,7 @@ public class CarregarPartida extends javax.swing.JFrame {
         // TODO add your handling code here:
         String str = String.valueOf(jComboBox1.getSelectedItem());
         MainController.getInstance().load_game(str);
-        Game g = new Game(MainController.getInstance().tamany());
+        Game g = new Game();
         g.setVisible(true);
         dispose();
         

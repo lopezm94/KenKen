@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class MainController{
 	private static final MainController mc = new MainController();
 	
-	//DefiniciÃ³ variables globals i controladors que necessitarem:
+	//Definició variables globals i controladors que necessitarem:
 	private GestionUsuario gestionus;
 	private GestioPartida gestionpart;
 	Scanner in;
@@ -62,7 +62,7 @@ public class MainController{
 	
 	
 	public Boolean CrearPartida(String nomkenken, String nompartida){
-		if(GestioDadesH.existeixPartida(nompartida)){
+		if(gestionus.es_invitado() || !GestioDadesH.existeixPartida(nompartida,gestionus.getProfile().get_usuari())){
 			gestionpart = new GestioPartida(nompartida,true,nomkenken,gestionus.getProfile().get_usuari());
 			gestionus.assignarPartida(gestionpart.getPartida());
 			gestionpart.start();
@@ -83,10 +83,8 @@ public class MainController{
 			gestionpart.deleteGame();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (FicheroNoExiste e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 	
