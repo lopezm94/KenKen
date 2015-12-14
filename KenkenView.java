@@ -75,6 +75,21 @@ public class KenkenView extends JPanel {
 	
 		}
 		
+		areas3 = new Vector<Integer>(MainController.getInstance().tam());
+	    c = 0;
+	    var = 10;
+		for (int i = 0; i < MainController.getInstance().tam(); ++i){
+			c += var;
+			if (c > 255){
+				var += 10;
+				c = 0;
+				if (var > 255){
+					var = 20;
+				}
+			}
+			areas3.add(c);
+		}
+		
 	
 	    this.size = MainController.getInstance().tamany();
 	    //*******************************************
