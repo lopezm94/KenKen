@@ -120,27 +120,8 @@ public class CarregarPartida extends javax.swing.JFrame {
         // TODO add your handling code here:
         String str = String.valueOf(jComboBox1.getSelectedItem());
         MainController.getInstance().load_game(str);
-        switch (MainController.getInstance().tamany()){
-        case 3:
-        	Game3 g3 = new Game3();
-            g3.setVisible(true);
-        	break;
-        case 4:
-        	Game4 g4 = new Game4();
-            g4.setVisible(true);
-        	break;
-        case 5:
-        	break;
-        case 6:
-        	break;
-        case 7:
-        	break;
-        case 8:
-        	break;
-        case 9:
-        	break;
-        }
-        
+        Game g = new Game(MainController.getInstance().tamany());
+        g.setVisible(true);
         dispose();
         
     }                                        

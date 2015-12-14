@@ -115,26 +115,8 @@ public class CrearPartida extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         MainController.getInstance().CrearPartida(String.valueOf(jComboBox1.getSelectedItem()), jTextField1.getText());
-        switch (MainController.getInstance().tamany()){
-	        case 3:
-	        	Game3 g3 = new Game3();
-	            g3.setVisible(true);
-	        	break;
-	        case 4:
-	        	Game4 g4 = new Game4();
-	            g4.setVisible(true);
-	        	break;
-	        case 5:
-	        	break;
-	        case 6:
-	        	break;
-	        case 7:
-	        	break;
-	        case 8:
-	        	break;
-	        case 9:
-	        	break;
-        }
+	    Game g = new Game(MainController.getInstance().tamany());
+	    g.setVisible(true);
         dispose();
     }                                        
 
