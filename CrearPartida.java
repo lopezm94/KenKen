@@ -111,6 +111,8 @@ public class CrearPartida extends javax.swing.JFrame {
             ge.setVisible(true);
         	break;
         case 5:
+        	Game5 ge5 = new Game5(mc,jTextField2.getText(),guest);
+            ge5.setVisible(true);
         	break;
         case 6:
         	break;

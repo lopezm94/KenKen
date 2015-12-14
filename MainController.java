@@ -176,6 +176,7 @@ public class MainController{
 
 	private TableroH creaTauler(String nomkenken){
 		int mida = dataEngine.getMidaKenken(nomkenken);
+		System.out.println("mida: " + mida);
 		TableroH tablero = new TableroH(mida);
 		try{
 			int[][] caselles;
@@ -191,6 +192,7 @@ public class MainController{
 					}else{
 						fija = false;
 					}
+					System.out.println("valor: " + valor + " Fija: " + fija + " Sol: "+ sol);
 					Casilla cas = new Casilla(valor,fija,sol);
 					tablero.setCasilla(cas,i,j);
 				}

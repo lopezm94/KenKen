@@ -85,7 +85,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Elimina Usuari");
+        jButton4.setText("Eliminar Usuari");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);

@@ -37,6 +37,7 @@ public class Jugar {
 	}
 	
 	public int num(int x, int y){
+		System.out.println(mc.numC(x, y));
 		return mc.numC(x,y);
 	}
 	
