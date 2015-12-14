@@ -337,14 +337,17 @@ public class GestioDadesH  extends Gestio_Dades{
 
 	public static String[] getPartides(String username){
 		String partides = "";
+		String partidesarray[] = {};
 		File[] files = new File("./Games/"+username).listFiles();
 		for (File file:files){
 			if(file.isFile() && file.getName().length() > 4){
 				partides += file.getName().substring(0, file.getName().length()-4)+",";
+				System.out.println(partides);
 			}
 		}
-		if (partides.equals("")) return null;
-		return partides.substring(0,partides.length()-1).split(",");
+		if (partides.equals("")) return partidesarray;
+		partidesarray = partides.substring(0,partides.length()-1).split(",");
+		return partidesarray;
 	}
 	
 	public static Boolean existeixPartida(String nompartida, String username){
@@ -357,12 +360,15 @@ public class GestioDadesH  extends Gestio_Dades{
 	
 	public static String[] getKenkens(){
 		String kenkens = "";
+		String kenkensarray[] = {};
 		File[] files = new File("./KenKens").listFiles();
 		for(File file:files){
 			if(file.isFile() && file.getName().length() > 4){
 				kenkens += file.getName().substring(0, file.getName().length()-4)+",";
 			}
 		}
-		return kenkens.substring(0, kenkens.length()-1).split(",");
+		if (kenkens.equals("")) return kenkensarray;
+		kenkensarray = kenkens.substring(0,kenkens.length()-1).split(",");
+		return kenkensarray;
 	}
 }

@@ -162,9 +162,13 @@ public class Menu extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     	if (! MainController.getInstance().es_guest()){
-    		CarregarPartida c = new CarregarPartida();
-    		c.setVisible(true);
-    		dispose();
+    		if(MainController.getInstance().getPartides().length > 0){
+    			CarregarPartida c = new CarregarPartida();
+        		c.setVisible(true);
+        		dispose();
+    		}else{
+    			JOptionPane.showMessageDialog(this, "No tens partides guardades");
+    		}
     	}
     	else {
     		JOptionPane.showMessageDialog(this, "Ets un convidat");
