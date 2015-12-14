@@ -347,6 +347,13 @@ public class GestioDadesH  extends Gestio_Dades{
 		return partides.substring(0,partides.length()-1).split(",");
 	}
 	
+	public static Boolean existeixPartida(String nompartida){
+		File[] files = new File("./Games/"+username).listFiles();
+		for (File file:files){
+			if(file.isFile() && file.getName().equals(nompartida+"txt")) return false;
+		}
+	}
+	
 	public static String[] getKenkens(){
 		String kenkens = "";
 		File[] files = new File("./KenKens").listFiles();
