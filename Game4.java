@@ -645,145 +645,305 @@ public class Game4 extends javax.swing.JFrame {
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
-    	int a = MainController.getInstance().num(0,0);
-    	if (a != -1) jTextField1.setText(Integer.toString(a));
     	if (! MainController.getInstance().fija(0,0)){
-    		MainController.getInstance().posar_pos(0,0,jTextField1.getText());
-    	}
+			int valor = Integer.parseInt(jTextField1.getText());
+			if((valor <= 4 && valor >= 1) || valor == -1 ){
+				MainController.getInstance().posar_pos(0,0,jTextField1.getText());
+				if(valor != -1){
+					jTextField1.setText(Integer.toString(valor));
+				}else{
+					jTextField1.setText("");
+				}
+			}else{
+				JOptionPane.showMessageDialog(this, "El valor ha de ser o be -1 o entre 1 i 4");
+			}
+		}else{
+			jTextField1.setText(Integer.toString(MainController.getInstance().num(0, 0)));
+		} 
     }                                           
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
-    	int a = MainController.getInstance().num(0,1);
-    	if (a != -1) jTextField2.setText(Integer.toString(a));
     	if (! MainController.getInstance().fija(0,1)){
-    		MainController.getInstance().posar_pos(0,1,jTextField2.getText());
-    	}
+			int valor = Integer.parseInt(jTextField2.getText());
+			if((valor <= 4 && valor >= 1) || valor == -1 ){
+				MainController.getInstance().posar_pos(0,1,jTextField2.getText());
+				if(valor != -1){
+					jTextField2.setText(Integer.toString(valor));
+				}else{
+					jTextField2.setText("");
+				}
+			}else{
+				JOptionPane.showMessageDialog(this, "El valor ha de ser o be -1 o entre 1 i 4");
+			}
+		}else{
+			jTextField1.setText(Integer.toString(MainController.getInstance().num(0, 1)));
+		}
     }                                           
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
-    	int a = MainController.getInstance().num(0,2);
-    	if (a != -1) jTextField3.setText(Integer.toString(a));
     	if (! MainController.getInstance().fija(0,2)){
-    		MainController.getInstance().posar_pos(0,2,jTextField3.getText());
-    	}
+			int valor = Integer.parseInt(jTextField3.getText());
+			if((valor <= 4 && valor >= 1) || valor == -1 ){
+				MainController.getInstance().posar_pos(0,2,jTextField3.getText());
+				if(valor != -1){
+					jTextField3.setText(Integer.toString(valor));
+				}else{
+					jTextField3.setText("");
+				}
+			}else{
+				JOptionPane.showMessageDialog(this, "El valor ha de ser o be -1 o entre 1 i 4");
+			}
+		}else{
+			jTextField3.setText(Integer.toString(MainController.getInstance().num(0, 2)));
+		}
     }                                           
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
-    	int a = MainController.getInstance().num(0,3);
-    	if (a != -1) jTextField4.setText(Integer.toString(a));
     	if (! MainController.getInstance().fija(0,3)){
-    		MainController.getInstance().posar_pos(0,3,jTextField4.getText());
-    	}
+			int valor = Integer.parseInt(jTextField4.getText());
+			if((valor <= 4 && valor >= 1) || valor == -1 ){
+				MainController.getInstance().posar_pos(0,3,jTextField4.getText());
+				if(valor != -1){
+					jTextField4.setText(Integer.toString(valor));
+				}else{
+					jTextField4.setText("");
+				}
+			}else{
+				JOptionPane.showMessageDialog(this, "El valor ha de ser o be -1 o entre 1 i 4");
+			}
+		}else{
+			jTextField4.setText(Integer.toString(MainController.getInstance().num(0, 3)));
+		}
     }                                           
 
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
-    	int a = MainController.getInstance().num(1,0);
-    	if (a != -1) jTextField5.setText(Integer.toString(a));
     	if (! MainController.getInstance().fija(1,0)){
-    		MainController.getInstance().posar_pos(1,0,jTextField5.getText());
-    	}
+			int valor = Integer.parseInt(jTextField5.getText());
+			if((valor <= 4 && valor >= 1) || valor == -1 ){
+				MainController.getInstance().posar_pos(1,0,jTextField5.getText());
+				if(valor != -1){
+					jTextField5.setText(Integer.toString(valor));
+				}else{
+					jTextField5.setText("");
+				}
+			}else{
+				JOptionPane.showMessageDialog(this, "El valor ha de ser o be -1 o entre 1 i 4");
+			}
+		}else{
+			jTextField5.setText(Integer.toString(MainController.getInstance().num(1, 0)));
+		}
     }                                           
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
-    	int a = MainController.getInstance().num(1,1);
-    	if (a != -1) jTextField6.setText(Integer.toString(a));
     	if (! MainController.getInstance().fija(1,1)){
-    		MainController.getInstance().posar_pos(1,1,jTextField6.getText());
-    	}
+			int valor = Integer.parseInt(jTextField6.getText());
+			if((valor <= 4 && valor >= 1) || valor == -1 ){
+				MainController.getInstance().posar_pos(1,1,jTextField6.getText());
+				if(valor != -1){
+					jTextField6.setText(Integer.toString(valor));
+				}else{
+					jTextField6.setText("");
+				}
+			}else{
+				JOptionPane.showMessageDialog(this, "El valor ha de ser o be -1 o entre 1 i 4");
+			}
+		}else{
+			jTextField6.setText(Integer.toString(MainController.getInstance().num(1, 1)));
+		}
     }                                           
 
     private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
-    	int a = MainController.getInstance().num(1,2);
-    	if (a != -1) jTextField7.setText(Integer.toString(a));
     	if (! MainController.getInstance().fija(1,2)){
-    		MainController.getInstance().posar_pos(1,2,jTextField7.getText());
-    	}
+			int valor = Integer.parseInt(jTextField7.getText());
+			if((valor <= 4 && valor >= 1) || valor == -1 ){
+				MainController.getInstance().posar_pos(1,2,jTextField7.getText());
+				if(valor != -1){
+					jTextField7.setText(Integer.toString(valor));
+				}else{
+					jTextField7.setText("");
+				}
+			}else{
+				JOptionPane.showMessageDialog(this, "El valor ha de ser o be -1 o entre 1 i 4");
+			}
+		}else{
+			jTextField7.setText(Integer.toString(MainController.getInstance().num(1, 2)));
+		}
     }                                           
 
     private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
-    	int a = MainController.getInstance().num(1,3);
-    	if (a != -1) jTextField8.setText(Integer.toString(a));
     	if (! MainController.getInstance().fija(1,3)){
-    		MainController.getInstance().posar_pos(1,3,jTextField8.getText());
-    	}
+			int valor = Integer.parseInt(jTextField8.getText());
+			if((valor <= 4 && valor >= 1) || valor == -1 ){
+				MainController.getInstance().posar_pos(1,3,jTextField8.getText());
+				if(valor != -1){
+					jTextField8.setText(Integer.toString(valor));
+				}else{
+					jTextField8.setText("");
+				}
+			}else{
+				JOptionPane.showMessageDialog(this, "El valor ha de ser o be -1 o entre 1 i 4");
+			}
+		}else{
+			jTextField8.setText(Integer.toString(MainController.getInstance().num(1, 3)));
+		}
     }                                           
 
     private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
-    	int a = MainController.getInstance().num(2,0);
-    	if (a != -1) jTextField9.setText(Integer.toString(a));
     	if (! MainController.getInstance().fija(2,0)){
-    		MainController.getInstance().posar_pos(2,0,jTextField9.getText());
-    	}
+			int valor = Integer.parseInt(jTextField9.getText());
+			if((valor <= 4 && valor >= 1) || valor == -1 ){
+				MainController.getInstance().posar_pos(2,0,jTextField9.getText());
+				if(valor != -1){
+					jTextField9.setText(Integer.toString(valor));
+				}else{
+					jTextField9.setText("");
+				}
+			}else{
+				JOptionPane.showMessageDialog(this, "El valor ha de ser o be -1 o entre 1 i 4");
+			}
+		}else{
+			jTextField9.setText(Integer.toString(MainController.getInstance().num(2, 0)));
+		}
     }       
     private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
-    	int a = MainController.getInstance().num(2,1);
-    	if (a != -1) jTextField10.setText(Integer.toString(a));
     	if (! MainController.getInstance().fija(2,1)){
-    		MainController.getInstance().posar_pos(2,1,jTextField10.getText());
-    	}
+			int valor = Integer.parseInt(jTextField10.getText());
+			if((valor <= 4 && valor >= 1) || valor == -1 ){
+				MainController.getInstance().posar_pos(2,1,jTextField10.getText());
+				if(valor != -1){
+					jTextField10.setText(Integer.toString(valor));
+				}else{
+					jTextField10.setText("");
+				}
+			}else{
+				JOptionPane.showMessageDialog(this, "El valor ha de ser o be -1 o entre 1 i 4");
+			}
+		}else{
+			jTextField10.setText(Integer.toString(MainController.getInstance().num(2, 1)));
+		}
     }         
 
     private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
-    	int a = MainController.getInstance().num(2,2);
-    	if (a != -1) jTextField11.setText(Integer.toString(a));
     	if (! MainController.getInstance().fija(2,2)){
-    		MainController.getInstance().posar_pos(2,2,jTextField11.getText());
-    	}
+			int valor = Integer.parseInt(jTextField11.getText());
+			if((valor <= 4 && valor >= 1) || valor == -1 ){
+				MainController.getInstance().posar_pos(2,2,jTextField11.getText());
+				if(valor != -1){
+					jTextField11.setText(Integer.toString(valor));
+				}else{
+					jTextField11.setText("");
+				}
+			}else{
+				JOptionPane.showMessageDialog(this, "El valor ha de ser o be -1 o entre 1 i 4");
+			}
+		}else{
+			jTextField11.setText(Integer.toString(MainController.getInstance().num(2, 2)));
+		}
     }                                            
 
     private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
-    	int a = MainController.getInstance().num(2,3);
-    	if (a != -1) jTextField12.setText(Integer.toString(a));
     	if (! MainController.getInstance().fija(2,3)){
-    		MainController.getInstance().posar_pos(2,3,jTextField12.getText());
-    	}
+			int valor = Integer.parseInt(jTextField12.getText());
+			if((valor <= 4 && valor >= 1) || valor == -1 ){
+				MainController.getInstance().posar_pos(2,3,jTextField12.getText());
+				if(valor != -1){
+					jTextField12.setText(Integer.toString(valor));
+				}else{
+					jTextField12.setText("");
+				}
+			}else{
+				JOptionPane.showMessageDialog(this, "El valor ha de ser o be -1 o entre 1 i 4");
+			}
+		}else{
+			jTextField12.setText(Integer.toString(MainController.getInstance().num(2,3)));
+		}
     }                                            
 
     private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
-    	int a = MainController.getInstance().num(3,0);
-    	if (a != -1) jTextField13.setText(Integer.toString(a));
     	if (! MainController.getInstance().fija(3,0)){
-    		MainController.getInstance().posar_pos(3,0,jTextField13.getText());
-    	}
+			int valor = Integer.parseInt(jTextField13.getText());
+			if((valor <= 4 && valor >= 1) || valor == -1 ){
+				MainController.getInstance().posar_pos(3,0,jTextField13.getText());
+				if(valor != -1){
+					jTextField13.setText(Integer.toString(valor));
+				}else{
+					jTextField13.setText("");
+				}
+			}else{
+				JOptionPane.showMessageDialog(this, "El valor ha de ser o be -1 o entre 1 i 4");
+			}
+		}else{
+			jTextField13.setText(Integer.toString(MainController.getInstance().num(3,0)));
+		}
     }                                            
 
     private void jTextField14ActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
-    	int a = MainController.getInstance().num(3,1);
-    	if (a != -1) jTextField14.setText(Integer.toString(a));
     	if (! MainController.getInstance().fija(3,1)){
-    		MainController.getInstance().posar_pos(3,1,jTextField14.getText());
-    	}
+			int valor = Integer.parseInt(jTextField14.getText());
+			if((valor <= 4 && valor >= 1) || valor == -1 ){
+				MainController.getInstance().posar_pos(3,1,jTextField14.getText());
+				if(valor != -1){
+					jTextField14.setText(Integer.toString(valor));
+				}else{
+					jTextField14.setText("");
+				}
+			}else{
+				JOptionPane.showMessageDialog(this, "El valor ha de ser o be -1 o entre 1 i 4");
+			}
+		}else{
+			jTextField14.setText(Integer.toString(MainController.getInstance().num(3,1)));
+		}
     }                                            
 
     private void jTextField15ActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
-    	int a = MainController.getInstance().num(3,2);
-    	if (a != -1) jTextField15.setText(Integer.toString(a));
     	if (! MainController.getInstance().fija(3,2)){
-    		MainController.getInstance().posar_pos(3,2,jTextField15.getText());
-    	}
+			int valor = Integer.parseInt(jTextField15.getText());
+			if((valor <= 4 && valor >= 1) || valor == -1 ){
+				MainController.getInstance().posar_pos(3,2,jTextField15.getText());
+				if(valor != -1){
+					jTextField15.setText(Integer.toString(valor));
+				}else{
+					jTextField15.setText("");
+				}
+			}else{
+				JOptionPane.showMessageDialog(this, "El valor ha de ser o be -1 o entre 1 i 4");
+			}
+		}else{
+			jTextField15.setText(Integer.toString(MainController.getInstance().num(3,2)));
+		}
     }                                            
 
     private void jTextField16ActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
-    	int a = MainController.getInstance().num(3,3);
-    	if (a != -1) jTextField16.setText(Integer.toString(a));
     	if (! MainController.getInstance().fija(3,3)){
-    		MainController.getInstance().posar_pos(3,3,jTextField16.getText());
-    	}
+			int valor = Integer.parseInt(jTextField16.getText());
+			if((valor <= 4 && valor >= 1) || valor == -1 ){
+				MainController.getInstance().posar_pos(3,3,jTextField16.getText());
+				if(valor != -1){
+					jTextField16.setText(Integer.toString(valor));
+				}else{
+					jTextField16.setText("");
+				}
+			}else{
+				JOptionPane.showMessageDialog(this, "El valor ha de ser o be -1 o entre 1 i 4");
+			}
+		}else{
+			jTextField16.setText(Integer.toString(MainController.getInstance().num(3, 3)));
+		}
     }                                            
 
     /**
