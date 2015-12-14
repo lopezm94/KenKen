@@ -174,7 +174,6 @@ public class MainController{
 	}
 	
 	public String areaTipoA(int i){
-		System.out.println(Character.toString(gestionpart.getOperacioA(i)) + " " + Integer.toString(gestionpart.getResultatAreaA(i)));
 		String b;
 		b = Character.toString(gestionpart.getOperacioA(i));
 		b += "   ";
