@@ -171,5 +171,10 @@ public class MainController{
     public Boolean es_guest(){
     	return gestionus.es_invitado();
     }
-
+    public String[] getPartides(String usr){
+    	return MainController.getInstance().getPartides(usr);
+    }
+    public String[] getKenKens(){
+    	return MainController.getInstance().getKenKens();
+    }
 }
