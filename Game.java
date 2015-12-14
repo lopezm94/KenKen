@@ -1,4 +1,5 @@
 import java.util.Random;
+
 import javax.swing.JOptionPane;
 
 /*
@@ -40,7 +41,7 @@ public class Game extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        a = new KenkenView(MainController.getInstance().tamany());
+        a = new KenkenView();
         jPanel2 = a.matriu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -177,12 +178,32 @@ public class Game extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     	if (ayuda > 0){
-    		a.ajuda();
+    		Random r = new Random();
+        	Boolean ok = false;
+        	while (! ok){
+        		int var = r.nextInt();
+        		var = Math.abs(var);
+        		var = var%MainController.getInstance().tamany();
+        		int var2 = r.nextInt();
+        		var2 = Math.abs(var2);
+        		var2 = var2%MainController.getInstance().tamany();
+        		int a = MainController.getInstance().num(var,var2);
+        		if (a != MainController.getInstance().show(var,var2)){
+        			int b = MainController.getInstance().show(var,var2);
+        			MainController.getInstance().posar_pos(var, var2, String.valueOf(b));
+    	    		//KenkenView();
+    	    		ok = true;
+    			}
+        	}
 	    	--ayuda;
+
     	}
     	else{
     		JOptionPane.showMessageDialog(this, "Ja no pots tenir més ajudes");
     	}
+    	Game b = new Game();
+    	b.setVisible(true);
+    	dispose();
     }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {  
@@ -202,10 +223,11 @@ public class Game extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     	if (MainController.getInstance().comp()){
-			JOptionPane.showMessageDialog(this, "FELICITATS!!");
 			if (!MainController.getInstance().es_guest()){
-				MainController.getInstance().actualizar_punt();
 				MainController.getInstance().delete_game();
+				JOptionPane.showMessageDialog(this, "FELICITATS!!\nTemps: "+MainController.getInstance().getTemps()+"\nPuntuacio: "+String.valueOf(MainController.getInstance().actualizar_punt()));
+			}else{
+				JOptionPane.showMessageDialog(this, "FELICITATS!!\nTemps: "+MainController.getInstance().getTemps());
 			}
 			Menu f =new Menu();
 			f.setVisible(true);
