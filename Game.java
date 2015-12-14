@@ -284,6 +284,12 @@ public class Game extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
     	//ensenyar resultat
+      JButton tmp;
+      int size = MainController.getInstance().tamany();
+      for (int i=0; i<size*size; i++) {
+        tmp = ((JButton)this.board.getComponent(i));
+        tmp.setText(Integer.toString(MainController.getInstance().getSolAt(i/size, i%size)));
+      }
     	JOptionPane.showMessageDialog(this, ":(");
     	MainController.getInstance().delete_game();
     	Menu m = new Menu();
