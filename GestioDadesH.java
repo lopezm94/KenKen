@@ -343,6 +343,7 @@ public class GestioDadesH  extends Gestio_Dades{
 				partides += file.getName()+",";
 			}
 		}
+		if (partides.equals("")) return null;
 		return partides.substring(0,partides.length()-1).split(",");
 	}
 	

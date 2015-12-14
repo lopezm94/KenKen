@@ -161,9 +161,14 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        CarregarPartida c = new CarregarPartida();
-        c.setVisible(true);
-        dispose();
+    	if (! MainController.getInstance().es_guest()){
+    		CarregarPartida c = new CarregarPartida();
+    		c.setVisible(true);
+    		dispose();
+    	}
+    	else {
+    		JOptionPane.showMessageDialog(this, "Ets un convidat");
+    	}
     }                                        
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -186,9 +191,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    //    MainController mc =new MainController();
-    //    mc.show_tutorial();
-        //dispose();
+    	MainController.getInstance().show_tutorial();
     }                                        
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                         

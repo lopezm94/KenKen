@@ -1,7 +1,10 @@
 //import Excepcions.*;
 //import Persistencia.Gestio_Dades;
 //import java.awt.Desktop;
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 //import java.net.URI;
 //import java.net.URISyntaxException;
 import java.util.Scanner;
@@ -171,10 +174,22 @@ public class MainController{
     public Boolean es_guest(){
     	return gestionus.es_invitado();
     }
-    public String[] getPartides(String usr){
-    	return MainController.getInstance().getPartides(usr);
+    public String[] getPartides(){
+    	return GestioDadesH.getPartides(gestionus.getProfile().get_usuari());
     }
     public String[] getKenKens(){
-    	return MainController.getInstance().getKenKens();
+    	return GestioDadesH.getKenkens();
     }
+    
+    public void show_tutorial(){
+		//show a simple text
+		//System.out.println("Tutorial per jugar:\n http://www.kenkenpuzzle.com/howto/solve");
+		
+		Desktop enlace=Desktop.getDesktop();
+		try {
+            enlace.browse(new URI("http://www.kenkenpuzzle.com/howto/solve"));
+		} catch (IOException | URISyntaxException e) {
+			e.getMessage();
+		}
+	}
 }
