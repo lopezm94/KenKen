@@ -102,8 +102,16 @@ public class GestioPartida{
 		return p.getTauler().getArea(x, y).get_operacio();
 	}
 	
+	public char getOperacio(int x){
+		return p.getTauler().getArea(x).get_operacio();
+	}
+	
 	public int getResultatArea(int x, int y){
 		return p.getTauler().getArea(x, y).get_resultat();
+	}
+	
+	public int getResultatArea(int x){
+		return p.getTauler().getArea(x).get_resultat();
 	}
 	
 	public boolean check(){

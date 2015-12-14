@@ -106,9 +106,10 @@ public class MainController{
 		return gestionpart.getDiff();
 	}
 	
-	public void actualizar_punt(){
+	public int actualizar_punt(){
 		int punt = (getVacias()*10000)/((int)getTemps()*tamany()*10);
 		gestionus.afegirPunt(punt, getDifficulty());
+		return punt;
 	}
 	
 	public long getTemps(){
@@ -168,6 +169,14 @@ public class MainController{
 		a = Character.toString(gestionpart.getOperacio(x, y));
 		a += "   ";
 		a += Integer.toString(gestionpart.getResultatArea(x, y));
+		return a;
+	}
+	
+	public String areaTipo(int x){
+		String a = null;
+		a = Character.toString(gestionpart.getOperacio(x));
+		a += "   ";
+		a += Integer.toString(gestionpart.getResultatArea(x));
 		return a;
 	}
            
