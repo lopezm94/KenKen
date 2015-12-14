@@ -638,6 +638,7 @@ public class Game4 extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
+		MainController.getInstance().sortir();
     	Menu m = new Menu();
     	m.setVisible(true);
     	dispose();
