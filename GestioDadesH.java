@@ -244,36 +244,38 @@ public class GestioDadesH  extends Gestio_Dades{
 	casellax fija sol idarea --> fija (1 fija,0 no fija), sol(value), idarea(0...total areas)
 */
 
-	public static void guardar_kenken(TableroH tauler, String nomkenken){
+	public static Boolean guardar_kenken(TableroH tauler, String nomkenken){
 		try {
 			Crear_archivo(nomkenken,"./KenKens");
-		} catch (IOException | FicheroYaExistente e) {
-		}
-		try {
-			Escribir_string(""+tauler.getFiles(),"\n",nomkenken,"./KenKens");
-			String st = "operacions";
-			for(int i=0; i < tauler.getNumAreas();++i){
-				st += " "+tauler.getArea(i).get_operacio();
-			}
-			Escribir_string(st,"\n",nomkenken,"./KenKens");
-			/*st = "dificultat";
-			st += " "+tauler.calcuDif();
-			Escribir_string(st,"\n",nomkenken,"./KenKens");*/
-			for(int i=0; i < tauler.getFiles(); ++i){
-				for(int j=0; j < tauler.getFiles(); ++j){
-					st = "casella";
-					int k = i*tauler.getFiles()+j;
-					st += ""+k;
-					if(tauler.getCasilla(i, j).getFija())	k = 1;
-					else	k = 0;
-					st += " "+k;
-					st += " "+tauler.getCasillaSol(i, j);
-					st += " "+tauler.getAreaID(i, j);
-					Escribir_string(st,"\n",nomkenken,"./KenKens");
+			try {
+				Escribir_string(""+tauler.getFiles(),"\n",nomkenken,"./KenKens");
+				String st = "operacions";
+				for(int i=0; i < tauler.getNumAreas();++i){
+					st += " "+tauler.getArea(i).get_operacio();
 				}
+				Escribir_string(st,"\n",nomkenken,"./KenKens");
+				/*st = "dificultat";
+				st += " "+tauler.calcuDif();
+				Escribir_string(st,"\n",nomkenken,"./KenKens");*/
+				for(int i=0; i < tauler.getFiles(); ++i){
+					for(int j=0; j < tauler.getFiles(); ++j){
+						st = "casella";
+						int k = i*tauler.getFiles()+j;
+						st += ""+k;
+						if(tauler.getCasilla(i, j).getFija())	k = 1;
+						else	k = 0;
+						st += " "+k;
+						st += " "+tauler.getCasillaSol(i, j);
+						st += " "+tauler.getAreaID(i, j);
+						Escribir_string(st,"\n",nomkenken,"./KenKens");
+					}
+				}
+				return true;
+			} catch (IOException | FicheroNoExiste e) {
+				return false;
 			}
-		} catch (IOException | FicheroNoExiste e) {
-			e.printStackTrace();
+		} catch (IOException | FicheroYaExistente e) {
+			return false;
 		}
 	}
 

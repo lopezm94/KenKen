@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class MainController{
 	private static final MainController mc = new MainController();
 	
-	//DefiniciÃ³ variables globals i controladors que necessitarem:
+	//Definició variables globals i controladors que necessitarem:
 	private GestionUsuario gestionus;
 	private GestioPartida gestionpart;
 	Scanner in;
@@ -84,9 +84,9 @@ public class MainController{
 		}
 	}
 	
-	public void genera(String nomkenken, String a, int b){
+	public Boolean genera(String nomkenken, String a, int b){
 		TableroH tablero = KenkenHandler.generateAndSolveKenken(b, a);
-		GestioDadesH.guardar_kenken(tablero, nomkenken);
+		return GestioDadesH.guardar_kenken(tablero, nomkenken);
 	}
 	
 	public Boolean generaMan(Generar a, String nomkenken){

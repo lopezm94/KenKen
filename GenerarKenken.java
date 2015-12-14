@@ -186,11 +186,14 @@ public class GenerarKenken extends javax.swing.JFrame {
     	if (jRadioButton1.isSelected() == true) a = "Facil";
     	else if (jRadioButton2.isSelected() == true) a = "Medio";
     	else if (jRadioButton3.isSelected() == true) a = "Dificil";
-    	MainController.getInstance().genera(jTextField1.getText() ,a, (int)jSpinner1.getValue());
-    	JOptionPane.showMessageDialog(this, "Ha sigut creac un Kenken amb:\nNom: "+jTextField1.getText()+"\nDificultat: "+a+"\nDimensió: "+(int)jSpinner1.getValue());
-    	Menu m = new Menu();
-    	m.setVisible(true);
-    	dispose();  /*aleatorio*/
+    	if(MainController.getInstance().genera(jTextField1.getText() ,a, (int)jSpinner1.getValue())){
+        	JOptionPane.showMessageDialog(this, "Ha sigut creac un Kenken amb:\nNom: "+jTextField1.getText()+"\nDificultat: "+a+"\nDimensió: "+(int)jSpinner1.getValue());
+        	Menu m = new Menu();
+        	m.setVisible(true);
+        	dispose();  /*aleatorio*/
+    	}else{
+        	JOptionPane.showMessageDialog(this, "Ja existeix un Kenken amb aquest nom");
+    	}
     }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
