@@ -50,6 +50,11 @@ public class CarregarPartida extends javax.swing.JFrame {
         });
 
         jButton2.setText("Sortir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         String partides[] = MainController.getInstance().getPartides();
         for (int i = 0; i < partides.length; ++i){
         	jComboBox1.addItem(partides[i]);
@@ -103,12 +108,9 @@ public class CarregarPartida extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>      
+                                       
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }                                           
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     	Menu m = new Menu();
     	m.setVisible(true);
@@ -183,10 +185,6 @@ public class CarregarPartida extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JScrollBar jScrollBar1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JComboBox<String> jComboBox1;
     // End of variables declaration                   
 }
