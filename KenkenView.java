@@ -7,28 +7,33 @@ public class KenkenView extends JPanel {
 	int size;
 	int r,v;
 	JButton button;
+	JPanel panel1;
 	Vector<Integer> areas = null;
 	Vector<Integer> areas2 = null;
 	//NumOptions nums;
 	public JPanel container;
-	
+
 	// added main for testing
 	public static void main(String [] args){
 	    KenkenView kenken = new KenkenView();
 	}
-	
+
 	/*public optionView() {
-	
+
 	}*/
-	
+
 	public void setButton(JButton button) {
 	  this.button = button;
 	}
-	
+
 	public JPanel matriu(){
 		return container;
 	}
-	
+
+	public JPanel getBoard() {
+		return panel1;
+	}
+
 	public KenkenView() {
 	    // TODO Auto-generated constructor stub
 		areas = new Vector<Integer>(MainController.getInstance().tam());
@@ -58,20 +63,20 @@ public class KenkenView extends JPanel {
 				}
 			}
 			areas2.add(c);
-	
+
 		}
-		
-	
+
+
 	    this.size = MainController.getInstance().tamany();
 	    //*******************************************
 	    container = new JPanel();
 	    container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
-	
-	    JPanel panel1 = new JPanel(new GridLayout(size,size));
+
+	    panel1 = new JPanel(new GridLayout(size,size));
 	    JPanel panel2 = new JPanel(new GridLayout(size,0));
-	
+
 	    //panel1.set[Preferred/Maximum/Minimum]Size()
-	
+
 	    container.add(panel1);
 	    container.add(panel2);
 	    ////*****************************************
@@ -80,7 +85,7 @@ public class KenkenView extends JPanel {
 	    */
 	    JFrame frame = new JFrame();
 	    frame.add(container);
-	
+
 	    for(r = 0; r < size; r++){
 	        for(v = 0; v < size; v++){
 	            //JPanel grid = new JPanel();
@@ -92,7 +97,7 @@ public class KenkenView extends JPanel {
 	                    jButtonActionPerformed(evt,row,col);
 	                }
 	            });
-	
+
 	            build.setBackground(new java.awt.Color(((int) areas.get(MainController.getInstance().area(r,v))), ((int) areas2.get(MainController.getInstance().area(r,v))), 255));
 	 	       if (MainController.getInstance().num(r, v) != -1)
 	            build.setText(Integer.toString(MainController.getInstance().num(r, v)));
@@ -100,7 +105,7 @@ public class KenkenView extends JPanel {
 	            //container.setVisible(true);
 	        }
 	    }
-	
+
 	    for(r = 0; r < size; r++){
 	            //JPanel grid = new JPanel();
 	            JButton build = new JButton();
@@ -111,7 +116,7 @@ public class KenkenView extends JPanel {
 	                    jButtonActionPerformed(evt,row);
 	                }
 	            });
-	
+
 	            panel2.add(build);
 	            //container.setVisible(true);
 	    }
@@ -123,20 +128,24 @@ public class KenkenView extends JPanel {
 	            container.setVisible(true);
 	        }
 	    }
-	
+
 	    frame.setSize(1000,700);
 	    //frame.setVisible(true);
 	    //nums = new NumOptions(size);
 	}
-	
-	
+
+	public void actualizar() {
+
+	}
+
+
 	private void jButtonActionPerformed(java.awt.event.ActionEvent evt, int row, int col) {
 		setButton(((JButton)evt.getSource()));
 		r = row;
 		v = col;
 	//  System.out.println(container.getComponentAt(row,col)).setText('9');
 	}
-	
+
 	private void jButtonActionPerformed(java.awt.event.ActionEvent evt, int row) {
 		if (button == null) return;
 		if (! MainController.getInstance().fija(r, v)){
