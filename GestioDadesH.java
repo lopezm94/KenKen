@@ -335,4 +335,25 @@ public class GestioDadesH  extends Gestio_Dades{
 		return casella_values;
 	}
 
+	public static String[] getPartides(String username){
+		String partides = "";
+		File[] files = new File("./Games/"+username).listFiles();
+		for (File file:files){
+			if(file.isFile()){
+				partides += file.getName()+",";
+			}
+		}
+		return partides.substring(0,partides.length()-1).split(",");
+	}
+	
+	public static String[] getKenkens(){
+		String kenkens = "";
+		File[] files = new File("./KenKens").listFiles();
+		for(File file:files){
+			if(file.isFile()){
+				kenkens += file.getName()+",";
+			}
+		}
+		return kenkens.substring(0, kenkens.length()-1).split(",");
+	}
 }
