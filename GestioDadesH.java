@@ -343,6 +343,17 @@ public class GestioDadesH  extends Gestio_Dades{
 				partides += file.getName()+",";
 			}
 		}
-		return partides.substring(0,partides.length()-1).split(',');
+		return partides.substring(0,partides.length()-1).split(",");
+	}
+	
+	public static String[] getKenkens(){
+		String kenkens = "";
+		File[] files = new File("./KenKens").listFiles();
+		for(File file:files){
+			if(file.isFile()){
+				kenkens += file.getName()+",";
+			}
+		}
+		return kenkens.substring(0, kenkens.length()-1).split(",");
 	}
 }
