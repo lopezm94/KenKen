@@ -7,14 +7,6 @@ import java.lang.RuntimeException;
 *@author Juan López
 */
 public class AreaBuilder {
-
-  /**
-  *Devuelve un area con el identificador pos y la operacion op
-  *
-  *@param pos Identificador
-  *@param op Operacion
-  *@return Area Area
-  */
   public static Area newArea(int pos, char op) {
     switch (op) {
       case '.':

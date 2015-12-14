@@ -5,11 +5,11 @@
 
 public class Multiplicacio extends Area{
 	private static final char op = '*';
-
+	
 	public Multiplicacio(int pos){
 		super(pos);
 	}
-
+	
 	public String toString(){
 		String res="";
 		res = "pos: " + pos + ", "
@@ -19,11 +19,11 @@ public class Multiplicacio extends Area{
 				+ "resact: " + resact + "\n ";
 		return res;
 	}
-
+	
 	public char get_operacio(){
 		return op;
 	}
-
+	
 	public Boolean check(int n){
 		Boolean b1;
 		int mult = 1, contador2 = 0;
@@ -61,20 +61,19 @@ public class Multiplicacio extends Area{
 		}
 		return b1;
 	}
-
+	
 	public void calcular_resultat(){
 		res = 1;
 		for(int i=0; i < caselles.size(); ++i){
 			res *= caselles.get(i).getSolucion();
 		}
 	}
-
+	
 	public void calcular_resultatactual(){
 		resact = 1;
 		for(int i=0; i < caselles.size(); ++i){
-
 			resact *= caselles.get(i).getValor();
 		}
 	}
-
+	
 }
