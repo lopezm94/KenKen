@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class MainController{
 	private static final MainController mc = new MainController();
 	
-	//Definició variables globals i controladors que necessitarem:
+	//DefiniciÃ³ variables globals i controladors que necessitarem:
 	private GestionUsuario gestionus;
 	private GestioPartida gestionpart;
 	Scanner in;
@@ -60,10 +60,16 @@ public class MainController{
 		}
 	}
 	
-	public void CrearPartida(String nomkenken, String nompartida){
-		gestionpart = new GestioPartida(nompartida,true,nomkenken,gestionus.getProfile().get_usuari());
-		gestionus.assignarPartida(gestionpart.getPartida());
-		gestionpart.start();
+	
+	public Boolean CrearPartida(String nomkenken, String nompartida){
+		if(GestioDadesH.existeixPartida(nompartida)){
+			gestionpart = new GestioPartida(nompartida,true,nomkenken,gestionus.getProfile().get_usuari());
+			gestionus.assignarPartida(gestionpart.getPartida());
+			gestionpart.start();
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	public void load_game(String nompartida){
