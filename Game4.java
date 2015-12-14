@@ -567,8 +567,8 @@ public class Game4 extends javax.swing.JFrame {
         // TODO add your handling code here:
     	MainController.getInstance().neteja();
     	if(!MainController.getInstance().fija(0, 0)) jTextField1.setText("");
-    	if(!MainController.getInstance().fija(0, 1)) jTextField3.setText("");
-    	if(!MainController.getInstance().fija(0, 2)) jTextField2.setText("");
+    	if(!MainController.getInstance().fija(0, 1)) jTextField2.setText("");
+    	if(!MainController.getInstance().fija(0, 2)) jTextField3.setText("");
     	if(!MainController.getInstance().fija(0, 3)) jTextField4.setText("");
     	if(!MainController.getInstance().fija(1, 0)) jTextField5.setText("");
     	if(!MainController.getInstance().fija(1, 1)) jTextField6.setText("");

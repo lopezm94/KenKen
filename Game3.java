@@ -403,8 +403,8 @@ import javax.swing.JOptionPane;
 	        // TODO add your handling code here:
 	    	MainController.getInstance().neteja();
 	    	if(!MainController.getInstance().fija(0, 0)) jTextField1.setText("");
-	    	if(!MainController.getInstance().fija(0, 1)) jTextField3.setText("");
-	    	if(!MainController.getInstance().fija(0, 2)) jTextField2.setText("");
+	    	if(!MainController.getInstance().fija(0, 1)) jTextField2.setText("");
+	    	if(!MainController.getInstance().fija(0, 2)) jTextField3.setText("");
 	    	if(!MainController.getInstance().fija(1, 0)) jTextField4.setText("");
 	    	if(!MainController.getInstance().fija(1, 1)) jTextField5.setText("");
 	    	if(!MainController.getInstance().fija(1, 2)) jTextField6.setText("");
