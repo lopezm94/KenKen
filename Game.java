@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 @SuppressWarnings("serial")
 public class Game extends javax.swing.JFrame {
     
+	
+	KenkenView a = null;
 	int ayuda = MainController.getInstance().tamany();
 	/**
      * Creates new form Game
@@ -38,7 +40,7 @@ public class Game extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        KenkenView a = new KenkenView(MainController.getInstance().tamany());
+        a = new KenkenView(MainController.getInstance().tamany());
         jPanel2 = a.matriu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -175,40 +177,7 @@ public class Game extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     	if (ayuda > 0){
-	    	Random r = new Random();
-	    	Boolean ok = false;
-	    	while (! ok){
-	    		int var = r.nextInt();
-	    		var = Math.abs(var);
-	    		var = var%MainController.getInstance().tamany();
-	    		int var2 = r.nextInt();
-	    		var2 = Math.abs(var2);
-	    		var2 = var2%MainController.getInstance().tamany();
-	    		int a = MainController.getInstance().num(var,var2);
-	    		if (a == -1) {
-	    			int b = MainController.getInstance().show(var,var2);
-	    			MainController.getInstance().posar_pos(var, var2, String.valueOf(b));
-	    		/*	int c = MainController.getInstance().num(0,0);
-	    	    	if (c > 0) jTextField1.setText(Integer.toString(c));
-	    		    c = MainController.getInstance().num(0,2);
-	    		    if (c != -1) jTextField3.setText(Integer.toString(c));
-	    	    	c = MainController.getInstance().num(0,1);
-	    	    	if (c != -1) jTextField2.setText(Integer.toString(c));
-	    	    	c = MainController.getInstance().num(1,0);
-	    	    	if (c != -1) jTextField4.setText(Integer.toString(c));
-	    	    	c = MainController.getInstance().num(1,1);
-	    	    	if (c != -1) jTextField5.setText(Integer.toString(c));
-	    	    	c = MainController.getInstance().num(1,2);
-	    	    	if (c != -1) jTextField6.setText(Integer.toString(c));
-	    	    	c = MainController.getInstance().num(2,0);
-	    	    	if (c != -1) jTextField7.setText(Integer.toString(c));
-	    	    	c = MainController.getInstance().num(2,1);
-	    	    	if (c != -1) jTextField8.setText(Integer.toString(c));
-	    	    	c = MainController.getInstance().num(2,2);
-	    	    	if (c != -1) jTextField9.setText(Integer.toString(c));*/
-	    			ok = true;
-	    		}
-	    	}
+    		a.ajuda();
 	    	--ayuda;
     	}
     	else{
@@ -218,6 +187,7 @@ public class Game extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {  
     	MainController.getInstance().neteja();//cal netejar botons
+    	
     }                                        
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         

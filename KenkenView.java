@@ -1,4 +1,5 @@
 import java.awt.GridLayout;
+import java.util.Random;
 import java.util.Vector;
 import javax.swing.*;
 
@@ -28,6 +29,31 @@ public class KenkenView extends JPanel {
 	public JPanel matriu(){
 		return container;
 	}
+	
+	public void ajuda(){
+		Random r = new Random();
+    	Boolean ok = false;
+    	while (! ok){
+    		int var = r.nextInt();
+    		var = Math.abs(var);
+    		var = var%MainController.getInstance().tamany();
+    		int var2 = r.nextInt();
+    		var2 = Math.abs(var2);
+    		var2 = var2%MainController.getInstance().tamany();
+    		int a = MainController.getInstance().num(var,var2);
+    		if (a != MainController.getInstance().show(var,var2)){
+    			int b = MainController.getInstance().show(var,var2);
+    			MainController.getInstance().posar_pos(var, var2, String.valueOf(b));
+	    		for (int i = 0; i < MainController.getInstance().tamany(); ++i){
+	    			for (int j = 0; j < MainController.getInstance().tamany();++j){
+		    			int c = MainController.getInstance().num(i,j);
+		    	    	if (c > 0) 
+		    			ok = true;
+	    			}
+	    		}
+			}
+    	}
+    }
 	
 	public KenkenView(int size) {
 	    // TODO Auto-generated constructor stub
