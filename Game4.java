@@ -566,22 +566,22 @@ public class Game4 extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     	MainController.getInstance().neteja();
-    	jTextField1.setText("");
-	    jTextField3.setText("");
-    	jTextField2.setText("");
-    	jTextField4.setText("");
-    	jTextField5.setText("");
-    	jTextField6.setText("");
-    	jTextField7.setText("");
-    	jTextField8.setText("");
-    	jTextField9.setText("");
-    	jTextField10.setText("");
-    	jTextField11.setText("");
-    	jTextField12.setText("");
-    	jTextField13.setText("");
-    	jTextField14.setText("");
-    	jTextField15.setText("");
-    	jTextField16.setText("");
+    	if(!MainController.getInstance().fija(0, 0)) jTextField1.setText("");
+    	if(!MainController.getInstance().fija(0, 1)) jTextField3.setText("");
+    	if(!MainController.getInstance().fija(0, 2)) jTextField2.setText("");
+    	if(!MainController.getInstance().fija(0, 3)) jTextField4.setText("");
+    	if(!MainController.getInstance().fija(1, 0)) jTextField5.setText("");
+    	if(!MainController.getInstance().fija(1, 1)) jTextField6.setText("");
+    	if(!MainController.getInstance().fija(1, 2)) jTextField7.setText("");
+    	if(!MainController.getInstance().fija(1, 3)) jTextField8.setText("");
+    	if(!MainController.getInstance().fija(2, 0)) jTextField9.setText("");
+    	if(!MainController.getInstance().fija(2, 1)) jTextField10.setText("");
+    	if(!MainController.getInstance().fija(2, 2)) jTextField11.setText("");
+    	if(!MainController.getInstance().fija(2, 3)) jTextField12.setText("");
+    	if(!MainController.getInstance().fija(3, 0)) jTextField13.setText("");
+    	if(!MainController.getInstance().fija(3, 1)) jTextField14.setText("");
+    	if(!MainController.getInstance().fija(3, 2)) jTextField15.setText("");
+    	if(!MainController.getInstance().fija(3, 3)) jTextField16.setText("");
     }                                        
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         

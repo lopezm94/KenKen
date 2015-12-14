@@ -402,15 +402,15 @@ import javax.swing.JOptionPane;
 	    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 	        // TODO add your handling code here:
 	    	MainController.getInstance().neteja();
-	    	jTextField1.setText("");
-		    jTextField3.setText("");
-	    	jTextField2.setText("");
-	    	jTextField4.setText("");
-	    	jTextField5.setText("");
-	    	jTextField6.setText("");
-	    	jTextField7.setText("");
-	    	jTextField8.setText("");
-	    	jTextField9.setText("");
+	    	if(!MainController.getInstance().fija(0, 0)) jTextField1.setText("");
+	    	if(!MainController.getInstance().fija(0, 1)) jTextField3.setText("");
+	    	if(!MainController.getInstance().fija(0, 2)) jTextField2.setText("");
+	    	if(!MainController.getInstance().fija(1, 0)) jTextField4.setText("");
+	    	if(!MainController.getInstance().fija(1, 1)) jTextField5.setText("");
+	    	if(!MainController.getInstance().fija(1, 2)) jTextField6.setText("");
+	    	if(!MainController.getInstance().fija(2, 0)) jTextField7.setText("");
+	    	if(!MainController.getInstance().fija(2, 1)) jTextField8.setText("");
+	    	if(!MainController.getInstance().fija(2, 2)) jTextField9.setText("");
 	    	
 	    }                                        
 
