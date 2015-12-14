@@ -88,8 +88,6 @@ public class GestioDadesH  extends Gestio_Dades{
 				info = line.split("\\s");
 				if (info.length < 5)
 					continue;
-				System.out.println(info.length);
-				System.out.println(line);
 				Integer puntuacion = Integer.parseInt(info[index]);
 				lista.add(new Pair<String,Integer>(info[0],puntuacion));
 		    }
@@ -339,8 +337,8 @@ public class GestioDadesH  extends Gestio_Dades{
 		String partides = "";
 		File[] files = new File("./Games/"+username).listFiles();
 		for (File file:files){
-			if(file.isFile()){
-				partides += file.getName().substring(0, partides.length()-4)+",";
+			if(file.isFile() && file.getName().length() > 4){
+				partides += file.getName().substring(0, file.getName().length()-4)+",";
 			}
 		}
 		if (partides.equals("")) return null;
@@ -351,8 +349,8 @@ public class GestioDadesH  extends Gestio_Dades{
 		String kenkens = "";
 		File[] files = new File("./KenKens").listFiles();
 		for(File file:files){
-			if(file.isFile()){
-				kenkens += file.getName().substring(0, kenkens.length()-4)+",";
+			if(file.isFile() && file.getName().length() > 4){
+				kenkens += file.getName().substring(0, file.getName().length()-4)+",";
 			}
 		}
 		return kenkens.substring(0, kenkens.length()-1).split(",");
