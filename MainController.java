@@ -8,6 +8,7 @@ import java.net.URISyntaxException;
 //import java.net.URI;
 //import java.net.URISyntaxException;
 import java.util.Scanner;
+import java.util.Vector;
 
 /**
 *@version 1.0
@@ -172,12 +173,13 @@ public class MainController{
 		return a;
 	}
 	
-	public String areaTipo(int x){
-		String a = null;
-		a = Character.toString(gestionpart.getOperacio(x));
-		a += "   ";
-		a += Integer.toString(gestionpart.getResultatArea(x));
-		return a;
+	public String areaTipoA(int i){
+		System.out.println(Character.toString(gestionpart.getOperacioA(i)) + " " + Integer.toString(gestionpart.getResultatAreaA(i)));
+		String b;
+		b = Character.toString(gestionpart.getOperacioA(i));
+		b += "   ";
+		b += Integer.toString(gestionpart.getResultatAreaA(i));
+		return b;
 	}
            
     public void guest(){

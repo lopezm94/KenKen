@@ -102,7 +102,7 @@ public class GestioPartida{
 		return p.getTauler().getArea(x, y).get_operacio();
 	}
 	
-	public char getOperacio(int x){
+	public char getOperacioA(int x){
 		return p.getTauler().getArea(x).get_operacio();
 	}
 	
@@ -110,7 +110,7 @@ public class GestioPartida{
 		return p.getTauler().getArea(x, y).get_resultat();
 	}
 	
-	public int getResultatArea(int x){
+	public int getResultatAreaA(int x){
 		return p.getTauler().getArea(x).get_resultat();
 	}
 	
