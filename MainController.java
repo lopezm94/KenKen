@@ -1,9 +1,9 @@
 //import Excepcions.*;
 //import Persistencia.Gestio_Dades;
-import java.awt.Desktop;
+//import java.awt.Desktop;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
+//import java.net.URI;
+//import java.net.URISyntaxException;
 import java.util.Scanner;
 
 /**
@@ -13,84 +13,71 @@ import java.util.Scanner;
 *@author reyes vera(interficie)
 */
 public class MainController{
-	//Definició variables globals i controladors que necessitarem:
-	private Perfil currentUser;
-	private GestioDadesH dataEngine;
+	private static final MainController mc = new MainController();
+	
+	//DefiniciÃ³ variables globals i controladors que necessitarem:
+	private GestionUsuario gestionus;
+	private GestioPartida gestionpart;
 	Scanner in;
-	//Login_Usuari:
-	//Comprovem que l'usuari existeixi a la base de dades o sino entrar com  a convidat
-	private static int action(Scanner in1) throws IOException{
-		System.out.println(	"1 - Introduir casella\n"+
-							"2 - Comprovar solucio\n"+
-							"3 - Guardar i sortir\n"+
-							"4 - Mostrar solucio\n"+
-							"0 - Sortir");
-		int res = in1.nextInt();
-		return res;
+	
+	
+	private MainController(){
+		gestionus = new GestionUsuario();
 	}
-	//Login_Usuari:
-	//Comprovem que l'usuari existeixi a la base de dades o sino entrar com  a convidat
-	private void imprimir_tauler(){
-		int mida = currentUser.get_partida().getTauler().size();
-		for(int i=0; i < currentUser.get_partida().getTauler().getNumAreas(); ++i){
-			System.out.println(i+": "+currentUser.get_partida().getTauler().getArea(i).get_operacio()+" "+currentUser.get_partida().getTauler().getArea(i).get_resultat());
+	
+	public static MainController getInstance() {
+		return mc;
+	}
+	
+	public Boolean newUser(String user, String psw){
+		try {
+			gestionus.newUser(user, psw);
+			return true;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			return false;
 		}
-		for(int i=0; i < mida; ++i ){
-			for(int j=0; j < mida; ++j){
-				System.out.print("|"+currentUser.get_partida().getTauler().getCasillaVal(i, j)+","+currentUser.get_partida().getTauler().getAreaID(i, j)+"|");
-			}
-			System.out.print("\n");
+	}
+	
+	public Boolean login(String user, String psw){
+		try {
+			gestionus.login(user, psw);
+			return true;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			return false;
 		}
-		System.out.print("\n");
-	}
-	private void imprimir_solucio(){
-		int mida = currentUser.get_partida().getTauler().size();
-		for(int i=0; i < mida; ++i ){
-			for(int j=0; j < mida; ++j){
-				System.out.print(" "+currentUser.get_partida().getTauler().getCasillaSol(i, j));
-			}
-			System.out.print("\n");
-		}
-		System.out.print("\n");
-	}
-
-	private int tiempo(long tiempo_start){
-		long time_end = System.currentTimeMillis();
-		int timeextra = currentUser.get_partida().getTime();
-		tiempo_start  = time_end/1000 - tiempo_start/1000;
-		timeextra += (int)tiempo_start;
-		return timeextra;
 	}
 	
-	public Boolean es_fija(int x, int y){
-		return currentUser.get_partida().getTauler().casillaIsFija(x, y);
+	public void CrearPartida(String nomkenken, String nompartida){
+		gestionpart = new GestioPartida(nompartida,true,nomkenken,gestionus.getProfile().get_usuari());
+		gestionus.assignarPartida(gestionpart.getPartida());
+		gestionpart.start();
 	}
 	
-	public int numC (int x , int y){
-		return currentUser.get_partida().getTauler().getCasillaVal(x, y);
+	public void load_game(String nompartida){
+		gestionpart = new GestioPartida(nompartida,false,null,gestionus.getProfile().get_usuari());
+		gestionus.assignarPartida(gestionpart.getPartida());
+		gestionpart.start();
 	}
 	
-	public void posar_pos(int x, int y, int valor){
-		currentUser.get_partida().getTauler().setCasillaVal(x,y,valor);
+	public long getTemps(){
+		return gestionpart.getTime();
 	}
 	
-	public int area(int x, int y){
-		return currentUser.get_partida().getTauler().getAreaID(x, y);
+	public void posar_pos(int x, int y, String valor){
+		gestionpart.setValue(x,y,Integer.parseInt(valor));
 	}
 	
-	public int tam(){
-		return currentUser.get_partida().getTauler().getNumAreas();
+	public void save(){
+		gestionpart.saveGame(gestionus.getProfile());
 	}
 	
-	public Boolean comp(){
-		Boolean correcte = currentUser.get_partida().getTauler().tableroCheck() &&
-		currentUser.get_partida().getTauler().numerosCheck();
-		if(correcte) {
-				return true;
-		}
-		return false;
+	public void sortir(){
+		gestionpart.TancarPartida();
 	}
 	
+<<<<<<< HEAD
 	public int getCas(int x, int y){
 		return currentUser.get_partida().getTauler().getCasilla(x, y).getSolucion();
 	}
@@ -103,72 +90,25 @@ public class MainController{
 	public void imprimir(){
 		imprimir_tauler();
 		imprimir_solucio();
+=======
+	public int area(int x, int y){
+		return gestionpart.getAreaID(x, y);
+>>>>>>> 69cd460d61e1de72a3a0dd918a92c6acc9c6c1eb
 	}
 	
-	private void play(String nomkenken){
-		long time_start;
-		time_start = System.currentTimeMillis();
-		Boolean end = false;
-		imprimir_tauler();
-		while(!end){
-			try {
-				switch(action(in)){
-				case 0:
-					end = true;
-					break;
-				case 1:
-					//introduir casella
-					System.out.println("Introdueix el valor de la casella: \n"+
-										"posx,posy,valor_nou (ex: 0,2,8)");
-					int x = in.nextInt();
-					int y = in.nextInt();
-					int valor = in.nextInt();
-					currentUser.get_partida().getTauler().setCasillaVal(x,y,valor);
-					imprimir_tauler();
-					System.out.println("Temps: "+tiempo(time_start));
-					break;
-				case 2:
-					Boolean correcte = currentUser.get_partida().getTauler().tableroCheck() &&
-										currentUser.get_partida().getTauler().numerosCheck();
-					if(correcte) {
-						System.out.println("KenKen correcte! Felicitats");
-						System.out.println("Temps total: "+tiempo(time_start));
-						end = true;
-					}else{
-						System.out.println("KenKen incorrecte!");
-					}
-					break;
-				case 3:
-					System.out.println("Temps: "+tiempo(time_start));
-					currentUser.get_partida().setTime(tiempo(time_start));
-					dataEngine.guardarPartida(currentUser,nomkenken);
-					end = true;
-					break;
-				case 4:
-					imprimir_solucio();
-					break;
-				default:
-				    System.out.println("Accion introducida no es correcta");
-				    break;
-				}
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-		}
-		in.close();
+	public int tam(){
+		return gestionpart.getNumAreas();
 	}
 	
 	public int tamany(){
-		return currentUser.get_partida().getTauler().getFiles();
+		return gestionpart.getTamany();
 	}
 	
-	public String nomKenken(){
-		return currentUser.get_partida().getNomKenken();
+	public Boolean fija(int x, int y){
+		return gestionpart.fija(x, y);
 	}
 	
+<<<<<<< HEAD
 	public void guarda(String a){
 		currentUser.get_partida().setTime(tiempo(0));
 		dataEngine.guardarPartida(currentUser,a);
@@ -352,101 +292,26 @@ public class MainController{
 			}*/
 		}
 		return currentUser;
+=======
+	public int num(int x, int y){
+		return gestionpart.getValue(x,y);
+>>>>>>> 69cd460d61e1de72a3a0dd918a92c6acc9c6c1eb
 	}
-	public MainController(){
-		in = new Scanner(System.in);
-		Perfil p = new Perfil();
-		dataEngine = new GestioDadesH();
-
-	}
-	public void new_game(String nompartida, String nomkenken){
-		//pre: current user ja esta inicialitzat
-		Partida nova = new Partida(nompartida,currentUser.get_usuari(),nomkenken);
-		currentUser.assignar_nova_partida(nova);
-		TableroH tablero = creaTauler(nomkenken);
-		nova.setTauler(tablero);
-		//play(nomkenken); /*cambiar para inter*/
+	
+	public Boolean comp(){
+		return gestionpart.check();
 	}
 	
 	public String areaTipo(int x, int y){
 		String a = null;
-		a = Character.toString(currentUser.get_partida().getTauler().getArea(x, y).get_operacio());
+		a = Character.toString(gestionpart.getOperacio(x, y));
 		a += "   ";
-		a += Integer.toString(currentUser.get_partida().getTauler().getArea(x, y).get_resultat());
+		a += Integer.toString(gestionpart.getResultatArea(x, y));
 		return a;
 	}
-	
-	public void genera(String nomkenken, String a, int b){
-		KenkenHandler ke = new KenkenHandler();
-		TableroH tablero = ke.generateAndSolveKenken(b,a);
-		dataEngine.guardar_kenken(tablero,nomkenken);
-	}
-	public Boolean generaMan(Generar a,String nomkenken){
-		TableroH tablero = a.getTablero();
-		KenkenHandler ke = new KenkenHandler();
-		ke.solveKenken(tablero);
-		return true;
-	}
-	
-	public void guarda_gen (Generar a, String nomkenken){
-		TableroH tablero = a.getTablero();
-		dataEngine.guardar_kenken(tablero,nomkenken);
-	}
-	
-	public void load_game(String nomsaved){
-		Partida load = new Partida(nomsaved,currentUser.get_usuari(),nomKenken());
-		currentUser.assignar_nova_partida(load);
-		String st[] = dataEngine.getPartidaHeaderInfo(nomsaved,currentUser.get_usuari(),0);
-		load.setTime(Integer.parseInt(st[0]));
-		String st1[] = dataEngine.getPartidaHeaderInfo(nomsaved,currentUser.get_usuari(),1);
-		TableroH tauler = creaTauler(st1[0]);
-		omplirTauler(tauler,nomsaved);
-		load.setTauler(tauler);
-		//play(st1[0]);   /*cambiar para inter*/
-		//Load an existing game
-	}
+           
+    public void guest(){
+    	gestionus.invitado();
+    }
 
-
-	public void create_kenken(){
-		Generar g = new Generar();
-		TableroH th =g.genera();
-		System.out.println("Quieres guardar y jugar a tu KenKen? (0-1)");
-		if(in.nextInt() == 1){
-			System.out.println("Introduce el nombre del kenken:");
-			String st = in.next();
-			System.out.println("Introduce el nombre de tu partida:");
-			String s2t = in.next();
-			Partida nova = new Partida(s2t,currentUser.get_usuari(),nomKenken());
-			currentUser.assignar_nova_partida(nova);
-			nova.setTauler(th);
-			dataEngine.guardar_kenken(th,st);
-			play(st);
-		}
-	}
-	
-	
-	public void delete_user(){
-		//delete my current username
-		int linea = dataEngine.getLine(currentUser.get_usuari(),".","Profiles.txt");
-		try{
-			Gestio_Dades.modificarString("Profiles", ".", linea, "\n", "\n");
-		}catch(IOException e){
-			//System.out.println(e.toString());
-		}catch(FicheroNoExiste f){
-			//System.out.println("El fichero no existe\n");
-		}catch(FicheroYaExistente f1){
-			//System.out.println("El fichero ya existe\n");
-		}
-	}
-	public void show_tutorial(){
-		//show a simple text
-		//System.out.println("Tutorial per jugar:\n http://www.kenkenpuzzle.com/howto/solve");
-		
-		Desktop enlace=Desktop.getDesktop();
-		try {
-            enlace.browse(new URI("http://www.kenkenpuzzle.com/howto/solve"));
-		} catch (IOException | URISyntaxException e) {
-			e.getMessage();
-		}
-	}
 }
