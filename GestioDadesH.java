@@ -349,7 +349,6 @@ public class GestioDadesH  extends Gestio_Dades{
 		for (File file:files){
 			if(file.isFile() && file.getName().length() > 4){
 				partides += file.getName().substring(0, file.getName().length()-4)+",";
-				System.out.println(partides);
 			}
 		}
 		if (partides.equals("")) return partidesarray;

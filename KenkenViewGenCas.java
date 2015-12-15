@@ -35,7 +35,6 @@ public class KenkenViewGenCas extends JPanel {
 		g = t;
 	
 	    this.size = g.mida();
-	    System.out.println(size);
 	    //*******************************************
 	    container = new JPanel();
 	    container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
