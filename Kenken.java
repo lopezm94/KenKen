@@ -1,4 +1,9 @@
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -36,8 +41,17 @@ public class Kenken extends javax.swing.JFrame implements Runnable {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        /* no funciona bien :( */
+        try {
+            BufferedImage myImage = ImageIO.read(new File("kenken.jpg"));
+            //JFrame myJFrame = new JFrame("Image pane");
+            jInternalFrame1.setContentPane(new ImagePanel(myImage));
+            jInternalFrame1.setVisible(true);
+          } catch (IOException e) {
+            System.out.println("Doge malo");
+          }
         
-      //  jInternalFrame1.setContentPane(descarga.jpg);
+       //jInternalFrame1.setContentPane(color.);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Kenken");

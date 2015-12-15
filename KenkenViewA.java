@@ -132,26 +132,6 @@ public class KenkenViewA extends JPanel {
 	        }
 	    }
 
-	    for(r = 0; r < size; r++){
-	            //JPanel grid = new JPanel();
-	            JButton build = new JButton();
-	            build.setText(""+(r+1));
-	            build.addActionListener(new java.awt.event.ActionListener() {
-	                final int row = r+1;
-	                public void actionPerformed(java.awt.event.ActionEvent evt) {
-	                }
-	            });
-
-	            //container.setVisible(true);
-	    }
-	    for(r = 0; r < size; r++){
-	        for(v = 0; v < size; v++){
-	            //container.add(Region(size,size));
-	            //add(build);
-	            //build.setSize(50, 50)
-	            container.setVisible(true);
-	        }
-	    }
 
 	    frame.setSize(1000,700);
 	    //frame.setVisible(true);
