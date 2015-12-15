@@ -1,3 +1,5 @@
+import java.awt.HeadlessException;
+
 import javax.swing.JOptionPane;
 
 /*
@@ -46,7 +48,7 @@ public class CrearPartida extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         jLabel1.setText("Crear Partida");
 
-        jTextField1.setText("Nom Partida");
+        jTextField1.setText("Nom del Kenken");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -114,7 +116,7 @@ public class CrearPartida extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                           
 
-       private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
 		try {
 			if(MainController.getInstance().CrearPartida(String.valueOf(jComboBox1.getSelectedItem()), jTextField1.getText())){
@@ -128,7 +130,7 @@ public class CrearPartida extends javax.swing.JFrame {
 		} catch (FicheroNoExiste e) {
 			JOptionPane.showMessageDialog(this, "No existeix un nom Kenken amb aquest nom");
 		}
-    }                                     
+    }                                        
 
     /**
      * @param args the command line arguments
