@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -34,6 +36,8 @@ public class Kenken extends javax.swing.JFrame implements Runnable {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        
+      //  jInternalFrame1.setContentPane(descarga.jpg);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Kenken");
@@ -71,6 +75,7 @@ public class Kenken extends javax.swing.JFrame implements Runnable {
                 jButton4ActionPerformed(evt);
             }
         });
+        
 
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);

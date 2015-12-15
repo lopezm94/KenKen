@@ -12,11 +12,13 @@ public class Guarda extends javax.swing.JFrame {
 
 	
 	Generar g;
+	String nomP;
     /**
      * Creates new form Guarda
      */
-    public Guarda(Generar a) {
+    public Guarda(Generar a, String b) {
     	g =a;
+    	nomP = b;
         initComponents();
     }
 
@@ -98,7 +100,7 @@ public class Guarda extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    	MostraT m = new MostraT(g);
+    	MostraT m = new MostraT(g,nomP);
     	m.setVisible(true);
     	dispose();
     }                                        
@@ -140,7 +142,7 @@ public class Guarda extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Guarda(null).setVisible(true);
+                new Guarda(null,null).setVisible(true);
             }
         });
     }

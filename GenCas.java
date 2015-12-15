@@ -146,7 +146,7 @@ public class GenCas extends javax.swing.JFrame {
     	g.colocAreas();
     	if (MainController.getInstance().generaMan(g,nomP)){
     		g.cambia(MainController.getInstance().getTab());
-    		Guarda gu = new Guarda(g);
+    		Guarda gu = new Guarda(g,nomP);
     		gu.setVisible(true);
     		dispose();
     	}

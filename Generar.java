@@ -29,6 +29,15 @@ public class Generar {
 		}
 	}
 	
+	public String areaTipo(int r, int v){
+		String a;
+		a = Character.toString(tablero.getArea(r, v).get_operacio());
+		a += "  ";
+		a += Integer.toString(tablero.getArea(r,v).get_resultat());
+		return a;
+	}
+	
+	
 	public int getNumAreas(){
 		return tablero.getNumAreas();
 	}
