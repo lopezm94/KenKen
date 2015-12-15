@@ -1,9 +1,12 @@
-import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Random;
-import javax.swing.*;
-import java.awt.GridLayout;
 import java.util.Vector;
-import javax.swing.JLabel;
+
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -13,6 +16,8 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.JTextField;
+import javax.swing.Timer;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -33,11 +38,24 @@ public class Game extends javax.swing.JFrame {
 	KenkenViewA b = null;
 	JPanel area;
 	int ayuda = MainController.getInstance().tamany();
+	Timer timer;
 	/**
      * Creates new form Game
      */
     public Game() {
     	initComponents();
+    	ActionListener actListner = new ActionListener(){
+    		public void actionPerformed(ActionEvent event){
+    			Date date = new Date(MainController.getInstance().getTemps());
+    			DateFormat formatter = new SimpleDateFormat("mm:SS");
+    			String dateFormatted = formatter.format(date);
+    			jTime.setText(dateFormatted);
+    		}
+    	};
+    	timer = new Timer(1000,actListner);
+    	timer.start();
+
+
     }
 
     /**
@@ -173,7 +191,6 @@ public class Game extends javax.swing.JFrame {
         jTime.setEditable(false);
         jTime.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jTime.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTime.setText("2");
 
 
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
@@ -320,6 +337,7 @@ public class Game extends javax.swing.JFrame {
     	MainController.getInstance().delete_game();
     	Menu m = new Menu();
     	m.setVisible(true);
+    	timer.stop();
     	dispose();
     }
 
@@ -334,6 +352,7 @@ public class Game extends javax.swing.JFrame {
 			}
 			Menu f =new Menu();
 			f.setVisible(true);
+			timer.stop();
 			dispose();
 		}
     	else{
@@ -356,6 +375,7 @@ public class Game extends javax.swing.JFrame {
     	MainController.getInstance().sortir();
     	Menu m = new Menu();
     	m.setVisible(true);
+    	timer.stop();
     	dispose();
     }
 
