@@ -19,7 +19,7 @@ import java.util.Vector;
 public class MainController{
 	private static final MainController mc = new MainController();
 
-	//Definici� variables globals i controladors que necessitarem:
+	//Definiciï¿½ variables globals i controladors que necessitarem:
 	private GestionUsuario gestionus;
 	private GestioPartida gestionpart;
 	Scanner in;
@@ -62,9 +62,14 @@ public class MainController{
 	}
 
 
-	public Boolean CrearPartida(String nomkenken, String nompartida){
+	public Boolean CrearPartida(String nomkenken, String nompartida) throws FicheroNoExiste{
+		/*He posat exepcions quan no és correcte el nom del kenken*/
 		if(gestionus.es_invitado() || !GestioDadesH.existeixPartida(nompartida,gestionus.getProfile().get_usuari())){
-			gestionpart = new GestioPartida(nompartida,true,nomkenken,gestionus.getProfile().get_usuari());
+			try {
+				gestionpart = new GestioPartida(nompartida,true,nomkenken,gestionus.getProfile().get_usuari());
+			} catch (FicheroNoExiste e) {
+				throw e;
+			}
 			gestionus.assignarPartida(gestionpart.getPartida());
 			gestionpart.start();
 			return true;
@@ -74,7 +79,11 @@ public class MainController{
 	}
 
 	public void load_game(String nompartida){
-		gestionpart = new GestioPartida(nompartida,false,null,gestionus.getProfile().get_usuari());
+		try {
+			gestionpart = new GestioPartida(nompartida,false,null,gestionus.getProfile().get_usuari());
+		} catch (FicheroNoExiste e) {
+			e.printStackTrace();
+		}
 		gestionus.assignarPartida(gestionpart.getPartida());
 		gestionpart.start();
 	}
