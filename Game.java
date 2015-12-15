@@ -59,6 +59,20 @@ public class Game extends javax.swing.JFrame {
 
 
     }
+    /*public Game() {
+    	initComponents();
+    	ActionListener actListner = new ActionListener(){
+    		public void actionPerformed(ActionEvent event){
+    			Time temps = new Time(MainController.getInstance().getTemps());
+    			String dateFormatted = temps.toString();
+    			jTime.setText(dateFormatted);
+    		}
+    	};
+    	timer = new Timer(1000,actListner);
+    	timer.start();
+
+
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -100,7 +114,8 @@ public class Game extends javax.swing.JFrame {
 
         jComboBox1 = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
-
+        
+        jTextField1.setText("00:00");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 

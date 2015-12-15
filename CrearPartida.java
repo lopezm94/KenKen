@@ -1,5 +1,9 @@
 import java.awt.HeadlessException;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 /*
@@ -35,6 +39,15 @@ public class CrearPartida extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
+        
+        try {
+            BufferedImage myImage = ImageIO.read(new File("doge.jpg"));
+            //JFrame myJFrame = new JFrame("Image pane");
+            jInternalFrame1.setContentPane(new ImagePanel(myImage));
+            jInternalFrame1.setVisible(true);
+          } catch (IOException e) {
+            System.out.println("Doge malo");
+          }
         
         String partides[] = MainController.getInstance().getKenKens();
         for (int i = 0; i < partides.length; ++i){

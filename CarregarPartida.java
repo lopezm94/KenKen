@@ -1,3 +1,9 @@
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -33,6 +39,15 @@ public class CarregarPartida extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
+        
+        try {
+            BufferedImage myImage = ImageIO.read(new File("doge.jpg"));
+            //JFrame myJFrame = new JFrame("Image pane");
+            jInternalFrame1.setContentPane(new ImagePanel(myImage));
+            jInternalFrame1.setVisible(true);
+          } catch (IOException e) {
+            System.out.println("Doge malo");
+          }
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 

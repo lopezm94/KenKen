@@ -1,7 +1,11 @@
 import java.awt.GridLayout;
 import java.util.Vector;
 import javax.swing.*;
-
+/**
+ * 
+ * @author reyes
+ *
+ */
 @SuppressWarnings("serial")
 public class KenkenViewGen extends JPanel {
 	int size;

@@ -42,21 +42,31 @@ public class Kenken extends javax.swing.JFrame implements Runnable {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         /* no funciona bien :( */
-        try {
+        /*try {
             BufferedImage myImage = ImageIO.read(new File("kenken.jpg"));
             //JFrame myJFrame = new JFrame("Image pane");
             jInternalFrame1.setContentPane(new ImagePanel(myImage));
             jInternalFrame1.setVisible(true);
           } catch (IOException e) {
             System.out.println("Doge malo");
-          }
+          }*/
         
-       //jInternalFrame1.setContentPane(color.);
+        try {
+            BufferedImage myImage = ImageIO.read(new File("doge.jpg"));
+            //JFrame myJFrame = new JFrame("Image pane");
+            jInternalFrame1.setContentPane(new ImagePanel(myImage));
+            jInternalFrame1.setVisible(true);
+          } catch (IOException e) {
+            System.out.println("Doge malo");
+          }
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Kenken");
-
+        
+        
+        
         jInternalFrame1.setVisible(true);
+        
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

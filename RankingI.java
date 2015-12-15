@@ -1,4 +1,9 @@
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
+
+import javax.imageio.ImageIO;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -100,6 +105,16 @@ public class RankingI extends javax.swing.JFrame {
         jTextField59 = new javax.swing.JTextField();
         jTextField60 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        
+        try {
+            BufferedImage myImage = ImageIO.read(new File("doge.jpg"));
+            //JFrame myJFrame = new JFrame("Image pane");
+            jInternalFrame1.setContentPane(new ImagePanel(myImage));
+            jInternalFrame1.setVisible(true);
+          } catch (IOException e) {
+            System.out.println("Doge malo");
+          }
+        
         
         int var = lista.size();
         if (var > 0){

@@ -1,3 +1,8 @@
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 /*
@@ -40,6 +45,15 @@ public class GenCas extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         a = new KenkenViewGenCas(g.mida(),g);
         jPanel2 = a.matriu();
+        
+        try {
+            BufferedImage myImage = ImageIO.read(new File("doge.jpg"));
+            //JFrame myJFrame = new JFrame("Image pane");
+            jInternalFrame1.setContentPane(new ImagePanel(myImage));
+            jInternalFrame1.setVisible(true);
+          } catch (IOException e) {
+            System.out.println("Doge malo");
+          }
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
