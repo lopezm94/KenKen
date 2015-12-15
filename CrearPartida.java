@@ -114,16 +114,21 @@ public class CrearPartida extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                           
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+       private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-		if(MainController.getInstance().CrearPartida(String.valueOf(jComboBox1.getSelectedItem()), jTextField1.getText())){
-			Game g = new Game();
-			g.setVisible(true);
-			dispose();
-		}else{
-			JOptionPane.showMessageDialog(this, "Ja existeix una partida amb aquest nom");
+		try {
+			if(MainController.getInstance().CrearPartida(String.valueOf(jComboBox1.getSelectedItem()), jTextField1.getText())){
+				Game g = new Game();
+				g.setVisible(true);
+				dispose();
+			}else{
+				JOptionPane.showMessageDialog(this, "Ja existeix una partida amb aquest nom");
+			}
+		} catch (HeadlessException e) {
+		} catch (FicheroNoExiste e) {
+			JOptionPane.showMessageDialog(this, "No existeix un nom Kenken amb aquest nom");
 		}
-    }                                        
+    }                                     
 
     /**
      * @param args the command line arguments
