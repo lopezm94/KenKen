@@ -7,6 +7,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.imageio.*;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -56,10 +62,21 @@ public class Game extends javax.swing.JFrame {
         b =new KenkenViewA();
         jPanel3= b;
 
+        //*****************
+        try {
+          BufferedImage myImage = ImageIO.read(new File("doge.jpg"));
+          //JFrame myJFrame = new JFrame("Image pane");
+          jInternalFrame1.setContentPane(new ImagePanel(myImage));
+          jInternalFrame1.setVisible(true);
+        } catch (IOException e) {
+          System.out.println("Doge malo");
+        }
+        //*********************
+
         this.board = a.getBoard();
 
         this.area = b.getBoard();
-        
+
         jComboBox1 = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
 
@@ -230,8 +247,8 @@ public class Game extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>   
-    
+    }// </editor-fold>
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     	if (ayuda > 0){
