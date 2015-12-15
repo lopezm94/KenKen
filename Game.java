@@ -247,7 +247,7 @@ public class Game extends javax.swing.JFrame {
 
     	}
     	else{
-    		JOptionPane.showMessageDialog(this, "Ja no pots tenir m�s ajudes");
+    		JOptionPane.showMessageDialog(this, "Ja no pots tenir mes ajudes");
     	}
     	this.actualizar();
     }

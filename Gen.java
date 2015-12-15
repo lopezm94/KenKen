@@ -1,3 +1,5 @@
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,16 +10,20 @@
  *
  * @author reyes
  */
-public class MostraT extends javax.swing.JFrame {
+public class Gen extends javax.swing.JFrame {
 
-	KenkenViewMostra a = null;
-	Generar g;
+	KenkenViewGen a = null;
+	String nomP = null;
+	Generar g = null;
+	int size;
     /**
      * Creates new form Gen
      */
-    public MostraT(Generar a) {
-        g = a;
-    	initComponents();
+    public Gen(String b, Generar d, int a) {
+    	nomP = b;
+    	g = d;
+    	size = a;
+        initComponents();
     }
 
     /**
@@ -34,7 +40,7 @@ public class MostraT extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        a = new KenkenViewMostra(g);
+        a = new KenkenViewGen(g.mida(),g,size);
         jPanel2 = a.matriu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -64,7 +70,7 @@ public class MostraT extends javax.swing.JFrame {
         );
 
 
-        jButton2.setText("Guardar");
+        jButton2.setText("Poner Areas");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -138,7 +144,9 @@ public class MostraT extends javax.swing.JFrame {
     }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here: /*guarda*/
+        // TODO add your handling code here:
+    	GenCas k = new GenCas(nomP,g);
+    	k.setVisible(true);
     	dispose();
     }                                        
 
@@ -172,7 +180,7 @@ public class MostraT extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MostraT(null).setVisible(true);
+                new Gen(null,null,0).setVisible(true);
             }
         });
     }

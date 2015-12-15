@@ -247,7 +247,20 @@ public class TableroH extends Tablero {
 			}
 			res = res + "\n";
 		}
+		res = res + "\n";
 
+		for (int i = 0; i < files;++i){
+			for (int j = 0; j < files; ++j){
+				res = res + getCasillaSol(i,j) + " ";
+			}
+			res = res + "\n";
+		}
+		res = res + "\n";
+
+		for (int i = 0; i < files;++i){
+			res = res + areas.get(i);
+			res = res + "\n";
+		}
 		return res;
 	}
 }

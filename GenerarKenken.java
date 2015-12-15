@@ -199,32 +199,12 @@ public class GenerarKenken extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:ç
     	
-    	switch ((int)jSpinner1.getValue()){
-	        case 3:
-	        	Generar ge = new Generar();
-	        	ge.mida(3);
-	        	JOptionPane.showMessageDialog(this, "Les areas comencen des de 0 i incrementa de 1 en 1");
-	        	Gen3 g = new Gen3(jTextField1.getText(),ge);
-	            g.setVisible(true);
-	        	break;
-	        case 4:
-	        	Generar gen = new Generar();
-	        	gen.mida(4);
-	        	JOptionPane.showMessageDialog(this, "Les areas comencen des de 0 i incrementa de 1 en 1");
-	        	Gen4 ge4 = new Gen4(jTextField1.getText(),gen);
-	            ge4.setVisible(true);
-	        	break;
-	        case 5:
-	        	break;
-	        case 6:
-	        	break;
-	        case 7:
-	        	break;
-	        case 8:
-	        	break;
-	        case 9:
-	        	break;
-        }
+    	Generar ge = new Generar();
+    	ge.mida((int)jSpinner1.getValue());
+    	JOptionPane.showMessageDialog(this, "Les areas comencen des de 0 i incrementa de 1 en 1");
+    	GenValor g = new GenValor(jTextField1.getText(),ge);
+        g.setVisible(true);
+       
     	dispose(); /*manual*/
     }                                        
 

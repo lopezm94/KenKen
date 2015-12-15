@@ -29,6 +29,25 @@ public class Generar {
 		}
 	}
 	
+	public int getNumAreas(){
+		return tablero.getNumAreas();
+	}
+	
+	public int getAreaID(int r, int v){
+		return tablero.getAreaID(r, v);
+	}
+	
+	public int getCasillaSol(int r, int v){
+		return tablero.getCasillaSol(r, v);
+	}
+	
+	public void cambia(TableroH a){
+		tablero = a;
+	}
+	
+	public int mida(){
+		return tablero.getFiles();
+	}
 	public int num(int x, int y){
 		return tablero.getCasillaSol(x, y);
 	}
@@ -45,7 +64,7 @@ public class Generar {
 	}
 
 	public void colocA (int a, int x, int y){
-		tablero.setId(a,x,y);
+		tablero.setId(a-1,x,y);
 	}
 	
 	public void colocAreas(){
