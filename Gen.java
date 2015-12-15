@@ -47,7 +47,7 @@ public class Gen extends javax.swing.JFrame {
 
         jInternalFrame1.setVisible(true);
 
-        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         jLabel1.setText("Genera");
 
         //jPanel1.setText("jPanel1");
@@ -70,7 +70,7 @@ public class Gen extends javax.swing.JFrame {
         );
 
 
-        jButton2.setText("Poner Areas");
+        jButton2.setText("Poner Casillas");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
