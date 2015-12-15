@@ -143,19 +143,28 @@ public class GenCas extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    	g.colocAreas();
-    	if (MainController.getInstance().generaMan(g,nomP)){
-    		g.cambia(MainController.getInstance().getTab());
-    		Guarda gu = new Guarda(g,nomP);
-    		gu.setVisible(true);
-    		dispose();
+    	if (g.ok()){
+	    	g.colocAreas();
+	    	if (MainController.getInstance().generaMan(g,nomP)){
+	    		g.cambia(MainController.getInstance().getTab());
+	    		Guarda gu = new Guarda(g,nomP);
+	    		gu.setVisible(true);
+	    		dispose();
+	    	}
+	    	else{
+	    		JOptionPane.showMessageDialog(this, "No té solució :(");
+	    		Menu m = new Menu();
+	    		m.setVisible(true);
+	    		dispose();
+	    	}
     	}
-    	else{
-    		JOptionPane.showMessageDialog(this, "No té solució :(");
-    		Menu m = new Menu();
-    		m.setVisible(true);
-    		dispose();
-    	}
+	    else{
+	    	JOptionPane.showMessageDialog(this, "No has fet be el Kenken :(");
+	    	Menu m = new Menu();
+	    	m.setVisible(true);
+	    	dispose();
+	    }
+    	
     }                                        
 
     /**

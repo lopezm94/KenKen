@@ -84,6 +84,15 @@ public class Generar {
 		return tablero;
 	}
 	
+	public Boolean ok(){
+		for (int i = 0; i < mida();++i){
+			for (int j = 0; j < mida(); ++j){
+				if (tablero.getAreaID(i, j) == -1) return false;
+			}
+		}
+		return true;
+	}
+	
 	public TableroH genera(){
 		Scanner input = null;
 
