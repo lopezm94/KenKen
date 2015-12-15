@@ -20,15 +20,18 @@ public class GestioPartida{
 		}
 	}
 	
-	public GestioPartida(String nompartida, Boolean novaPartida, String nomkenken,String nomUser){
+	public GestioPartida(String nompartida, Boolean novaPartida, String nomkenken,String nomUser) throws FicheroNoExiste{
 		//LOADING GAME
 		this.nomUser = nomUser;
-		GestioTauler creator = new GestioTauler();
 		if(novaPartida){
 			this.nomkenken = nomkenken;
 			p = new Partida(nompartida,nomkenken);
 			p.setTime(0);
-			p.setTauler(creator.creaTauler(nomkenken));
+			try {
+				p.setTauler(GestioTauler.creaTauler(nomkenken));
+			} catch (FicheroNoExiste e) {
+				throw e;
+			}
 		}else{
 			//carrega la partida des de memoria
 			String st[] = GestioDadesH.getPartidaHeaderInfo(nompartida,nomUser,0);
@@ -36,7 +39,11 @@ public class GestioPartida{
 			this.nomkenken = st1[0];
 			p = new Partida(nompartida,this.nomkenken);
 			p.setTime(Integer.parseInt(st[0]));
-			p.setTauler(creator.creaTauler(st1[0]));
+			try {
+				p.setTauler(GestioTauler.creaTauler(st1[0]));
+			} catch (FicheroNoExiste e) {
+				throw e;
+			}
 			ompleTauler();
 		}
 	}
