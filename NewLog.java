@@ -106,10 +106,10 @@ public class NewLog extends javax.swing.JFrame {
             }
         });
         
-        jLabel1.setBackground(Color.ORANGE);
-        jLabel2.setBackground(Color.ORANGE);
-        jLabel3.setBackground(Color.ORANGE);
-        jLabel4.setBackground(Color.ORANGE);
+        jLabel1.setForeground(Color.ORANGE);
+        jLabel2.setForeground(Color.ORANGE);
+        jLabel3.setForeground(Color.ORANGE);
+        jLabel4.setForeground(Color.ORANGE);
 
 
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
