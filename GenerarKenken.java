@@ -212,6 +212,14 @@ public class GenerarKenken extends javax.swing.JFrame {
     	if (jRadioButton1.isSelected() == true) a = "Facil";
     	else if (jRadioButton2.isSelected() == true) a = "Medio";
     	else if (jRadioButton3.isSelected() == true) a = "Dificil";
+    	if ((int)jSpinner1.getValue() == 3 || (int)jSpinner1.getValue() == 4){
+    		a = "Facil";
+    		JOptionPane.showMessageDialog(this, "Amb aquesta mida el nivell es Facil");
+    	}
+    	if (((int)jSpinner1.getValue() == 5 || (int)jSpinner1.getValue() == 6) && jRadioButton3.isSelected() == true){
+    		a = "Medio";
+    		JOptionPane.showMessageDialog(this, "Amb aquesta mida el nivell es Medio o Facil");
+    	}
     	if(MainController.getInstance().genera(jTextField1.getText() ,a, (int)jSpinner1.getValue())){
         	JOptionPane.showMessageDialog(this, "Ha sigut creac un Kenken amb:\nNom: "+jTextField1.getText()+"\nDificultat: "+a+"\nDimensió: "+(int)jSpinner1.getValue());
         	Menu m = new Menu();
