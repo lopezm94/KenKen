@@ -101,6 +101,14 @@ public class MainController{
 		}
 	}
 	
+	public void borrar_dir(){
+		try {
+			gestionus.Borrar_dir();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}
+	}
+	
 	public Boolean genera(String nomkenken, String a, int b){
 		TableroH tablero = KenkenHandler.generateAndSolveKenken(b, a);
 		return GestioDadesH.guardar_kenken(tablero, nomkenken);
