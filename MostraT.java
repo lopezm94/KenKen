@@ -16,10 +16,10 @@ import javax.imageio.ImageIO;
  */
 public class MostraT extends javax.swing.JFrame {
 
-	KenkenViewMostra a = null;
-	KenkenViewMostraA b = null;
-	Generar g;
-	String nomP;
+	private KenkenViewMostra a = null;
+	private KenkenViewMostraA b = null;
+	private Generar g;
+	private String nomP;
     /**
      * Creates new form Gen
      */

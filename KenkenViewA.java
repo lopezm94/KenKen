@@ -8,13 +8,13 @@ import javax.swing.*;
  */
 @SuppressWarnings("serial")
 public class KenkenViewA extends JPanel {
-	int size;
-	int r,v;
-	JButton button;
-	JPanel panel1;
-	Vector<Integer> areas = null;
-	Vector<Integer> areas2 = null;
-	Vector<Integer> areas3 = null;
+	private int size;
+	private int r,v;
+	private JButton button;
+	private JPanel panel1;
+	private Vector<Integer> areas = null;
+	private Vector<Integer> areas2 = null;
+	private Vector<Integer> areas3 = null;
 	//NumOptions nums;
 	public JPanel container;
 

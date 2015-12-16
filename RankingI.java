@@ -18,9 +18,9 @@ import javax.imageio.ImageIO;
 @SuppressWarnings("serial")
 public class RankingI extends javax.swing.JFrame {
 
-	LinkedList<Pair<String,Integer>> lista;
-	LinkedList<Pair<String,Integer>> lista2;
-	LinkedList<Pair<String,Integer>> lista3;
+	private LinkedList<Pair<String,Integer>> lista;
+	private LinkedList<Pair<String,Integer>> lista2;
+	private LinkedList<Pair<String,Integer>> lista3;
     /**
      * Creates new form RankingII
      */

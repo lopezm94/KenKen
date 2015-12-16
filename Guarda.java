@@ -17,8 +17,8 @@ import javax.imageio.ImageIO;
 public class Guarda extends javax.swing.JFrame {
 
 	
-	Generar g;
-	String nomP;
+	private Generar g;
+	private String nomP;
     /**
      * Creates new form Guarda
      */

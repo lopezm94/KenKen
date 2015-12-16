@@ -17,9 +17,9 @@ import javax.swing.JOptionPane;
  */
 public class GenCas extends javax.swing.JFrame {
 
-	KenkenViewGenCas a = null;
-	String nomP = null;
-	Generar g = null;
+	private KenkenViewGenCas a = null;
+	private String nomP = null;
+	private Generar g = null;
     /**
      * Creates new form GenCas
      */

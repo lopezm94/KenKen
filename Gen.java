@@ -17,10 +17,10 @@ import javax.swing.JOptionPane;
  */
 public class Gen extends javax.swing.JFrame {
 
-	KenkenViewGen a = null;
-	String nomP = null;
-	Generar g = null;
-	int size;
+	private KenkenViewGen a = null;
+	private String nomP = null;
+	private Generar g = null;
+	private int size;
     /**
      * Creates new form Gen
      */

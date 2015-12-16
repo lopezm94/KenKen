@@ -21,8 +21,7 @@ public class MainController{
 	//Definició variables globals i controladors que necessitarem:
 	private GestionUsuario gestionus;
 	private GestioPartida gestionpart;
-	TableroH tablero;
-	Scanner in;
+	private TableroH tablero;
 	
 	public int getSolAt(int i, int j) {
 		return this.gestionpart.getSol(i,j);
