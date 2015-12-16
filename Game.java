@@ -386,6 +386,7 @@ public class Game extends javax.swing.JFrame {
         // TODO add your handling code here:
     	if (!MainController.getInstance().es_guest()){
     		MainController.getInstance().save();
+    		JOptionPane.showMessageDialog(this, "Partida guardada");
     	}
     	else {
     		JOptionPane.showMessageDialog(this, "Ets un convidat");
