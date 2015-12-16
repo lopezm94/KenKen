@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -52,7 +54,7 @@ public class Kenken extends javax.swing.JFrame implements Runnable {
           }*/
         
         try {
-            BufferedImage myImage = ImageIO.read(new File("doge.jpg"));
+            BufferedImage myImage = ImageIO.read(new File("cubo.jpg"));
             //JFrame myJFrame = new JFrame("Image pane");
             jInternalFrame1.setContentPane(new ImagePanel(myImage));
             jInternalFrame1.setVisible(true);
@@ -68,7 +70,10 @@ public class Kenken extends javax.swing.JFrame implements Runnable {
         jInternalFrame1.setVisible(true);
         
 
-        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 40)); // NOI18N
+        jLabel1.setForeground(Color.ORANGE);
+        
+        
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Kenken");
 
@@ -100,6 +105,10 @@ public class Kenken extends javax.swing.JFrame implements Runnable {
             }
         });
         
+        jButton1.setBackground(Color.CYAN);
+        jButton2.setBackground(Color.CYAN);
+        jButton3.setBackground(Color.CYAN);
+        jButton4.setBackground(Color.CYAN);
 
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);

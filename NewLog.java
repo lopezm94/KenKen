@@ -52,7 +52,7 @@ public class NewLog extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         
         try {
-            BufferedImage myImage = ImageIO.read(new File("doge.jpg"));
+            BufferedImage myImage = ImageIO.read(new File("cubo.jpg"));
             //JFrame myJFrame = new JFrame("Image pane");
             jInternalFrame1.setContentPane(new ImagePanel(myImage));
             jInternalFrame1.setVisible(true);
@@ -60,6 +60,13 @@ public class NewLog extends javax.swing.JFrame {
             System.out.println("Doge malo");
           }
 
+        jButton1.setBackground(Color.CYAN);
+        jButton2.setBackground(Color.CYAN);
+        
+              /*  jLabel2.setForeground(new java.awt.Color(87, 246, 246));
+        jLabel3.setForeground(new java.awt.Color(87, 246, 246));
+        jLabel4.setForeground(new java.awt.Color(87, 246, 246));*/
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jInternalFrame1.setVisible(true);
@@ -98,6 +105,12 @@ public class NewLog extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        
+        jLabel1.setBackground(Color.ORANGE);
+        jLabel2.setBackground(Color.ORANGE);
+        jLabel3.setBackground(Color.ORANGE);
+        jLabel4.setBackground(Color.ORANGE);
+
 
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
@@ -183,16 +196,21 @@ public class NewLog extends javax.swing.JFrame {
 		String str1 = jPasswordField1.getText();
 		@SuppressWarnings("deprecation")
 		String str2 = jPasswordField2.getText();
-		if(str1.equals(str2)){
-			if(MainController.getInstance().newUser(str, str1)) {
-				Menu m = new Menu();
-				m.setVisible(true);
-				dispose();
+		if (str == "" && str1 == " " && str2 ==""){
+			if(str1.equals(str2)){
+				if(MainController.getInstance().newUser(str, str1)) {
+					Menu m = new Menu();
+					m.setVisible(true);
+					dispose();
+				}else{
+					JOptionPane.showMessageDialog(this, "Usuari ja existent");
+				}
 			}else{
-				JOptionPane.showMessageDialog(this, "Usuari ja existent");
+				JOptionPane.showMessageDialog(this, "Contrassenyes no coincidents");
 			}
-		}else{
-			JOptionPane.showMessageDialog(this, "Contrassenyes no coincidents");
+		}
+		else{
+			JOptionPane.showMessageDialog(this, "Crea Usuari");
 		}
     }                                        
 

@@ -135,12 +135,12 @@ public class KenkenView extends JPanel {
 	        }
 	    }
 
-	    for(r = 0; r < size; r++){
+	    for(r = 0; r <= size; r++){
 	            //JPanel grid = new JPanel();
 	            JButton build = new JButton();
-	            build.setText(""+(r+1));
+	            build.setText(""+(r));
 	            build.addActionListener(new java.awt.event.ActionListener() {
-	                final int row = r+1;
+	                final int row = r;
 	                public void actionPerformed(java.awt.event.ActionEvent evt) {
 	                    jButtonActionPerformed(evt,row);
 	                }
@@ -178,8 +178,14 @@ public class KenkenView extends JPanel {
 	private void jButtonActionPerformed(java.awt.event.ActionEvent evt, int row) {
 		if (button == null) return;
 		if (! MainController.getInstance().fija(r, v)){
+			if (row == 0){
+				MainController.getInstance().posar_pos(r,v,String.valueOf(-1));
+				button.setText("");
+			}
+			else{
 			MainController.getInstance().posar_pos(r,v,String.valueOf(row));
 			button.setText("" + row);
+			}
 		}
 	}
 }

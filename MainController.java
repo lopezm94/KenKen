@@ -185,7 +185,7 @@ public class MainController{
 	public String areaTipo(int x, int y){
 		String a = null;
 		char c = gestionpart.getOperacio(x, y);
-		if (c == '.') c = 'F';
+		if (c == '.') c = ' ';
 		a = Character.toString(c);
 		a += "  ";
 		a += Integer.toString(gestionpart.getResultatArea(x, y));

@@ -46,7 +46,7 @@ public class Log extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         
         try {
-            BufferedImage myImage = ImageIO.read(new File("doge.jpg"));
+            BufferedImage myImage = ImageIO.read(new File("cubo.jpg"));
             //JFrame myJFrame = new JFrame("Image pane");
             jInternalFrame1.setContentPane(new ImagePanel(myImage));
             jInternalFrame1.setVisible(true);
@@ -59,7 +59,11 @@ public class Log extends javax.swing.JFrame {
         jInternalFrame1.setVisible(true);
 
         jLabel2.setText("User:");
-
+        
+        
+        jButton1.setBackground(Color.CYAN);
+        jButton2.setBackground(Color.CYAN);
+        
         jLabel3.setText("Password:");
 
         jButton1.setText("Login");
@@ -86,6 +90,10 @@ public class Log extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setBackground(Color.ORANGE);
+        jLabel2.setBackground(Color.ORANGE);
+        jLabel3.setBackground(Color.ORANGE);
+        
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(

@@ -3,6 +3,7 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.sql.Time;
 import java.text.DateFormat;
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Random;
 import java.util.Vector;
@@ -45,7 +46,7 @@ public class Game extends javax.swing.JFrame {
 	/**
      * Creates new form Game
      */
-    public Game() {
+    /*public Game() {
     	initComponents();
     	ActionListener actListner = new ActionListener(){
     		public void actionPerformed(ActionEvent event){
@@ -59,13 +60,14 @@ public class Game extends javax.swing.JFrame {
     	timer.start();
 
 
-    }
- /*   public Game() {
+    }*/
+    public Game() {
     	initComponents();
     	ActionListener actListner = new ActionListener(){
     		public void actionPerformed(ActionEvent event){
     			Time temps = new Time(MainController.getInstance().getTemps());
-    			String dateFormatted = temps.toString();
+    			Format formatter = new SimpleDateFormat("mm:SS");
+    			String dateFormatted = formatter.format(temps);
     			jTime.setText(dateFormatted);
     		}
     	};
@@ -73,7 +75,7 @@ public class Game extends javax.swing.JFrame {
     	timer.start();
 
 
-    }*/
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -228,12 +230,12 @@ public class Game extends javax.swing.JFrame {
                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62)
+                        .addGap(107, 107, 107)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -256,9 +258,9 @@ public class Game extends javax.swing.JFrame {
                     .addComponent(jTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(139, 139, 139)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(230, 230, 230)
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -283,8 +285,8 @@ public class Game extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>  
-
+    }// </editor-fold>   
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     	if (ayuda > 0){

@@ -93,7 +93,7 @@ public class GenValor extends javax.swing.JFrame {
             }
         });
         
-        for (int i = 0; i < g.mida()*g.mida();++i){
+        for (int i = 1; i <= g.mida()*g.mida();++i){
         	jComboBox1.addItem(Integer.toString(i));
         }
 
@@ -179,7 +179,7 @@ public class GenValor extends javax.swing.JFrame {
     		if (var == jComboBox1.getSelectedIndex()){
     			g.areas(jComboBox1.getSelectedIndex(),  jTextField2.getText().charAt(0), Integer.parseInt(jTextField1.getText()));
 	    		++var;
-	    		JOptionPane.showMessageDialog(this, "Area: " + jComboBox1.getSelectedIndex() + '\n' +
+	    		JOptionPane.showMessageDialog(this, "Area: " + (jComboBox1.getSelectedIndex()+1) + '\n' +
 	    			" Operació: " + jTextField2.getText().charAt(0) +'\n'+
 	    			"Resultat: " + Integer.parseInt(jTextField1.getText()));
     		}

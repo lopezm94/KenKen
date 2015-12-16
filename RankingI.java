@@ -106,6 +106,127 @@ public class RankingI extends javax.swing.JFrame {
         jTextField60 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         
+        jTextField1.setEditable(false);
+
+        jTextField2.setEditable(false);
+
+        jTextField3.setEditable(false);
+
+        jTextField4.setEditable(false);
+
+        jTextField5.setEditable(false);
+
+        jTextField6.setEditable(false);
+
+        jTextField7.setEditable(false);
+
+        jTextField8.setEditable(false);
+
+        jTextField9.setEditable(false);
+
+        jTextField10.setEditable(false);
+
+        jTextField11.setEditable(false);
+
+        jTextField12.setEditable(false);
+
+        jTextField13.setEditable(false);
+
+        jTextField14.setEditable(false);
+
+        jTextField15.setEditable(false);
+
+        jTextField16.setEditable(false);
+
+        jTextField17.setEditable(false);
+
+        jTextField18.setEditable(false);
+
+        jTextField19.setEditable(false);
+
+        jTextField20.setEditable(false);
+
+        jTextField21.setEditable(false);
+
+        jTextField22.setEditable(false);
+
+        jTextField23.setEditable(false);
+
+        jTextField24.setEditable(false);
+
+        jTextField25.setEditable(false);
+
+        jTextField26.setEditable(false);
+
+        jTextField27.setEditable(false);
+
+        jTextField28.setEditable(false);
+
+        jTextField29.setEditable(false);
+
+        jTextField30.setEditable(false);
+
+        jTextField31.setEditable(false);
+
+        jTextField32.setEditable(false);
+
+        jTextField33.setEditable(false);
+
+        jTextField34.setEditable(false);
+
+        jTextField35.setEditable(false);
+
+        jTextField36.setEditable(false);
+
+        jTextField37.setEditable(false);
+
+        jTextField38.setEditable(false);
+
+        jTextField39.setEditable(false);
+
+        jTextField40.setEditable(false);
+
+        jTextField41.setEditable(false);
+
+        jTextField42.setEditable(false);
+
+        jTextField43.setEditable(false);
+
+        jTextField44.setEditable(false);
+
+        jTextField45.setEditable(false);
+
+        jTextField46.setEditable(false);
+
+        jTextField47.setEditable(false);
+
+        jTextField48.setEditable(false);
+
+        jTextField49.setEditable(false);
+
+        jTextField50.setEditable(false);
+
+        jTextField51.setEditable(false);
+
+        jTextField52.setEditable(false);
+
+        jTextField53.setEditable(false);
+
+        jTextField54.setEditable(false);
+
+        jTextField55.setEditable(false);
+
+        jTextField56.setEditable(false);
+
+        jTextField57.setEditable(false);
+
+        jTextField58.setEditable(false);
+
+        jTextField59.setEditable(false);
+
+        jTextField60.setEditable(false);
+
+        
         try {
             BufferedImage myImage = ImageIO.read(new File("doge.jpg"));
             //JFrame myJFrame = new JFrame("Image pane");
