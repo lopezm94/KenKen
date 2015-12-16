@@ -183,7 +183,7 @@ public class GenValor extends javax.swing.JFrame {
 	    			" Operació: " + jTextField2.getText().charAt(0) +'\n'+
 	    			"Resultat: " + Integer.parseInt(jTextField1.getText()));
     		}
-    		else JOptionPane.showMessageDialog(this, "Ja has ficat aquesta area");
+    		else JOptionPane.showMessageDialog(this, "Num area incorrecte");
     	}
     	else JOptionPane.showMessageDialog(this, "Posa alguna cosa"); 
     }  

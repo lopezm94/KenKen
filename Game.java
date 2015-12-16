@@ -1,6 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Random;
@@ -59,7 +60,7 @@ public class Game extends javax.swing.JFrame {
 
 
     }
-    /*public Game() {
+ /*   public Game() {
     	initComponents();
     	ActionListener actListner = new ActionListener(){
     		public void actionPerformed(ActionEvent event){
