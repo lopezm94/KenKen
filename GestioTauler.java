@@ -4,6 +4,7 @@
 *@author Marc Ortiz
 *@author Joan Grau
 **/
+import Excepcions.*;
 public class GestioTauler{
 	public static TableroH creaTauler(String nomkenken) throws FicheroNoExiste{
 		try{

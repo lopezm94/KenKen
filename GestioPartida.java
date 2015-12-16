@@ -1,4 +1,6 @@
+import Excepcions.*;
 import java.io.IOException;
+import Persistencia.Gestio_Dades;
 
 /**
 *@author Marc Ortiz

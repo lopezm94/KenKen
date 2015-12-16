@@ -109,7 +109,7 @@ public class GenerarKenken extends javax.swing.JFrame {
         jSpinner1.setMaximumSize(new java.awt.Dimension(9, 9));
         jSpinner1.setMinimumSize(new java.awt.Dimension(3, 3));
 
-        jLabel3.setText("Tamaño");
+        jLabel3.setText("Size");
 
         jTextField1.setText("Nom Kenken");
 
@@ -221,7 +221,7 @@ public class GenerarKenken extends javax.swing.JFrame {
     		JOptionPane.showMessageDialog(this, "Amb aquesta mida el nivell es Medio o Facil");
     	}
     	if(MainController.getInstance().genera(jTextField1.getText() ,a, (int)jSpinner1.getValue())){
-        	JOptionPane.showMessageDialog(this, "Ha sigut creac un Kenken amb:\nNom: "+jTextField1.getText()+"\nDificultat: "+a+"\nDimensió: "+(int)jSpinner1.getValue());
+        	JOptionPane.showMessageDialog(this, "Ha sigut creac un Kenken amb:\nNom: "+jTextField1.getText()+"\nDificultat: "+a+"\nDimensio: "+(int)jSpinner1.getValue());
         	Menu m = new Menu();
         	m.setVisible(true);
         	dispose();  /*aleatorio*/
@@ -231,7 +231,7 @@ public class GenerarKenken extends javax.swing.JFrame {
     }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:ç
+        // TODO add your handling code here:
     	
     	Generar ge = new Generar();
     	ge.mida((int)jSpinner1.getValue());
@@ -243,7 +243,7 @@ public class GenerarKenken extends javax.swing.JFrame {
     }    
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:ç
+        // TODO add your handling code here:
     	
     	Menu m = new Menu();
     	m.setVisible(true);

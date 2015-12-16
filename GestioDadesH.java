@@ -1,5 +1,5 @@
-//import Excepcions.*;
-//import Persistencia.Gestio_Dades;
+import Excepcions.*;
+import Persistencia.Gestio_Dades;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

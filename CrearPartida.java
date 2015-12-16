@@ -1,3 +1,4 @@
+import Excepcions.*;
 import java.awt.HeadlessException;
 import java.awt.image.BufferedImage;
 import java.io.File;

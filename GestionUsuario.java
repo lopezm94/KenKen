@@ -1,7 +1,9 @@
 /**
 *@author Marc Ortiz
 **/
+import Excepcions.*;
 import java.io.IOException;
+import Persistencia.Gestio_Dades;
 
 public class GestionUsuario{
 	private Perfil perfilActual;

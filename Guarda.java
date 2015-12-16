@@ -57,7 +57,7 @@ public class Guarda extends javax.swing.JFrame {
         jInternalFrame1.setVisible(true);
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        jLabel1.setText("Té solució! :)");
+        jLabel1.setText("Te solucio! :)");
 
         jButton1.setText("Mostrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

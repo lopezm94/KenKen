@@ -156,7 +156,7 @@ public class KenkenHandler {
 	/**
 	*Construye un tablero Kenken desde cero.
 	*
-	*@param size Tamaño del nuevo tablero.
+	*@param size Tamano del nuevo tablero.
 	*@param dificultad La dificultad del tablero(Facil,Medio,Dificil).
 	*@return TableroH Devuelve un kenken sin resolver.
 	*/
@@ -277,7 +277,7 @@ public class KenkenHandler {
 	*@param x Posicion en el eje X.
 	*@param y Posicion en el eje Y.
 	*@param tablero Tablero.
-	*@param size tamaño del area a asignar.
+	*@param size tamano del area a asignar.
 	*/
 	private static void randomDFS(int x, int y, TableroH tablero, LinkedList<Pair<Integer,Integer>> bag, int size) {
 		if (tablero.getAreaID(x,y) != -1 || bag.size() == size)

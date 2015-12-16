@@ -166,7 +166,7 @@ public class GenCas extends javax.swing.JFrame {
 	    		dispose();
 	    	}
 	    	else{
-	    		JOptionPane.showMessageDialog(this, "No té solució :(");
+	    		JOptionPane.showMessageDialog(this, "No te solucio :(");
 	    		Menu m = new Menu();
 	    		m.setVisible(true);
 	    		dispose();

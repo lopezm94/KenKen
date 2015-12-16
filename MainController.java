@@ -1,5 +1,5 @@
-//import Excepcions.*;
-//import Persistencia.Gestio_Dades;
+import Excepcions.*;
+import Persistencia.Gestio_Dades;
 //import java.awt.Desktop;
 import java.awt.Desktop;
 import java.io.IOException;
@@ -19,7 +19,7 @@ import java.util.Vector;
 public class MainController{
 	private static final MainController mc = new MainController();
 	
-	//Definició variables globals i controladors que necessitarem:
+	//Definicio variables globals i controladors que necessitarem:
 	private GestionUsuario gestionus;
 	private GestioPartida gestionpart;
 	private TableroH tablero;
@@ -66,7 +66,7 @@ public class MainController{
 	
 	
 	public Boolean CrearPartida(String nomkenken, String nompartida) throws FicheroNoExiste{
-		/*He posat exepcions quan no és correcte el nom del kenken*/
+		/*He posat exepcions quan no es correcte el nom del kenken*/
 		if(gestionus.es_invitado() || !GestioDadesH.existeixPartida(nompartida,gestionus.getProfile().get_usuari())){
 			try {
 				gestionpart = new GestioPartida(nompartida,true,nomkenken,gestionus.getProfile().get_usuari());

@@ -110,13 +110,13 @@ public class RankingI extends javax.swing.JFrame {
         jLabel1.setText("Top 10");
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jLabel2.setText("Fácil");
+        jLabel2.setText("Facil");
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabel3.setText("Medio");
 
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jLabel4.setText("Difícil");
+        jLabel4.setText("Dificil");
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(255, 215, 0));
@@ -398,13 +398,13 @@ public class RankingI extends javax.swing.JFrame {
         jLabel1.setText("Top 10");
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jLabel2.setText("Fácil");
+        jLabel2.setText("Facil");
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabel3.setText("Medio");
 
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jLabel4.setText("Difícil");
+        jLabel4.setText("Dificil");
 
         jButton1.setText("Sortir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
