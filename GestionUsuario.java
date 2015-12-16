@@ -88,7 +88,6 @@ public class GestionUsuario{
 				break;
 		}
 		try {
-			DeleteUser();
 			GestioDadesH.Escribir_string(str[0]+" "+str[1]+" "+str[2]+" "+str[3]+" "+str[4], "\n", "Profiles", ".");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
