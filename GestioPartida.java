@@ -135,6 +135,7 @@ public class GestioPartida{
 	
 	public void saveGame(Perfil p1){
 		p1.get_partida().setTime((int)getTime());
+		start();
 		GestioDadesH.guardarPartida(p1,nomkenken);
 	}
 	
