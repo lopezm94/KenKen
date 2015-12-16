@@ -8,7 +8,6 @@ import java.net.URISyntaxException;
 //import java.net.URI;
 //import java.net.URISyntaxException;
 import java.util.Scanner;
-import java.util.Vector;
 
 /**
 *@version 1.0
@@ -132,7 +131,7 @@ public class MainController{
 	}
 	
 	public int actualizar_punt(){
-		int punt = (getVacias()*10000)/((int)getTemps()*tamany()*10);
+		int punt = (getVacias()*getVacias()*tamany()*10)/((int)getTemps());
 		gestionus.afegirPunt(punt, getDifficulty());
 		return punt;
 	}
