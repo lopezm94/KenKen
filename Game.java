@@ -37,12 +37,12 @@ import javax.swing.Timer;
 public class Game extends javax.swing.JFrame {
 
 
-  JPanel board;
-	KenkenView a = null;
-	KenkenViewA b = null;
-	JPanel area;
-	int ayuda = MainController.getInstance().tamany();
-	Timer timer;
+	private JPanel board;
+	private KenkenView a = null;
+	private KenkenViewA b = null;
+	private JPanel area;
+	private int ayuda = MainController.getInstance().tamany();
+	private Timer timer;
 	/**
      * Creates new form Game
      */

@@ -22,8 +22,8 @@ public class GenValor extends javax.swing.JFrame {
      * Creates new form GenValor
      */
 	
-	String nomP = null;
-	Generar g = null;
+	private String nomP = null;
+	private Generar g = null;
 	int var;
 	
     public GenValor(String b, Generar a) {
@@ -88,7 +88,7 @@ public class GenValor extends javax.swing.JFrame {
             }
         });
         
-        jButton2.setText("Añadir");
+        jButton2.setText("Add");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -104,7 +104,7 @@ public class GenValor extends javax.swing.JFrame {
         jComboBox2.addItem("/");
         jComboBox2.addItem(".");
 
-        jButton2.setText("Añadir");
+        jButton2.setText("Add");
 
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
@@ -187,7 +187,7 @@ public class GenValor extends javax.swing.JFrame {
     			g.areas(jComboBox1.getSelectedIndex(),  jComboBox2.getSelectedItem().toString().charAt(0), Integer.parseInt(jTextField1.getText()));
 	    		++var;
 	    		JOptionPane.showMessageDialog(this, "Area: " + (jComboBox1.getSelectedIndex()+1) + '\n' +
-	    			" Operació: " + jComboBox2.getSelectedItem().toString() +'\n'+
+	    			" Operacio: " + jComboBox2.getSelectedItem().toString() +'\n'+
 	    			"Resultat: " + Integer.parseInt(jTextField1.getText()));
     		}
     		else JOptionPane.showMessageDialog(this, "Num area incorrecte");

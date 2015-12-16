@@ -8,10 +8,10 @@ import javax.swing.*;
  */
 @SuppressWarnings("serial")
 public class KenkenViewGen extends JPanel {
-	int size;
-	int r,v,area;
-	JButton button;
-	Generar g;
+	private int size;
+	private int r,v,area;
+	private JButton button;
+	private Generar g;
 	//NumOptions nums;
 	public JPanel container;
 	

@@ -1,7 +1,7 @@
 
 public class CrearKenken {
 	
-	MainController mc = null;
+	private MainController mc = null;
 	
 	public CrearKenken(MainController a){
 		mc = a;
