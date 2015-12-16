@@ -292,6 +292,7 @@ public class Game extends javax.swing.JFrame {
     	if (ayuda > 0){
     		Random r = new Random();
         	Boolean ok = false;
+        	ok = MainController.getInstance().comp();
         	while (! ok){
         		int var = r.nextInt();
         		var = Math.abs(var);
