@@ -7,4 +7,5 @@ mklibs: ./src/FicheroNoExiste.java ./src/FicheroYaExistente.java ./src/Gestio_Da
 domain: java.txt
 	javac -cp ./ @java.txt
 
-clean: rm *.class
+clean: 
+	rm *.class

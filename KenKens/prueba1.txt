@@ -1,0 +1,18 @@
+4
+operacions + . . + * . .
+casella0 0 4 0
+casella1 1 3 0
+casella2 0 1 0
+casella3 0 2 1
+casella4 1 3 2
+casella5 0 1 3
+casella6 0 2 3
+casella7 0 4 3
+casella8 0 1 4
+casella9 0 2 5
+casella10 0 4 6
+casella11 0 3 3
+casella12 1 2 4
+casella13 1 4 4
+casella14 0 3 4
+casella15 0 1 4
