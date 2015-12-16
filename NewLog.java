@@ -196,7 +196,7 @@ public class NewLog extends javax.swing.JFrame {
 		String str1 = jPasswordField1.getText();
 		@SuppressWarnings("deprecation")
 		String str2 = jPasswordField2.getText();
-		if (str == "" && str1 == " " && str2 ==""){
+		if (! (str.equals("") || str1.equals("") || str2.equals(""))){
 			if(str1.equals(str2)){
 				if(MainController.getInstance().newUser(str, str1)) {
 					Menu m = new Menu();

@@ -176,11 +176,16 @@ public class Log extends javax.swing.JFrame {
         String str = jTextField1.getText();
 		@SuppressWarnings("deprecation")
 		String str1 = jPasswordField1.getText();
-		if(MainController.getInstance().login(str,str1)){
-			Menu m = new Menu();
-			m.setVisible(true);
-			dispose();
-		}else{
+		if (! (str.equals("") || str1.equals(""))){
+			if(MainController.getInstance().login(str,str1)){
+				Menu m = new Menu();
+				m.setVisible(true);
+				dispose();
+			}else{
+				JOptionPane.showMessageDialog(this, "Usuari o contrassenya incorrecta");
+			}
+		}
+		else{
 			JOptionPane.showMessageDialog(this, "Usuari o contrassenya incorrecta");
 		}
     }                                        
