@@ -124,6 +124,7 @@ public class Elimina extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     	MainController.getInstance().delete_user();
+    	MainController.getInstance().borrar_dir();
     	Kenken k = new Kenken();
     	k.setVisible(true);
     	dispose();

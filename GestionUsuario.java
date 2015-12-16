@@ -54,17 +54,20 @@ public class GestionUsuario{
 		}catch(FicheroYaExistente f1){
 			
 		}
-		try {
-			Gestio_Dades.Borrar_directorio(perfilActual.get_usuari(), "Games");
-		} catch (FicheroNoExiste e) {
-			// TODO Auto-generated catch block
-		}
 	}
 	public void assignarPartida(Partida p){
 		perfilActual.assignar_nova_partida(p);
 	}
 	public Perfil getProfile(){
 		return perfilActual;
+	}
+	
+	public void Borrar_dir() throws IOException{
+		try {
+			Gestio_Dades.Borrar_directorio(perfilActual.get_usuari(), "Games");
+		} catch (FicheroNoExiste e) {
+			// TODO Auto-generated catch block
+		}
 	}
 	
 	public void afegirPunt(int punt, String diff){
@@ -88,6 +91,7 @@ public class GestionUsuario{
 				break;
 		}
 		try {
+			DeleteUser();
 			GestioDadesH.Escribir_string(str[0]+" "+str[1]+" "+str[2]+" "+str[3]+" "+str[4], "\n", "Profiles", ".");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
