@@ -105,13 +105,13 @@ public class GenerarKenken extends javax.swing.JFrame {
 
         jLabel2.setText("Elige una opcion:");
 
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(3, 3, 9, 1));
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(3, 3, 45, 1));
         jSpinner1.setMaximumSize(new java.awt.Dimension(9, 9));
         jSpinner1.setMinimumSize(new java.awt.Dimension(3, 3));
 
         jLabel3.setText("Tamaño");
 
-        jTextField1.setText("Nom Partida");
+        jTextField1.setText("Nom Kenken");
 
         jButton3.setText("Salir");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
